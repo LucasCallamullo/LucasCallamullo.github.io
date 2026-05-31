@@ -1,0 +1,409 @@
+
+/* ========================================
+   TEXT UTILITIES - Utilidades de texto
+   ========================================
+   
+   Este archivo agrupa todas las clases relacionadas con:
+   - Colores de texto
+   - Tamaños de fuente
+   - Alineación
+   - Transformación
+   - Peso de fuente (negritas)
+   - Decoración
+   - Interlineado
+   - Truncado de texto
+   - Utilidades para SEO
+   
+   ======================================== */
+
+/* ========================================
+   VARIABLES DE TEXTO (deben estar en :root)
+   ========================================
+   
+   Estas son las variables que deberíamos tener definidas en otroa archivo.css:
+       - en este caso estaran en root_basic.css
+   
+
+
+/* ========================================
+   PESO DE FUENTE (Font Weight) - Negritas
+   ======================================== */
+/* 
+   .bolder - Texto más negrita que el normal
+   --------------------------------------------
+   Hace que el texto sea más grueso (negrita)
+   Depende de la fuente, pero suele ser equivalente a 700
+*/
+.bolder { 
+    font-weight: bolder;    /* Aplica el nivel de negrita más cercano disponible */
+}
+
+/* 
+   .bold-red / .bold-green / .bold-orange - Negrita con color
+   --------------------------------------------
+   Combina color específico + negrita
+   Usa !important para asegurar que prevalezca sobre otros estilos
+*/
+.bold-red {
+    color: var(--red-color) !important;    /* Color rojo definido en variables */
+    font-weight: bolder;                    /* Texto en negrita */
+}
+
+.bold-green {
+    color: var(--green-color) !important;   /* Color verde */
+    font-weight: bolder;                    /* Texto en negrita */
+}
+
+.bold-orange {
+    color: var(--orange-color) !important;  /* Color naranja */
+    font-weight: bolder;                    /* Texto en negrita */
+}
+
+/* 
+   .bold-main / .bold-main-light - Negrita con colores principales
+   --------------------------------------------
+   Versión SIN !important para que puedan ser sobrescritas
+*/
+.bold-main {
+    color: var(--main-color);          /* Color principal (azul típicamente) */
+    font-weight: bolder;               /* Texto en negrita */
+}
+
+.bold-main-light {
+    color: var(--main-light-color);    /* Color principal más claro */
+    font-weight: bolder;               /* Texto en negrita */
+}
+
+/*
+   .gray - Color gris
+   --------------------------------------------
+   Útil para textos secundarios, fechas, metadatos
+*/
+.gray { 
+    color: gray !important;    /* Color gris estándar del navegador */
+}
+
+/* ========================================
+   TAMAÑOS DE FUENTE (Font Sizes)
+   ========================================
+   
+   Escala basada en rem (relativo al root)
+   Los comentarios muestran el equivalente aproximado en px
+   ======================================== */
+
+.font-xs { 
+    font-size: var(--font-x-small);    /* Extra pequeño: ~12px */
+}
+
+.font-sm { 
+    font-size: var(--font-small);      /* Pequeño: ~14px */
+}
+
+.font-md { 
+    font-size: var(--font-normal);     /* Mediano: ~16px (tamaño base) */
+}
+
+.font-lg { 
+    font-size: var(--font-large);      /* Grande: ~18px */
+}
+
+.font-xl { 
+    font-size: var(--font-x-large);    /* Extra grande: ~20px */
+}
+
+.font-xxl { 
+    font-size: var(--font-xx-large);   /* Doble extra: ~24px */
+}
+
+.font-xxxl { 
+    font-size: var(--font-xxx-large);  /* Triple extra: ~32px */
+}
+
+/* ========================================
+   COLORES DE TEXTO (Text Colors)
+   ======================================== */
+
+.text-white { 
+    color: var(--white-color) !important;    /* Texto blanco */
+}
+
+.text-black { 
+    color: var(--black-color) !important;    /* Texto negro/gris oscuro */
+}
+
+.text-main { 
+    color: var(--main-color) !important;     /* Color principal de la marca */
+}
+
+.text-primary { 
+    color: var(--text-primary) !important;   /* Color primario para textos */
+}
+
+.text-secondary { 
+    color: var(--text-secondary) !important; /* Color secundario (más claro) */
+}
+
+/* 
+   Comentados pero disponibles si se necesitan:
+   .text-success { color: var(--color-success) !important; }
+   .text-error { color: var(--color-error) !important; }
+*/
+
+/* ========================================
+   ALINEACIÓN DE TEXTO (Text Alignment)
+   ======================================== */
+
+.text-start { 
+    text-align: left !important;     /* Alinea a la izquierda (inicio) */
+}
+
+.text-end { 
+    text-align: right !important;    /* Alinea a la derecha (final) */
+}
+
+.text-center { 
+    text-align: center !important;   /* Centra el texto horizontalmente */
+}
+
+.text-justify { 
+    text-align: justify !important;  /* Justifica: expande palabras para que todas las líneas tengan el mismo ancho */
+}
+
+/* ========================================
+   TRANSFORMACIÓN DE TEXTO (Text Transform)
+   ======================================== */
+
+.text-uppercase { 
+    text-transform: uppercase !important;    /* CONVIERTE TODO EN MAYÚSCULAS */
+}
+
+.text-lowercase { 
+    text-transform: lowercase !important;    /* convierte todo en minúsculas */
+}
+
+.text-capitalize { 
+    text-transform: capitalize !important;   /* Primera Letra De Cada Palabra En Mayúscula */
+}
+
+/* ========================================
+   PESO DE FUENTE (Font Weight - Numérico)
+   ========================================
+   
+   Escala estándar de 100 a 900
+   400 es normal, 700 es negrita
+   ======================================== */
+
+.fw-light { 
+    font-weight: 300 !important;     /* Fuente más delgada (light) */
+}
+
+.fw-normal { 
+    font-weight: 400 !important;     /* Peso normal (regular) */
+}
+
+.fw-normal-plus { 
+    font-weight: 500 !important;     /* Semi-negrita (entre normal y bold) */
+}
+
+.fw-bold { 
+    font-weight: 700 !important;     /* Negrita estándar (bold) */
+}
+
+/* ========================================
+   DECORACIÓN DE TEXTO (Text Decoration)
+   ======================================== */
+
+.text-underline { 
+    text-decoration: underline !important;    /* Subraya el texto */
+}
+
+.text-line-through { 
+    text-decoration: line-through !important; /* Tacha el texto (como si estuviera borrado) */
+}
+
+.text-no-decoration { 
+    text-decoration: none !important;         /* Elimina cualquier decoración */
+    /* Útil para quitar el subrayado de los enlaces (<a>) */
+}
+
+.text-italic { 
+    font-style: italic;    /* Texto en cursiva/italica */
+}
+
+/* ========================================
+   INTERLINEADO (Line Height)
+   ========================================
+   
+   Controla el espacio entre líneas de texto
+   Un valor sin unidad es relativo al tamaño de fuente
+   ======================================== */
+
+/* 
+   .text-line-sm - Interlineado compacto
+   --------------------------------------------
+   1.3 = el espacio entre líneas es 1.3 veces el tamaño de la fuente
+   Útil para títulos o textos densos
+*/
+.text-line-sm { 
+    line-height: 1.3;    /* Espaciado ajustado (títulos, textos cortos) */
+}
+
+/* 
+   .text-line-md - Interlineado cómodo
+   --------------------------------------------
+   1.6 = separación ideal para lectura larga
+   Recomendado para párrafos y textos extensos
+*/
+.text-line-md { 
+    line-height: 1.6;    /* Espaciado cómodo para leer (textos largos) */
+}
+
+/* ========================================
+   TRUNCADO DE TEXTO (Text Truncate)
+   ========================================
+   
+   Útil cuando el texto es muy largo y no queremos que rompa el diseño
+   ======================================== */
+
+/* 
+   .text-truncate - Corta texto en UNA línea con "..."
+   --------------------------------------------
+   El texto se mantiene en una sola línea
+   Si es más largo que el contenedor, se corta y agrega "..."
+   
+   Ejemplo: "Texto muy largo que no entra..." → "Texto muy largo que..."
+*/
+.text-truncate {
+    white-space: nowrap !important;        /* Fuerza que el texto esté en UNA sola línea */
+    overflow: hidden !important;           /* Oculta lo que se desborda */
+    text-overflow: ellipsis !important;    /* Agrega "..." al final del texto cortado */
+}
+
+/* 
+   .text-truncate-multiline - Corta texto en MÚLTIPLES líneas
+   --------------------------------------------
+   Muestra hasta cierto número de líneas y luego corta
+   ⚠️ NOTA: -webkit-line-clamp está comentado para que el usuario elija cuántas líneas
+   
+   Ejemplo: 
+   <div class="text-truncate-multiline" style="-webkit-line-clamp: 3;">
+       Texto largo que ocupa muchas líneas...
+   </div>
+*/
+.text-truncate-multiline {
+    display: -webkit-box;                  /* Necesario para line-clamp */
+    -webkit-box-orient: vertical;          /* Orientación vertical del box */
+    overflow: hidden;                      /* Oculta el texto sobrante */
+    line-height: 20px;                     /* Altura de línea fija para el fallback */
+    text-overflow: ellipsis;               /* Agrega "..." al final (si soporta) */
+    
+    /* Fallback para navegadores viejos: altura máxima equivalente a 3 líneas */
+    max-height: calc(22px * 3);            /* 3 líneas de aprox 22px cada una */
+}
+
+/* 
+   .text-break - Rompe palabras largas
+   --------------------------------------------
+   Cuando una palabra es muy larga (como una URL), la rompe para que no desborde
+   
+   Ejemplo: "https://www.ejemplomuy-largo.com/una-url-que-no-entra"
+   Sin text-break: sale del contenedor
+   Con text-break: se parte en varias líneas
+*/
+.text-break {
+    overflow-wrap: break-word;     /* Rompe la palabra si no hay otro lugar */
+    word-break: break-word;        /* Fuerza el quiebre de palabras largas */
+    white-space: normal;           /* Permite que el texto fluya normalmente */
+}
+
+/* 
+   .text-pre-wrap - Respeta saltos de línea del HTML
+   --------------------------------------------
+   Útil cuando tenés texto con \n (saltos de línea) y querés que se muestren
+   
+   Ejemplo en HTML:
+   <div class="text-pre-wrap">
+       Línea 1
+       Línea 2
+       Línea 3
+   </div>
+   Va a respetar esos saltos aunque no haya <br>
+*/
+.text-pre-wrap {
+    white-space: pre-wrap;    /* Respeta espacios y saltos de línea, pero permite wrapping */
+}
+
+/* ========================================
+   UTILIDADES DE SEO (Search Engine Optimization)
+   ======================================== */
+
+/* 
+   .seo-only - Texto invisible para SEO
+   --------------------------------------------
+   El texto NO es visible para humanos
+   PERO los motores de búsqueda (Google, Bing) SÍ lo leen
+   
+   ¿Para qué sirve?
+   - Tener un H1 visible para SEO pero otro diseño visual
+   - Incluir keywords sin afectar el diseño
+   - Mejorar accesibilidad sin cambiar la apariencia
+   
+   ⚠️ ADVERTENCIA: No abusar, Google puede penalizar si se usa mal
+*/
+.seo-only {
+    position: absolute;        /* Saca el elemento del flujo normal */
+    width: 1px;                /* Reduce a 1px de ancho (invisible) */
+    height: 1px;               /* Reduce a 1px de alto (invisible) */
+    padding: 0;                /* Sin padding */
+    margin: -1px;              /* Margen negativo para asegurar que no ocupa espacio */
+    overflow: hidden;          /* Oculta cualquier desbordamiento */
+    clip: rect(0, 0, 0, 0);   /* Recorta el elemento a 0x0 (técnica antigua pero segura) */
+    white-space: nowrap;       /* Evita que el texto haga wrap */
+    border: 0;                 /* Sin bordes */
+}
+
+/* ========================================
+   CLASES COMENTADAS (Para referencia futura)
+   ======================================== */
+
+/* 
+   .text-clamp - Base para clamp de líneas
+   (No implementado, dejado como placeholder)
+*/
+
+/* 
+   .line-2, .line-3 - Cantidad específica de líneas
+   Ejemplo de uso:
+   .line-2 { -webkit-line-clamp: 2; max-height: calc(1.5em * 2); }
+*/
+
+/* 
+   .text-truncate-fade - Efecto fade en lugar de "..."
+   Más elegante pero menos compatible
+*/
+
+/* ========================================
+   EJEMPLOS PRÁCTICOS
+   ========================================
+
+   1. Tarjeta de producto:
+   <h3 class="font-lg fw-bold text-main">Producto</h3>
+   <p class="text-secondary text-line-md">Descripción larga del producto...</p>
+   <span class="text-uppercase fw-light">NUEVO</span>
+
+   2. Fecha de publicación:
+   <span class="font-xs gray">Publicado el 15 de enero, 2024</span>
+
+   3. Título principal (visible y SEO):
+   <h1 class="seo-only">Título para Google</h1>
+   <div class="font-xxxl fw-bold">Título Visible</div>
+
+   4. Enlace sin subrayado:
+   <a href="#" class="text-no-decoration text-main">Link personalizado</a>
+
+   5. Texto truncado en tabla:
+   <td class="text-truncate" style="max-width: 200px;">
+       Texto muy largo que no debería romper la tabla...
+   </td>
+
+   ======================================== */

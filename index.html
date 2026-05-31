@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags útiles para SEO y redes sociales -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Callamullo Lucas · Software Engineer</title>
+    <meta name="description" content="Ramiro Krapp, DevOps Engineer based in 
+        Buenos Aires. Multi-cloud connectivity, 
+        Kubernetes, CI/CD, and infrastructure as code across AWS and GCP.">
+    <meta name="author" content="Lucas Callamullo">
+
+    <!-- Open Graph (para cuando compartes en Facebook/LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ramiro Krapp · DevOps Engineer">
+    <meta property="og:description" content="DevOps Engineer focused on 
+        multi-cloud connectivity, Kubernetes, CI/CD, and IaC across AWS and GCP.">
+
+    <meta property="og:url" content="https://krapp.dev">
+    <meta property="og:site_name" content="krapp.dev">
+
+    <!-- Twitter Card (para cuando compartes en Twitter) -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Ramiro Krapp · DevOps Engineer">
+    <meta name="twitter:description" content="DevOps Engineer focused on 
+        multi-cloud connectivity, Kubernetes, CI/CD, and IaC.">
+
+    <link rel="icon" type="image/svg+xml" href="./staticfiles/icon/terminal.svg">
+
+
+    <!-- Roboto font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="./staticfiles/css/base_root.css">
+    <link rel="stylesheet" href="./staticfiles/css/buttons.css">
+    <link rel="stylesheet" href="./staticfiles/css/containers.css">
+    <link rel="stylesheet" href="./staticfiles/css/gap_utils.css">
+    <link rel="stylesheet" href="./staticfiles/css/effects.css">
+    <link rel="stylesheet" href="./staticfiles/css/text_utils.css">
+
+    <link rel="stylesheet" href="./staticfiles/css/portfolio.css">
+
+    
+    <!-- Remix Icon CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+
+    <!-- Icons FONT CDN
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css">
+    <i class="devicon-go-original colored"></i>
+     -->
+
+    <!-- 	SWIPER CDN 	 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+</head>
+<body>
+    <header class="header-portfolio">
+        <nav class="cont-page d-grid grid-122 nav-container h-100">
+            <!-- Logo -->
+            <div class="main-dev d-flex gap-1 align-center">
+                <span class="roboto-medium font-lg bold-console" data-i18n="hero.prefix"> > </span>
+                <span class="roboto-medium font-lg" data-i18n="hero.name">Lucas.dev </span>
+                <span class="roboto-medium font-lg blinking-underscore">_</span>
+            </div>
+
+            <!-- NAV BUTTONS -->
+            <ul class="d-flex gap-4 justify-end align-center nav-list">
+
+                <!-- HOME ABOUT PROJECTS SKILLS CONTACT -->
+                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.home" data-nav="home">
+                    </button></li>
+                <li><button class="btn btn-nav text-truncate roboto-medium font-md" data-i18n="nav.about" data-nav="about">
+                    </button></li>
+                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.skills" data-nav="skills">
+                    </button></li>
+                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.projects" data-nav="projects">
+                    </button></li>
+                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.contact" data-nav="contact">
+                    </button></li>
+
+                <!-- Botón de idioma con dropdown -->
+                <li class="language-dropdown d-flex gap-2">
+                    <!-- Botón de modo oscuro/claro -->
+                    <button id="themeToggle" class="btn control-btn" aria-label="Cambiar tema">
+                        <i class="ri-moon-line"></i>
+                    </button>
+
+                    <button id="languageBtn" class="control-btn" aria-label="Cambiar idioma">
+                        <i class="ri-global-line"></i>
+                        <span id="currentLangFlag">🇬🇧</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="dropdown-menu" id="languageDropdown">
+                        <li onclick="setLanguage('en')">
+                            <img src="./staticfiles/icon/flag_us.svg" alt="USA flag" class="flag-icon">
+                            <span>EN</span> English
+                        </li>
+                        <li onclick="setLanguage('es')">
+                            <img src="./staticfiles/icon/flag_ar.svg" alt="Spain flag" class="flag-icon">
+                            <span>ES</span> Español
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- La barra deslizante -->
+            <div class="nav-sliding-bar"></div>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO DINAMICO ENRUTADO -->
+    <main class="" id="app-root"> </main>
+
+
+
+
+    <!-- ========================================================================================
+                                    Footer 
+    ======================================================================================== -->
+    <footer class="full-bg-secondary-dark pt-5">
+        <div class="cont-page d-grid grid-123 gap-3">
+
+            <div class="console-container">
+                <span class="prompt-console roboto-medium font-md letter-spacing-md">
+                    $&nbsp;&nbsp;cat&nbsp;&nbsp;whoami.txt
+                </span>
+
+                <p class="mt-1">
+                    <span class="roboto-medium font-md prompt-console">></span>
+                    <span class="roboto-medium font-md blinking-underscore">_</span>
+                    <span class="roboto-medium font-md text-green-cursor">Lucas Callamullo</span>
+                </p>
+
+                <p class="mt-1">
+                    <span class="roboto-medium font-md prompt-console">></span>
+                    <span class="roboto-medium font-md blinking-underscore text-primary">_</span>
+                    <span class="roboto-regular text-secondary text-justify" data-i18n="footer.resume">
+                        Backend Developer building scalable APIs with Python & Java. 
+                        PostgreSQL, Docker, and cloud deployments.
+                    </span>
+                </p>
+                
+                <a class="mt-2 footer-btn-cv w-min text-truncate download-cv" data-i18n="footer.href_download" target="_blank"
+                    href="./CV/LucasCallamullo_Backend_Resume.pdf">
+                    <i class="ri-file-text-line font-md fw-normal"></i>
+                    <span class="roboto-medium font-sm letter-spacing-md" data-i18n="footer.download">./download_cv.sh</span>
+                </a>
+            </div>
+
+            <!-- nav buttons -->
+            <div class="console-container justify-start align-start">
+                <span class="prompt-console roboto-medium font-md letter-spacing-md">
+                    $&nbsp;&nbsp;ls&nbsp;&nbsp;routes/
+                </span>
+
+                <button class="btn roboto-regular mt-2 hover-up btn-foot-ref" data-nav="home">
+                    <span class="roboto-medium font-md prompt-console">>&nbsp;&nbsp;</span>
+                    <span class="text-primary font-md text-lowercase text-ref" data-i18n="nav.home">Home</span>
+                </button>
+
+                <button class="btn roboto-regular mt-1 text-truncate hover-up btn-foot-ref" data-nav="about">
+                    <span class="roboto-medium font-md prompt-console">>&nbsp;&nbsp;</span>
+                    <span class="text-primary font-md text-lowercase text-ref" data-i18n="nav.about">About</span>
+                </button>
+
+                <button class="btn roboto-regular mt-1 hover-up btn-foot-ref" data-nav="skills">
+                    <span class="roboto-medium font-md prompt-console">>&nbsp;&nbsp;</span>
+                    <span class="text-primary font-md text-lowercase text-ref" data-i18n="nav.skills">Skills</span>
+                </button>
+
+                <button class="btn roboto-regular mt-1 hover-up btn-foot-ref" data-nav="projects">
+                    <span class="roboto-medium font-md prompt-console">>&nbsp;&nbsp;</span>
+                    <span class="text-primary font-md text-lowercase text-ref" data-i18n="nav.projects">Projects</span>
+                </button>
+
+                <button class="btn roboto-regular mt-1 hover-up btn-foot-ref" data-nav="contact">
+                    <span class="roboto-medium font-md prompt-console">>&nbsp;&nbsp;</span>
+                    <span class="text-primary font-md text-lowercase text-ref" data-i18n="nav.contact">Contact</span>
+                </button>
+            </div>
+
+            <!-- CONTACTO buttons -->
+            <div class="console-container">
+                <span class="prompt-console roboto-medium font-md letter-spacing-md">
+                    $&nbsp;&nbsp;ssh&nbsp;&nbsp;connect@lucas.dev
+                </span>
+
+                <a class="mt-1 d-flex gap-1 hover-up align-center" 
+                href="https://github.com/LucasCallamullo" target="_blank">
+                    <i class="ri-github-line font-lg fw-normal"></i>
+                    <span class="font-md">GitHub</span>
+                    <i class="ri-external-link-line"></i>
+                </a>
+
+                <a class="mt-1 d-flex gap-1 hover-up align-center" 
+                href="https://www.linkedin.com/in/lucas-callamullo/" target="_blank">
+                    <i class="ri-linkedin-fill font-lg fw-normal"></i>
+                    <span class="font-md">LinkedIn</span>
+                    <i class="ri-external-link-line"></i>
+                </a>
+
+                <a class="mt-1 d-flex gap-1 hover-up align-center" 
+                href="mailto:you@example.com" target="_blank">
+                    <i class="ri-mail-line font-lg fw-normal"></i>
+                    <span class="font-md">Email</span>
+                    <i class="ri-external-link-line"></i>
+                </a>
+
+                <p class="footer-border-top mt-4">
+                    <span class="online-status">
+                        <span class="status-dot online"></span>
+                        <span class="status-text">online · ART (UTC-3)</span>
+                    </span>
+                </p>
+            </div>
+
+            <div class="footer-border-top mt-3 grid-col-all cont-space-between">
+                <p class="p-3">
+                    <span class="prompt-console font-sm letter-spacing-md">$</span>
+                    <span class="roboto-regular font-sm letter-spacing-md">echo "© 2026 Lucas Callamullo · UTN"</span>
+                </p>
+                <p class="p-3">
+                    <span class="roboto-regular font-sm letter-spacing-md">built with: </span>
+                    <span class="roboto-regular font-sm letter-spacing-md bold-console">Vanilla JS</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts (EN ESTE ORDEN) -->
+    <script src="./staticfiles/js/translates.js"></script>
+    <script src="./staticfiles/js/typewriter.js"></script>
+    <script src="./staticfiles/js/theme.js"></script>
+    <script src="./staticfiles/js/sliding-nav.js"></script>
+
+    <!-- Scripts con renderizado dinamico de cada view y api hiustory -->
+    <script src="./staticfiles/js/views/HomeView.js"></script>
+    <script src="./staticfiles/js/router.js"></script>
+
+
+    <!-- SWIPPER STuFF -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./staticfiles/js/portfolio-swiper.js"> </script>
+   
+</body>
+</html>

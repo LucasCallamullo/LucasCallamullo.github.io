@@ -1,0 +1,545 @@
+/* ========================================
+   FRAMEWORK CSS BASE - v1.0.0
+   ========================================
+   
+   Este archivo contiene:
+   1. IMPORT de fuentes
+   2. VARIABLES GLOBALES (:root)
+   3. TEMAS (light/dark mode)
+   4. ESTILOS BASE (html, body)
+   5. CONTAINERS PRINCIPALES
+   6. RESET Y AJUSTES BÁSICOS
+   
+   Es la BASE de todo el framework. Todos los demás archivos
+   (utilities, grid, text, etc.) dependen de las variables de acá.
+   
+   ======================================== */
+
+/* ========================================
+   1. IMPORT DE FUENTES
+   ======================================== */
+
+/* 
+   Importa Montserrat de Google Fonts
+   Pesa ~30-40KB y solo carga los pesos que usamos (400, 500, 700)
+   Los navegadores modernos lo cachean después de la primera carga
+*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+
+/* ========================================
+   2. VARIABLES GLOBALES (:root)
+   ========================================
+   
+   :root es el elemento <html> pero con mayor especificidad
+   Todas las variables definidas acá están disponibles en TODO el CSS
+   
+   Nomenclatura: --categoria-propiedad (ej: --bg-primary, --text-secondary)
+   ======================================== */
+
+:root {
+    /* 
+       color-scheme: Le dice al navegador qué modo de color usar
+       - "light": fuerza modo claro
+       - "dark": fuerza modo oscuro  
+       - "light dark": permite ambos (el navegador elige según el SO)
+    */
+    color-scheme: light; /* Fuerza solo el modo claro */
+
+    /* ========== COLORES PRINCIPALES DE LA MARCA ========== */
+    --main-color: #5e08e7;        /* Color principal (morado/azul) */
+    --main-light-color: #9554ff;  /* Versión más clara del principal */
+
+    /* ========== COLORES DE FONDO ========== */
+    --bg-primary: #ffffff;         /* Fondo principal (blanco) */
+    --bg-secondary: #f7f7f7;       /* Fondo secundario (gris muy claro) */
+
+    /* ========== COLORES DE TEXTO ========== */
+    --text-primary: #000000;       /* Texto principal (negro) */
+    --text-secondary: #6c757d;     /* Texto secundario (gris) */
+
+    /* ========== EXTENSIÓN DE ESCALA DE GRISES ========== */
+    --bg-secondary-light: #c9c9c96e;  /* Más claro que secondary (con transparencia) */
+    --bg-secondary-dark: #6c757d;      /* Más oscuro que secondary (gris medio) */
+    
+    /* ========== COLORES BÁSICOS ========== */
+    --white-color: #fff;           /* Blanco puro */
+    --black-color: #000;           /* Negro puro */
+    --red-color: #e40707;          /* Rojo (errores, peligro) */
+    --green-color: #28a745;        /* Verde (éxito, confirmación) */
+    --orange-color: #ff9900;       /* Naranja (advertencia) */
+    --green-wsp-color: #2db742;    /* Verde específico de WhatsApp */
+
+    /* ========== COLORES SEMÁNTICOS PARA ALERTAS ========== */
+    /* Usados por la función JS openAlert() */
+    --color-success: #28a745;      /* Verde para éxito */
+    --color-error: #dc3545;        /* Rojo para errores */
+    --color-info: #007bff;         /* Azul para información */
+    --color-warning: #ffc107;      /* Amarillo/ámbar para advertencias */
+
+    /* ========== BORDES Y SUPERFICIES ========== */
+    --border-cont: rgba(0, 0, 0, .125);  /* Color de borde (negro 12.5% opaco) */
+    --bg-images: #fff;                    /* Fondo para espacios de imágenes */
+
+    /* ========== TAMAÑOS DE FUENTE ========== */
+    /* Escala en rem (relativo al root, 1rem = 16px por defecto) */
+    --font-x-small: 0.5rem;      /* 12px */
+    --font-small: 0.75rem;       /* 14px */
+    --font-normal: 1rem;          /* 16px (tamaño base) */
+    --font-large: 1.5rem;        /* 20px */
+    --font-x-large: 2rem;       /* 24px */
+    --font-xx-large: 2.5rem;     /* 28px (Mobile) */
+    --font-xxx-large: 3rem;       /* 32px (Mobile) */
+    
+    /* ========== FUENTES ========== */
+    --font-main: 'Montserrat';     /* Fuente principal */
+    --font-slim: 'Montserrat';     /* Fuente "fina" (misma, pero podría cambiarse) */
+
+    /* ========== Z-INDEX (Capas) ========== */
+    /* Controla qué elemento se dibuja encima de cuál */
+    --z-fixed: 100;                /* Elementos fijos (headers fijos) */
+    --z-index: 150;               /* Z-index genérico */
+    --z-index-overlay: 200;       /* Overlays (fondos de modales) */
+    --z-index-plus: 300;          /* Un nivel más */
+    --z-index-overlay-cart: 400;  /* Overlay específico del carrito */
+    --z-index-cart: 500;          /* Carrito de compras */
+
+    /* ========== ANIMACIONES ========== */
+    --max-height-vertical-anim: 0;  /* Para animaciones de altura vertical */
+
+    /* ========== ALTURAS ========== */
+    --height-header: 64px;           /* Altura del header en mobile */
+    --height-item-main-nav: 48px;    /* Altura de items de navegación */
+
+    /* ========== PADDINGS RESPONSIVOS ========== */
+    --padding-container-page: 3%;    /* Padding lateral para contenedores */
+}
+
+/* ========================================
+   3. TEMAS (Dark Mode / Light Mode)
+   ========================================
+   
+   NOTA: Para activar el dark mode, agregar la clase "dark-mode" al <body>
+   Para activar light mode, agregar la clase "light-mode"
+   
+   Ejemplo: <body class="dark-mode">
+   ======================================== */
+
+/* 
+   .dark-mode - Modo oscuro
+   --------------------------------------------
+   Sobrescribe las variables para que los colores sean oscuros
+   Ideal para apps de noche o preferencia del usuario
+*/
+.dark-mode {
+    /* Fondos oscuros */
+    --bg-primary: #343a40;          /* Fondo principal: gris oscuro */
+    --bg-secondary: #212529;        /* Fondo secundario: casi negro */
+    
+    --bg-secondary-light: #c9c9c936; /* Más claro pero con transparencia */
+    --bg-secondary-dark: #141b20;    /* Mismo que secondary 212529 */
+
+    /* Textos claros (para contrastar con fondo oscuro) */
+    --text-primary: #ffffff;         /* Texto principal: blanco */
+    --text-secondary: #b3b5b6;       /* Texto secundario: gris claro */
+
+    /* Bordes claros (para que se vean sobre fondo oscuro) */
+    --border-cont: rgba(255, 255, 255, 0.125);  /* Blanco 12.5% opaco */
+
+    --main-color: #b000ff;        /* Violeta neón puro */
+    --main-light-color: #d86eff;  /* Violeta neón más claro */
+}
+
+/* 
+   .light-mode - Modo claro (explícito)
+   --------------------------------------------
+   Este es el modo por defecto, pero se puede forzar agregando la clase
+   Útil si el sistema está en dark mode pero querés mostrar light
+*/
+.light-mode {
+    /* Fondos claros */
+    --bg-primary: #ffffff;           /* Fondo principal: blanco */
+    --bg-secondary: #f7f7f7;         /* Fondo secundario: gris muy claro */
+    --bg-secondary-light: #c9c9c9ab; /* Más claro con más opacidad */
+    --bg-secondary-dark: #f7f7f7;  /* Más oscuro para contraste */
+
+    /* Textos oscuros */
+    --text-primary: #000000;         /* Texto principal: negro */
+    --text-secondary: #6c757d;       /* Texto secundario: gris medio */
+    
+    --border-cont: rgba(0, 0, 0, .125);  /* Borde negro semitransparente */
+}
+
+/* ========================================
+   4. MEDIA QUERIES - VARIABLES RESPONSIVAS
+   ========================================
+   
+   Las variables se actualizan según el tamaño de pantalla
+   ======================================== */
+
+/* 
+   Tablet pequeña (mínimo 480px)
+   --------------------------------------------
+   Ajusta alturas para pantallas más grandes
+*/
+@media (min-width: 480px) {
+    :root {
+        --height-header: 80px;           /* Header más alto */
+        --height-item-main-nav: 50px;    /* Items de navegación más altos */
+    }
+}
+
+/* 
+   Tablet (mínimo 768px)
+   --------------------------------------------
+   Ajustes para tablets en horizontal
+*/
+@media (min-width: 768px) {
+    :root {
+        --height-header: 80px;          /* Header aún más alto */
+        --height-item-main-nav: 60px;    /* Items aún más altos */
+        --padding-container-page: 4%;    /* Más padding lateral */
+        --font-xxx-large: 2.5rem;        /* 40px (texto más grande en tablet) */
+    }
+}
+
+/* 
+   Desktop (mínimo 992px)
+   --------------------------------------------
+   Ajustes para pantallas de escritorio
+*/
+@media (min-width: 992px) {
+    :root {
+        --height-header: 80px;          /* Header más alto en desktop */
+        --height-item-main-nav: 48px;    /* Items un poco más pequeños */
+        --padding-container-page: 84px;  /* Padding fijo en px */
+    }
+}
+
+/* 
+   Desktop grande (mínimo 1280px)
+   --------------------------------------------
+   Para pantallas muy anchas
+*/
+@media (min-width: 1280px) {
+    :root {
+        --padding-container-page: 100px; /* Más padding lateral */
+    }
+}
+
+/* ========================================
+   5. ESTILOS BASE (HTML y BODY)
+   ========================================
+   
+   Configuración global que aplica a toda la página
+   ======================================== */
+
+/* 
+   html, body - Estilos base de toda la página
+   --------------------------------------------
+   Configuración fundamental que afecta a todos los elementos
+*/
+html, body {
+    margin: 0;                         /* Sin márgenes externos */
+    padding: 0;                        /* Sin padding interno */
+    width: 100%;                       /* Ocupa todo el ancho */
+    height: 100vh;                     /* Altura = viewport */
+    min-height: 100vh;                 /* Mínimo = viewport (fallback) */
+
+    line-height: 1.25;                 /* Interlineado base (25% más que el texto) */
+    color: var(--text-primary);        /* Color de texto (variable) */
+    font-size: var(--font-normal);     /* Tamaño base (16px) */
+    font-family: var(--font-main), sans-serif;  /* Fuente principal */
+    background-color: var(--bg-secondary-dark);      /* Fondo secundario */
+
+    scroll-behavior: smooth;           /* Scroll suave al hacer clic en anclas */
+    -webkit-font-smoothing: antialiased;        /* Suavizado de fuentes en WebKit */
+    transition: background-color .2s ease-in-out; /* Transición suave al cambiar tema */
+    -webkit-tap-highlight-color: transparent;    /* Elimina resaltado al tocar en móviles */
+}
+
+/* 
+   Scrollbar - Personalización de la barra de scroll
+   --------------------------------------------
+   Solo para navegadores WebKit (Chrome, Safari, Edge)
+*/
+::-webkit-scrollbar-track {
+    background: #2b2b2b;              /* Fondo de la barra de scroll (oscuro) */
+}
+
+/* 
+   html - Configuraciones específicas del html
+   --------------------------------------------
+*/
+html {
+    -webkit-text-size-adjust: 100%;    /* Evita que iOS escale el texto */
+    scrollbar-color: #797979 #2b2b2b;  /* Para Firefox: color thumb y track */
+}
+
+/* 
+   body - Configuraciones específicas del body
+   --------------------------------------------
+*/
+body {
+    text-align: left;                  /* Texto alineado a la izquierda */
+    direction: ltr;                    /* Dirección de escritura izquierda→derecha */
+    overflow-x: hidden;                /* Oculta scroll horizontal */
+    -webkit-backface-visibility: hidden; /* Mejora rendimiento Safari */
+    backface-visibility: hidden;       /* Misma mejora para otros navegadores */
+    overscroll-behavior-y: contain;    /* Evita pull-to-refresh en móviles */
+    touch-action: manipulation;        /* Mejora respuesta táctil */
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    -webkit-tap-highlight-color: transparent; /* Sin resaltado al tocar */
+}
+
+/* ========================================
+   6. ESTILOS BASE DE ELEMENTOS
+   ========================================
+   
+   Configuración de elementos comunes (header, main, footer, etc.)
+   ======================================== */
+
+/* 
+   header - Estilo base para encabezados
+   --------------------------------------------
+   Mobile first: fixed para que quede siempre arriba
+*/
+header {
+    height: var(--height-header);      /* Altura según variable */
+    width: 100%;                       /* Ancho completo */
+    position: fixed;                   /* Fijo al hacer scroll */
+    top: 0;                            /* Pegado arriba */
+    left: 0;                           /* Pegado izquierda */
+    right: 0;                          /* Pegado derecha */
+    z-index: var(--z-index);           /* Sobre otros elementos */
+}
+
+/* 
+   header.cart-open - Cuando el carrito está abierto
+   --------------------------------------------
+   Aumenta el z-index para que el header esté SOBRE el carrito
+*/
+header.cart-open {
+    z-index: calc(var(--z-index-plus) + 2);  /* +2 para asegurar */
+}
+
+/* 
+   main - Contenido principal
+   --------------------------------------------
+*/
+main {
+    width: 100%;
+    /*  padding-top: 20px;                 Espacio arriba (mobile) */
+    /* padding-bottom: 20px;               Espacio abajo (mobile) */
+    margin-top: var(--height-header);  /* Compensa el header fixed */
+}
+
+/* 
+   footer - Pie de página
+   --------------------------------------------
+*/
+footer {
+    width: 100%;
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    background-color: var(--bg-secondary-dark);
+}
+
+/* 
+   Desktop (992px+) - Cambia comportamiento del header
+   --------------------------------------------
+   En desktop, el header ya no es fixed
+*/
+@media (min-width: 992px) {
+    header {
+        /* padding-top: 16px; */
+        position: fixed;            /* relative, no fixed */
+        z-index: var(--z-index);    /* Z-index auto */
+    }
+
+    /* main {
+        margin-top: 0;                 /* Ya no necesita compensar 
+    } */
+
+    footer { 
+        padding-top: 24px;
+        padding-bottom: 12px;
+    }
+}
+
+/* ========================================
+   7. CONTAINERS PRINCIPALES
+   ======================================== */
+
+/* 
+   .cont-page - Contenedor principal de contenido
+   --------------------------------------------
+   Centra el contenido con paddings laterales responsivos
+   Se usa en header, main y footer para mantener consistencia
+*/
+
+.full-bg-primary {
+    background: var(--bg-primary);
+    width: 100%; padding: 0; margin: 0;
+}
+
+.full-bg-secondary-dark {
+    background: var(--bg-secondary-dark);
+    width: 100%; padding: 0; margin: 0;
+}
+
+.full-bg-secondary {
+    background: var(--bg-secondary);
+    width: 100%; padding: 0; margin: 0;
+}
+
+
+.cont-page {
+    width: 100% !important;                   /* Ancho completo */
+    max-width: 1280px !important;             /* Máximo ancho (no más de 1280px) */
+    padding-left: var(--padding-container-page) !important;   /* Padding izquierdo variable */
+    padding-right: var(--padding-container-page) !important;  /* Padding derecho variable */
+    margin: 0 auto;                           /* Centra horizontalmente */
+}
+
+
+/* ========================================
+   8. RESET Y AJUSTES BÁSICOS
+   ========================================
+   
+   Normaliza comportamientos entre navegadores
+   ======================================== */
+
+/* 
+   *, *::before, *::after - Reset universal
+   --------------------------------------------
+   Aplica box-sizing border-box a TODOS los elementos
+   Esto hace que padding y border NO aumenten el ancho total
+*/
+*, *::before, *::after {
+    box-sizing: border-box;    /* El width incluye padding y border */
+    margin: 0;                 /* Resetea márgenes */
+    padding: 0;                /* Resetea paddings */
+}
+
+/* 
+   body * - Asegura que todos los elementos hereden la fuente
+   --------------------------------------------
+*/
+body * {
+    font-family: var(--font-main), sans-serif;
+}
+
+/* 
+   ul - Listas sin viñetas
+   --------------------------------------------
+*/
+ul {
+    list-style: none;                       /* Sin viñetas */
+    -webkit-tap-highlight-color: transparent; /* Sin resaltado al tocar */
+}
+
+/* 
+   a - Enlaces sin subrayado por defecto
+   --------------------------------------------
+*/
+a {
+    text-decoration: none;                  /* Sin subrayado */
+    color: var(--text-primary);             /* Color del texto (variable) */
+}
+
+/* 
+   button i - Iconos dentro de botones
+   --------------------------------------------
+   Evita que el ícono reciba eventos de puntero
+*/
+button i { 
+    pointer-events: none;                   /* El click pasa al botón */
+}
+
+/* 
+   b, strong - Negritas consistentes
+   --------------------------------------------
+*/
+b, strong { 
+    font-weight: bolder;                    /* La negrita más fuerte disponible */
+}
+
+/* 
+   input, select, textarea - Estilos de formularios
+   --------------------------------------------
+*/
+input, select, textarea {
+    font-size: var(--font-small);           /* Tamaño de fuente pequeño */
+    font-weight: bolder;                    /* Texto en negrita */
+    color: var(--text-primary);             /* Color del texto */
+    background-color: var(--bg-secondary);  /* Fondo secundario */
+    border: 1px solid var(--text-primary);  /* Borde del color del texto */
+    outline: none;                          /* Sin contorno al focus (lo manejamos aparte) */
+    padding: 5px;                           /* Padding interno */
+    padding-left: 8px;                      /* Más padding a la izquierda */
+    height: 36px;                           /* Altura fija */
+    width: 100%;                            /* Ancho completo */
+}
+
+/* 
+   select, option - Estilos específicos para selects
+   --------------------------------------------
+*/
+select, option { 
+    cursor: pointer;                        /* Cursor de mano */
+    font-weight: bolder;                    /* Texto en negrita */
+    color: var(--text-primary);             /* Color del texto */
+}
+
+/* 
+   input:-webkit-autofill - Estilos para autocompletado
+   --------------------------------------------
+   Mantiene la consistencia de colores cuando el navegador autocompleta
+*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-primary);          /* Color del texto */
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-secondary) inset; /* Fondo forzado */
+}
+
+/* 
+   input focus - Efecto al hacer foco
+   --------------------------------------------
+*/
+input[type="text"],
+input[type="email"],
+input[type="url"] {
+    transition: box-shadow 0.3s ease;      /* Transición suave */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus {
+    box-shadow: 0 0 1px var(--text-primary), 0 0 4px var(--text-primary); /* Efecto glow */
+}
+
+/* 
+   Safari/Chrome - Quita highlight especial
+   --------------------------------------------
+*/
+input[type="text"]::-webkit-focus-inner {
+    border: 0;
+}
+
+input[type="text"]:-moz-focusring {
+    outline: none;
+}
+
+/* ========================================
+   NOTAS Y RECOMENDACIONES
+   ========================================
+
+   1. Las variables en :root están disponibles en TODO el CSS
+   2. Para usar dark mode: <body class="dark-mode">
+   3. Los estilos base son MOBILE FIRST (primero móvil, luego desktop con media queries)
+   4. .cont-page es el contenedor principal para mantener consistencia
+   5. Todas las alturas y tamaños usan variables para facilitar cambios globales
+
+   ======================================== */

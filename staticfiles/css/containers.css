@@ -1,0 +1,654 @@
+/* ========================================
+   HELPERS DE CONTENEDORES FLEX
+   ======================================== */
+
+/* Contenedor Flex que distribuye espacio ENTRE los hijos (el primero al inicio, el último al final) */
+.cont-space-between {
+    display: flex;                    /* Activa Flexbox en el contenedor */
+    justify-content: space-between;  /* Distribuye espacio sobrante ENTRE los elementos */
+}
+
+/* Contenedor Flex que distribuye espacio ALREDEDOR de los hijos (espacio igual a los lados) */
+.cont-space-around {
+    display: flex;                    /* Activa Flexbox en el contenedor */
+    justify-content: space-around;   /* Cada elemento tiene espacio a izquierda y derecha (menor en los bordes) */
+}
+
+/* Contenedor Flex que distribuye espacio UNIFORMEMENTE entre hijos y bordes */
+.cont-space-evenly {
+    display: flex;                    /* Activa Flexbox en el contenedor */
+    justify-content: space-evenly;   /* Espacio IDÉNTICO entre todos los elementos y los bordes */
+}
+
+/* ========================================
+   HELPERS FLEX BÁSICOS
+   ======================================== */
+
+/* Activa Flexbox en modo fila horizontal (default) */
+.d-flex { 
+    display: flex;    /* Convierte el elemento en contenedor flexible (hijos en horizontal) */
+}
+
+/* Activa Flexbox en modo columna vertical (apila elementos uno abajo del otro) */
+.d-flex-col { 
+    display: flex;              /* Activa Flexbox */
+    flex-direction: column;    /* Cambia la dirección de horizontal (fila) a vertical (columna) */
+}
+
+/* 
+   ⚠️ IMPORTANTE: Este es un caso especial de uso educativo
+   En mobile: los elementos se apilan verticalmente (columna)
+   En desktop: se alinean horizontalmente (fila) - Ver media query más abajo
+*/
+.d-flex-col-row { 
+    display: flex;              /* Activa Flexbox */
+    flex-direction: column;    /* En mobile: dirección vertical (columna) */
+}
+
+@media (min-width: 992px) {
+    .d-flex-col-row { flex-direction: row; }
+}
+
+
+/* ========================================
+   ALIGN ITEMS - Alineación VERTICAL (eje cruzado)
+   ========================================
+   NOTA: align-items controla la alineación de los hijos en el eje VERTICAL
+         cuando flex-direction es row (horizontal)
+         En column, controla la alineación HORIZONTAL
+*/
+
+/* Alinea los hijos al INICIO (arriba si es row, izquierda si es column) */
+.align-start { 
+    align-items: flex-start;    /* Los hijos se pegan al borde superior/izquierdo */
+}
+
+/* Alinea los hijos al CENTRO vertical/horizontalmente (muy usado para centrar) */
+.align-center { 
+    align-items: center;        /* Los hijos se centran perfectamente en el eje secundario */
+}
+
+/* Alinea los hijos al FINAL (abajo si es row, derecha si es column) */
+.align-end { 
+    align-items: flex-end;      /* Los hijos se pegan al borde inferior/derecho */
+}
+
+/* Estira los hijos para que ocupen TODO el alto/ancho del contenedor (valor por defecto) */
+.align-stretch { 
+    align-items: stretch;       /* Los hijos se expanden para llenar todo el espacio disponible */
+}
+
+/* Alinea los hijos según la línea base del texto (útil para textos de diferentes tamaños) */
+.align-baseline { 
+    align-items: baseline;      /* Los textos se alinean por su línea base (no por su borde inferior) */
+}
+
+/* ========================================
+   JUSTIFY CONTENT - Alineación HORIZONTAL (eje principal)
+   ========================================
+   NOTA: justify-content controla la distribución en el eje PRINCIPAL
+         (horizontal si flex-direction es row, vertical si es column)
+*/
+
+/* Agrupa los hijos al INICIO (izquierda en row, arriba en column) */
+.justify-start { 
+    justify-content: flex-start;    /* Todos los elementos se pegan al inicio (sin espacio entre ellos) */
+}
+
+/* Centra los hijos horizontalmente/verticalmente en el eje principal */
+.justify-center { 
+    justify-content: center;        /* Todos los elementos se agrupan en el centro */
+}
+
+/* Agrupa los hijos al FINAL (derecha en row, abajo en column) */
+.justify-end { 
+    justify-content: flex-end;      /* Todos los elementos se pegan al final */
+}
+
+/* Distribuye los hijos con ESPACIO ENTRE ellos (primero al inicio, último al final) */
+.justify-between { 
+    justify-content: space-between; /* El espacio sobrante se distribuye ENTRE los elementos */
+}
+
+/* Distribuye los hijos con ESPACIO ALREDEDOR (cada elemento tiene espacio a sus lados) */
+.justify-around { 
+    justify-content: space-around;  /* Los elementos tienen espacio a izquierda y derecha (mitad en los bordes) */
+}
+
+/* Distribuye los hijos con ESPACIO UNIFORME (todos los espacios son iguales) */
+.justify-evenly { 
+    justify-content: space-evenly;  /* El espacio entre elementos y bordes es IDÉNTICO */
+}
+
+/* ========================================
+   TEXT ALIGN - Alineación de TEXTO
+   ========================================
+   NOTA: Estas clases afectan SOLO al texto dentro del elemento
+*/
+
+/* Centra el texto horizontalmente */
+.text-center { 
+    text-align: center;    /* El texto se centra dentro de su contenedor */
+}
+
+/* Alinea el texto al INICIO (izquierda en idiomas LTR como español) */
+.text-start { 
+    text-align: start;     /* El texto se pega al inicio (izquierda en español) */
+}
+
+/* Alinea el texto al FINAL (derecha en idiomas LTR) */
+.text-end { 
+    text-align: end;       /* El texto se pega al final (derecha en español) */
+}
+
+/* Justifica el texto (expande las palabras para que ocupe todo el ancho) */
+.text-justify { 
+    text-align: justify;   /* El texto se estira para que todas las líneas tengan el mismo ancho */
+}
+
+
+/* ========================================
+   CONTENEDOR GRID BASE
+   ======================================== */
+/* 
+   .d-grid - Activa CSS Grid en el contenedor
+   --------------------------------------------
+   Úsalo como base para cualquier layout con grid
+*/
+.d-grid {
+    display: grid;          /* Activa el modo Grid Layout */
+    width: 100%;            /* Ocupa todo el ancho disponible de su contenedor padre */
+}
+
+/* 
+   Previene desbordamientos en elementos hijos del grid
+   --------------------------------------------
+   Sin esto, los hijos podrían expandirse más allá del grid
+   Especialmente útil con textos largos o imágenes
+*/
+.d-grid > * {
+    min-width: 0;           /* Permite que los hijos se encojan si es necesario */
+    min-height: 0;          /* Permite que los hijos se encojan verticalmente */
+}
+
+/* ========================================
+   GRID TEMPLATES RESPONSIVOS
+   ========================================
+   
+   NOTA IMPORTANTE: Estos templates siguen enfoque MOBILE FIRST
+   - Los valores BASE son para móviles (0 - 767px)
+   - Los media queries SOBREESCRIBEN para tablet y desktop
+   ======================================== */
+/* 
+   .grid-122 - Grid adaptable (1→2→2 columnas)
+   --------------------------------------------
+   Mobile: 1 columna
+   Tablet: 2 columnas
+   Desktop: 2 columnas
+*/
+.grid-122 { 
+    grid-template-columns: repeat(1, 1fr);   /* Mobile: 1 columna que ocupa todo el ancho */
+}
+
+/* 
+   .grid-123 - Grid adaptable (1→2→3 columnas)
+   --------------------------------------------
+   Mobile: 1 columna
+   Tablet: 2 columnas
+   Desktop: 3 columnas
+*/
+.grid-123 { 
+    grid-template-columns: repeat(1, 1fr);   /* Mobile: 1 columna */
+}
+
+/* 
+   .grid-234 - Grid adaptable (2→3→4 columnas)
+   --------------------------------------------
+   Mobile: 2 columnas
+   Tablet: 3 columnas
+   Desktop: 4 columnas
+*/
+.grid-234 { 
+    grid-template-columns: repeat(2, 1fr);   /* Mobile: 2 columnas (bueno para móvil) */
+}
+
+/* 
+   .grid-334 - Grid adaptable (3→3→4 columnas)
+   --------------------------------------------
+   Mobile: 3 columnas
+   Tablet: 3 columnas
+   Desktop: 4 columnas
+*/
+.grid-334 { 
+    grid-template-columns: repeat(3, 1fr);   /* Mobile: 3 columnas (aprovecha móviles grandes) */
+}
+
+/* 
+   .grid-11-13 - Grid de proporción 1:3
+   --------------------------------------------
+   Mobile: 1fr + 1fr (50% y 50%)
+   Desktop: 1fr + 3fr (25% y 75%)
+*/
+.grid-11-13 { 
+    grid-template-columns: 1fr 1fr;   /* Mobile: Dos columnas iguales (1 parte cada una) */
+}
+
+/* ========================================
+   UTILIDADES PARA COLUMNAS
+   ======================================== */
+
+/* 
+   .grid-col-all - Ocupa todas las columnas disponibles
+   --------------------------------------------
+   Útil cuando quieres que un elemento OCupe desde la columna 1 hasta la última
+   Ejemplo: Un banner que atraviesa todo el grid, un encabezado de sección
+   
+   ¿Cómo funciona?
+   - "1" = primera línea de columna
+   - "-1" = última línea de columna (cuenta desde el final)
+   - Resultado: El elemento se expande por todo el ancho
+*/
+.grid-col-all { 
+    grid-column: 1 / -1;    /* Desde la primera línea de columna hasta la última */
+}
+
+.grid-col-span-2 { grid-column: span 2; }  /* Ocupa 2 columnas */
+.grid-col-span-3 { grid-column: span 3; }  /* Ocupa 3 columnas */
+.grid-col-start-2 { grid-column-start: 2; } /* Empieza en columna 2 */
+.grid-col-end-2 { grid-column-end: 2; }    /* Termina en columna 2 */
+   
+
+/* ========================================
+   MEDIA QUERIES RESPONSIVAS
+   ======================================== */
+/* 
+   TABLET (mínimo 768px)
+   --------------------------------------------
+   Aplica estilos cuando la pantalla mide 768px o más
+   Sobrescribe los templates base para mejorar el layout en tabletas
+*/
+@media (min-width: 768px) {
+    
+    /* .grid-122: pasa de 1 columna a 2 columnas en tablet */
+    .grid-122 { 
+        grid-template-columns: repeat(2, 1fr);   /* Tablet: 2 columnas */
+    }
+    
+    /* .grid-123: pasa de 1 columna a 2 columnas en tablet */
+    .grid-123 { 
+        grid-template-columns: repeat(2, 1fr);   /* Tablet: 2 columnas */
+    }
+    
+    /* .grid-234: pasa de 2 columnas a 3 columnas en tablet */
+    .grid-234 { 
+        grid-template-columns: repeat(3, 1fr);   /* Tablet: 3 columnas */
+    }
+}
+
+/* 
+   DESKTOP (mínimo 992px)
+   --------------------------------------------
+   Aplica estilos cuando la pantalla mide 992px o más
+   Último nivel de responsividad para pantallas grandes
+*/
+@media (min-width: 992px) {
+    
+    /* .grid-122: se mantiene en 2 columnas en desktop */
+    .grid-122 { 
+        grid-template-columns: repeat(2, 1fr);   /* Desktop: 2 columnas */
+    }
+    
+    /* .grid-123: pasa de 2 a 3 columnas en desktop */
+    .grid-123 { 
+        grid-template-columns: repeat(3, 1fr);   /* Desktop: 3 columnas */
+    }
+    
+    /* .grid-234: pasa de 3 a 4 columnas en desktop */
+    .grid-234 { 
+        grid-template-columns: repeat(4, 1fr);   /* Desktop: 4 columnas */
+    }
+    
+    /* .grid-334: pasa de 3 a 4 columnas en desktop */
+    .grid-334 { 
+        grid-template-columns: repeat(4, 1fr);   /* Desktop: 4 columnas */
+    }
+    
+    /* .grid-11-13: cambia proporción de 1:1 a 1:3 en desktop */
+    .grid-11-13 { 
+        grid-template-columns: 1fr 3fr;   /* Desktop: 25% y 75% */
+    }
+}
+
+/* ========================================
+   SELF ALIGNMENT - Alineación individual
+   ========================================
+   
+   NOTA: Estas clases se aplican a los HIJOS del grid
+   Permiten que un elemento específico se alinee diferente a los demás
+   
+   Diferencia con align-items/justify-items:
+   - align-items: afecta a TODOS los hijos
+   - align-self: afecta SOLO a este elemento
+   
+   ======================================== */
+/*
+   JUSTIFY-SELF - Alineación HORIZONTAL individual
+   --------------------------------------------
+   Controla cómo se alinea un elemento específico dentro de su celda (horizontalmente)
+*/
+.justify-self-start { 
+    justify-self: flex-start;   /* Se alinea a la izquierda de su celda */
+}
+.justify-self-center { 
+    justify-self: center;       /* Se centra horizontalmente en su celda */
+}
+.justify-self-end { 
+    justify-self: flex-end;     /* Se alinea a la derecha de su celda */
+}
+
+/*
+   ALIGN-SELF - Alineación VERTICAL individual
+   --------------------------------------------
+   Controla cómo se alinea un elemento específico dentro de su celda (verticalmente)
+*/
+.align-self-start { 
+    align-self: flex-start;     /* Se alinea arriba en su celda */
+}
+.align-self-center { 
+    align-self: center;         /* Se centra verticalmente en su celda */
+}
+.align-self-end { 
+    align-self: flex-end;       /* Se alinea abajo en su celda */
+}
+
+/* ========================================
+   EJEMPLOS PRÁCTICOS DE USO
+   ========================================
+
+   1. GALERÍA DE IMÁGENES RESPONSIVE:
+   --------------------------------------------
+   <div class="d-grid grid-123">
+       <img src="img1.jpg">
+       <img src="img2.jpg">
+       <img src="img3.jpg">
+       <img src="img4.jpg">
+       <img src="img5.jpg">
+       <img src="img6.jpg">
+   </div>
+   // Mobile: 1 columna, Tablet: 2 columnas, Desktop: 3 columnas
+
+
+   2. SIDEBAR + CONTENIDO PRINCIPAL:
+   --------------------------------------------
+   <div class="d-grid grid-11-13">
+       <aside class="sidebar">Menú lateral</aside>
+       <main class="content">Contenido principal</main>
+   </div>
+   // Mobile: 50% - 50%, Desktop: 25% - 75%
+
+
+   3. ELEMENTO QUE ATRAVIESA TODAS LAS COLUMNAS:
+   --------------------------------------------
+   <div class="d-grid grid-3">
+       <div class="grid-col-all bg-blue">Encabezado que ocupa todo</div>
+       <div>Item 1</div>
+       <div>Item 2</div>
+       <div>Item 3</div>
+   </div>
+
+
+   4. ALINEACIÓN INDIVIDUAL DENTRO DEL GRID:
+   --------------------------------------------
+   <div class="d-grid grid-3" style="height: 200px;">
+       <div class="align-self-start">Arriba</div>
+       <div class="align-self-center">Centro</div>
+       <div class="align-self-end">Abajo</div>
+   </div>
+
+
+   5. DASHBOARD CON MÉTRICAS (grid-334):
+   --------------------------------------------
+   <div class="d-grid grid-334">
+       <div class="card">Ventas: $10k</div>
+       <div class="card">Usuarios: 1,234</div>
+       <div class="card">Productos: 56</div>
+       <div class="card">Pedidos: 89</div>
+   </div>
+   // Mobile: 3 columnas apretadas, Desktop: 4 columnas cómodas
+
+   ======================================== */
+
+/* ========================================
+   COMPARATIVA RÁPIDA DE NOMBRES
+   ========================================
+   
+   Clase      | Mobile | Tablet | Desktop | Uso típico
+   -----------|--------|--------|---------|--------------------
+   .grid-122  | 1 col  | 2 cols | 2 cols  | Cards, productos
+   .grid-123  | 1 col  | 2 cols | 3 cols  | Galerías, imágenes
+   .grid-234  | 2 cols | 3 cols | 4 cols  | Íconos, miniaturas
+   .grid-334  | 3 cols | 3 cols | 4 cols  | Dashboards, métricas
+   .grid-11-13| 1:1    | 1:1    | 1:3     | Sidebar + contenido
+   
+   ======================================== */
+
+
+
+
+/* ========================================
+   SIZING - Control de dimensiones
+   ========================================
+   NOTA: Estas clases controlan el ANCHO y ALTO de los elementos
+   ======================================== */
+
+/*
+   w-min / w-max - Ancho según el CONTENIDO
+   --------------------------------------------
+   w-min: el elemento se encoge hasta el tamaño MÍNIMO que necesita su contenido
+   w-max: el elemento se expande hasta el tamaño MÁXIMO que necesita su contenido
+   
+   ¿Cuándo usarlos?
+   - w-min: botones que no quieras que ocupen más de lo necesario
+   - w-max: etiquetas o badges que quieras que se ajusten al texto
+*/
+.w-min { 
+    width: min-content;        /* El ancho se ajusta al contenido MÁS ANGOSTO posible */
+    /* Ejemplo: un botón con texto largo se encoge hasta la palabra más larga */
+}
+
+.w-max { 
+    width: max-content;        /* El ancho se ajusta al contenido MÁS ANCHO posible */
+    /* Ejemplo: el elemento se expande para que TODO el texto esté en una línea */
+}
+
+.h-min { 
+    height: min-content;       /* El alto se ajusta al contenido MÍNIMO (sin espacio vacío) */
+}
+
+/*
+   w-100 / h-100 - Porcentaje relativo al PADRE
+   --------------------------------------------
+   Toman el tamaño según el elemento CONTENEDOR (no según el contenido)
+*/
+.w-100 { 
+    width: 100%;               /* Ocupa TODO el ancho de su contenedor padre */
+}
+
+.h-100 { 
+    height: 100%;              /* Ocupa TODO el alto de su contenedor padre */
+    /* ⚠️ OJO: El padre necesita tener una altura definida para que funcione */
+}
+
+/*
+   w-25 / w-50 / w-75 - Fracciones del contenedor
+   --------------------------------------------
+   Útiles para layouts responsivos sin grid/flex
+*/
+.w-25 { 
+    width: 25%;                /* Una cuarta parte del contenedor */
+}
+
+.w-50 { 
+    width: 50%;                /* La mitad del contenedor */
+}
+
+.w-75 { 
+    width: 75%;                /* Tres cuartas partes del contenedor */
+}
+
+/*
+   vh-100 / vw-100 - Relativo a la PANTALLA (viewport)
+   --------------------------------------------
+   A diferencia del % (relativo al padre), vh/vw es relativo a la ventana del navegador
+   
+   ¿Para qué sirve?
+   - Pantallas completas (hero sections, modales)
+   - Elementos que deben ocupar toda la altura visible
+*/
+.vh-100 { 
+    height: 100vh;             /* 100% de la altura de la PANTALLA (viewport height) */
+    /* Útil para secciones que quieras que ocupen toda la pantalla al entrar */
+}
+
+.vw-100 { 
+    width: 100vw;              /* 100% del ancho de la PANTALLA (viewport width) */
+    /* ⚠️ OJO: Puede causar scroll horizontal si hay margin/padding */
+}
+
+/* ========================================
+   POSITION - Control de ubicación
+   ========================================
+   NOTA: Estas clases cambian CÓMO se posiciona un elemento en la página
+   El valor por defecto de todos los elementos es "static" (estático)
+   ======================================== */
+
+/*
+   relative - Posición RELATIVA a su lugar original
+   --------------------------------------------
+   El elemento se mueve DESDE donde debería estar naturalmente
+   Los demás elementos NO ocupan el espacio que dejó vacío (sigue "reservado")
+*/
+.relative { 
+    position: relative;        /* Se posiciona RELATIVO a su ubicación normal */
+    /* Útil para: ser contenedor de elementos absolute, o moverlo con top/left */
+}
+
+/*
+   absolute - Posición ABSOLUTA respecto al primer "relative" de sus padres
+   --------------------------------------------
+   El elemento SALE del flujo normal (como si no existiera para los demás)
+   Se posiciona respecto al ANCESTOR más cercano con position: relative
+*/
+.absolute { 
+    position: absolute;        /* Se posiciona respecto al primer padre con position relative */
+    /* Útil para: tooltips, badges, elementos flotantes, modales */
+}
+
+/*
+   fixed - Fijo respecto a la PANTALLA (viewport)
+   --------------------------------------------
+   El elemento NO se mueve aunque hagas scroll
+   Siempre se posiciona respecto a la ventana del navegador
+*/
+.fixed { 
+    position: fixed;           /* Se queda PEGADO en la pantalla aunque scrollees */
+    /* Útil para: headers fijos, botones de "volver arriba", chat flotante */
+}
+
+/*
+   sticky - Híbrido entre relative y fixed
+   --------------------------------------------
+   Se comporta como "relative" NORMALMENTE
+   Pero cuando el scroll lo alcanza, se "pega" y se comporta como "fixed"
+*/
+.sticky { 
+    position: sticky;          /* Normal hasta que el scroll lo toca, luego se fija */
+    top: 0;                    /* Se pega cuando llega al borde superior (0px) */
+    /* Útil para: headers de tabla, barras laterales, menús que quieras que sigan */
+}
+
+/* ========================================
+   EJEMPLOS PRÁCTICOS
+   ========================================
+
+   1. Hero section que ocupa toda la pantalla:
+   <div class="vh-100 w-100 bg-blue">Pantalla completa</div>
+
+   2. Botón flotante fijo en la esquina:
+   <button class="fixed" style="bottom: 20px; right: 20px;">+</button>
+
+   3. Badge sobre un ícono (relative + absolute):
+   <div class="relative">
+       <i class="fa-regular fa-bell"></i>
+       <span class="absolute bg-red" style="top: -5px; right: -10px;">3</span>
+   </div>
+
+   4. Header que se pega al hacer scroll:
+   <header class="sticky">Este header se queda arriba</header>
+
+   5. Imagen que se ajusta al contenedor:
+   <div style="width: 300px; height: 200px;">
+       <img src="foto.jpg" class="w-100 h-100" style="object-fit: cover;">
+   </div>
+
+   ======================================== */
+
+
+/* ========================================
+   HELPERS DISPLAY BÁSICOS
+   ======================================== */
+
+/*
+   .d-block - Display block
+   --------------------------------------------
+   El elemento ocupa TODO el ancho disponible
+   Fuerza un salto de línea antes y después
+*/
+.d-block { 
+    display: block;    /* El elemento se comporta como un "bloque" (como un div) */
+    /* Útil para: hacer que un span, a o button se comporten como bloque */
+}
+
+/*
+   .d-inline - Display inline
+   --------------------------------------------
+   El elemento ocupa SOLO el ancho de su contenido
+   NO fuerza saltos de línea, los elementos se alinean en la misma línea
+*/
+.d-inline { 
+    display: inline;   /* Se comporta como texto (como un span) */
+    /* ⚠️ OJO: No se puede aplicar width, height, ni margin vertical */
+}
+
+/*
+   .d-inline-block - Híbrido entre inline y block
+   --------------------------------------------
+   Se alinea como inline (en la misma línea)
+   PERO permite aplicar width, height, margin y padding
+*/
+.d-inline-block { 
+    display: inline-block;    /* Lo mejor de ambos mundos */
+    /* Útil para: botones en línea, elementos de navegación, badges */
+}
+
+/*
+   .d-none - Ocultar elemento
+   --------------------------------------------
+   El elemento DESAPARECE completamente
+   No ocupa espacio (como si no existiera)
+*/
+.d-none { 
+    display: none;     /* El elemento se elimina visualmente y del flujo */
+    /* Útil para: modales ocultos, menús mobile, elementos condicionales */
+}
+
+/*
+   .d-hidden - Ocultar pero mantener espacio (alternativa)
+   --------------------------------------------
+   Diferencia con d-none: visibility: hidden mantiene el espacio ocupado
+   El elemento no se ve, pero su lugar sigue ahí (como un fantasma)
+*/
+.d-hidden { 
+    visibility: hidden;    /* Invisible pero ocupa su espacio */
+    /* Útil para: placeholders, elementos que quieras ocultar sin que se mueva el layout */
+}

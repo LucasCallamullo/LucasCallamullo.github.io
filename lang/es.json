@@ -1,0 +1,25 @@
+{
+    "nav.home": "Inicio",
+    "nav.about": "Sobre mí",
+    "nav.skills": "Habilidades",
+    "nav.projects": "Proyectos",
+    "nav.contact": "Contacto",
+    "hero.prefix": ">",
+    "hero.name": "Lucas.dev",
+    "prompt": "$",
+    "whoami": "whoami",
+    "title": "Lucas Callamullo",
+    "subtitle": "Ingeniero de Software",
+    "description.line1": "Hola, soy Lucas, puedes ver mis proyectos y mis habilidades en esta página,",
+    "description.line2": "me interesa principalmente el desarrollo de backend",
+    "button.projects": "Ver Proyectos",
+    "button.cv": "Descargar CV",
+    "button.contact": "Contacto",
+    "footer.resume": "Desarrollador backend que crea API escalables con Python y Java. PostgreSQL, Docker e implementaciones en la nube.",
+    "footer.href_download": "./CV/LucasCallamullo_Backend_CV.pdf",
+    "footer.download": "./descargar_cv.sh",
+
+    "home.skills.title": "Tecnologías destacadas", 
+    "home.skills.subtitle": "Mi Stack diario para Backend, Bases de Datos e Implementación.",
+    "home.skills.button": "Mira mis skills"
+}

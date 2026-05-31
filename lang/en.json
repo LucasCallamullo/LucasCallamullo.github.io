@@ -1,0 +1,25 @@
+{
+    "nav.home": "Home",
+    "nav.about": "About",
+    "nav.skills": "Skills",
+    "nav.projects": "Projects",
+    "nav.contact": "Contact",
+    "hero.prefix": ">",
+    "hero.name": "Lucas.dev",
+    "prompt": "$",
+    "whoami": "whoami",
+    "title": "Lucas Callamullo",
+    "subtitle": "Software Engineer",
+    "description.line1": "Hi, I'm Lucas, you can see my projects and my skills on this page,",
+    "description.line2": "I'm mainly interested in backend development",
+    "button.projects": "View Projects",
+    "button.cv": "Download CV",
+    "button.contact": "Contact",
+    "footer.resume": "Backend Developer building scalable APIs with Python & Java. PostgreSQL, Docker, and cloud deployments.",
+    "footer.href_download": "./CV/LucasCallamullo_Backend_Resume.pdf",
+    "footer.download": "./download_resume.sh",
+
+    "home.skills.title": "Featured Technologies", 
+    "home.skills.subtitle": "My daily stack for backend development, databases, and deployment.",
+    "home.skills.button": "View all skills"
+}

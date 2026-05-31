@@ -1,0 +1,303 @@
+/* ===============================================
+   SISTEMA DE BOTONES - UI COMPONENTS
+   Author: Sistema de Diseño
+   Descripción: Componentes de botones reutilizables
+   =============================================== */
+
+/* ==================== RESET Y BASE ==================== */
+/* Botón base: propiedades fundamentales que todos los botones heredan */
+.btn {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+    outline: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none; /* Previene selección de texto dentro del botón */
+    
+    /* Transiciones suaves para todas las propiedades interactivas */
+    transition: 
+        color 0.3s ease-in-out,
+        background-color 0.3s ease-in-out,
+        border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}
+
+/* ==================== TAMAÑOS PREDEFINIDOS ==================== */
+/* Botones cuadrados con diferentes dimensiones (height y width iguales) */
+.btn-24 { height: 24px; width: 24px; } /* Extra pequeño - iconos miniatura */
+.btn-28 { height: 28px; width: 28px; } /* Muy pequeño */
+.btn-32 { height: 32px; width: 32px; } /* Pequeño - estándar para iconos */
+.btn-36 { height: 36px; width: 36px; } /* Mediano-pequeño */
+.btn-40 { height: 40px; width: 40px; } /* Mediano - común para iconos con texto */
+.btn-44 { height: 44px; width: 44px; } /* Grande */
+.btn-48 { height: 48px; width: 48px; } /* Extra grande - botones táctiles */
+
+/* ==================== VARIANTES PRINCIPALES ==================== */
+/* Botón principal: acción primaria de la página (guardar, enviar, confirmar) */
+.btn-main {
+    color: var(--white-color);
+    background-color: var(--main-color);
+    transition: 
+        background-color 0.3s ease,
+        transform 0.3s ease;
+    border-radius: 4px;  
+}
+
+/* Botón alternativo: acciones secundarias (cancelar, volver, descartar) */
+.btn-alt {
+    color: var(--white-color);
+    background-color: var(--text-secondary);
+    transition: 
+        background-color 0.3s ease,
+        transform 0.3s ease;
+    border-radius: 4px; 
+}
+
+/* Estado activo/focus para ambos botones principales */
+.btn-main:active,
+.btn-main:focus,
+.btn-alt:active,
+.btn-alt:focus {
+    background-color: var(--main-light-color);
+    transform: scale(1.01);
+    outline: 2px solid var(--main-color); /* mejora accesibilidad */
+    outline-offset: 2px;
+}
+
+/* ==================== BOTÓN DE CIERRE ==================== */
+/* Botón para cerrar modales, diálogos o ventanas emergentes */
+.btn-close {
+    color: var(--white-color);
+    background-color: var(--red-color);
+    border: 2px solid transparent;
+    border-radius: 4px; 
+    transition:
+        color 0.3s ease, 
+        transform 0.3s ease, 
+        background-color 0.3s ease, 
+        border-color 0.3s ease;
+}
+
+/* Estado activo del botón cerrar */
+.btn-close:active {
+    color: var(--text-primary);
+    background-color: var(--color-white);
+    border: 2px solid var(--red-color);
+    transform: scale(1.05);
+}
+
+/* ==================== BOTONES PRIMARIO/SECUNDARIO (LEGADO) ==================== */
+/* NOTA: Estos parecen duplicar funcionalidad con btn-main/btn-alt.
+   Sugerencia: unificar o eliminar uno de los dos sistemas */
+.btn-primary, 
+.btn-secondary {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+/* ==================== FORMA CIRCULAR ==================== */
+/* Aplica radio del 50% para hacer botones circulares */
+.btn-circle {
+    border-radius: 50% !important; 
+}
+
+/* ==================== BOTÓN PARALELOGRAMO ==================== */
+/* Botón con forma de rombo/paralelogramo - efecto decorativo */
+.btn-parallelogram {
+    color: var(--white-color);
+    background-color: var(--main-color);
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 3px 10px;
+    transform: skew(-30deg); /* Deforma el contenedor */
+    min-width: auto;         /* AGREGADO: no forzar ancho mínimo */
+}
+
+/* El contenido dentro debe enderezarse para ser legible */
+.btn-parallelogram span {
+    display: inline-block;
+    transform: skew(30deg); /* Contrarresta la deformación del padre */
+}
+
+/* ==================== BOTÓN LIKE ==================== */
+/* Botón estilo "me gusta" con animación de corazón */
+.btn-like {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer; /* ✅ AGREGADO: asegura cursor pointer */
+    border-radius: 50%; /* ✅ AGREGADO: mejor para íconos */
+}
+
+/* Ícono inactivo (no likeado) */
+.btn-like i {
+    color: var(--text-secondary);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Estado likeado (activo) */
+.btn-like.liked i {
+    color: var(--red-color);
+    transform: scale(1.2);
+}
+
+/* Animación al hacer clic (feedback táctil) */
+.btn-like:active i {
+    transform: scale(0.9);
+}
+
+/* Animación de "pop" cuando se activa el like */
+.btn-like.liked i {
+    animation: like-pop 0.3s ease;
+}
+
+/* ==================== EFECTO POP ==================== */
+/* Clase reutilizable para cualquier elemento que necesite animación de "pop" */
+.pop-effect {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Efecto de presión al hacer clic */
+.pop-effect:active {
+    transform: scale(0.9);
+}
+
+/* ==================== KEYFRAMES (ANIMACIONES) ==================== */
+/* Animación de "pop" estilo corazón que late */
+@keyframes like-pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3); /* Se agranda en el punto medio */
+    }
+    100% {
+        transform: scale(1.2); /* Termina ligeramente más grande */
+    }
+}
+
+/* ==================== MEDIA QUERIES (DESKTOP) ==================== */
+/* Pantallas grandes: mínimo 993px */
+@media (min-width: 993px) {
+    
+    /* Hover: efecto de cierre con cambio de color */
+    .btn-close:hover {
+        color: var(--text-primary);
+        background-color: var(--color-white);
+        border: 2px solid var(--red-color);
+        transform: scale(1.05);
+    }
+
+    /* Hover: botón principal cambia a variante más clara */
+    .btn-main:hover {
+        background-color: var(--main-light-color);
+        transform: scale(1.01);
+    }
+
+    /* Hover: botón alternativo */
+    .btn-alt:hover {
+        background-color: var(--main-light-color);
+        transform: scale(1.01);
+    }
+
+    /* Hover: botón primario (legado) intercambia colores */
+    .btn-primary:hover {
+        color: var(--bg-primary);
+        background-color: var(--text-primary);
+    }
+
+    /* Hover: botón secundario (legado) */
+    .btn-secondary:hover {
+        color: var(--bg-primary);
+        background-color: var(--text-secondary);
+    }
+
+    /* Ajuste de margen para paralelogramo en desktop */
+    .btn-parallelogram {
+        margin-left: 5px;
+    }
+
+    /* Hover: efecto de like - se pone rojo y crece */
+    .btn-like:hover i {
+        color: var(--red-color);
+        transform: scale(1.1);
+    }
+
+    /* Hover: efecto pop - animación al pasar cursor */
+    .pop-effect:hover {
+        animation: like-pop 0.3s ease;
+        transform: scale(1.1);
+    }
+}
+
+/* ==================== CLASES ADICIONALES SUGERIDAS ==================== */
+
+/* BOTÓN DESHABILITADO - estándar de accesibilidad */
+.btn:disabled,
+.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* BOTÓN PELIGRO - para acciones destructivas (eliminar, borrar) */
+.btn-danger {
+    background-color: var(--red-color);
+    color: var(--white-color);
+    border-radius: 4px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* rojo más oscuro */
+    transform: scale(1.01);
+}
+
+/* BOTÓN ÉXITO - para acciones positivas */
+.btn-success {
+    background-color: var(--green-color, #28a745);
+    color: var(--white-color);
+    border-radius: 4px;
+}
+
+/* BOTÓN ADVERTENCIA - acciones que requieren confirmación */
+.btn-warning {
+    background-color: var(--yellow-color, #ffc107);
+    color: var(--text-primary);
+    border-radius: 4px;
+}
+
+/* BOTÓN OUTLINE - variante solo borde sin fondo */
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+/* BOTÓN FLOTANTE (FAB) - acción principal flotante */
+.btn-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.btn-fab:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}

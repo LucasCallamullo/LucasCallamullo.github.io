@@ -1,0 +1,340 @@
+/* ============================================
+   GENERIC EFFECTS & UTILITIES
+   Version: 1.0.0
+   Author: System Design
+   Description: Reusable CSS effects, animations, and utility classes
+   ============================================ */
+
+/* ==================== VISIBILITY UTILITIES ==================== */
+
+/**
+ * Force element to display as block
+ * Use case: Dynamically showing hidden elements via JavaScript
+ * Priority: High (uses !important to override inline styles)
+ */
+.show { 
+    display: block !important; 
+}
+
+/**
+ * Completely hide element
+ * - Removes from layout flow (display: none)
+ - Makes invisible to screen readers (visibility: hidden)
+ * Use case: Toggle panels, modals, conditional content
+ */
+.hidden { 
+    display: none !important; 
+    visibility: hidden !important; /* Optional but recommended for accessibility */
+}
+
+/* ==================== TOUCH INTERACTIONS ==================== */
+
+/**
+ * Scale animation on touch/click for mobile devices
+ * 
+ * Performance Optimizations:
+ * - cubic-bezier(0.4, 0, 0.2, 1) = Material Design standard easing
+ * - will-change: transform → creates composite layer for smoother animations
+ * 
+ * Use case: Buttons, cards, interactive elements needing tactile feedback
+ */
+.scale-on-touch {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform; /* ⚠️ Performance: Prevents layout thrashing */
+}
+
+/* Active state (touched/clicked) */
+.scale-on-touch:active {
+    transform: scale(0.9); /* 10% reduction gives clear feedback */
+}
+
+/* ==================== BORDER EFFECTS ==================== */
+
+/**
+ * Interactive border with hover effects
+ * 
+ * Features:
+ * - Solid border with CSS variable for theme consistency
+ * - Border radius transitions on hover
+ * - Box shadow for depth perception
+ * 
+ * Use case: Cards, input fields, clickable containers
+ */
+.border-hover {
+    border: 1px solid var(--border-cont);
+    border-radius: .25rem; /* 4px - matches modern design systems */
+    transition: border-radius 0.2s ease, box-shadow 0.2s ease;
+}
+
+/**
+ * Lift effect on hover/active
+ * 
+ * Creates 3D depth by moving element upward on Z-axis
+ * Use case: Cards, menu items, interactive components
+ */
+.hover-up {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer; /* Indicates interactivity */
+}
+
+/* Active and focus states */
+.hover-up:active,
+.hover-up:focus-visible {
+    transform: translateY(-0.25rem) translateZ(0);
+    /* translateZ(0) forces GPU acceleration */
+}
+
+/* ==================== LINK STYLES ==================== */
+
+/**
+ * Main reference link styling
+ * Use case: Navigation links, anchor tags, interactive text
+ */
+.main-ref {
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+/* ==================== DESKTOP ENHANCEMENTS ==================== */
+/* min-width: 992px = Standard desktop breakpoint (Bootstrap LG) */
+
+@media (min-width: 992px) {
+    
+    /* Hover effects only on devices with hover capability */
+    .main-ref:hover,
+    .main-ref:active {
+        color: var(--main-color);
+    }
+
+    /* Desktop scale effect (same as touch but on hover) */
+    .scale-on-touch:hover { 
+        transform: scale(0.9); 
+    }
+    
+    /* Desktop lift effect */
+    .hover-up:hover { 
+        transform: translateY(-0.25rem) translateZ(0); 
+    }
+
+    /* ⚠️ ISSUE: border-radius resets to 0 on hover
+       This breaks consistency - consider removing or documenting purpose */
+    .border-hover {
+        border-radius: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* ==================== SLIDE ANIMATIONS ==================== */
+
+/* 
+   ===== SLIDE TOGGLE ANIMATIONS =====
+   DEPENDENCY: Requires custom property --max-anim-vertical-height
+   to be set on the animated element
+   
+   Example usage:
+   .my-element {
+       --max-anim-vertical-height: 300px; /* Adjust based on content /
+   }
+   
+   ⚠️ Limitation: max-height animations don't work well with dynamic content
+   Consider using Grid or transform: scaleY() for better performance
+*/
+
+/**
+ * Slide open animation (expands from top)
+ * from: height 0 → to: height variable value
+ */
+@keyframes slideOpenToggle {
+    from {
+        max-height: 0;
+        opacity: 1;
+    }
+    to {
+        max-height: var(--max-height-vertical-anim);
+        opacity: 1;
+    }
+}
+
+/**
+ * Slide close animation (collapses to top)
+ * from: height variable value → to: height 0
+ */
+@keyframes slideCloseToggle {
+    from {
+        max-height: var(--max-height-vertical-anim);
+        opacity: 1;
+    }
+    to {
+        max-height: 0;
+        opacity: 1;
+        /* display: none; */ /* Commented - should be handled by JavaScript */
+    }
+}
+
+/* ==================== BACKGROUND UTILITIES ==================== */
+
+.bg-color { background-color: var(--main-color); }
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-gray-light { background-color: var(--bg-secondary-light); }
+.bg-gray-dark  { background-color: var(--bg-secondary-dark); }
+
+/* ==================== BORDER UTILITIES ==================== */
+
+/* Solid borders with theme colors */
+.border-main { border: 2px solid var(--main-color); }
+.border-primary { border: 1px solid var(--text-primary); }
+.border-secondary { border: 1px solid var(--text-secondary); }
+
+/* Special case: removes bottom border - likely for specific UI components */
+.not-border-bottom { border-bottom: 1px transparent !important; }
+
+/* Directional borders */
+.border-bot-prim { border-bottom: 2px solid var(--text-primary); }
+.border-top-prim { border-top: 2px solid var(--text-primary); }
+.border-bot-second { border-bottom: 1px solid var(--text-secondary); }
+
+/* ==================== SCROLL UTILITIES ==================== */
+
+/**
+ * Vertical scroll with auto overflow
+ * Useful for modals, dropdowns, sidebars with limited height
+ */
+.scroll-y { overflow-y: auto; }
+
+/**
+ * Horizontal scroll for tables, galleries, carousels
+ * Keeps layout intact while enabling horizontal scrolling
+ */
+.scroll-x { overflow-x: auto; }
+
+/* ==================== ADVANCED DESKTOP ANIMATIONS ==================== */
+
+@media (min-width: 992px) {
+    
+    /**
+     * Underline animation for navigation links
+     * 
+     * Creates a sliding underline effect on hover
+     * Uses pseudo-element (::after) for the underline
+     * 
+     * ⚠️ ISSUE: The sibling fade effect (.underline-anim:has...) 
+     * only works in modern browsers (Safari 15.4+, Chrome 105+)
+     * Consider fallback for older browsers
+     */
+    .underline-anim {
+        position: relative;
+        color: var(--text-primary);
+        font-weight: bolder;
+        transition: opacity .4s;
+    }
+
+    /* Inner span wrapper for better control */
+    .underline-anim span {
+        position: relative;
+        display: inline-block;
+        transition: margin .4s;
+    }
+
+    /* The underline itself */
+    .underline-anim span::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background-color: var(--text-primary); /* ⚠️ Hardcoded - make it variable */
+        transition: width .4s ease-out;
+    }
+    
+    /* Hover expands the underline */
+    .underline-anim:hover span::after { 
+        width: 100% !important;
+    }
+    
+    /**
+     * Sibling fade effect
+     * Hovering one link fades others (creates focus)
+     * ⚠️ Uses :has() selector - check browser compatibility
+     */
+    .underline-anim:has(.underline-anim:hover) .underline-anim:not(:hover) { 
+        opacity: .4; 
+    }
+}
+
+/* ==================== HIGHLIGHT EFFECTS ==================== */
+
+/**
+ * Visual feedback for selected/focused elements
+ * Creates a colored ring around the element
+ */
+.highlight-red {
+    box-shadow: 0 0 0 2px var(--red-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.highlight-main {
+    box-shadow: 0 0 0 2px var(--main-color);
+    transition: box-shadow 0.3s ease;
+}
+
+/* ==================== CUSTOM HORIZONTAL RULES ==================== */
+
+/**
+ * Animated gradient separator
+ * 
+ * Creates a flowing gradient effect for decorative separators
+ * Use case: Hero sections, content dividers, loading animations
+ * 
+ * Performance Notes:
+ * - background-size: 200% allows smooth infinite scrolling
+ * - will-change: background-position GPU acceleration
+ * - filter: blur(0.5px) softens hard gradient edges
+ */
+.hr-custom {
+    display: block;
+    overflow: hidden;
+    border: none;
+    height: 6px;
+    background: linear-gradient(
+        to right,
+        var(--main-color),
+        var(--main-color),
+        var(--main-light-color),
+        var(--white-color),
+        var(--main-light-color),
+        var(--main-color),
+        var(--main-color) 100%
+    );
+    background-size: 200% 100%;
+    margin: 16px 0;
+    animation: gradientScroll 4s linear infinite;
+    will-change: background-position;
+    filter: blur(0.5px); /* Softens gradient transitions */
+}
+
+/**
+ * Gradient scroll animation
+ * Moves background position to create flowing effect
+ */
+@keyframes gradientScroll {
+    100% {
+        background-position: 0% 50%;   /* Start position */
+    }
+    0% {
+        background-position: 100% 50%; /* End position (flows right to left) */
+    }
+}
+
+/**
+ * Simple solid separator
+ * Use case: Subtle content dividers
+ */
+.hr-primary {
+    border: none;
+    height: 3px;
+    background: var(--text-primary);
+}
+

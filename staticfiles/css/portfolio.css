@@ -1,0 +1,633 @@
+:root {
+    /* --console-color: #2e7d32;   Verde bosque oscuro */
+    /* --console-color: #4c7a34;   Verde oliva */
+    --console-color: #059669;  /* Verde menta oscuro */
+    --accent-color: #c47d00;  /* Ámbar terroso */
+    --dark-console: #f0f2f5;
+}
+
+.dark-mode {
+    --console-color: #00ff00;
+    --accent-color: #ffb800;  /*  */
+    --dark-console: #0a0e11;
+
+    /* --main-colorr: #ff1493;        /* Rosa fuerte (DeepPink) */
+    /* --main-light-colorr: #ff69b4;  /* Rosa más claro (HotPink) */
+}
+
+.light-mode { 
+    --console-color: #059669;  /* Verde menta oscuro */
+    --accent-color: #c47d00;  /* Ámbar terroso */
+    --dark-console: #f0f2f5;
+    
+}
+
+
+/* Clases reutilizables */
+.roboto-regular {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400;
+}
+
+.roboto-medium {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 500;
+}
+
+.roboto-bold {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700;
+}
+
+.bold-console {
+    font-weight: bolder;
+    color: var(--console-color);
+}
+
+.color-console {
+    color: var(--console-color);
+}
+
+
+.header-portfolio {
+    background-color: var(--bg-secondary-dark);
+    border-bottom: 1px solid var(---console-color);
+}
+
+/* altura definida para la primera seccion renderizada, la parte visible */
+#main-root {
+    min-height: calc(100vh - var(--height-header));
+}
+
+
+
+/* CSS para el cursor */
+.font-xxxxl {
+    font-size: 69px;
+}
+
+/* Cursor para el efecto typewriter - Personalizable */
+.typewriter-cursor {
+    border-right: 3px solid var(--console-color, #2563eb);
+    animation: blink 2s step-end infinite;
+    padding-right: 4px;
+}
+
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--console-color, #2563eb); }
+}
+
+.text-green-cursor {
+    color: var(--console-color);
+}
+
+/* En tu CSS */
+.blinking-underscore {
+    animation: blinkUnderscore 2s step-end infinite;
+    color: var(--console-color);
+    display: inline-block;
+}
+
+@keyframes blinkUnderscore {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* ========== BOTONES DE CONTROL (Idioma + Tema) ========== */
+
+.control-btn {
+    background: transparent;
+    border: 1px solid var(--border-cont);
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: var(--main-color);
+    border-color: var(--main-color);
+    color: white;
+}
+
+/* Dropdown de idioma */
+.language-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-cont);
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 130px;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: var(--z-index);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.language-dropdown:hover .dropdown-menu,
+.dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    transition: background 0.15s ease;
+}
+
+.dropdown-menu li:hover {
+    background: var(--main-color);
+    color: white;
+}
+
+/* Animación del ícono del tema */
+.control-btn i {
+    transition: transform 0.3s ease;
+}
+
+.control-btn:hover i {
+    transform: scale(1.1);
+}
+
+/* Responsive: en mobile los botones pueden ser solo íconos */
+@media (max-width: 768px) {
+    .control-btn {
+        padding: 8px 10px;
+    }
+    
+    .control-btn #currentLangFlag {
+        display: none;
+    }
+    
+    .control-btn .ri-arrow-down-s-line {
+        display: none;
+    }
+}
+
+
+
+
+/* Estilos para las banderas en el dropdown */
+.flag-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.dropdown-menu li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.dropdown-menu li img.flag-icon,
+.dropdown-menu li .flag-icon {
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+/* Para el botón principal de idioma */
+#currentLangFlag {
+    display: inline-flex;
+    align-items: center;
+}
+
+#currentLangFlag img {
+    width: 20px;
+    height: 14px;
+}
+
+
+
+
+
+
+
+/* ==================== SLIDING UNDERLINE NAVIGATION ==================== */
+
+/* Contenedor principal de la navegación */
+.nav-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Lista de navegación */
+.nav-list {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Botones de navegación - ESTILO BASE */
+.btn-nav {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0 16px;
+    color: var(--text-secondary, #64748b);
+    transition: color 0.2s ease;
+}
+
+/* Hover effect */
+.btn-nav:hover {
+    color: var(--main-color, #10b981);
+}
+
+/* Estado activo (página actual) */
+.btn-nav.active {
+    color: var(--main-color, #10b981);
+}
+
+/* ===== LA BARRA DESLIZANTE ===== */
+.nav-sliding-bar {
+    position: absolute;
+    bottom: calc(23%);
+    left: 0;
+    height: 3px;
+    background-color: var(--main-color, #10b981);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; /* Para que no interfiera con clicks */
+    box-shadow: 0 0 1px var(--main-color); /* Glow effect opcional */
+}
+
+/* ===== VARIANTE CON BORDE VERDE DEBAJO (SIN SLIDE) ===== */
+/* Si solo quieres el borde verde al hover (alternativa más simple) */
+.btn-nav-border {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-nav-border:hover {
+    border-bottom-color: var(--main-color, #10b981);
+    color: var(--main-color, #10b981);
+}
+
+.btn-nav-border.active {
+    border-bottom-color: var(--main-color, #10b981);
+    color: var(--main-color, #10b981);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-nav {
+        padding: 0 12px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ========== TERMINAL / CONSOLE STYLES ========== */
+
+/* Contenedor principal estilo consola     primary  secondary */
+.console-container {
+    background-color: var(--dark-console);
+    border-radius: 12px;
+    padding: 15px 15px 15px 15px;
+    border: 1px solid var(--text-secondary);
+    /* box-shadow: 0 8px 32px var(--bg-primary); */
+    width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.prompt-console {
+    color: var(--accent-color);
+}
+
+.letter-spacing-md {
+    letter-spacing: 1px;   /* Separa las letras */
+}
+
+
+
+.footer-btn-cv {
+  background: transparent;
+  position: relative;
+  padding: 2px 0px 2px 6px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--console-color);
+  border-radius: 4px;
+  outline: none;
+  overflow: hidden;
+  color: var(--console-color);
+  transition: color 0.3s 0.1s ease-out;
+  text-align: center;
+}
+
+.footer-btn-cv span {
+  margin: 10px;
+}
+
+.footer-btn-cv::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  content: '';
+  border-radius: 50%;
+  display: block;
+  width: 20em;
+  height: 20em;
+  left: -5em;
+  text-align: center;
+  transition: box-shadow 0.5s ease-out;
+  z-index: -1;
+}
+
+.footer-btn-cv:hover {
+  color: var(--text-primary);
+  border: 1px solid var(--console-color);
+}
+
+.footer-btn-cv:hover::before {
+  box-shadow: inset 0 0 0 10em var(--console-color);
+}
+ 
+/* efecto para el texto de los bottones del footer que hacen de href */
+.btn-foot-ref:hover .text-ref {
+    color: var(--console-color) !important;
+}
+
+.footer-border-top {
+    border-top: 1px solid var(--text-primary);
+}
+
+
+
+
+
+
+/* ========== ONLINE STATUS INDICATOR ========== */
+.online-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 12px;
+}
+
+/* Círculo verde */
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #10b981;  /* Verde */
+    box-shadow: 0 0 6px #10b981;
+    animation: pulse-green 1.5s ease-in-out infinite;
+}
+
+/* Texto del estado */
+.status-text {
+    color: var(--text-secondary, #b0b0c0);
+}
+
+/* ========== ANIMACIÓN PARPADEANTE ========== */
+
+/* Opción 1: Pulso suave (recomendada) */
+@keyframes pulse-green {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    50% {
+        opacity: 0.6;
+        box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.2);
+    }
+}
+
+/* Opción 2: Parpadeo clásico (más notorio) */
+@keyframes blink-green {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Opción 3: Glow pulsante (efecto neón) */
+@keyframes glow-pulse {
+    0%, 100% {
+        background-color: #10b981;
+        box-shadow: 0 0 4px #10b981;
+    }
+    50% {
+        background-color: #34d399;
+        box-shadow: 0 0 12px #10b981, 0 0 8px #34d399;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========== SWIPER CUSTOM STYLES ==========  */
+.skillsSwiper {
+    width: 100%;
+    overflow: visible;
+    height: 160px;
+    cursor: grab;
+}
+
+.swiper * {
+    font-family: inherit !important;
+}
+
+.tech-group {
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+
+    /* width: auto !important;   Para que respete el ancho del contenido */
+    background-color: var(--bg-secondary-dark);
+    color: var(--text-primary);
+    border-radius: 12px;
+
+    margin-top: 4px;
+    height: 150px !important;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    /* Para mejorar el rendimiento en drag */
+    will-change: transform;
+}
+
+.tech-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.2);
+}
+
+.tech-group img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Comienza en gris y más tenue */
+    filter: grayscale(70%);
+    opacity: 0.7;
+}
+
+.tech-group img:hover {
+    transform: scale(1.1);
+}
+
+/* Efecto al pasar el mouse sobre el slide completo */
+.tech-group:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Efecto adicional: el resto de iconos del slide se atenúan */
+.tech-group:hover img:not(:hover) {
+    filter: grayscale(25%);
+    opacity: 0.9;
+}
+
+
+/* ========================================
+   BOTÓN HOME SKILLS CON EFECTO HOVER
+   ======================================== */
+
+.btn-home-skills {
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 20px;
+}
+
+/* Texto dentro del botón */
+.btn-home-skills span {
+    transition: color 0.3s ease;
+    color: var(--text-primary);
+}
+
+/* Icono dentro del botón */
+.btn-home-skills i {
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+/* EFECTO HOVER: Cambia colores y anima el icono */
+.btn-home-skills:hover {
+    background: rgba(0, 255, 0, 0.05); /* Fondo sutil al hacer hover */
+}
+
+.btn-home-skills:hover span {
+    color: var(--console-color);
+}
+
+.btn-home-skills:hover i {
+    color: var(--console-color);
+    /* Animación de desplazamiento hacia la derecha */
+    transform: translateX(6px);
+}
+
+/* Versión con animación más pronunciada */
+.btn-home-skills:hover i {
+    animation: slideIcon 0.4s ease-in-out;
+}
+
+/* Definición de la animación */
+@keyframes slideIcon {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(8px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(6px);
+        opacity: 1;
+    }
+}
+
+/* Opcional: Efecto de "rebote" al hacer hover */
+.btn-home-skills:active i {
+    transform: translateX(10px);
+    transition: transform 0.05s ease;
+}
