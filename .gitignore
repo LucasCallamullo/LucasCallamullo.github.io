@@ -1,0 +1,33 @@
+# Dependencias
+node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Variables de entorno
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+
+# Build outputs (si los tienes)
+dist/
+build/
+
+# mis folders
+dsi/
+CV/
+proofs/
