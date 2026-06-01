@@ -103,6 +103,10 @@
     font-size: var(--font-normal);     /* Mediano: ~16px (tamaño base) */
 }
 
+.font-md-plus { 
+    font-size: var(--font-normal-plus);     /* Mediano: ~16px (tamaño base) */
+}
+
 .font-lg { 
     font-size: var(--font-large);      /* Grande: ~18px */
 }

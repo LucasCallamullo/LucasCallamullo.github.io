@@ -31,3 +31,7 @@ build/
 dsi/
 CV/
 proofs/
+
+package-lock.json
+package.json
+server.js

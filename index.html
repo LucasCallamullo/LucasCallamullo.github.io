@@ -60,12 +60,12 @@
 
 </head>
 <body>
-    <header class="header-portfolio">
-        <nav class="cont-page d-grid grid-122 nav-container h-100">
+    <header class="full-bg-secondary-dark border-bot-header">
+        <nav class="cont-page d-grid grid-122 nav-container header-portfolio">
             <!-- Logo -->
             <div class="main-dev d-flex gap-1 align-center">
                 <span class="roboto-medium font-lg bold-console" data-i18n="hero.prefix"> > </span>
-                <span class="roboto-medium font-lg" data-i18n="hero.name">Lucas.dev </span>
+                <span class="text-console font-lg" data-i18n="hero.name">Lucas.dev </span>
                 <span class="roboto-medium font-lg blinking-underscore">_</span>
             </div>
 
@@ -73,15 +73,15 @@
             <ul class="d-flex gap-4 justify-end align-center nav-list">
 
                 <!-- HOME ABOUT PROJECTS SKILLS CONTACT -->
-                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.home" data-nav="home">
+                <li><button class="btn btn-nav text-console" data-i18n="nav.home" data-nav="home">
                     </button></li>
-                <li><button class="btn btn-nav text-truncate roboto-medium font-md" data-i18n="nav.about" data-nav="about">
+                <li><button class="btn btn-nav text-truncate text-console" data-i18n="nav.about" data-nav="about">
                     </button></li>
-                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.skills" data-nav="skills">
+                <li><button class="btn btn-nav text-console" data-i18n="nav.skills" data-nav="skills">
                     </button></li>
-                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.projects" data-nav="projects">
+                <li><button class="btn btn-nav text-console" data-i18n="nav.projects" data-nav="projects">
                     </button></li>
-                <li><button class="btn btn-nav roboto-medium font-md" data-i18n="nav.contact" data-nav="contact">
+                <li><button class="btn btn-nav text-console" data-i18n="nav.contact" data-nav="contact">
                     </button></li>
 
                 <!-- Botón de idioma con dropdown -->
@@ -127,8 +127,8 @@
         <div class="cont-page d-grid grid-123 gap-3">
 
             <div class="console-container">
-                <span class="prompt-console roboto-medium font-md letter-spacing-md">
-                    $&nbsp;&nbsp;cat&nbsp;&nbsp;whoami.txt
+                <span class="prompt-console text-console font-md-plus">
+                    $&nbsp;cat&nbsp;whoami.txt
                 </span>
 
                 <p class="mt-1">
@@ -155,8 +155,8 @@
 
             <!-- nav buttons -->
             <div class="console-container justify-start align-start">
-                <span class="prompt-console roboto-medium font-md letter-spacing-md">
-                    $&nbsp;&nbsp;ls&nbsp;&nbsp;routes/
+                <span class="prompt-console text-console font-md-plus">
+                    $&nbsp;ls&nbsp;routes/
                 </span>
 
                 <button class="btn roboto-regular mt-2 hover-up btn-foot-ref" data-nav="home">
@@ -187,8 +187,8 @@
 
             <!-- CONTACTO buttons -->
             <div class="console-container">
-                <span class="prompt-console roboto-medium font-md letter-spacing-md">
-                    $&nbsp;&nbsp;ssh&nbsp;&nbsp;connect@lucas.dev
+                <span class="prompt-console text-console font-md-plus">
+                    $&nbsp;ssh&nbsp;connect@lucas.dev
                 </span>
 
                 <a class="mt-1 d-flex gap-1 hover-up align-center" 
@@ -241,6 +241,7 @@
 
     <!-- Scripts con renderizado dinamico de cada view y api hiustory -->
     <script src="./staticfiles/js/views/HomeView.js"></script>
+    <script src="./staticfiles/js/views/SkillsView.js"></script>
     <script src="./staticfiles/js/router.js"></script>
 
 

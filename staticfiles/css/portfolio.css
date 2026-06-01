@@ -4,6 +4,8 @@
     --console-color: #059669;  /* Verde menta oscuro */
     --accent-color: #c47d00;  /* Ámbar terroso */
     --dark-console: #f0f2f5;
+
+    --border-header: #2e7d32;     /* Verde bosque oscuro (recomendado) */
 }
 
 .dark-mode {
@@ -13,6 +15,17 @@
 
     /* --main-colorr: #ff1493;        /* Rosa fuerte (DeepPink) */
     /* --main-light-colorr: #ff69b4;  /* Rosa más claro (HotPink) */
+
+    /* Colores de fondo de cards */
+    --card-bg-top: #141b20;
+    --card-bg-bottom: #0a0e11;
+    --card-bg-item: rgb(20, 27, 32);
+    
+    /* Colores del borde giratorio */
+    --card-border-gradient-start: #1a2028;
+    --card-border-gradient-mid: #252a35;
+    --card-border-gradient-end: #1a2028;
+    --card-border-opacity: 0.5;
 }
 
 .light-mode { 
@@ -20,6 +33,16 @@
     --accent-color: #c47d00;  /* Ámbar terroso */
     --dark-console: #f0f2f5;
     
+    /* Colores de fondo de cards */
+    --card-bg-top: #e8edf2;
+    --card-bg-bottom: #d9dfe6;
+    --card-bg-item: rgb(235, 240, 245);
+    
+    /* Colores del borde giratorio (más oscuros para verse) */
+    --card-border-gradient-start: #e4e9ee;
+    --card-border-gradient-mid: #d9e2e9;
+    --card-border-gradient-end: #e4e9ee;
+    --card-border-opacity: 0.8;
 }
 
 
@@ -44,14 +67,17 @@
     color: var(--console-color);
 }
 
-.color-console {
-    color: var(--console-color);
+.color-console { color: var(--console-color); }
+
+.text-console {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+.border-bot-header { border-bottom: 1px solid var(--border-header); }
 
 
 .header-portfolio {
-    background-color: var(--bg-secondary-dark);
-    border-bottom: 1px solid var(---console-color);
+    height: calc(100% - 2px);
 }
 
 /* altura definida para la primera seccion renderizada, la parte visible */
@@ -68,14 +94,14 @@
 
 /* Cursor para el efecto typewriter - Personalizable */
 .typewriter-cursor {
-    border-right: 3px solid var(--console-color, #2563eb);
+    border-right: 3px solid var(--console-color);
     animation: blink 2s step-end infinite;
     padding-right: 4px;
 }
 
 @keyframes blink {
     0%, 100% { border-color: transparent; }
-    50% { border-color: var(--console-color, #2563eb); }
+    50% { border-color: var(--console-color); }
 }
 
 .text-green-cursor {
@@ -255,6 +281,7 @@
     padding: 0 16px;
     color: var(--text-secondary, #64748b);
     transition: color 0.2s ease;
+    font-size: 18px;
 }
 
 /* Hover effect */
@@ -631,3 +658,145 @@
     transform: translateX(10px);
     transition: transform 0.05s ease;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* SKILLS SECTION */
+
+/* From Uiverse.io by ilkhoeri */ 
+.card-skills {
+    overflow: hidden;
+    border: 1px solid var(--bg-secondary-dark);
+    border-radius: 16px;
+    background-color: var(--card-bg-bottom);
+    backdrop-filter: blur(8px);
+    
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot-red {
+    background-color: #ef4444;
+}
+
+.dot-yellow {
+    background-color: #eab308;
+}
+
+.dot-green {
+    background-color: #22c55e;
+}
+
+.card-top-border {
+    overflow: hidden;
+    min-height: 50px;
+    background-color: var(--card-bg-top);
+}
+
+.card-bot-border {
+    position: relative;
+    background-color: var(--card-bg-bottom);
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.skills__cont__card__img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+
+    padding: 12px 8px;
+    
+    /* IMPORTANTE: fondo oscuro para que se vea el borde */
+    background-color: var(--card-bg-item);
+    
+    /* Asegurar que el contenido esté por encima */
+    isolation: isolate;
+}
+
+/* Borde giratorio (detrás) */
+.skills__cont__card__img::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background: linear-gradient(
+        90deg, 
+        var(--card-border-gradient-start), 
+        var(--card-border-gradient-mid), 
+        var(--card-border-gradient-end)
+    );
+    opacity: var(--card-border-opacity);
+    background-size: 200% 200%;
+    animation: rotBGimg 2s linear infinite;
+    z-index: 0;
+    border-radius: 20px;
+}
+
+/* Capa interna (fondo sólido que tapa el centro) */
+.skills__cont__card__img::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: var(--card-bg-item);
+    border-radius: 18px;
+    z-index: 1;
+}
+
+/* TODO el contenido debe estar por encima */
+.skills__cont__card__img > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animación mejorada */
+@keyframes rotBGimg {
+    0% {
+        background-position: 0% 0%;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        background-position: 100% 100%;
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Imagen dentro de la card */
+.skills__card__img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+}
+
+/* Texto dentro de la card */
+.skills__cont__card__img .text-console {
+    position: relative;
+    z-index: 2;
+    color: var(--text-primary);
+}
+

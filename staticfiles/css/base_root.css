@@ -85,6 +85,7 @@
     --font-x-small: 0.5rem;      /* 12px */
     --font-small: 0.75rem;       /* 14px */
     --font-normal: 1rem;          /* 16px (tamaño base) */
+    --font-normal-plus: 1.25rem;   /* 16px (tamaño base) */
     --font-large: 1.5rem;        /* 20px */
     --font-x-large: 2rem;       /* 24px */
     --font-xx-large: 2.5rem;     /* 28px (Mobile) */

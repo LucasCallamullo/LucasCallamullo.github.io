@@ -2,7 +2,7 @@
 const TECH_STACK = {
     // Lenguajes principales
     "Java": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/java/java-original.svg",
-    "Spring": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/spring/spring-original.svg",
+    "Spring Boot": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/spring/spring-original.svg",
     "Python": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/python/python-original.svg",
     "JavaScript": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/javascript/javascript-original.svg",
     "TypeScript": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/typescript/typescript-original.svg",
@@ -12,8 +12,8 @@ const TECH_STACK = {
     "Django": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/django/django-plain.svg",
     "DRF": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/djangorest/djangorest-original.svg",
     "FastAPI": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/fastapi/fastapi-original.svg",
-    "Node.js": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/nodejs/nodejs-original.svg",
-    "Node.js2": "https://icongr.am/devicon/nodejs-original.svg",
+    "Node.js2": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/nodejs/nodejs-original.svg",
+    "Node.js": "https://icongr.am/devicon/nodejs-original.svg",
     "Express": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/express/express-original.svg",
     
     // Frameworks Frontend
@@ -40,6 +40,7 @@ const TECH_STACK = {
     
     // Testing y Documentación
     "PyTest": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/pytest/pytest-original.svg",
+    "JUnit5": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/junit/junit-original-wordmark.svg",
     "Postman": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/postman/postman-original.svg",
     "Swagger": "https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/swagger/swagger-original.svg",
     
@@ -68,39 +69,6 @@ const TECH_STACK_ORDER = [
     "Python", "Django", "DRF", "Redis", "SQLite",
     "JavaScript", "React", "Git", "Linux", "Bash", "Nginx"
 ];
-
-
-function renderTechStackByCategory() {
-    const categories = {
-        "Languages": ["Java", "Python", "JavaScript", "Go"],
-        "Backend": ["Spring", "Django", "DRF", "FastAPI"],
-        "Databases": ["PostgreSQL", "Redis", "SQLite"],
-        "DevOps": ["Docker", "Docker Compose", "Nginx", "Git", "Linux", "Bash"]
-    };
-    
-    return Object.entries(categories)
-        .map(([categoryName, techs]) => {
-            const iconsHTML = techs
-                .filter(tech => TECH_STACK[tech])
-                .map(tech => /*html*/`
-                    <div class="tech-icon-item">
-                        <img src="${TECH_STACK[tech]}" alt="${tech}">
-                        <span>${tech}</span>
-                    </div>
-                `).join('');
-            
-            return /*html*/`
-                <div class="swiper-slide tech-category-slide">
-                    <h3 class="tech-category-title">${categoryName}</h3>
-                    <div class="tech-icons-grid">
-                        ${iconsHTML}
-                    </div>
-                </div>
-            `;
-        })
-        .join('');
-}
-
 
 
 function renderTechStack(techList = null) {
@@ -182,10 +150,10 @@ const HomeView = {
 
                 <div class="d-flex-col justify-center align-center text-center gap-3">
                     <!-- Ttitle --> 
-                    <h2 class="roboto-medium font-xl bold-console" data-i18n="home.skills.title">
+                    <h2 class="text-console font-xl color-console" data-i18n="home.skills.title">
                         Featured Technologies
                     </h2>
-                    <span class="roboto-regular font-md pb-3" data-i18n="home.skills.subtitle">
+                    <span class="text-console font-md pb-3" data-i18n="home.skills.subtitle">
                         My daily stack for backend development, databases, and deployment.
                     </span>
 
