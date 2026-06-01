@@ -128,8 +128,7 @@ function renderView(path, addToHistory = true) {
         // updateActiveNav(path);
         
         // MOVER LA BARRA DESLIZANTE cuando cambia la vista
-        // moveSlidingBarToActiveButton();
-        setTimeout(() => moveSlidingBarToActiveButton(), 50);
+        setTimeout(() => moveSlidingBarToActiveButton(), 10);
         
         // Actualizar historial si es necesario
         if (addToHistory) {
@@ -140,9 +139,6 @@ function renderView(path, addToHistory = true) {
         const event = new CustomEvent('viewchanged', { detail: { path: normalizedPath } });
         document.dispatchEvent(event);
 
-        // Disparar evento personalizado (útil para analytics)
-        // const event = new CustomEvent('viewchanged', { detail: { path, view: ViewComponent } });
-        // document.dispatchEvent(event);
     }, 150);
 }
 
@@ -154,7 +150,7 @@ function navigateFromUrl() {
     let route = path === '/' ? 'home' : path.slice(1);
     
     // Verificar si la ruta existe en ROUTES
-    const validRoutes = ['home', 'projects', 'contact', 'skills'];
+    const validRoutes = ['home', 'about', 'projects', 'contact', 'skills'];
     
     if (validRoutes.includes(route) && route !== currentPath.slice(1)) {
         // Navegar directamente sin simular click
@@ -223,31 +219,6 @@ function setupNavigation() {
         renderView(path, false); // false = no agregar al historial
     });
 }
-
-
-/*
-// 5. CONFIGURAR EVENTOS
-function setupNavigation() {
-
-    // DELEGACIÓN: Un solo evento para toda la navegación
-    document.body.addEventListener('click', function(e) {
-        const navButton = e.target.closest('[data-nav]');
-        if (navButton) {
-            e.preventDefault();
-            const path = navButton.getAttribute('data-nav');
-            navigateTo(path);
-        }
-    });
-    
-    // Manejar botones de retroceso/avance
-    window.addEventListener('popstate', function(event) {
-        const path = event.state?.path || window.location.pathname;
-        renderView(path);
-        
-        // Mover la barra después de popstate
-        setTimeout(() => moveSlidingBarToActiveButton(), 50);
-    });
-} */
 
 function updateActiveNav(navKey) {
     document.querySelectorAll('[data-nav]').forEach(function(btn) {

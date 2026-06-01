@@ -1,81 +1,121 @@
 // ==================== TYPEWRITER MODULE ====================
-// Solo el TÍTULO tiene efecto letra por letra
-// El subtítulo es visible desde el principio
-// Los textos y botones aparecen con fade después
+// Only the TITLE has the letter-by-letter typewriter effect
+// The subtitle remains visible from the start
+// Text paragraphs and buttons fade in sequentially after the title finishes
 
+/**
+ * Creates a typewriter animation effect on a title element,
+ * with sequential fade-in animations for other elements.
+ */
 class TypewriterEffect {
-    // 100
-    constructor(speed = 80) {
+    /**
+     * Creates an instance of TypewriterEffect.
+     * @param {number} [speed=100] - Typing speed in milliseconds per character.
+     */
+    constructor(speed = 70) {
         this.speed = speed;
     }
     
-    // Efecto letra por letra SOLO para el título
+    /**
+     * Applies a letter-by-letter typewriter effect to the target element.
+     * Adds a blinking cursor that remains visible after completion.
+     * @param {HTMLElement} element - The DOM element to apply the typewriter effect to.
+     * @param {string} text - The text to be typed into the element.
+     * @param {Function} [onComplete] - Optional callback function executed when typing finishes.
+     */
     typeTitle(element, text, onComplete) {
         let i = 0;
         element.textContent = '';
-        element.classList.add('typewriter-cursor');
-        
+        // element.classList.add('typewriter-cursor');
+
         const type = () => {
             if (i < text.length) {
+                const isLastChar = i === text.length - 1;
                 element.textContent += text.charAt(i);
                 i++;
-                setTimeout(type, this.speed);
-            } else {
-                // NO quitamos el cursor, solo llamamos al callback
-                // element.classList.remove('typewriter-cursor'); ← COMENTADO
-                if (onComplete) onComplete();
+                
+                if (isLastChar) {
+                    // Last character added, execute callback immediately
+                    if (onComplete) onComplete();
+                } else {
+                    // Cursor remains blinking (class is not removed)
+                    setTimeout(type, this.speed);
+                }
             }
         };
         
         type();
     }
     
-    // Fade para los elementos que aparecen después
-    fadeIn(element, duration = 500, delay = 0) {
+    /**
+     * Applies a fade-in animation to an element with optional delay.
+     * The element starts invisible and translates up slightly while fading in.
+     * @param {HTMLElement} element - The DOM element to fade in.
+     * @param {number} [duration=300] - Animation duration in milliseconds.
+     * @param {number} [delay=0] - Delay before starting the animation in milliseconds.
+     */
+    fadeIn(element, duration = 300, delay = 0) {
         setTimeout(() => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(15px)';
             element.style.transition = `opacity ${duration}ms ease, transform ${duration}ms ease`;
             
-            // Forzar reflow
+            // Force reflow to ensure transition works properly
             void element.offsetHeight;
             
             element.style.opacity = '1';
             element.style.transform = 'translateY(0)';
         }, delay);
     }
-    
-    // Mostrar elementos secuencialmente
+    /**
+     * Executes sequential fade-in animations for an array of elements.
+     * Each element fades in after the previous one completes.
+     * @param {Array<Object>} elements - Array of element configuration objects.
+     * @param {HTMLElement} elements[].element - The DOM element to fade in.
+     * @param {number} [elements[].delayBefore=0] - Delay before this element starts fading in.
+     * @param {number} [elements[].duration=500] - Duration of the fade animation.
+     * @param {number} [startDelay=0] - Initial delay before the sequence begins.
+     */
     showSequential(elements, startDelay = 0) {
         let totalDelay = startDelay;
         
-        elements.forEach((item, index) => {
-            totalDelay += item.delayBefore || 0;
-            this.fadeIn(item.element, item.duration || 500, totalDelay);
-            totalDelay += (item.duration || 500);
+        elements.forEach((item) => {
+            const delayBefore = item.delayBefore || 0;
+            const duration = item.duration || 300;
+            
+            totalDelay += delayBefore;
+            this.fadeIn(item.element, duration, totalDelay);
+            totalDelay += duration;
         });
     }
 }
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', async () => {
-    // Esperar a que carguen las traducciones
-    await new Promise(resolve => setTimeout(resolve, 300));
+
+/**
+ * Initializes the typewriter effect.
+ * Called only after translations are fully loaded.
+ */
+function initTypewriter() {
     
-    const typewriter = new TypewriterEffect();
+    const TYPE_WRITER = new TypewriterEffect();
     
-    // Obtener elementos
+    // Get DOM elements
     const titleElement = document.getElementById('title');
     const description1 = document.getElementById('main-span');
     const description2 = document.getElementById('main-spann');
     const buttonsContainer = document.getElementById('main-buttons');
+
+    // Guard clause: exit if required elements don't exist
+    if (!titleElement) {
+        console.warn('TYPE_WRITER: title element not found');
+        return;
+    }
     
-    // Obtener el texto del título desde data-original-text
+    // Retrieve title text from data attribute or fallback to text content
     const titleText = titleElement.getAttribute('data-original-text') || titleElement.textContent;
     
-    // El subtítulo ya es visible, no hacemos nada con él
-    
-    // Configurar estado inicial para los elementos que aparecerán después
+    // Elements that will fade in after the title
+    // Set initial state: hidden and shifted down
     description1.style.opacity = '0';
     description1.style.transform = 'translateY(15px)';
     description1.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -88,25 +128,49 @@ document.addEventListener('DOMContentLoaded', async () => {
     buttonsContainer.style.transform = 'translateY(15px)';
     buttonsContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     
-    // Limpiar temporalmente los textos (solo los que aparecerán con fade)
+    // Temporarily clear text content while the title is typing
     const desc1Original = description1.textContent;
     const desc2Original = description2.textContent;
     description1.textContent = '';
     description2.textContent = '';
     
-    // Iniciar: primero el título letra por letra
-    typewriter.typeTitle(titleElement, titleText, () => {
-        // Cuando termina el título, restaurar textos y mostrar con fade
-        
-        // Restaurar textos
+    // Start typewriter effect on the title
+    TYPE_WRITER.typeTitle(titleElement, titleText, () => {
+        // Restore original text content
         description1.textContent = desc1Original;
         description2.textContent = desc2Original;
         
-        // Mostrar secuencialmente: primero línea1, luego línea2, luego botones
-        typewriter.showSequential([
-            { element: description1, delayBefore: 0, duration: 500 },
-            { element: description2, delayBefore: 200, duration: 500 },
-            { element: buttonsContainer, delayBefore: 200, duration: 500 }
-        ], 100);
+        // Fade in elements sequentially:
+        // Line 1 appears first, then line 2, then buttons
+        TYPE_WRITER.showSequential([
+            { element: description1, delayBefore: 0, duration: 300 },
+            { element: description2, delayBefore: 100, duration: 300 },
+            { element: buttonsContainer, delayBefore: 100, duration: 300 }
+        ], 0);
     });
+};
+
+
+
+// ==================== INITIALIZATION ====================
+// Wait for translations to be fully loaded before starting the typewriter
+
+/**
+ * Start the typewriter effect only after translations are ready.
+ * Listens for the custom event dispatched by the translations module.
+ *
+document.addEventListener('translationsLoaded', function onTranslationsReady() {
+    // Remove listener to prevent duplicate execution
+    document.removeEventListener('translationsLoaded', onTranslationsReady);
+    
+    // Small delay to ensure DOM is fully rendered
+    setTimeout(initTypewriter, 200);
 });
+
+// Fallback: if translationsLoaded already fired before this listener was added
+if (document.readyState === 'complete') {
+    // Check if translations are already applied
+    if (document.querySelector('[data-original-text]')) {
+        setTimeout(initTypewriter, 200);
+    }
+} */

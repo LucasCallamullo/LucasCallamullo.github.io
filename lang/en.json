@@ -21,5 +21,18 @@
 
     "home.skills.title": "Featured Technologies", 
     "home.skills.subtitle": "My daily stack for backend development, databases, and deployment.",
-    "home.skills.button": "View all skills"
+    "home.skills.button": "View all skills",
+    
+    "skills": {
+        "featured": "Featured Technologies",
+        "subFeatured": "Tooling and stacks I have worked with",
+        "exploring": "Exploring technical expertise",
+        "languages": "Languages",
+        "backend": "Back-End",
+        "frontend": "Front-End",
+        "databases": "Databases",
+        "containers": "Containers & Reverse Proxies",
+        "devops": "DevOps & Automation",
+        "testing": "Testing & Docs"
+    }
 }

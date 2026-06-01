@@ -17,12 +17,12 @@ function applyTheme(theme) {
     if (theme === 'dark') {
         body.classList.add('dark-mode');
         if (themeToggle) {
-            themeToggle.innerHTML = '<i class="ri-sun-line"></i>';
+            themeToggle.innerHTML = '<i class="ri-sun-line font-md"></i>';
         }
     } else {
         body.classList.add('light-mode');
         if (themeToggle) {
-            themeToggle.innerHTML = '<i class="ri-moon-line"></i>';
+            themeToggle.innerHTML = '<i class="ri-moon-line font-md"></i>';
         }
     }
     

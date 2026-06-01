@@ -1,25 +1,75 @@
 // ==================== TRANSLATIONS MODULE ====================
 
+/**
+ * Manages internationalization (i18n) for the application.
+ * Handles loading translation JSON files, applying translations to DOM elements,
+ * and persisting language preference in localStorage.
+ * Dispatches a 'translationsLoaded' event when translations are ready.
+ */
+
 let currentLang = localStorage.getItem('language') || 'en';
 let translations = {};
 
+/**
+ * Loads translation JSON file for the specified language.
+ * Applies translations to all elements with data-i18n attribute.
+ * Dispatches 'translationsLoaded' event when complete.
+ * 
+ * @param {string} lang - Language code ('en' or 'es')
+ * @returns {Promise<void>}
+ */
 async function loadLanguage(lang) {
     try {
         const response = await fetch(`lang/${lang}.json`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Failed to load ${lang}.json`);
+        }
+        
         translations = await response.json();
+
+        // Apply translations to DOM elements
         applyTranslations();
+
+        // Update current language and persist to localStorage
         currentLang = lang;
         localStorage.setItem('language', lang);
         
-        // Actualizar bandera en el botón
+        // Update flag icon in language switcher button
         updateLanguageFlag(lang);
 
-        // SOLO ESTAS 2 LÍNEAS:
-        window.dispatchEvent(new Event('resize')); // Fuerza recálculo la nav moviable
+        // Disparar evento ESPECÍFICO para la barra deslizante
+        window.dispatchEvent(new CustomEvent('slidingNavUpdate'));
 
     } catch (error) {
         console.error('Error loading language:', error);
     }
+}
+
+
+/**
+ * Gets value from translations object supporting both:
+ * - Flat keys: "nav.home" (stored as is in JSON)
+ * - Nested keys: "skills.languages" (stored as object.skills.languages)
+ * 
+ * @param {Object} translations - The translations object
+ * @param {string} key - The i18n key (e.g., "nav.home" or "skills.languages")
+ * @returns {string|undefined} The translated value or undefined
+ */
+function getTranslationValue(translations, key) {
+    if (!translations || !key) return undefined;
+    
+    // Try 1: Direct lookup (for flat keys like "nav.home")
+    if (translations[key] !== undefined) {
+        return translations[key];
+    }
+    
+    // Try 2: Nested lookup (for keys like "skills.languages")
+    const nestedValue = key.split('.').reduce((obj, part) => {
+        return obj && obj[part] !== undefined ? obj[part] : undefined;
+    }, translations);
+    
+    return nestedValue;
 }
 
 
@@ -29,49 +79,70 @@ function updateLanguageFlag(lang) {
 
     flagContainer.innerHTML = /*html*/`
         <img src="./staticfiles/icon/${(lang === 'en') ? 'flag_us.svg' : 'flag_ar.svg'}" 
-            alt="EN" class="flag-icon" 
-            style="width: 20px; height: 14px;">
+            alt="EN" class="flag-icon">
     `;
 }
 
 function applyTranslations() {
 
     document.querySelectorAll('.download-cv').forEach(e => {
+
         const key = e.getAttribute('data-i18n');
+
+        // Soporte para keys anidadas: "skills.languages" -> translations.skills.languages
+        const value = getTranslationValue(translations, key);
+
         // quitar la key "footer.href_download"
-        if (translations[key]) {
-            e.href = translations[key];
-        }
+        if (value) e.href = value;
     });
 
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
+    document.querySelectorAll('[data-i18n]').forEach(e => {
+        const key = e.getAttribute('data-i18n');
 
-        if (translations[key] && key != "footer.href_download") {
-            element.setAttribute('data-original-text', translations[key]);
+        // Skip download-cv elements (already handled above)
+        if (key === 'footer.href_download') return;
+
+        // Soporte para keys anidadas: "skills.languages" -> translations.skills.languages
+        const value = getTranslationValue(translations, key);
+
+        if (value) {
+            e.setAttribute('data-original-text', value);
             
-            if (element.id === 'title') {
-                if (!element.classList.contains('typewriter-cursor')) {
-                    element.textContent = translations[key];
+            if (e.id === 'title') {
+                if (!e.classList.contains('typewriter-cursor')) {
+                    e.textContent = value;
                 }
             } else {
-                element.textContent = translations[key];
+                e.textContent = value;
             }
         }
     });
 }
 
-function setLanguage(lang) {
-    loadLanguage(lang);
+/**
+ * Public API to change language programmatically.
+ * @param {string} lang - Language code ('en' or 'es')
+ */
+async function setLanguage(lang) {
+    await loadLanguage(lang);
 }
 
-// Cargar idioma al inicio
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        loadLanguage(currentLang);
-        updateLanguageFlag(currentLang);
-    });
-} else {
-    loadLanguage(currentLang);
-    updateLanguageFlag(currentLang);
+
+// ==================== INITIALIZATION ====================
+// Load saved language preference when the page starts, regardless of DOM state
+
+/**
+ * Initializes the translations module.
+ * Loads the saved language (or default 'en') and dispatches the ready event.
+ */
+async function initTranslations() {
+    await loadLanguage(currentLang);
+
+    // Small delay to ensure DOM is fully rendered
+    setTimeout(initTypewriter, 150); 
 }
+
+// Execute initialization immediately
+// No need to wait for DOMContentLoaded because fetch requests run in parallel
+initTranslations();
+

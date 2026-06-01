@@ -21,5 +21,18 @@
 
     "home.skills.title": "Tecnologías destacadas", 
     "home.skills.subtitle": "Mi Stack diario para Backend, Bases de Datos e Implementación.",
-    "home.skills.button": "Mira mis skills"
+    "home.skills.button": "Mira mis skills",
+    
+    "skills": {
+        "featured": "Tecnologías Destacadas",
+        "subFeatured": "Herramientas y stacks con los que he trabajado",
+        "exploring": "Explorando experiencia técnica",
+        "languages": "Lenguajes",
+        "backend": "Back-End",
+        "frontend": "Front-End",
+        "databases": "Bases de Datos",
+        "containers": "Contenedores y Proxy Inverso",
+        "devops": "DevOps y Automatización",
+        "testing": "Pruebas y Documentación"
+    }
 }

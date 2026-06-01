@@ -1,44 +1,93 @@
 
-
 const SKILLS_CONFIG = {
     categories: {
-        "Languages": ["Python", "Java", "JavaScript"],
-        "Back-End": ["Spring Boot", "Django", "DRF"],
-        "Front-End": ["React", "HTML5", "CSS3", "Bootstrap"],
-        "Databases": ["PostgreSQL", "SQLite", "Redis"],
-        "Containers & Reverse Proxies": ["Docker", "Docker Compose", "Nginx"],
-        "DevOps & Automation": ["Git", "GitHub Actions", "Linux", "Bash"],
-        "Testing & Docs": ["JUnit5", "PyTest", "Postman", "Swagger"]
+        languages: {
+            title: "Languages",
+            i18n: "skills.languages",
+            items: ["Python", "Java", "JavaScript"]
+        },
+        backend: {
+            title: "Back-End",
+            i18n: "skills.backend",
+            items: ["Spring Boot", "Django", "DRF"]
+        },
+        frontend: {
+            title: "Front-End",
+            i18n: "skills.frontend",
+            items: ["React", "HTML5", "CSS3", "Bootstrap"]
+        },
+        databases: {
+            title: "Databases",
+            i18n: "skills.databases",
+            items: ["PostgreSQL", "SQLite", "Redis"]
+        },
+        containers: {
+            title: "Containers & Reverse Proxies",
+            i18n: "skills.containers",
+            items: ["Docker", "Docker Compose", "Nginx"]
+        },
+        devops: {
+            title: "DevOps & Automation",
+            i18n: "skills.devops",
+            items: ["Git", "GitHub Actions", "Linux", "Bash"]
+        },
+        testing: {
+            title: "Testing & Docs",
+            i18n: "skills.testing",
+            items: ["JUnit5", "PyTest", "Postman", "Swagger"]
+        }
     },
-    order: ["Languages", "Back-End", "Front-End", "Databases",  "Containers & Reverse Proxies", "DevOps & Automation", "Testing & Docs"]
+    // Order uses the category keys
+    order: ["languages", "backend", "frontend", "databases", "containers", "devops", "testing"]
 };
 
 
+/**
+ * Renders the skills section from the SKILLS_CONFIG object.
+ * Each category is rendered as a card with a title, window dots, and tech items.
+ * @returns {string} HTML string of all skill cards
+ */
 function renderSkillsFromConfig() {
-    return SKILLS_CONFIG.order.map(cat => {
-        const techs = SKILLS_CONFIG.categories[cat];
-        const itemsHTML = techs.map(tech => {
+    return SKILLS_CONFIG.order.map(categoryKey => {
+        const category = SKILLS_CONFIG.categories[categoryKey];
+        
+        // Guard clause: skip if category is missing
+        if (!category) {
+            console.warn(`Category not found: ${categoryKey}`);
+            return '';
+        }
+        
+        // desempaqueta keys in vars
+        const { title: categoryTitle, i18n: i18nKey, items: techItems } = category;
+        
+        // Generate HTML for each technology item
+        const itemsHTML = techItems.map(tech => {
             const url = TECH_STACK[tech];
-            return url ? /*html*/`
+            if (!url) {
+                console.warn(`Icon not found for technology: ${tech}`);
+                return '';
+            }
+            
+            return /*html*/`
                 <div class="d-flex align-center gap-1 skills__cont__card__img">
                     <img class="skills__card__img" src="${url}" alt="${tech}">
                     <span class="text-console font-md text-truncate">${tech}</span>
                 </div>
-            ` : '';
+            `;
         }).join('');
         
         return /*html*/`
             <div class="card-skills">
                 <div class="card-top-border d-flex justify-between align-center px-3 py-2">
-                    <h3 class="d-flex font-md-plus color-console text-console">${cat}</h3>
-
+                    <h3 class="d-flex font-md-plus color-console text-console tech-skill" data-i18n="${i18nKey}">
+                        ${categoryTitle}
+                    </h3>
                     <div class="d-flex gap-1">
                         <div class="dot dot-red"></div>
                         <div class="dot dot-yellow"></div>
                         <div class="dot dot-green"></div>
                     </div>
                 </div>
-
                 <div class="card-bot-border d-grid grid-123 gap-1 px-3 py-5">
                     ${itemsHTML}
                 </div>
@@ -56,7 +105,7 @@ const SkillView = {
                 <h2 class="text-console font-xl text-primary">ls -la skills/</h2>
             </div>
 
-            <span class="cont-page roboto-regular ms-3 font-md text-secondary">
+            <span class="cont-page roboto-regular ms-3 font-md text-secondary" data-i18n="skills.exploring">
                 Exploring technical expertise
             </span>
         </div>
@@ -66,10 +115,10 @@ const SkillView = {
             <div class="cont-page py-5 d-grid gap-2 grid-122">
 
                 <div class="d-flex-col gap-2 grid-col-all justify-self-center justify-center align-center pb-4">
-                    <h2 class="text-console font-lg color-console">
+                    <h2 class="text-console font-lg color-console" data-i18n="skills.featured">
                         Featured Technologies
                     </h2>
-                    <span class="text-console text-secondary font-md"> 
+                    <span class="text-console text-secondary font-md" data-i18n="skills.subFeatured"> 
                         Tooling and stacks I have worked with
                     </span>
                 </div>
@@ -80,5 +129,8 @@ const SkillView = {
     `,
 
     /* funcion que se ejecuta al terminar el renderizado del anterior html */ 
-    onMount: function() { }
+    onMount: function() {
+
+
+    }
 };

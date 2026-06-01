@@ -51,7 +51,7 @@ class SlidingNavigation {
             e.preventDefault();
             
             const path = button.getAttribute('data-nav');
-            if (!path) return;
+            // if (!path) return;
             
             // Actualizar estado activo
             this.setActiveButton(button);
@@ -68,6 +68,13 @@ class SlidingNavigation {
         
         // Recalcular posición en resize (importante para responsive)
         window.addEventListener('resize', () => {
+            if (this.currentActive) {
+                this.moveBarToButton(this.currentActive);
+            }
+        });
+
+        // Escuchar el evento personalizado
+        window.addEventListener('slidingNavUpdate', () => {
             if (this.currentActive) {
                 this.moveBarToButton(this.currentActive);
             }
@@ -105,34 +112,6 @@ class SlidingNavigation {
         observer.observe(this.container, { childList: true, subtree: true });
     }
     
-    /*
-    setupEvents() {
-        this.buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const path = button.getAttribute('data-nav');
-                
-                // Actualizar estado activo
-                this.setActiveButton(button);
-                
-                // Mover la barra
-                this.moveBarToButton(button);
-                
-                // Disparar evento personalizado para el router
-                const event = new CustomEvent('navchange', { 
-                    detail: { path, button } 
-                });
-                document.dispatchEvent(event);
-            });
-        });
-        
-        // Recalcular posición en resize (importante para responsive)
-        window.addEventListener('resize', () => {
-            if (this.currentActive) {
-                this.moveBarToButton(this.currentActive);
-            }
-        });
-    }
-        */
     
     setInitialActive() {
         // Buscar si hay un botón con clase 'active'
@@ -150,6 +129,7 @@ class SlidingNavigation {
     }
     
     setActiveButton(button) {
+        
         // Remover clase active de todos
         this.buttons.forEach(btn => btn.classList.remove('active'));
         
@@ -159,6 +139,7 @@ class SlidingNavigation {
     }
     
     moveBarToButton(button) {
+
         const buttonRect = button.getBoundingClientRect();
         const containerRect = this.container.getBoundingClientRect();
         
