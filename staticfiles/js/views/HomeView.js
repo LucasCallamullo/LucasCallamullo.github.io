@@ -99,21 +99,21 @@ function renderTechStack(techList = null) {
     return slidesHTML;
 }
 
-
 const HomeView = {
     template: /*html*/`
         <section class="full-bg-secondary-dark d-flex-col justify-center align-center" id="main-root">
             <div class="cont-page d-flex-col justify-center align-center">
                 <div class="d-flex gap-1">
                     <span class="roboto-regular font-xl bold-console" data-i18n="prompt">$</span>
-                    <span class="roboto-regular font-xl" data-i18n="whoami">whoami</span>
+                    <span class="roboto-regular font-xl prompt-console" data-i18n="whoami">whoami</span>
                 </div>
 
                 <!-- texto effect typewriter -->
-                <h1 class="roboto-medium font-xxxxl mt-3 text-center mx-auto" id="title" data-i18n="title">
+                <h1 class="text-console font-xxxxl mt-3 text-center mx-auto typewriter-cursor" 
+                    id="title" data-i18n="title">
                     Lucas Callamullo
                 </h1>
-                <h2 class="roboto-medium font-xxxl mt-2 text-center mx-auto" id="subtitle" data-i18n="subtitle">
+                <h2 class="text-console font-xxxl mt-2 text-center mx-auto prompt-console" id="subtitle" data-i18n="subtitle">
                     Software Engineer
                 </h2>
 
@@ -176,8 +176,11 @@ const HomeView = {
         </section>
     `,
 
+    firstTypeWriter: false,
+
     /* funcion que se ejecuta al terminar el renderizado del anterior html */ 
     onMount: function() { 
+
         document.querySelectorAll('.download-cv').forEach(e => {
             const key = e.getAttribute('data-i18n');
             // quitar la key "footer.href_download"
@@ -187,6 +190,13 @@ const HomeView = {
         });
 
         swipperInitMain();
+
+        // Small delay to ensure DOM is fully rendered - stupid check
+        if (HomeView.firstTypeWriter) {
+            initTypewriter();
+            // setTimeout(initTypewriter, 0);
+        }
+        HomeView.firstTypeWriter = true;
     }
 };
 

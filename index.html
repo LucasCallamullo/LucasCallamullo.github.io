@@ -70,7 +70,7 @@
             </div>
 
             <!-- NAV BUTTONS -->
-            <ul class="d-flex gap-4 justify-end align-center nav-list">
+            <ul class="d-flex gap-2 justify-end align-center nav-list">
 
                 <!-- HOME ABOUT PROJECTS SKILLS CONTACT -->
                 <li><button class="btn btn-nav text-console" data-i18n="nav.home" data-nav="home">
@@ -85,16 +85,16 @@
                     </button></li>
 
                 <!-- Botón de idioma con dropdown -->
-                <li class="language-dropdown d-flex gap-2">
+                <li class="language-dropdown d-flex gap-1">
                     <!-- Botón de modo oscuro/claro -->
                     <button id="themeToggle" class="btn control-btn" aria-label="Cambiar tema">
-                        <i class="ri-moon-line"></i>
+                        <i class="ri-moon-line font-lg"></i>
                     </button>
 
                     <button id="languageBtn" class="control-btn" aria-label="Cambiar idioma">
-                        <i class="ri-global-line"></i>
-                        <span id="currentLangFlag">🇬🇧</span>
-                        <i class="ri-arrow-down-s-line"></i>
+                        <i class="ri-global-line font-lg"></i>
+                        <span id="currentLangFlag" class="font-md">🇬🇧</span>
+                        <i class="ri-arrow-down-s-line font-lg"></i>
                     </button>
                     <ul class="dropdown-menu" id="languageDropdown">
                         <li onclick="setLanguage('en')">
@@ -234,11 +234,13 @@
     </footer>
     
     <!-- Scripts (EN ESTE ORDEN) -->
-    <script src="./staticfiles/js/translates.js"></script>
-    <script src="./staticfiles/js/typewriter.js"></script>
     <script src="./staticfiles/js/theme.js"></script>
     <script src="./staticfiles/js/sliding-nav.js"></script>
 
+    <script src="./staticfiles/js/typewriter.js"></script>
+    <script src="./staticfiles/js/translates.js"></script>
+    
+    
     <!-- Scripts con renderizado dinamico de cada view y api hiustory -->
     <script src="./staticfiles/js/views/HomeView.js"></script>
     <script src="./staticfiles/js/views/SkillsView.js"></script>
