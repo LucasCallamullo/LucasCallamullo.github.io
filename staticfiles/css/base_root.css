@@ -160,8 +160,12 @@
     /* Fondos claros */
     --bg-primary: #ffffff;           /* Fondo principal: blanco */
     --bg-secondary: #f7f7f7;         /* Fondo secundario: gris muy claro */
-    --bg-secondary-light: #c9c9c9ab; /* Más claro con más opacidad */
-    --bg-secondary-dark: #f7f7f7;  /* Más oscuro para contraste */
+    /*  --bg-secondary-light: #c9c9c9ab; /* Más claro con más opacidad 
+    --bg-secondary-dark: #f7f7f7;  Más oscuro para contraste */
+
+    --bg-tertiary: #f1f3f5;          /* Fondo terciario: gris más notorio */
+    --bg-secondary-light: #e9ecef;   /* Más claro que secondary (gris suave) */
+    --bg-secondary-dark: #dee2e6;    /* Más oscuro para contraste (gris medio suave) */
 
     /* Textos oscuros */
     --text-primary: #000000;         /* Texto principal: negro */

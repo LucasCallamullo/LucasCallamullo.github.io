@@ -65,7 +65,7 @@ const TECH_STACK = {
 
 
 const TECH_STACK_ORDER = [
-    "Java", "Spring", "PostgreSQL", "Docker", "Docker Compose",
+    "Java", "Spring Boot", "PostgreSQL", "Docker", "Docker Compose",
     "Python", "Django", "DRF", "Redis", "SQLite",
     "JavaScript", "React", "Git", "Linux", "Bash", "Nginx"
 ];

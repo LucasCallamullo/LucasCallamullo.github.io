@@ -652,3 +652,49 @@
     visibility: hidden;    /* Invisible pero ocupa su espacio */
     /* Útil para: placeholders, elementos que quieras ocultar sin que se mueva el layout */
 }
+
+
+
+/* ========================================
+   UTILIDADES RESPONSIVAS
+   ======================================== */
+
+/* ---------- BASE: Mobile First (default) ---------- */
+/* Por defecto, todo es mobile */
+
+/* Display utilities base */
+.d-flex-mobile { display: flex; }
+.d-grid-mobile { display: grid; }
+.d-block-mobile { display: block; }
+
+
+/* ---------- TABLET (min-width: 768px) ---------- */
+@media (min-width: 768px) {
+    .d-flex-tablet { display: flex; }
+    .d-grid-tablet { display: grid; }
+    .d-block-tablet { display: block; }
+    
+    /* Reset mobile styles on tablet */
+    .d-flex-mobile { display: none; }
+    .d-grid-mobile { display: none; }
+    .d-block-mobile { display: none; }
+}
+
+/* ---------- DESKTOP (min-width: 1024px) ---------- */
+@media (min-width: 992px) {
+    .d-flex-desktop { display: flex; }
+    .d-grid-desktop { display: grid; }
+    .d-block-desktop { display: block; }
+    
+    /* Reset tablet styles on desktop */
+    .d-flex-tablet { display: none; }
+    .d-grid-tablet { display: none; }
+    .d-block-tablet { display: none; }
+}
+
+/* ---------- LARGE DESKTOP (min-width: 1440px) ---------- */
+@media (min-width: 1024px) {
+    .d-flex-large { display: flex; }
+    .d-grid-large { display: grid; }
+    .d-block-large { display: block; }
+}

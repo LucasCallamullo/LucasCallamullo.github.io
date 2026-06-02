@@ -69,7 +69,7 @@ function renderSkillsFromConfig() {
             }
             
             return /*html*/`
-                <div class="d-flex align-center gap-1 skills__cont__card__img">
+                <div class="d-flex align-center gap-1 skills__cont__card__img cont__to__animate">
                     <img class="skills__card__img" src="${url}" alt="${tech}">
                     <span class="text-console font-md text-truncate">${tech}</span>
                 </div>
@@ -97,21 +97,71 @@ function renderSkillsFromConfig() {
 }
 
 
+/**
+ * Applies entry animation to skill cards after rendering.
+ * Cards animate in from the left with staggered delays.
+ * @param {number} [staggerDelay=30] - Delay in ms between each card animation
+ */
+function animateSkillCards(staggerDelay = 30, cards) {
+    // Get all skill cards within the container
+    
+    if (!cards.length) {
+        console.warn('No skill cards found to animate');
+        return;
+    }
+    
+    // Apply staggered animation
+    cards.forEach((card, index) => {
+        // Set custom transition delay based on index
+        const delay = index * staggerDelay;
+        card.style.transitionDelay = `${delay}ms`;
+        
+        // Force reflow to ensure transition works
+        void card.offsetHeight;
+        
+        // Add animation class
+        card.classList.add('animate-in');
+    });
+}
+
+
+/**
+ * Waits for DOM updates and then animates skill cards
+ * @returns {Promise<void>}
+ */
+async function initSkillCardsAnimation(classHtml = '.cont__to__animate') {
+    // Small delay to ensure DOM is ready
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
+    // Check if cards exist
+    const cards = document.querySelectorAll(`${classHtml}`);
+    
+    if (cards.length === 0) {
+        // Cards not found, wait a bit more
+        await new Promise(resolve => setTimeout(resolve, 100));
+        return initSkillCardsAnimation(classHtml); // Retry
+    }
+    
+    // Apply animation
+    animateSkillCards(40, cards);
+}
+
+
 const SkillView = {
     template: /*html*/`
-        <div class="full-bg-secondary-dark d-flex-col pt-6 pb-5 gap-3">
+        <div class="full-bg-secondary-dark d-flex-col pt-6 pb-5 gap-3 h-200">
             <div class="cont-page d-flex gap-1 justify-start align-center text-start">
                 <span class="roboto-regular font-xl color-console"> $ </span>
-                <h2 class="text-console font-xl text-primary">ls -la skills/</h2>
+                <h2 class="text-console font-xl text-primary typewriter-cursor" id="skillsTittle">ls -la skills/</h2>
             </div>
 
-            <span class="cont-page roboto-regular ms-3 font-md text-secondary" data-i18n="skills.exploring">
+            <span class="cont-page roboto-regular ms-3 font-md text-secondary" id="skillsSpan" data-i18n="skills.exploring">
                 Exploring technical expertise
             </span>
         </div>
 
         <!-- Sección de Tecnologías / Skills -->
-        <section class="full-bg-primary pt-4 pb-6" id="skillTech">
+        <section class="full-bg-secondary pt-4 pb-6" id="skillTech">
             <div class="cont-page py-5 d-grid gap-2 grid-122">
 
                 <div class="d-flex-col gap-2 grid-col-all justify-self-center justify-center align-center pb-4">
@@ -131,6 +181,31 @@ const SkillView = {
     /* funcion que se ejecuta al terminar el renderizado del anterior html */ 
     onMount: function() {
 
+        const titleElement = document.getElementById('skillsTittle');
+        const description1 = document.getElementById('skillsSpan');
 
+        // Retrieve title text from data attribute or fallback to text content
+        const titleText = titleElement.getAttribute('data-original-text') || titleElement.textContent;
+
+        // Temporarily clear text content while the title is typing
+        const desc1Original = description1.textContent;
+        description1.textContent = '';
+
+        description1.classList.add('fade-init');
+
+        // Start typewriter effect on the title
+        TYPE_WRITER.typeTitle(titleElement, titleText, () => {
+            // Restore original text content
+            description1.textContent = desc1Original;
+            
+            // Fade in elements sequentially:
+            // Line 1 appears first, then line 2, then buttons
+            TYPE_WRITER.showSequential([
+                { element: description1, delayBefore: 200, duration: 300 }
+            ], 0);
+        });
+
+        // animated cards
+        initSkillCardsAnimation();
     }
 };
