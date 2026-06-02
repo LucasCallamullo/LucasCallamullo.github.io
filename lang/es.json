@@ -34,5 +34,35 @@
         "containers": "Contenedores y Proxy Inverso",
         "devops": "DevOps y Automatización",
         "testing": "Pruebas y Documentación"
+    },
+
+    "contact": {
+        "ping": "ping contacto.servidor",
+        "establishing": "Estableciendo conexión con el punto de comunicación",
+        "title": "Contáctame",
+        "name_label": "Nombre:",
+        "email_label": "Correo:",
+        "message_label": "Mensaje:",
+        "send_button": "Enviar",
+        "availability_title": "Estado de Disponibilidad",
+        "open_to_opportunities": "Abierto a oportunidades",
+        "response_time": "Tiempo de respuesta: Dentro de 24 horas",
+        "timezone": "ART (UTC-3)",
+        "location": "Córdoba, Argentina",
+        "connect_title": "Conecta Conmigo",
+        "github_tag": "Ir a GitHub",
+        "github_text": "Git Hub",
+        "linkedin_tag": "Ir a Linkedin",
+        "linkedin_text": "Linkedin",
+        "email_tag": "Envíame un Correo",
+        "email_text": "Correo",
+        "copy_tag": "Copiar Correo",
+        "copy_text": "Correo",
+        "echo": "$ echo",
+        "thanks_message": "\"Gracias por visitar\"",
+        "chat_invite": "Si quieres conversar, ¡mis correos están siempre abiertos!",
+        "faster_response": "Responderé más rápido si contactas por correo.",
+        "connection_message": "Conexión establecida. Esperando tu mensaje... :D",
+        "connection_message_mobile": "Conexión establecida. Esperando tu mensaje... :D"
     }
 }

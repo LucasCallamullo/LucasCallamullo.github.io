@@ -34,5 +34,35 @@
         "containers": "Containers & Reverse Proxies",
         "devops": "DevOps & Automation",
         "testing": "Testing & Docs"
+    },
+
+    "contact": {
+        "ping": "ping contact.server",
+        "establishing": "Establishing connection to communication endpoint",
+        "title": "Contact Me",
+        "name_label": "Name:",
+        "email_label": "Email:",
+        "message_label": "Message:",
+        "send_button": "Send",
+        "availability_title": "Availability Status",
+        "open_to_opportunities": "Open to opportunities",
+        "response_time": "Response time: Within 24 hours",
+        "timezone": "ART (UTC-3)",
+        "location": "Córdoba, Argentine",
+        "connect_title": "Connect With Me",
+        "github_tag": "Go GitHub",
+        "github_text": "Git Hub",
+        "linkedin_tag": "Go Linkedin",
+        "linkedin_text": "Linkedin",
+        "email_tag": "Send Me Email!",
+        "email_text": "Email",
+        "copy_tag": "Copy Email!",
+        "copy_text": "Email",
+        "echo": "$ echo",
+        "thanks_message": "\"Thanks for stopping by\"",
+        "chat_invite": "If you want to chat, my emails are always open!",
+        "faster_response": "I'll answer faster if you contact via email.",
+        "connection_message": "Connection established. Awaiting your message... :D",
+        "connection_message_mobile": "Connection established. Awaiting your message... :D"
     }
 }

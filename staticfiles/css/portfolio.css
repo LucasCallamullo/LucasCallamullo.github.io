@@ -26,6 +26,9 @@
     --card-border-gradient-mid: #252a35;
     --card-border-gradient-end: #1a2028;
     --card-border-opacity: 0.5;
+
+    --grad-start: #11998e;  
+    --grad-end: #38ef7d;     
 }
 
 .light-mode { 
@@ -43,6 +46,11 @@
     --card-border-gradient-mid: #d9e2e9;
     --card-border-gradient-end: #e4e9ee;
     --card-border-opacity: 0.8;
+
+
+    --grad-start: #10b981;  
+    --grad-end: #059669;      
+
 }
 
 
@@ -124,17 +132,10 @@
 /* ========== BOTONES DE CONTROL (Idioma + Tema) ========== */
 
 .control-btn {
-    background: transparent;
     border: 1px solid var(--border-cont);
     border-radius: 8px;
     padding: 8px 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Roboto', sans-serif;
     color: var(--text-primary);
-    transition: all 0.2s ease;
 }
 
 .control-btn:hover {
@@ -144,10 +145,6 @@
 }
 
 /* Dropdown de idioma */
-.language-dropdown {
-    position: relative;
-}
-
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -672,13 +669,12 @@
 
 /* SKILLS SECTION */
 
-/* From Uiverse.io by ilkhoeri */ 
 .card-skills {
     overflow: hidden;
     border: 1px solid var(--bg-secondary-dark);
     border-radius: 16px;
     background-color: var(--card-bg-bottom);
-    backdrop-filter: blur(8px);
+    /* backdrop-filter: blur(8px); */
     
     display: flex;
     flex-direction: column;
@@ -729,6 +725,12 @@
     
     /* Asegurar que el contenido esté por encima */
     isolation: isolate;
+
+    /* Estado inicial: fuera de la pantalla (izquierda) 
+    opacity: 0; */
+    transform: translateX(-30px);
+    transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
 /* Borde giratorio (detrás) */
@@ -748,6 +750,7 @@
     );
     opacity: var(--card-border-opacity);
     background-size: 200% 200%;
+    
     animation: rotBGimg 2s linear infinite;
     z-index: 0;
     border-radius: 20px;
@@ -800,3 +803,236 @@
     color: var(--text-primary);
 }
 
+
+
+
+
+
+.cont__to__animate {
+    position: relative;
+    overflow: hidden;
+    
+    /* Asegurar que el contenido esté por encima */
+    isolation: isolate;
+
+    /* Estado inicial: fuera de la pantalla (izquierda) 
+    opacity: 0; */
+    transform: translateX(-30px);
+    transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+/* Estado visible: en su posición normal */
+.cont__to__animate.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Efecto de entrada escalonado (stagger) - diferentes delays */
+.cont__to__animate.animate-in:nth-child(1) { transition-delay: 0ms; }
+.cont__to__animate.animate-in:nth-child(2) { transition-delay: 30ms; }
+.cont__to__animate.animate-in:nth-child(3) { transition-delay: 60ms; }
+.cont__to__animate.animate-in:nth-child(4) { transition-delay: 90ms; }
+.cont__to__animate.animate-in:nth-child(5) { transition-delay: 120ms; }
+.cont__to__animate.animate-in:nth-child(6) { transition-delay: 150ms; }
+.cont__to__animate.animate-in:nth-child(7) { transition-delay: 180ms; }
+.cont__to__animate.animate-in:nth-child(8) { transition-delay: 210ms; }
+.cont__to__animate.animate-in:nth-child(9) { transition-delay: 240ms; }
+.cont__to__animate.animate-in:nth-child(10) { transition-delay: 270ms; }
+.cont__to__animate.animate-in:nth-child(11) { transition-delay: 300ms; }
+.cont__to__animate.animate-in:nth-child(12) { transition-delay: 330ms; }
+
+/* Para pantallas pequeñas, reducir el delay */
+@media (max-width: 768px) {
+    .cont__to__animate.animate-in:nth-child(n) {
+        transition-delay: 0ms;
+    }
+}
+
+
+
+/* ========================================
+   FADE-IN UTILITIES
+   ======================================== */
+
+/* Initial hidden state for elements that fade in */
+.fade-init {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Visible state (added by JavaScript when ready to show) */
+.fade-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.h-200 { height: 200px; }
+.h-150 { height: 150px; }
+.h-100 { height: 100px; }
+
+
+
+
+
+
+
+/* CONTACT FORM */
+
+
+
+#contactForm {
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-cont);
+    border-radius: 20px;
+    padding: 28px;
+}
+
+
+.contact-container {
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-cont);
+    border-radius: 20px;
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.btn-tag-effect {
+  position: relative;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  cursor: pointer;
+
+  padding: 16px 20px;
+  border-radius: 20px;
+  height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn-tag-effect:hover .tag-effect-top {
+  top: -40px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.btn-tag-effect:hover,
+.btn-tag-effect:hover .tag-effect-top,
+.btn-tag-effect:hover .tag-effect-top::before {
+  background: linear-gradient(320deg, var(--grad-end), var(--grad-start));
+  color: var(--text-primary);
+}
+
+.tag-effect-top {
+  position: absolute;
+  top: 0;
+  background: var(--text-primary);
+  color: var(--text-primary);
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tag-effect-top::before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  background: var(--text-primary);
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contact_cont {
+
+  width: 100%;
+  height: 250px;
+  background-color: var(--bg-secondary-dark);
+  border: 1px solid var(--border-cont); 
+  border-radius: 20px;
+  
+  position: relative;
+  transition-duration: .5s;
+  
+
+}
+
+.contact_cont_title {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border-cont); 
+  border-radius: 20px;
+  padding: 28px;
+
+  background-color: var(--bg-primary);
+  transition-duration: .5s;
+  color: var(--text-primary);
+
+
+}
+
+.contact_cont:hover .contact_cont_title {
+  transform: translateY(-25%);
+  transition-duration: .5s;
+}
+
+.contact_cont_info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1;
+
+  opacity: 0;
+  pointer-events: none; 
+
+
+  transform: translateY(10%); /* Empieza escondido abajo */
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.3s ease;
+ /* 
+  background-color: var(--bg-secondary);
+  opacity: 0;Empieza invisible 
+  transition: opacity 0.3s ease;
+  pointer-events: none; 
+  color: red; */
+}
+
+.contact_cont:hover .contact_cont_info {
+  opacity: 1; 
+  transform: translateY(37%); /* Sube al hacer hover */
+}

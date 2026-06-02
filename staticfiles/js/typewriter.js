@@ -9,11 +9,38 @@
  */
 class TypewriterEffect {
     /**
-     * Creates an instance of TypewriterEffect.
-     * @param {number} [speed=100] - Typing speed in milliseconds per character.
+     * Creates an instance of TypewriterEffect (Singleton pattern).
+     * Only one instance can exist throughout the application.
+     * @param {number} [speed=70] - Typing speed in milliseconds per character.
+     * @returns {TypewriterEffect} The singleton instance.
      */
     constructor(speed = 70) {
+        // Check if an instance already exists
+        if (TypewriterEffect.instance) {
+            // console.warn('TypewriterEffect already instantiated. Returning existing instance.');
+            return TypewriterEffect.instance;
+        }
+        
+        // Initialize the instance
         this.speed = speed;
+        
+        // Store the instance as a static property
+        TypewriterEffect.instance = this;
+        
+        // Optional: freeze the instance to prevent modifications
+        // Object.freeze(this);
+    }
+    
+    /**
+     * Get the singleton instance (alternative access method).
+     * @param {number} [speed=70] - Typing speed (only used if instance doesn't exist).
+     * @returns {TypewriterEffect} The singleton instance.
+     */
+    static getInstance(speed = 70) {
+        if (!TypewriterEffect.instance) {
+            TypewriterEffect.instance = new TypewriterEffect(speed);
+        }
+        return TypewriterEffect.instance;
     }
     
     /**
@@ -23,7 +50,7 @@ class TypewriterEffect {
      * @param {string} text - The text to be typed into the element.
      * @param {Function} [onComplete] - Optional callback function executed when typing finishes.
      */
-    typeTitle(element, text, onComplete) {
+    typeTitle(element, text, onComplete, init = 0) {
         let i = 0;
         element.textContent = '';
         // element.classList.add('typewriter-cursor');
@@ -90,14 +117,14 @@ class TypewriterEffect {
     }
 }
 
+const TYPE_WRITER = new TypewriterEffect();
+
 
 /**
  * Initializes the typewriter effect.
  * Called only after translations are fully loaded.
  */
 function initTypewriter() {
-    
-    const TYPE_WRITER = new TypewriterEffect();
     
     // Get DOM elements
     const titleElement = document.getElementById('title');
@@ -116,17 +143,9 @@ function initTypewriter() {
     
     // Elements that will fade in after the title
     // Set initial state: hidden and shifted down
-    description1.style.opacity = '0';
-    description1.style.transform = 'translateY(15px)';
-    description1.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    
-    description2.style.opacity = '0';
-    description2.style.transform = 'translateY(15px)';
-    description2.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    
-    buttonsContainer.style.opacity = '0';
-    buttonsContainer.style.transform = 'translateY(15px)';
-    buttonsContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    description1.classList.add('fade-init');
+    description2.classList.add('fade-init');
+    buttonsContainer.classList.add('fade-init');
     
     // Temporarily clear text content while the title is typing
     const desc1Original = description1.textContent;

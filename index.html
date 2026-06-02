@@ -84,18 +84,23 @@
                 <li><button class="btn btn-nav text-console" data-i18n="nav.contact" data-nav="contact">
                     </button></li>
 
-                <!-- Botón de idioma con dropdown -->
-                <li class="language-dropdown d-flex gap-1">
+
+                <li>
                     <!-- Botón de modo oscuro/claro -->
-                    <button id="themeToggle" class="btn control-btn" aria-label="Cambiar tema">
+                    <button id="themeToggle" class="btn control-btn btn-36" aria-label="Chnage theme">
                         <i class="ri-moon-line font-lg"></i>
                     </button>
+                </li>
 
-                    <button id="languageBtn" class="control-btn" aria-label="Cambiar idioma">
-                        <i class="ri-global-line font-lg"></i>
+                <!-- Botón de idioma con dropdown -->
+                <li class="relative language-dropdown d-flex gap-1">
+                    
+                    <button id="languageBtn" class="btn control-btn btn-36 w-min gap-1" aria-label="Cambiar idioma">
+                        <i class="ri-translate font-lg"></i>
                         <span id="currentLangFlag" class="font-md">🇬🇧</span>
                         <i class="ri-arrow-down-s-line font-lg"></i>
                     </button>
+
                     <ul class="dropdown-menu" id="languageDropdown">
                         <li onclick="setLanguage('en')">
                             <img src="./staticfiles/icon/flag_us.svg" alt="USA flag" class="flag-icon">
@@ -244,6 +249,7 @@
     <!-- Scripts con renderizado dinamico de cada view y api hiustory -->
     <script src="./staticfiles/js/views/HomeView.js"></script>
     <script src="./staticfiles/js/views/SkillsView.js"></script>
+    <script src="./staticfiles/js/views/ContactView.js"></script>
     <script src="./staticfiles/js/router.js"></script>
 
 

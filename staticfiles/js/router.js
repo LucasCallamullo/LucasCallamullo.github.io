@@ -27,33 +27,6 @@ const ProjectsView = {
     }
 };
 
-const ContactView = {
-    template: /*html*/`
-        <div class="contact-container">
-            <h2 class="roboto-bold font-xxxl">Contacto</h2>
-            <form id="contact-form" class="mt-4">
-                <input type="text" placeholder="Nombre" class="form-input">
-                <input type="email" placeholder="Email" class="form-input mt-2">
-                <textarea placeholder="Mensaje" class="form-input mt-2"></textarea>
-                <button type="submit" class="btn btn-main mt-3">Enviar</button>
-            </form>
-            <button class="btn btn-alt mt-4" data-nav="home">
-                ← Volver al inicio
-            </button>
-        </div>
-    `,
-    
-    onMount: function() {
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Mensaje enviado (demo)');
-            });
-        }
-    }
-};
-
 // 2. DEFINIR RUTAS
 const ROUTES = {
     '/': HomeView,
