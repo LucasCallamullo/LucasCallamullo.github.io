@@ -184,8 +184,8 @@ const HomeView = {
         document.querySelectorAll('.download-cv').forEach(e => {
             const key = e.getAttribute('data-i18n');
             // quitar la key "footer.href_download"
-            if (translations[key]) {
-                e.href = translations[key];
+            if (g_TRANSLATIONS[key]) {
+                e.href = g_TRANSLATIONS[key];
             }
         });
 
