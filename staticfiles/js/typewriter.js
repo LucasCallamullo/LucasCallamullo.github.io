@@ -168,28 +168,3 @@ function initTypewriter() {
         ], 0);
     });
 };
-
-
-
-// ==================== INITIALIZATION ====================
-// Wait for translations to be fully loaded before starting the typewriter
-
-/**
- * Start the typewriter effect only after translations are ready.
- * Listens for the custom event dispatched by the translations module.
- *
-document.addEventListener('translationsLoaded', function onTranslationsReady() {
-    // Remove listener to prevent duplicate execution
-    document.removeEventListener('translationsLoaded', onTranslationsReady);
-    
-    // Small delay to ensure DOM is fully rendered
-    setTimeout(initTypewriter, 200);
-});
-
-// Fallback: if translationsLoaded already fired before this listener was added
-if (document.readyState === 'complete') {
-    // Check if translations are already applied
-    if (document.querySelector('[data-original-text]')) {
-        setTimeout(initTypewriter, 200);
-    }
-} */

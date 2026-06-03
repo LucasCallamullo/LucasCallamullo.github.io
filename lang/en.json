@@ -63,6 +63,9 @@
         "chat_invite": "If you want to chat, my emails are always open!",
         "faster_response": "I'll answer faster if you contact via email.",
         "connection_message": "Connection established. Awaiting your message... :D",
-        "connection_message_mobile": "Connection established. Awaiting your message... :D"
+        "connection_message_mobile": "Connection established. Awaiting your message... :D",
+        "email_success": "Message sent successfully!",
+        "email_error": "Something went wrong. Please try again.",
+        "email_thanks_success": "Thank u!"
     }
 }

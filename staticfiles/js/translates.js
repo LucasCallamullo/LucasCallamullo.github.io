@@ -8,7 +8,7 @@
  */
 
 let currentLang = localStorage.getItem('language') || 'en';
-let translations = {};
+let g_TRANSLATIONS = {};
 
 /**
  * Loads translation JSON file for the specified language.
@@ -26,7 +26,7 @@ async function loadLanguage(lang) {
             throw new Error(`HTTP ${response.status}: Failed to load ${lang}.json`);
         }
         
-        translations = await response.json();
+        g_TRANSLATIONS = await response.json();
 
         // Apply translations to DOM elements
         applyTranslations();
@@ -52,22 +52,22 @@ async function loadLanguage(lang) {
  * - Flat keys: "nav.home" (stored as is in JSON)
  * - Nested keys: "skills.languages" (stored as object.skills.languages)
  * 
- * @param {Object} translations - The translations object
+ * @param {Object} g_TRANSLATIONS - The translations object
  * @param {string} key - The i18n key (e.g., "nav.home" or "skills.languages")
  * @returns {string|undefined} The translated value or undefined
  */
 function getTranslationValue(translations, key) {
-    if (!translations || !key) return undefined;
+    if (!g_TRANSLATIONS || !key) return undefined;
     
     // Try 1: Direct lookup (for flat keys like "nav.home")
-    if (translations[key] !== undefined) {
-        return translations[key];
+    if (g_TRANSLATIONS[key] !== undefined) {
+        return g_TRANSLATIONS[key];
     }
     
     // Try 2: Nested lookup (for keys like "skills.languages")
     const nestedValue = key.split('.').reduce((obj, part) => {
         return obj && obj[part] !== undefined ? obj[part] : undefined;
-    }, translations);
+    }, g_TRANSLATIONS);
     
     return nestedValue;
 }
@@ -89,8 +89,8 @@ function applyTranslations() {
 
         const key = e.getAttribute('data-i18n');
 
-        // Soporte para keys anidadas: "skills.languages" -> translations.skills.languages
-        const value = getTranslationValue(translations, key);
+        // Soporte para keys anidadas: "skills.languages" -> g_TRANSLATIONS.skills.languages
+        const value = getTranslationValue(g_TRANSLATIONS, key);
 
         // quitar la key "footer.href_download"
         if (value) e.href = value;
@@ -102,8 +102,8 @@ function applyTranslations() {
         // Skip download-cv elements (already handled above)
         if (key === 'footer.href_download') return;
 
-        // Soporte para keys anidadas: "skills.languages" -> translations.skills.languages
-        const value = getTranslationValue(translations, key);
+        // Soporte para keys anidadas: "skills.languages" -> g_TRANSLATIONS.skills.languages
+        const value = getTranslationValue(g_TRANSLATIONS, key);
 
         if (value) {
             e.setAttribute('data-original-text', value);
@@ -132,7 +132,7 @@ async function setLanguage(lang) {
 // Load saved language preference when the page starts, regardless of DOM state
 
 /**
- * Initializes the translations module.
+ * Initializes the g_TRANSLATIONS module.
  * Loads the saved language (or default 'en') and dispatches the ready event.
  */
 async function initTranslations() {

@@ -1,41 +1,152 @@
+/**
+ * ================================================================
+ * CONTACT FORM HANDLER - Web3Forms Integration
+ * ================================================================
+ * 
+ * This function handles form submission to Web3Forms API,
+ * a free service that forwards form data to email.
+ * 
+ * Features:
+ *   - Base64-encoded access key (basic obfuscation)
+ *   - Success/error UI feedback via span element
+ *   - Loading state with disabled button
+ *   - i18n support for multilingual messages
+ *   - Graceful error handling with API error messages
+ * 
+ * Security note: The access key is public and rate-limited by Web3Forms.
+ * For production, consider proxying through a backend.
+ * 
+ * @param {HTMLFormElement} form - The form element containing inputs
+ * @param {HTMLElement} spanForm - Element to display success/error messages
+ * 
+ * @returns {Promise<void>}
+ * 
+ * @example
+ * const form = document.querySelector('#contact-form');
+ * const feedbackSpan = document.querySelector('#form-feedback');
+ * sm(form, feedbackSpan);
+ * ================================================================
+ */
 
 
+async function sm(form, spanForm) {
 
-async function sm(form) {
+    // ============================================================
+    // Helper: Render success message in the feedback span
+    // ============================================================
+    /**
+     * Displays a success message with a thank you note
+     * 
+     * @param {HTMLElement} spanForm - Target element to insert the HTML
+     */
+    const renderSuccess = (spanForm) => {
+        // Get translated strings from global translations object
+        const textContact = getTranslationValue(g_TRANSLATIONS, "contact.email_success");
+        const textThanks = getTranslationValue(g_TRANSLATIONS, "contact.email_thanks_success");
+
+        spanForm.innerHTML = /*html*/`
+            <span class="text-console form-md color-console mt-5 ms-2" data-i18n="contact.email_success">
+                ${textContact || 'Message sent successfully!'} 
+            </span>
+
+            <div class="tooltip-container mt-5">
+                <span class="tooltip font-md text-console" data-i18n="contact.email_thanks_success">
+                    ${textThanks || 'Thank u!'}  
+                </span>
+                <i class="ri-mail-check-line icon_cart font-lg"></i>
+            </div>
+        `;
+    };
+
+    // ============================================================
+    // Helper: Render error message in the feedback span
+    // ============================================================
+    /**
+     * Displays an error message (custom or generic)
+     * 
+     * @param {HTMLElement} spanForm - Target element to insert the HTML
+     * @param {Object|null} data - API response data containing error message
+     */
+    const renderError = (spanForm, data = null) => {
+        // Get translated error string
+        const textError = getTranslationValue(g_TRANSLATIONS, "contact.email_error");
+        // Use API error message if available, otherwise fallback to generic
+        const apiError = data?.message || "Something went wrong. Please try again.";
+
+        spanForm.innerHTML = /*html*/`
+            <span class="text-console form-md color-console mt-5 ms-2" data-i18n="contact.email_error">
+                ${textError} ${apiError} 
+            </span>
+        `;
+    };
+
+    // ============================================================
+    // Main submission logic
+    // ============================================================
+
+    // Get the submit button to control its state
     const submitBtn = form.querySelector('button[type="submit"]');
         
+    // ============================================================
+    // Access Key (base64 encoded for basic obfuscation)
+    // ============================================================
+    // Note: This access key is public and rate-limited by Web3Forms.
+    // For production, this should be proxied through a backend.
+    // Key is base64-encoded to avoid plain-text scraping.
+    // Decoding: atob("MDNmYWVlZmMt...") = "03faeefc-7c18-444a-9955-ee540c62dd05"
+    const ACCESS_KEY = atob("MDNmYWVlZmMtN2MxOC00NDRhLTk5NTUtZWU1NDBjNjJkZDA1");
 
+    // Prepare form data
     const formData = new FormData(form);
-    formData.append("access_key", "03faeefc-7c18-444a-9955-ee540c62dd05");
+    formData.append("access_key", ACCESS_KEY);
 
-    const originalText = submitBtn.textContent;
+    // Set loading state
+    const parentContainer = submitBtn.parentElement;
+    parentContainer.originalHtml = parentContainer.innerHTML;
 
-    submitBtn.textContent = "Sending...";
-    submitBtn.disabled = true;
+    // Optional: smooth scroll to form
+    window.scrollBy({ top: 170, behavior: 'smooth' });
+
+    parentContainer.innerHTML = /*html*/`
+        <div class="loadingspinner">
+            <div id="square1"></div>
+            <div id="square2"></div>
+            <div id="square3"></div>
+            <div id="square4"></div>
+            <div id="square5"></div>
+        </div>
+    `
 
     try {
+        // ========================================================
+        // Send request to Web3Forms API
+        // ======================================================== /* 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
             body: formData
         });
 
-        const data = await response.json();
+        const data = await response.json(); 
 
+        // Handle response based on HTTP status
         if (response.ok) {
-            alert("Success! Your message has been sent.");
-            form.reset();
+            renderSuccess(spanForm);
+            // form.reset(); // Uncomment to clear form after successful submission
         } else {
-            alert("Error: " + data.message);
-        }
+            renderError(spanForm, data);
+        } 
+
+        // For testing
+        // renderSuccess(spanForm);
 
     } catch (error) {
-        alert("Something went wrong. Please try again.");
+        // Network error or request failure
+        renderError(spanForm, null);
     } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        // Restore button state regardless of success/failure
+        setTimeout(()=> { parentContainer.innerHTML = parentContainer.originalHtml }, 300)
     }
 }
-
 
 
 const ContactView = {
@@ -55,30 +166,31 @@ const ContactView = {
         <section class="full-bg-secondary pt-4 pb-4" id="contactSection">
             <div class="cont-page py-5 gap-3 d-grid grid-123 w-100">
 
+                <!-- Formulario -->
                 <form class="justify-self-center d-grid grid-122 gap-2 border-secondary border-hover grid-col-span-2 cont__to__animate" 
                     id="contactForm">
 
                     <h2 class="text-console color-console grid-col-all" data-i18n="contact.title">Contact Me</h2>
 
                     <label class="d-flex-col gap-1">
-                        <span data-i18n="contact.name_label">Name:</span>
+                        <span class="text-console font-md text-primary" data-i18n="contact.name_label">Name:</span>
                         <input type="text" name="name" required>
                     </label>
 
                     <label class="d-flex-col gap-1">
-                        <span data-i18n="contact.email_label">Email:</span>
+                        <span class="text-console font-md text-primary" data-i18n="contact.email_label">Email:</span>
                         <input type="email" name="email" required>
                     </label>
 
                     <label class="grid-col-all d-flex-col gap-1">
-                        <span data-i18n="contact.message_label">Message:</span>
+                        <span class="text-console font-md text-primary" data-i18n="contact.message_label">Message:</span>
                         <textarea class="h-150" name="message" required></textarea>
                     </label>
                     
                     <div class="d-grid grid-col-all">
                         <button class="btn btn-main justify-self-center align-center px-3 py-1 gap-1" type="submit">
-                            <span class="text-console font-md" data-i18n="contact.send_button">Send</span>
-                            <i class="ri-send-plane-line font-md"></i>
+                            <span class="text-console font-md-plus" data-i18n="contact.send_button">Send</span>
+                            <i class="ri-send-plane-line font-md-plus"></i>
                         </button>
                     </div>
                 </form>
@@ -143,7 +255,12 @@ const ContactView = {
                 </div>
             </div>
 
-            <div class="full-bg-secondary-dark h-150"> </div>
+            <!--  Span de enviado email -->
+            <div class="full-bg-secondary-dark h-160">
+                <div class="cont-page d-flex gap-2 justify-center align-center" id="spanForm">
+                    
+                </div>
+            </div>
 
             <div class="full-bg-secondary cont-page pt-6 pb-3"> 
             
@@ -181,7 +298,16 @@ const ContactView = {
     
     onMount: function() {
 
+        /**
+         * Title element where typewriter effect will be applied
+         * @type {HTMLElement}
+         */
         const titleElement = document.getElementById('skillsTittle');
+        
+        /**
+         * Description span that will fade in after title typing completes
+         * @type {HTMLElement}
+         */
         const description1 = document.getElementById('skillsSpan');
 
         // Retrieve title text from data attribute or fallback to text content
@@ -189,34 +315,60 @@ const ContactView = {
 
         // Temporarily clear text content while the title is typing
         const desc1Original = description1.textContent;
+        // Clear description text temporarily (will be shown via fade-in later)
         description1.textContent = '';
-
+        
+        // Add initial fade class for smooth entrance animation
         description1.classList.add('fade-init');
 
-        // Start typewriter effect on the title
+        /**
+         * Start typing animation on the title element.
+         * When typing completes, the callback function executes.
+         */
         TYPE_WRITER.typeTitle(titleElement, titleText, () => {
             // Restore original text content
             description1.textContent = desc1Original;
             
-            // Fade in elements sequentially:
-            // Line 1 appears first, then line 2, then buttons
+            /**
+             * Animate elements in sequence:
+             * - description1: fades in after 200ms delay, over 300ms
+             * 
+             * The TYPE_WRITER.showSequential method handles the timing
+             * and CSS class management for each element in the array.
+             */
             TYPE_WRITER.showSequential([
-                { element: description1, delayBefore: 200, duration: 300 }
-            ], 0);
+                { 
+                    element: description1,      // DOM element to animate
+                    delayBefore: 200,           // Milliseconds to wait before animation
+                    duration: 300               // Animation duration in milliseconds
+                }
+            ], 0); // Initial delay before first animation (0ms)
         });
 
-        // animated cards
+        /**
+         * Initialize entrance animation for skill cards.
+         * Typically applies staggered fade-in/scale effects.
+         */
         initSkillCardsAnimation();
 
 
+        /**
+         * Get contact form and its feedback container elements.
+         * These are optional — form may not exist on all pages.
+         */
         const form = document.getElementById('contactForm');
-        if (form) {
+        const spanForm = document.getElementById('spanForm');
+        
+        /**
+         * Bind submit event handler to the contact form if it exists.
+         * Prevents default browser behavior and delegates to custom sm() function.
+         * 
+         * @param {Event} e - Submit event
+         */
+        if (form && spanForm) {
             form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                alert('Mensaje enviado (demo)');
-                
-                // await sm(form)
-
+                e.preventDefault();           // Prevent page reload
+                await sm(form, spanForm);     // Handle form submission with feedback
             });
         }
     }
