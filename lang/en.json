@@ -37,7 +37,7 @@
     },
 
     "contact": {
-        "ping": "ping contact.server",
+        "ping": "    ping contact.server",
         "establishing": "Establishing connection to communication endpoint",
         "title": "Contact Me",
         "name_label": "Name:",
@@ -67,5 +67,39 @@
         "email_success": "Message sent successfully!",
         "email_error": "Something went wrong. Please try again.",
         "email_thanks_success": "Thank u!"
+    },
+
+    "about": {
+        "ping": "    cat about.txt",
+        "establishing": "Displaying professional background",
+        
+        "p_1": "Hi! I'm Lucas Callamullo, a backend / full stack developer based in Córdoba, Argentina.",
+        "p_2": "I've been fascinated by programming logic ever since I started modifying game mods. I probably spend more time than I should coding some idea.",
+        "p_3": "Over the last 3 years, I built my own RoadMap — a self-taught Full-Stack journey focused on building real-world applications from scratch. Alongside that, I'm currently in my fourth year of Systems Engineering at UTN.",
+        "p_4": "Teaching was one of the experiences I enjoyed the most. What I loved about this RoadMap was teaching programming (Algorithms and Paradigms) for university courses over 2 years. It taught me how to break down complex ideas into plain language and introduced me to amazing people who are now friends.",
+        "p_5": "My technical experience covers ",
+        "p_6": "To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. I love that code is our medium to turn any idea into reality.",
+
+        "stats_1": "Projects: ",
+        "stats_2": "4+ Completed",
+        "stats_3": "DevOps: ",
+        "stats_4": "Currently: ",
+        "stats_5": "4th year Systems Eng.",
+        "stats_6": "Location: ",
+        "stats_7": "University: ",
+
+        "timeline": "Career Timeline",
+        "sub_timeline": "From university assignments to robust systems with professional architecture"
+    },
+
+    "external": {
+        "code": "Code",
+        "external": "External",
+        "youtube": "YouTube",
+        "github": "View on GitHub",
+        "youtube_playlist": "YouTube Playlist",
+        "youtube_channel": "YouTube Channel",
+        "university": "University Page"
     }
+ 
 }

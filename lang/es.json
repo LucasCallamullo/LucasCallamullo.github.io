@@ -37,7 +37,7 @@
     },
 
     "contact": {
-        "ping": "ping contacto.servidor",
+        "ping": "    ping contacto.servidor",
         "establishing": "Estableciendo conexión con el punto de comunicación",
         "title": "Contáctame",
         "name_label": "Nombre:",
@@ -67,5 +67,38 @@
         "email_success": "Mensaje enviado exitosamente!",
         "email_error": "Algo salió mal. Por favor, inténtalo de nuevo.",
         "email_thanks_success": "Gracias!"
+    },
+
+    "about": {
+        "ping": "    cat about.txt",
+        "establishing": "Displaying professional background",
+
+        "p_1": "Hola! Soy Lucas Callamullo, desarrollador backend / full stack que vive en Córdoba.",
+        "p_2": "Me fascina la lógica de programación desde que modificaba mods de juegos, y probablemente paso más tiempo del que debería programando alguna idea.",
+        "p_3": "En los últimos 3 años, hice mi propio RoadMap — un viaje Full-Stack autodidacta enfocado en desarrollar aplicaciones reales desde cero. Sumado a estar cursando cuarto año de la carrera Ingeniería en Sistemas en la UTN",
+        "p_4": "Dar clases fue una de las experiencias que más disfruté. Una experiencia que amé de este RoadMap fue: Dar clases de programación (Algoritmos y Paradigmas) de materias de mi universidad durante 2 años. Me enseñó a bajar ideas complejas a lenguaje común y conocer gente hermosa que hoy son amistades.",
+        "p_5": "Mi experiencia técnica cubre ",
+        "p_6": "Para mí, programar es simplificar la vida mediante código — aunque parece imposible replicar el azar de la vida. Me encanta que sea nuestro medio para convertir cualquier idea en realidad.",
+        
+        "stats_1": "Projects: ",
+        "stats_2": "4+ Completos",
+        "stats_3": "DevOps: ",
+        "stats_4": "Actualidad: ",
+        "stats_5": "4° año Ing. Sistemas",
+        "stats_6": "Residencia: ",
+        "stats_7": "Universidad: ",
+
+        "timeline": "Experiencia Timeline",
+        "sub_timeline": "De trabajos de facultad a sistemas robustos con arquitectura profesional"
+    },
+
+    "external": {
+        "code": "Código",
+        "external": "Sitio",
+        "youtube": "YouTube",
+        "github": "Ver en GitHub",
+        "youtube_playlist": "Lista de YouTube",
+        "youtube_channel": "Canal de YouTube",
+        "university": "Página de la Universidad"
     }
 }
