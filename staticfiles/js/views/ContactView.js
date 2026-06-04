@@ -154,7 +154,8 @@ const ContactView = {
         <div class="full-bg-secondary-dark d-flex-col pt-6 pb-5 gap-3 h-200">
             <div class="cont-page d-flex gap-1 justify-start align-center text-start">
                 <span class="roboto-regular font-xl color-console"> $ </span>
-                <h2 class="text-console font-xl text-primary typewriter-cursor" id="skillsTittle" data-i18n="contact.ping">ping contact.server</h2>
+                <h2 class="text-console font-xl text-primary typewriter-cursor" 
+                    id="skillsTittle" data-i18n="contact.ping">   ping contact.server</h2>
             </div>
 
             <span class="cont-page roboto-regular ms-3 font-md text-secondary" id="skillsSpan" data-i18n="contact.establishing">
@@ -167,8 +168,8 @@ const ContactView = {
             <div class="cont-page py-5 gap-3 d-grid grid-123 w-100">
 
                 <!-- Formulario -->
-                <form class="justify-self-center d-grid grid-122 gap-2 border-secondary border-hover grid-col-span-2 cont__to__animate" 
-                    id="contactForm">
+                <form class="justify-self-center d-grid grid-122 gap-2 border-secondary border-hover 
+                    grid-col-span-2 def__container cont__to__animate" id="contactForm">
 
                     <h2 class="text-console color-console grid-col-all" data-i18n="contact.title">Contact Me</h2>
 
@@ -195,7 +196,7 @@ const ContactView = {
                     </div>
                 </form>
 
-                <div class="contact-container gap-1 border-bot-header cont__to__animate">
+                <div class="def__container d-flex-col gap-1 border-bot-header cont__to__animate">
                     <h3 class="text-console color-console" data-i18n="contact.availability_title">Availability Status</h3>
 
                     <span class="online-status">
@@ -297,6 +298,10 @@ const ContactView = {
     `,
     
     onMount: function() {
+
+        applyTranslations();
+
+
 
         /**
          * Title element where typewriter effect will be applied

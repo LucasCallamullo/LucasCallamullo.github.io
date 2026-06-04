@@ -31,6 +31,7 @@ const ProjectsView = {
 const ROUTES = {
     '/': HomeView,
     '/home': HomeView,
+    '/about': AboutView,
     '/projects': ProjectsView,
     '/contact': ContactView,
     '/skills': SkillView
@@ -39,6 +40,7 @@ const ROUTES = {
 const ROUTE_TO_NAV = {
     '/': 'home',
     '/home': 'home',
+    '/about': 'about',
     '/projects': 'projects',
     '/contact': 'contact',
     '/skills': 'skills'
@@ -81,7 +83,7 @@ function renderView(path, addToHistory = true) {
     
     setTimeout(function() {
         // Renderizar nuevo template
-        appRoot.innerHTML = ViewComponent.template;
+        appRoot.innerHTML = ViewComponent.template.trim();
         
         // Ejecutar mount del nuevo componente
         if (ViewComponent.onMount) {

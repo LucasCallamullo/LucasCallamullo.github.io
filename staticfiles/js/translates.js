@@ -7,7 +7,7 @@
  * Dispatches a 'translationsLoaded' event when translations are ready.
  */
 
-let currentLang = localStorage.getItem('language') || 'en';
+let CURRENT_LANG = localStorage.getItem('language') || 'en';
 let g_TRANSLATIONS = {};
 
 /**
@@ -28,18 +28,25 @@ async function loadLanguage(lang) {
         
         g_TRANSLATIONS = await response.json();
 
-        // Apply translations to DOM elements
-        applyTranslations();
-
         // Update current language and persist to localStorage
-        currentLang = lang;
+        CURRENT_LANG = lang;
         localStorage.setItem('language', lang);
-        
+
         // Update flag icon in language switcher button
         updateLanguageFlag(lang);
 
+
+        // stupid about view functions
+        renderClassicTimeline();
+
+        // Apply translations to DOM elements
+        applyTranslations({
+            'refreshTimeline': () => renderButtonsOnTimeline()
+        });
+
         // Disparar evento ESPECÍFICO para la barra deslizante
         window.dispatchEvent(new CustomEvent('slidingNavUpdate'));
+
 
     } catch (error) {
         console.error('Error loading language:', error);
@@ -83,40 +90,69 @@ function updateLanguageFlag(lang) {
     `;
 }
 
-function applyTranslations() {
 
+/**
+ * Applies translations to all DOM elements with data-i18n attributes
+ * 
+ * @param {Object} callbacks - Optional dictionary of functions to execute after translations
+ * @param {Function} callbacks[key] - Function to execute, receives no parameters
+ * 
+ * @example
+ * applyTranslations({
+ *     'refreshTimeline': () => renderTimeline(CURRENT_LANG),
+ *     'updateCounter': () => console.log('Translations done')
+ * });
+ */
+function applyTranslations(callbacks = {}) {
+
+    // FIRST PASS: Handle download links (set href attribute)
     document.querySelectorAll('.download-cv').forEach(e => {
 
         const key = e.getAttribute('data-i18n');
 
-        // Soporte para keys anidadas: "skills.languages" -> g_TRANSLATIONS.skills.languages
+        // Resolve nested keys: "skills.languages" -> g_TRANSLATIONS.skills.languages
         const value = getTranslationValue(g_TRANSLATIONS, key);
 
-        // quitar la key "footer.href_download"
+        // Remove the key "footer.href_download" - only set if value exists
         if (value) e.href = value;
     });
+    
 
+    // SECOND PASS: Handle all other translatable elements
     document.querySelectorAll('[data-i18n]').forEach(e => {
         const key = e.getAttribute('data-i18n');
 
-        // Skip download-cv elements (already handled above)
+        // Skip download-cv elements (already handled in first pass)
         if (key === 'footer.href_download') return;
 
-        // Soporte para keys anidadas: "skills.languages" -> g_TRANSLATIONS.skills.languages
+        // Resolve nested keys: "skills.languages" -> g_TRANSLATIONS.skills.languages
         const value = getTranslationValue(g_TRANSLATIONS, key);
 
         if (value) {
+            // Store original text for debugging or potential revert functionality
             e.setAttribute('data-original-text', value);
             
+            // Special case: title element with typewriter animation
+            // Preserve the original text content to avoid breaking the typewriter effect
             if (e.id === 'title') {
                 if (!e.classList.contains('typewriter-cursor')) {
                     e.textContent = value;
                 }
             } else {
+                // Standard elements: just update the text content
                 e.textContent = value;
             }
         }
     });
+
+    // Execute all callback functions from the dictionary
+    if (callbacks && typeof callbacks === 'object') {
+        for (const [key, fn] of Object.entries(callbacks)) {
+            if (typeof fn === 'function') {
+                fn();
+            }
+        }
+    }
 }
 
 /**
@@ -136,7 +172,7 @@ async function setLanguage(lang) {
  * Loads the saved language (or default 'en') and dispatches the ready event.
  */
 async function initTranslations() {
-    await loadLanguage(currentLang);
+    await loadLanguage(CURRENT_LANG);
 
     // Small delay to ensure DOM is fully rendered
     setTimeout(initTypewriter, 150); 

@@ -79,7 +79,7 @@ function renderSkillsFromConfig() {
         return /*html*/`
             <div class="card-skills">
                 <div class="card-top-border d-flex justify-between align-center px-3 py-2">
-                    <h3 class="d-flex font-md-plus color-console text-console tech-skill" data-i18n="${i18nKey}">
+                    <h3 class="d-flex font-md-plus color-console text-console tech-skill cont__to__animate" data-i18n="${i18nKey}">
                         ${categoryTitle}
                     </h3>
                     <div class="d-flex gap-1">
@@ -152,7 +152,7 @@ const SkillView = {
         <div class="full-bg-secondary-dark d-flex-col pt-6 pb-5 gap-3 h-200">
             <div class="cont-page d-flex gap-1 justify-start align-center text-start">
                 <span class="roboto-regular font-xl color-console"> $ </span>
-                <h2 class="text-console font-xl text-primary typewriter-cursor" id="skillsTittle">ls -la skills/</h2>
+                <h2 class="text-console font-xl text-primary typewriter-cursor" id="skillsTittle">   ls -la skills/</h2>
             </div>
 
             <span class="cont-page roboto-regular ms-3 font-md text-secondary" id="skillsSpan" data-i18n="skills.exploring">
@@ -165,10 +165,10 @@ const SkillView = {
             <div class="cont-page py-5 d-grid gap-2 grid-122">
 
                 <div class="d-flex-col gap-2 grid-col-all justify-self-center justify-center align-center pb-4">
-                    <h2 class="text-console font-lg color-console" data-i18n="skills.featured">
+                    <h2 class="text-console font-lg color-console cont__to__animate" data-i18n="skills.featured">
                         Featured Technologies
                     </h2>
-                    <span class="text-console text-secondary font-md" data-i18n="skills.subFeatured"> 
+                    <span class="text-console text-secondary font-md cont__to__animate" data-i18n="skills.subFeatured"> 
                         Tooling and stacks I have worked with
                     </span>
                 </div>
@@ -180,6 +180,9 @@ const SkillView = {
 
     /* funcion que se ejecuta al terminar el renderizado del anterior html */ 
     onMount: function() {
+
+        applyTranslations();
+        
 
         const titleElement = document.getElementById('skillsTittle');
         const description1 = document.getElementById('skillsSpan');

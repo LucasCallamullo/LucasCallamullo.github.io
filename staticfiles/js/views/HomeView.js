@@ -110,9 +110,7 @@ const HomeView = {
 
                 <!-- texto effect typewriter -->
                 <h1 class="text-console font-xxxxl mt-3 text-center mx-auto typewriter-cursor" 
-                    id="title" data-i18n="title">
-                    Lucas Callamullo
-                </h1>
+                    id="title" data-i18n="title">        Lucas Callamullo</h1>
                 <h2 class="text-console font-xxxl mt-2 text-center mx-auto prompt-console" id="subtitle" data-i18n="subtitle">
                     Software Engineer
                 </h2>

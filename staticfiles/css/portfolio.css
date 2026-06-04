@@ -70,6 +70,10 @@
     font-weight: 700;
 }
 
+.color-main-light {
+    color: var(--main-light-color);
+}
+
 .bold-console {
     font-weight: bolder;
     color: var(--console-color);
@@ -93,7 +97,12 @@
     min-height: calc(100vh - var(--height-header));
 }
 
-
+.def__container {
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-cont);
+    border-radius: 20px;
+    padding: 20px;
+}
 
 /* CSS para el cursor */
 .font-xxxxl {
@@ -120,7 +129,6 @@
 .blinking-underscore {
     animation: blinkUnderscore 2s step-end infinite;
     color: var(--console-color);
-    display: inline-block;
 }
 
 @keyframes blinkUnderscore {
@@ -880,29 +888,6 @@
 
 
 /* CONTACT FORM */
-
-
-
-#contactForm {
-    background-color: var(--bg-secondary-dark);
-    border: 1px solid var(--border-cont);
-    border-radius: 20px;
-    padding: 28px;
-}
-
-
-.contact-container {
-    background-color: var(--bg-secondary-dark);
-    border: 1px solid var(--border-cont);
-    border-radius: 20px;
-    padding: 28px;
-
-    display: flex;
-    flex-direction: column;
-}
-
-
-
 .btn-tag-effect {
   position: relative;
   background: var(--text-primary);
@@ -963,20 +948,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* card hacia arriba de contact */
 .contact_cont {
-
   width: 100%;
   height: 250px;
   background-color: var(--bg-secondary-dark);
@@ -985,8 +958,6 @@
   
   position: relative;
   transition-duration: .5s;
-  
-
 }
 
 .contact_cont_title {
@@ -1393,4 +1364,175 @@
     transform: scale(1.0);
     opacity: 1.0;
   }
+}
+
+
+
+.about__grid {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+}
+
+
+
+/* --- ESTILO 1: TIMELINE VERTICAL CLÁSICO (línea central) --- */
+.timeline-classic {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.timeline-classic::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 3px;
+    height: calc(100% + 20px);
+    /* background: linear-gradient(to bottom, #9bc0d4, #2c5f7a, #9bc0d4);
+    background: linear-gradient(to bottom, var(--grad-start), var(--grad-end), var(--grad-start));  */
+    background: var(--grad-start);
+    border-radius: 4px;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+    position: relative;
+    margin-bottom: 0.5rem;
+    width: 50%;
+}
+
+.timeline-item:nth-child(even) {
+    align-self: flex-end;
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: 30px;
+    margin-left: 50%;
+}
+
+.timeline-content {
+    background: var(--bg-secondary-dark);
+    border: 1px solid var(--border-cont);
+
+    border-radius: 1.25rem;
+    padding: 1.2rem 1.5rem;
+    
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-header);
+}
+
+.timeline-date {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    background: var(--bg-primary);
+    padding: 0.2rem 0.8rem;
+    border-radius: 30px;
+}
+
+
+.timeline-icon {
+    position: absolute;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--border-header);
+    border: 3px solid var(--border-header);
+
+    box-shadow: 0 0 8px var(--console-color);
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.timeline-item:nth-child(odd) .timeline-icon {
+    right: -20px;
+}
+
+.timeline-item:nth-child(even) .timeline-icon {
+    left: -20px;
+}
+
+/* Responsive clásico */
+@media (max-width: 768px) {
+    .timeline-classic::before {
+        left: 20px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 0;
+        justify-content: flex-start;
+    }
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+        padding-left: 50px;
+    }
+    .timeline-item:nth-child(odd) .timeline-icon,
+    .timeline-item:nth-child(even) .timeline-icon {
+        left: 0px;
+        right: auto;
+    }
+    .timeline-item:nth-child(odd) {
+        padding-right: 0;
+    }
+    .timeline-content {
+        width: 100%;
+    }
+}
+
+/* effects button timeline */
+.btn-timeline {
+  width: min-content;
+  padding: 16px 20px;
+  position: relative;
+  height: 2em;
+  border: 3px ridge var(--console-color);
+  outline: none;
+  transition: 1s;
+  border-radius: 0.3em;
+}
+
+.btn-timeline::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: var(--bg-secondary-dark);
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.btn-timeline::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: var(--bg-secondary-dark);
+  transition: 0.5s;
+}
+
+.btn-timeline:hover::before, .btn-timeline:hover::after {
+  transform: scale(0)
+}
+
+.btn-timeline:hover {
+  box-shadow: inset 0px 0px 25px var(--console-color);
 }
