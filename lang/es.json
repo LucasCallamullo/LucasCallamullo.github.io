@@ -102,11 +102,14 @@
         "university": "Página de la Universidad"
     },
 
-
     "projects": {
         "ping": "    docker ps -a/",
-        "exploring": "Listing deployed projects and applications",
-        "featured": "Featured Technologies",
-        "subFeatured": "Tooling and stacks I have worked with"
+        "exploring": "Listado de proyectos y aplicaciones desplegados",
+        "featured": "Proyectos Destacados",
+        "subFeatured": "Repositorios documentados y demos desplegadas en una VPS",
+        "move_title": "Más en GitHub",
+        "move_span_1": "Gran parte de mi progreso en distintos proyectos (backend, frontend, Python, Java) está documentado en mi GitHub",
+        "move_span_2": "Experimentos personales, aplicaciones y proyectos secundarios están en GitHub.",
+        "move_btn": "Contactar"
     }
 }

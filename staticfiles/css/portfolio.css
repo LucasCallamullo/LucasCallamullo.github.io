@@ -1646,3 +1646,112 @@
 }
 
 
+
+
+
+
+
+/* Animación de salida para transiciones entre vistas */
+.page-exit {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+/* Transición de entrada para nuevos elementos (opcional) */
+.page-enter {
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn_glass_glow {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  background-color: rgb(0 107 179);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white-color);
+  border: 3px solid #ffffff4d;
+  outline: none;
+  overflow: hidden;
+}
+
+.btn_glass_glow i {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn_glass_glow:hover i {
+  transform: translate(-4px);
+}
+
+.btn_glass_glow:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.btn_glass_glow:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.btn_glass_glow::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+
+.bg_cont_projects_move {
+    background-color: var(--bg-primary);
+}

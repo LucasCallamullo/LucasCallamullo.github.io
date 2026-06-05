@@ -44,19 +44,27 @@ function renderView(path, addToHistory = true) {
         console.error('No se encontró el elemento app-root');
         return;
     }
+
+    // Scroll al tope con animación suave
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     
     // Limpiar vista anterior si tiene onDestroy
     if (currentView && currentView.onDestroy) {
         currentView.onDestroy();
     }
+
+    // Agregar clase de salida para animación (opcional)
+    appRoot.classList.add('page-exit');
     
-    // Fade out
-    appRoot.style.opacity = '0';
-    appRoot.style.transition = 'opacity 0.2s ease';
     
     setTimeout(function() {
         // Renderizar nuevo template
         appRoot.innerHTML = ViewComponent.template.trim();
+
+
+        appRoot.classList.remove('page-exit');
+
         
         // Ejecutar mount del nuevo componente
         if (ViewComponent.onMount) {
@@ -86,6 +94,10 @@ function renderView(path, addToHistory = true) {
         // Disparar evento personalizado (útil para analytics)
         const event = new CustomEvent('viewchanged', { detail: { path: normalizedPath } });
         document.dispatchEvent(event);
+
+
+        // Reforzar scroll al tope (por si el contenido es largo)
+        window.scrollTo({ top: 0, behavior: 'instant' });
 
     }, 150);
 }

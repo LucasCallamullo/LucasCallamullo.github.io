@@ -105,8 +105,12 @@
     "projects": {
         "ping": "    docker ps -a/",
         "exploring": "Listing deployed projects and applications",
-        "featured": "Featured Technologies",
-        "subFeatured": "Tooling and stacks I have worked with"
+        "featured": "Featured Projects",
+        "subFeatured": "Documented repositories and demos deployed on a VPS",
+        "move_title": "More on GitHub",
+        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
+        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
+        "move_btn": "Get In Touch"
     }
  
 }

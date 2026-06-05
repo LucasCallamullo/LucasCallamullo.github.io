@@ -5,8 +5,8 @@ const projectsData = [
     {
         id: "1",
         group: ["Back-End", "Front-End", "DevOps", "SQL"],
-        date_es: "2024 - En progreso",
-        date_en: "2024 - In Progress",
+        date_es: "2024 - \nEn progreso",
+        date_en: "2024 - \nIn Progress",
         title_es: "E-commerce Engine",
         title_en: "E-commerce Engine",
         icon: "ri-store-3-line",
@@ -29,8 +29,8 @@ const projectsData = [
     {
         id: "4",
         group: ["Back-End", "DevOps", "SQL"],
-        date_es: "2025 - En progreso",
-        date_en: "2025 - In Progress",
+        date_es: "2025 - \nEn progreso",
+        date_en: "2025 - \nIn Progress",
         title_es: "Microservicios · Gestión de flotas",
         title_en: "Microservices · Fleet Management",
         icon: "ri-git-merge-line",
@@ -51,8 +51,8 @@ const projectsData = [
     {
         id: "3",
         group: ["Back-End", "SQL"],
-        date_es: "2026 - En progreso",
-        date_en: "2026 - In Progress",
+        date_es: "2026 - \nEn progreso",
+        date_en: "2026 - \nIn Progress",
         title_es: "Student Forum · API con JWT",
         title_en: "Student Forum · JWT Auth API",
         icon: "ri-nodejs-line",
@@ -218,10 +218,10 @@ const ProjectsView = {
 
                 <div class="d-flex-col gap-2 grid-col-all justify-self-center justify-center align-center pb-4">
                     <h2 class="text-console font-lg color-console cont__to__animate" data-i18n="projects.featured">
-                        Featured Technologies
+                        My Personal Projects
                     </h2>
                     <span class="text-console text-secondary font-md cont__to__animate" data-i18n="projects.subFeatured"> 
-                        Tooling and stacks I have worked with
+                        Some of my documented repositories and demos of my projects are deployed on a VPS.
                     </span>
                 </div>
 
@@ -231,6 +231,43 @@ const ProjectsView = {
 
             </div>
         </section>
+
+
+        <!--- contact to move --> 
+        <div class="full-bg-secondary-dark d-flex-col justify-center gap-3">
+
+            <div class="cont-page py-5 d-grid">
+
+                <div class="def__container p-3 d-flex-col justify-center align-center justify-self-center bg_cont_projects_move">
+                    <h3 class="text-console color-console font-xl" data-i18n="projects.move_title"> More on GitHub </h3>
+
+                    <span class="text-console font-md text-secondary mt-2" data-i18n="projects.move_span_1">
+                        Most of my work lives in private repos at MercadoLibre and previous employers. 
+                    </span>
+                    <span class="text-console font-md text-secondary" data-i18n="projects.move_span_2">
+                        Personal experiments, dotfiles, and side projects are on GitHub. 
+                    </span>
+
+                    <div class="d-flex gap-2 justify-center mt-3">
+                        <a class="btn gap-1 px-3 py-2 btn_glass_glow" href="https://github.com/LucasCallamullo" target="_blank"> 
+                            <i class="ri-github-line font-md-plus"></i>
+                            <span class="font-md text-console bolder">
+                                GitHub
+                            </span> 
+                        </a>
+                        <button class="btn gap-1 px-3 py-2 btn_glass_glow" data-nav="contact"> 
+                            <i class="ri-mail-send-line font-md-plus"></i>
+                            <span class="font-md text-console bolder"  data-i18n="projects.move_btn">
+                                Get In Touch
+                            </span> 
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="full-bg-secondary  h-100"> </div>
     `,
 
     
@@ -268,5 +305,3 @@ const ProjectsView = {
         initSkillCardsAnimation();
     }
 };
-
-

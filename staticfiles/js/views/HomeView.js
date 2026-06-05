@@ -123,7 +123,7 @@ const HomeView = {
                 </span>
 
                 <!-- buttons stuff -->
-                <div class="d-flex-col-row gap-3 mt-3" id="main-buttons">
+                <div class="d-flex-col-row gap-3 mt-3" id="main-buttons" data-nav="projects">
                     <button class="btn gap-1 btn-main px-3 py-2">
                         <i class="ri-code-s-slash-line font-lg fw-normal"></i>
                         <span data-i18n="button.projects" class="font-md">View Projects</span>
@@ -134,7 +134,7 @@ const HomeView = {
                         <span data-i18n="button.cv" class="font-md">Download CV</span>
                     </a>
 
-                    <button class="btn gap-1 btn-main px-3 py-2">
+                    <button class="btn gap-1 btn-main px-3 py-2" data-nav="contact">
                         <i class="ri-send-plane-fill font-lg fw-normal"></i>
                         <span data-i18n="button.contact" class="font-md">Contact</span>
                     </button>
@@ -197,4 +197,3 @@ const HomeView = {
         HomeView.firstTypeWriter = true;
     }
 };
-
