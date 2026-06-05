@@ -41,7 +41,9 @@ async function loadLanguage(lang) {
 
         // Apply translations to DOM elements
         applyTranslations({
-            'refreshTimeline': () => renderButtonsOnTimeline()
+            'refreshTimeline': () => renderButtonsOnTimeline(),    // from ABOUT SECTION
+            'renderProjects': () => renderProjects(),           // from PROJECTS SECTION
+            'animate': () => initSkillCardsAnimation()            // from SKILLS SECTION
         });
 
         // Disparar evento ESPECÍFICO para la barra deslizante

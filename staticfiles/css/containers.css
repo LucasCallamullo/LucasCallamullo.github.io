@@ -29,6 +29,11 @@
     display: flex;    /* Convierte el elemento en contenedor flexible (hijos en horizontal) */
 }
 
+.d-flex-wrap { 
+    display: flex;    /* Convierte el elemento en contenedor flexible (hijos en horizontal al quedarse sin lugar continua abajo) */
+    flex-wrap: wrap;
+}
+
 /* Activa Flexbox en modo columna vertical (apila elementos uno abajo del otro) */
 .d-flex-col { 
     display: flex;              /* Activa Flexbox */

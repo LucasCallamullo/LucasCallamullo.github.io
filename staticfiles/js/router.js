@@ -1,33 +1,6 @@
 // js/router.js - SIN imports/exports, todo global
 
-// 1. DEFINIR TUS VISTAS COMO OBJETOS GLOBALES
-const ProjectsView = {
-    template: `
-        <div class="projects-container">
-            <h2 class="roboto-bold font-xxxl">Mis Proyectos</h2>
-            <div class="projects-grid mt-4">
-                <div class="project-card">
-                    <h3>Proyecto 1</h3>
-                    <p>Descripción del proyecto...</p>
-                </div>
-                <div class="project-card">
-                    <h3>Proyecto 2</h3>
-                    <p>Descripción del proyecto...</p>
-                </div>
-            </div>
-            <button class="btn btn-alt mt-4" data-nav="home">
-                ← Volver al inicio
-            </button>
-        </div>
-    `,
-    
-    onMount: function() {
-        console.log('Vista de proyectos cargada');
-        // Aquí puedes cargar proyectos desde una API
-    }
-};
-
-// 2. DEFINIR RUTAS
+// DEFINIR RUTAS
 const ROUTES = {
     '/': HomeView,
     '/home': HomeView,

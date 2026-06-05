@@ -100,6 +100,13 @@
         "youtube_playlist": "YouTube Playlist",
         "youtube_channel": "YouTube Channel",
         "university": "University Page"
+    },
+
+    "projects": {
+        "ping": "    docker ps -a/",
+        "exploring": "Listing deployed projects and applications",
+        "featured": "Featured Technologies",
+        "subFeatured": "Tooling and stacks I have worked with"
     }
  
 }
