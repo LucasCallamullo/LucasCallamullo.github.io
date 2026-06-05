@@ -82,8 +82,8 @@
 
     /* ========== TAMAÑOS DE FUENTE ========== */
     /* Escala en rem (relativo al root, 1rem = 16px por defecto) */
-    --font-x-small: 0.5rem;      /* 12px */
-    --font-small: 0.75rem;       /* 14px */
+    --font-x-small: 0.75rem;      /* 12px */
+    --font-small: 0.875rem;       /* 14px */
     --font-normal: 1rem;          /* 16px (tamaño base) */
     --font-normal-plus: 1.25rem;   /* 16px (tamaño base) */
     --font-large: 1.5rem;        /* 20px */

@@ -29,6 +29,15 @@
 
     --grad-start: #11998e;  
     --grad-end: #38ef7d;     
+
+    /* cards porjects */
+    --btn-blue-border: rgba(59, 130, 246, 0.12);
+    --btn-blue-text: #93c5fd;
+    --btn-blue-hover-bg: rgba(59, 130, 246, 0.25);
+
+    --bg-tech-tag: rgba(16, 185, 129, 0.1);
+    --bg-tech-tag-text: #6ee7b7;
+    --bg-tech-tag-hover: rgba(16, 185, 129, 0.2);
 }
 
 .light-mode { 
@@ -51,8 +60,18 @@
     --grad-start: #10b981;  
     --grad-end: #059669;      
 
-}
+    /* cards porjects */
+    --btn-blue-border: rgba(37, 99, 235, 0.08);
+    --btn-blue-text: #1e40af;
+    --btn-blue-hover-bg: rgba(37, 99, 235, 0.15);
 
+    
+
+
+    --bg-tech-tag: rgba(5, 150, 105, 0.08);
+    --bg-tech-tag-text: #065f46;
+    --bg-tech-tag-hover: rgba(5, 150, 105, 0.15);
+}
 
 /* Clases reutilizables */
 .roboto-regular {
@@ -356,7 +375,6 @@
     border-radius: 12px;
     padding: 15px 15px 15px 15px;
     border: 1px solid var(--text-secondary);
-    /* box-shadow: 0 8px 32px var(--bg-primary); */
     width: 100%;
     margin: 0 auto;
 
@@ -409,7 +427,6 @@
   height: 20em;
   left: -5em;
   text-align: center;
-  transition: box-shadow 0.5s ease-out;
   z-index: -1;
 }
 
@@ -418,9 +435,6 @@
   border: 1px solid var(--console-color);
 }
 
-.footer-btn-cv:hover::before {
-  box-shadow: inset 0 0 0 10em var(--console-color);
-}
  
 /* efecto para el texto de los bottones del footer que hacen de href */
 .btn-foot-ref:hover .text-ref {
@@ -877,6 +891,7 @@
 }
 
 .h-200 { height: 200px; }
+.h-180 { height: 180px; }
 .h-160 { height: 160px; }
 .h-150 { height: 150px; }
 .h-100 { height: 100px; }
@@ -1536,3 +1551,98 @@
 .btn-timeline:hover {
   box-shadow: inset 0px 0px 25px var(--console-color);
 }
+
+
+
+
+
+/* CSS FOR PROJECTSVIEW PROJECTS_VIEW */
+
+ /* tarjeta moderna  height: 420px;*/
+.project-card {
+    background-color: var(--bg-secondary-dark);
+    border: 1px solid var(--border-cont);
+    border-radius: 20px;
+    /* backdrop-filter: blur(2px); */
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--console-color);
+}
+
+
+/* header de la card con fecha e ícono */
+.card_header {
+    height: 200px;
+    position: relative;
+    border-bottom: 1px solid var(--bg-primary);
+}
+
+.card_header_img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card_header_date {
+    background: transparent;
+    border-radius: 20px;
+    color: var(--accent-color);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.card_header_tags {
+    background: transparent;
+    color: var(--border-header);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.card_header_tags_tag {
+    background: rgba(40, 80, 60, 0.15);
+    border-radius: 20px;
+    padding: 8px 12px;
+}
+
+
+/* tecnologías (badges) */
+.tech_tag {
+    background: var(--bg-tech-tag);
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: var(--bg-tech-tag-text);
+    letter-spacing: 0.01em;
+    transition: all 0.2s;
+}
+
+.tech_tag:hover {
+    background: var(--bg-tech-tag-hover);
+    transform: translateY(-4px);
+}
+
+
+/* botones de acción cards */
+
+.btn_card {
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.2s;
+    background: var(--btn-blue-text);
+    border: 1px solid var(--btn-blue-border);
+    color: var(--bg-primary);
+}
+
+
+.btn_card:hover {
+    background: var(--btn-blue-hover-bg);
+    transform: translateY(-8px);
+    color: var(--text-primary);
+}
+
+

@@ -151,8 +151,8 @@ async function sm(form, spanForm) {
 
 const ContactView = {
     template: /*html*/`
-        <div class="full-bg-secondary-dark d-flex-col pt-6 pb-5 gap-3 h-200">
-            <div class="cont-page d-flex gap-1 justify-start align-center text-start">
+        <div class="full-bg-secondary-dark d-flex-col justify-center gap-3 h-180">
+            <div class="cont-page d-flex gap-1 align-center">
                 <span class="roboto-regular font-xl color-console"> $ </span>
                 <h2 class="text-console font-xl text-primary typewriter-cursor" 
                     id="skillsTittle" data-i18n="contact.ping">   ping contact.server</h2>
@@ -321,7 +321,7 @@ const ContactView = {
         // Temporarily clear text content while the title is typing
         const desc1Original = description1.textContent;
         // Clear description text temporarily (will be shown via fade-in later)
-        description1.textContent = '';
+        description1.textContent = '_';
         
         // Add initial fade class for smooth entrance animation
         description1.classList.add('fade-init');

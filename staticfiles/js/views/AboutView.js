@@ -118,6 +118,7 @@ const classicData = [
 // ========== FUNCIÓN PARA RENDER TIMELINE CLÁSICO ==========
 function renderButtonsOnTimeline() {
     const containers = document.querySelectorAll('.cont-btns-external-timeline');
+    if (!containers) return;
     containers.forEach(cont => {
         // Obtener referencias externas usando el ID del item
         const externalRefs = EXTERNAL_REFERNCES[cont.dataset.id] || [];
@@ -142,8 +143,10 @@ function renderButtonsOnTimeline() {
 
 
 function renderClassicTimeline() {
-    let html = '';
+    const cont = document.getElementById('classicTimeline');
+    if (!cont) return;
 
+    let html = '';
     let toFor = (CURRENT_LANG === 'en' ? classicDataEng : classicData);
     toFor.forEach((item, idx) => {
 
@@ -174,7 +177,6 @@ function renderClassicTimeline() {
         `;
     });
 
-    const cont = document.getElementById('classicTimeline');
     cont.innerHTML = html;
 }
 
@@ -183,8 +185,8 @@ function renderClassicTimeline() {
 // 1. DEFINIR TUS VISTAS COMO OBJETOS GLOBALES
 const AboutView = {
     template: /*html*/`
-        <div class="full-bg-secondary-dark d-flex-col pt-6 pb-5 gap-3 h-200">
-            <div class="cont-page d-flex gap-1 justify-start align-center text-start">
+        <div class="full-bg-secondary-dark d-flex-col justify-center gap-3 h-180">
+            <div class="cont-page d-flex gap-1 align-center">
                 <span class="roboto-regular font-xl color-console"> $ </span>
                 <h2 class="text-console font-xl text-primary typewriter-cursor" 
                     id="aboutTittle" data-i18n="about.ping">   cat about.txt</h2>
@@ -348,7 +350,7 @@ const AboutView = {
         // Temporarily clear text content while the title is typing
         const desc1Original = description1.textContent;
         // Clear description text temporarily (will be shown via fade-in later)
-        description1.textContent = '';
+        description1.textContent = '_';
         
         // Add initial fade class for smooth entrance animation
         description1.classList.add('fade-init');
