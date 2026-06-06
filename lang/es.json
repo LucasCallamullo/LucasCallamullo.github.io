@@ -22,6 +22,20 @@
     "home.skills.title": "Tecnologías destacadas", 
     "home.skills.subtitle": "Mi Stack diario para Backend, Bases de Datos e Implementación.",
     "home.skills.button": "Mira mis skills",
+
+    "home": {
+        "about_txt": "about.txt",
+        "about_p1": "Hola, soy Lucas.",
+        "about_p2": " vivo en Córdoba, Argentina.",
+        "about_p3": "Actualmente terminando 4to año de",
+        "about_p4": "Ingeniería en Sistemas en UTN.",
+        "about_p5": "Disfruto construir cosas que funcionan, enseñar lo que aprendo y mejorar poco a poco.",
+
+        "contact_p1": "Construyamos algo que funcione.",
+        "contact_p2": "Desarrollo backend, APIs REST, y arquitecturas limpias.",
+        "contact_p3": "Feliz de charlar sobre código, aprendizaje y proyectos que resuelven problemas reales.",
+        "contact_btn": "Contacto"
+    },
     
     "skills": {
         "featured": "Tecnologías Destacadas",

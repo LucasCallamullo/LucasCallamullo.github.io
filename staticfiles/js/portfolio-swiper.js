@@ -11,8 +11,10 @@ function swipperInitMain() {
             grabCursor: true,
             resistanceRatio: 0.001,
             preventInteractionOnTransition: true,
+            slideToClickedSlide: true,
             loop: true,
-
+            
+ 
             // --- Autoplay para que se mueva solo (y se detenga al interactuar) ---
             autoplay: {
                 delay: 1000,             // 0 segundos entre transiciones → movimiento continuo
@@ -21,7 +23,9 @@ function swipperInitMain() {
                 // stopOnLastSlide: false,
                 // waitForTransition: false
             },
-            mousewheel: true, 
+
+
+            mousewheel: false, 
             // speed: Velocidad de la transición (en milisegundos) (más alta = más lento y fluido)
             // 400 = 0.4 segundos tarda en moverse de un slide a otro
             // speed: 300,

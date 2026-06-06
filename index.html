@@ -61,16 +61,27 @@
 </head>
 <body>
     <header class="full-bg-secondary-dark border-bot-header">
-        <nav class="cont-page d-grid grid-122 nav-container header-portfolio">
+        <nav class="cont-page nav-container header-portfolio">
+
+            <!-- Botón hamburguesa (solo visible en mobile) -->
+            <button class="btn hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
             <!-- Logo -->
-            <div class="main-dev d-flex gap-1 align-center">
-                <span class="roboto-medium font-lg bold-console" data-i18n="hero.prefix"> > </span>
-                <span class="text-console font-lg" data-i18n="hero.name">Lucas.dev </span>
-                <span class="roboto-medium font-lg blinking-underscore">_</span>
+            <div class="main-dev d-flex align-center">
+                <button class="btn gap-1" data-nav="home"> 
+                    <span class="roboto-medium font-lg bold-console" data-i18n="hero.prefix"> > </span>
+                    <span class="text-console font-lg text-primary" data-i18n="hero.name">Lucas.dev </span>
+                    <span class="roboto-medium font-lg blinking-underscore">_</span>
+                </button>
             </div>
 
+
             <!-- NAV BUTTONS -->
-            <ul class="d-flex gap-2 justify-end align-center nav-list">
+            <ul class="gap-2 nav-list" id="navList">
 
                 <!-- HOME ABOUT PROJECTS SKILLS CONTACT -->
                 <li><button class="btn btn-nav text-console" data-i18n="nav.home" data-nav="home">
@@ -87,15 +98,15 @@
 
                 <li>
                     <!-- Botón de modo oscuro/claro -->
-                    <button id="themeToggle" class="btn control-btn btn-36" aria-label="Chnage theme">
+                    <button id="themeToggle" class="btn control-btn btn-36" aria-label="Change theme">
                         <i class="ri-moon-line font-lg"></i>
                     </button>
                 </li>
 
                 <!-- Botón de idioma con dropdown -->
-                <li class="relative language-dropdown d-flex gap-1">
+                <li class="language-dropdown d-flex gap-1">
                     
-                    <button id="languageBtn" class="btn control-btn btn-36 w-min gap-1" aria-label="Cambiar idioma">
+                    <button id="languageBtn" class="btn control-btn btn-36 w-min gap-1" aria-label="Change language">
                         <i class="ri-translate font-lg"></i>
                         <span id="currentLangFlag" class="font-md">🇬🇧</span>
                         <i class="ri-arrow-down-s-line font-lg"></i>
@@ -227,7 +238,8 @@
             <div class="footer-border-top mt-3 grid-col-all cont-space-between">
                 <p class="p-3">
                     <span class="prompt-console font-sm letter-spacing-md">$</span>
-                    <span class="roboto-regular font-sm letter-spacing-md">echo "© 2026 Lucas Callamullo · UTN"</span>
+                    <span class="roboto-regular font-sm letter-spacing-md">echo 
+                        "<i class="ri-copyright-line"></i> 2026 Lucas Callamullo · UTN"</span>
                 </p>
                 <p class="p-3">
                     <span class="roboto-regular font-sm letter-spacing-md">built with: </span>
@@ -240,6 +252,7 @@
     <!-- Scripts (EN ESTE ORDEN) -->
     <script src="./staticfiles/js/theme.js"></script>
     <script src="./staticfiles/js/sliding-nav.js"></script>
+    <script src="./staticfiles/js/btn-hamburguer.js"></script>
 
     <script src="./staticfiles/js/typewriter.js"></script>
     <script src="./staticfiles/js/translates.js"></script>

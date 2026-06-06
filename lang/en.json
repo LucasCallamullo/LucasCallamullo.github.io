@@ -22,6 +22,21 @@
     "home.skills.title": "Featured Technologies", 
     "home.skills.subtitle": "My daily stack for backend development, databases, and deployment.",
     "home.skills.button": "View all skills",
+
+    "home": {
+        "about_txt": "about.txt",
+        "about_p1": "Hi, I'm Lucas.",
+        "about_p2": " based in Córdoba, Argentina.",
+        "about_p3": "Currently finishing 4th year of",
+        "about_p4": "Systems Engineering at UTN.",
+        "about_p5": "I enjoy building things that work, teaching what I learn, and improving bit by bit.",
+
+        "contact_p1": "Let's build something that works.",
+        "contact_p2": "Backend development, REST APIs, and clean architectures.",
+        "contact_p3": "Happy to talk about code, learning, and projects that solve real problems.",
+        "contact_btn": "Contact"
+    },
+
     
     "skills": {
         "featured": "Featured Technologies",

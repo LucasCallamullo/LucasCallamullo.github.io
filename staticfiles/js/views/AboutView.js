@@ -165,7 +165,7 @@ function renderClassicTimeline() {
                     <p class="text-secondary text-justify mt-2">${item.desc}</p>
 
                     ${(externalRefs.length > 0) ? /*html*/`
-                        <div class="d-flex gap-2 mt-2 cont-btns-external-timeline" data-id="${item.id}">
+                        <div class="d-flex-col-row gap-2 mt-2 cont-btns-external-timeline" data-id="${item.id}">
                             
                         </div>` 
                     : ''}
