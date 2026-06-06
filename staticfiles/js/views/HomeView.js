@@ -122,29 +122,88 @@ const HomeView = {
                     I'm mainly interested in backend development
                 </span>
 
+                
                 <!-- buttons stuff -->
-                <div class="d-flex-col-row gap-3 mt-3" id="main-buttons" data-nav="projects">
-                    <button class="btn gap-1 btn-main px-3 py-2">
-                        <i class="ri-code-s-slash-line font-lg fw-normal"></i>
-                        <span data-i18n="button.projects" class="font-md">View Projects</span>
+                <div class="d-flex-col-row align-center gap-3 mt-3" id="main-buttons">
+                    <button class="btn btn-timeline hover-up gap-1 align-center justify-center" data-nav="projects">
+                        <i class="ri-code-s-slash-line font-md-plus fw-normal prompt-console"></i>
+                        <span class="text-primary text-console font-md-plus text-truncate" data-i18n="button.projects">
+                            View Projects
+                        </span>
                     </button>
 
-                    <a class="btn gap-1 btn-main px-3 py-2 download-cv" data-i18n="footer.href_download" target="_blank" href="#">
-                        <i class="ri-file-pdf-2-line font-lg fw-normal"></i>
-                        <span data-i18n="button.cv" class="font-md">Download CV</span>
+
+                    <a class="btn btn-timeline hover-up gap-1 align-center justify-center download-cv" 
+                        data-i18n="footer.href_download" target="_blank" href="#">
+                        <i class="ri-file-pdf-2-line font-md-plus fw-normal prompt-console"></i>
+                        <span class="text-primary text-console font-md-plus text-truncate" data-i18n="button.cv">
+                            Download CV
+                        </span>
                     </a>
 
-                    <button class="btn gap-1 btn-main px-3 py-2" data-nav="contact">
-                        <i class="ri-send-plane-fill font-lg fw-normal"></i>
-                        <span data-i18n="button.contact" class="font-md">Contact</span>
+
+                    <button class="btn btn-timeline hover-up gap-1 align-center justify-center" data-nav="contact">
+                        <i class="ri-send-plane-fill font-md-plus fw-normal prompt-console"></i>
+                        <span class="text-primary text-console font-md-plus text-truncate" data-i18n="button.contact">
+                            Contact
+                        </span>
                     </button>
                 </div>
             </div>
         </section>
 
+        <!-- ABOUT SECTION ON HOME  -->
+        <section class="full-bg-primary py-6">
+            <div class="cont-page d-flex justify-center align-center py-6">
+            
+                <div class="def__container px-3 py-3 d-flex-col justify-center gap-1 home_section_containers hover-up">
+                    
+                    <p class="text-break text-console font-md-plus prompt-console">
+                        $ cat <span class="text-primary text-console font-md-plus" data-i18n="home.about_txt">about.txt</span>  | head
+                    </p>
+
+                    <p class="mt-2">
+                        <span class="color-console font-md-plus text-console"> > </span>
+                        <span class="font-md-plus text-console" data-i18n="home.about_p1"> 
+                            Hi, I'm Lucas.   
+                        </span>
+                        <span class="font-md-plus text-console color-console">
+                            Backend / Full Stack Developer
+                        </span>
+                        <span class="font-md-plus text-console" data-i18n="home.about_p2">
+                             based in Córdoba, Argentina.
+                        </span>
+                    </p>
+                    <p class="mt-1">
+                        <span class="color-console font-md-plus text-console"> > </span>
+                        <span class="font-md-plus text-console" data-i18n="home.about_p3"> 
+                            Currently finishing 4th year of 
+                        </span>
+                        <span class="font-md-plus text-console color-console" data-i18n="home.about_p4">
+                            Systems Engineering at UTN. 
+                        </span>
+                    </p>
+                    <p class="mt-1">
+                        <span class="color-console font-md-plus text-console"> > </span>
+                        <span class="font-md-plus text-console" data-i18n="home.about_p5">
+                            I enjoy building things that work, teaching what I learn, 
+                            and improving bit by bit.
+                        </span>
+                    </p>
+
+                    <div class="d-flex gap-1 align-center justify-center mt-2">
+                        <button class="btn btn-timeline hover-up gap-1 align-center justify-center" data-nav="about">
+                            <span class="font-md-plus text-console prompt-console text-truncate">$ cd</span>
+                            <span class="text-primary text-console font-md-plus" data-i18n="home.about_txt">about.txt</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Sección de Tecnologías / Skills -->
-        <section class="full-bg-primary" id="skillsMain">
-            <div class="cont-page py-5">
+        <section class="full-bg-secondary-dark py-6" id="skillsMain">
+            <div class="cont-page py-6">
 
                 <div class="d-flex-col justify-center align-center text-center gap-3">
                     <!-- Ttitle --> 
@@ -163,12 +222,51 @@ const HomeView = {
                         </div>
                     </div>
 
-                    <button class="btn btn-home-skills gap-1 d-flex"> 
-                        <span class="roboto-regular font-lg color-console" data-i18n="home.skills.button" data-nav="skills">
+                    <button class="btn btn-timeline hover-up gap-1 align-center justify-center" data-nav="skills">
+                        <i class="ri-external-link-line font-lg fw-normal text-primary"></i>
+                        <span class="text-primary text-console font-md-plus text-truncate" data-i18n="home.skills.button">
                             View all skills
                         </span>
-                        <i class="ri-external-link-line font-lg bold-console"></i>
                     </button>
+                </div>
+            </div>
+        </section>
+
+        <!--  CONTACT Y GITHUB SECTION   -->
+        <section class="full-bg-primary py-6">
+            <div class="cont-page d-flex justify-center align-center py-6">
+            
+                <div class="def__container px-3 py-3 d-flex-col justify-center gap-1 home_section_containers hover-up">
+                    
+                    <span class="text-break text-console font-lg color-console" data-i18n="home.contact_p1">
+                        Construyamos algo que funcione.
+                    </span>
+
+                    <p class="mt-2">
+                        <span class="color-console font-md-plus text-console"> > </span>
+                        <span class="font-md-plus text-console" data-i18n="home.contact_p2"> 
+                            Desarrollo backend, APIs REST, y arquitecturas limpias. 
+                        </span>
+                    </p>
+                    <p class="mt-1">
+                        <span class="color-console font-md-plus text-console"> > </span>
+                        <span class="font-md-plus text-console" data-i18n="home.contact_p3"> 
+                            Feliz de charlar sobre código, aprendizaje y proyectos que resuelven problemas reales.
+                        </span>
+                    </p>
+
+                    <div class="d-flex-col-row gap-2 align-center justify-center mt-2">
+                        <button class="btn btn-timeline hover-up gap-1 align-center justify-center" data-nav="contact">
+                            <i class="ri-external-link-line font-lg fw-normal text-primary"></i>
+                            <span class="text-primary text-console font-md-plus" data-i18n="home.contact_btn">Contacto</span>
+                        </button>
+
+                        <a class="btn btn-timeline hover-up gap-1 align-center justify-center" 
+                            href="https://github.com/LucasCallamullo">
+                            <i class="ri-github-line font-lg fw-normal"></i>
+                            <span class="text-primary text-console font-md-plus">GitHub</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -186,6 +284,8 @@ const HomeView = {
                 e.href = g_TRANSLATIONS[key];
             }
         });
+
+        applyTranslations();
 
         swipperInitMain();
 

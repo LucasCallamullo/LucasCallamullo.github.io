@@ -107,10 +107,6 @@
 .border-bot-header { border-bottom: 1px solid var(--border-header); }
 
 
-.header-portfolio {
-    height: calc(100% - 2px);
-}
-
 /* altura definida para la primera seccion renderizada, la parte visible */
 #main-root {
     min-height: calc(100vh - var(--height-header));
@@ -121,11 +117,6 @@
     border: 1px solid var(--border-cont);
     border-radius: 20px;
     padding: 20px;
-}
-
-/* CSS para el cursor */
-.font-xxxxl {
-    font-size: 69px;
 }
 
 /* Cursor para el efecto typewriter - Personalizable */
@@ -158,11 +149,18 @@
 
 /* ========== BOTONES DE CONTROL (Idioma + Tema) ========== */
 
+/* Botones de control (tema e idioma) - versión mobile */
 .control-btn {
     border: 1px solid var(--border-cont);
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 8px 10px;  /* padding más compacto para mobile */
     color: var(--text-primary);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    margin-top: 8px;
+    margin-left: 16px;
 }
 
 .control-btn:hover {
@@ -171,26 +169,46 @@
     color: white;
 }
 
-/* Dropdown de idioma */
+/* Icono del botón */
+.control-btn i {
+    transition: transform 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.control-btn:hover i {
+    transform: scale(1.1);
+}
+
+
+/* Dropdown de idioma - mobile first */
+.language-dropdown {
+    position: relative;
+}
+
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
+
     margin-top: 8px;
+    margin-left: 16px;
+
+
     background: var(--bg-primary);
     border: 1px solid var(--border-cont);
     border-radius: 8px;
     padding: 8px 0;
-    min-width: 130px;
+    min-width: 140px;
     list-style: none;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.2s ease;
-    z-index: var(--z-index);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: var(--z-index, 1000);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Abrir dropdown al hacer hover o con clase active */
 .language-dropdown:hover .dropdown-menu,
 .dropdown-menu.active {
     opacity: 1;
@@ -198,12 +216,10 @@
     transform: translateY(0);
 }
 
+/* Items del dropdown */
 .dropdown-menu li {
-    padding: 8px 16px;
+    padding: 10px 16px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
     color: var(--text-primary);
     transition: background 0.15s ease;
 }
@@ -213,72 +229,87 @@
     color: white;
 }
 
-/* Animación del ícono del tema */
-.control-btn i {
-    transition: transform 0.3s ease;
-}
-
-.control-btn:hover i {
-    transform: scale(1.1);
-}
-
-/* Responsive: en mobile los botones pueden ser solo íconos */
-@media (max-width: 768px) {
-    .control-btn {
-        padding: 8px 10px;
-    }
-    
-    .control-btn #currentLangFlag {
-        display: none;
-    }
-    
-    .control-btn .ri-arrow-down-s-line {
-        display: none;
-    }
-}
-
-
-
-
-/* Estilos para las banderas en el dropdown */
+/* Banderas en dropdown */
 .flag-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 2px;
+    width: 21px;
+    height: 18px;
     object-fit: cover;
-}
-
-.dropdown-menu li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 16px;
-    cursor: pointer;
-}
-
-.dropdown-menu li img.flag-icon,
-.dropdown-menu li .flag-icon {
-    width: 22px;
-    height: 16px;
     border-radius: 2px;
 }
 
-/* Para el botón principal de idioma */
-#currentLangFlag {
-    display: inline-flex;
+/* ============================================
+   TABLET / DESKTOP (punto de quiebre)
+   ============================================ */
+@media (min-width: 769px) {
+    .control-btn {
+        margin: 0;
+        padding: 8px 12px;  /* padding más amplio en desktop */
+    }
+    
+    /* Mostrar bandera y flecha solo en desktop */
+    .control-btn #currentLangFlag {
+        display: inline-block;
+        margin-left: 4px;
+    }
+    
+    .dropdown-menu {
+        min-width: 150px;
+        margin-left: 0;
+    }
+}
+
+.header-portfolio {
+    height: calc(100% - 2px);
+    left: auto;
+    right: 0;
+}
+
+
+/* ============================================
+   MOBILE FIRST - Menú Hamburguesa
+   ============================================ */
+
+/* Botón hamburguesa - visible por defecto (mobile) */
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+
+    justify-self: center;
+    align-self: center;
+
+    margin-right: 50px;
+
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 500;
 }
 
-#currentLangFlag img {
-    width: 20px;
-    height: 14px;
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background: var(--console-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
+/* Animación para abrir/cerrar (X) */
+.hamburger-btn.open .hamburger-line:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
 
+.hamburger-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
 
-
-
-
+.hamburger-btn.open .hamburger-line:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
 
 /* ==================== SLIDING UNDERLINE NAVIGATION ==================== */
 
@@ -286,15 +317,106 @@
 .nav-container {
     position: relative;
     width: 100%;
+    display: grid;
+    grid-template-columns: min-content 1fr;
 }
 
-/* Lista de navegación */
+/* Menú lateral - visible por defecto en mobile (pero escondido a la derecha) */
 .nav-list {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 200;
+    transition: left 0.3s ease;
+
+    width: 290px;
+    max-width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    
+    background: var(--bg-secondary-dark);
+    border-right: 1px solid #2c5f7a;
+
+    /* Lista de navegación */
+    /* position: relative; */
     list-style: none;
     margin: 0;
     padding: 0;
+
+    margin-top: calc(var(--height-header));
+    padding-top: 32px;
 }
+
+.nav-list.open {
+    left: 0;
+}
+
+/* Overlay para cerrar al hacer clic fuera */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: none;
+}
+
+.nav-overlay.open {
+    display: block;
+}
+
+
+/* ============================================
+   TABLET / DESKTOP (punto de quiebre)
+   ============================================ */
+@media (min-width: 769px) {
+    .hamburger-btn {
+        display: none;
+    }
+
+    .nav-list {
+        position: relative;
+        transition: none;
+        background: transparent;
+        
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+
+        border-right: none;
+
+        left: 0;
+        top: 0;
+        
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-list.open {
+        left: auto;
+    }
+
+    .nav-overlay {
+        display: none !important;
+    }
+
+    .nav-container {
+        z-index: auto;
+    }
+}
+
+
+
 
 /* Botones de navegación - ESTILO BASE */
 .btn-nav {
@@ -352,14 +474,40 @@
     color: var(--main-color, #10b981);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .btn-nav {
-        padding: 0 12px;
-    }
+
+/* Estilos para las banderas en el dropdown */
+.flag-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    object-fit: cover;
 }
 
+.dropdown-menu li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
 
+.dropdown-menu li img.flag-icon,
+.dropdown-menu li .flag-icon {
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+/* Para el botón principal de idioma */
+#currentLangFlag {
+    display: inline-flex;
+    align-items: center;
+}
+
+#currentLangFlag img {
+    width: 20px;
+    height: 14px;
+}
 
 
 
@@ -563,7 +711,7 @@
     text-align: center;
 
     /* width: auto !important;   Para que respete el ancho del contenido */
-    background-color: var(--bg-secondary-dark);
+    background-color: var(--bg-primary);
     color: var(--text-primary);
     border-radius: 12px;
 
@@ -966,7 +1114,7 @@
 /* card hacia arriba de contact */
 .contact_cont {
   width: 100%;
-  height: 250px;
+  height: 350px;
   background-color: var(--bg-secondary-dark);
   border: 1px solid var(--border-cont); 
   border-radius: 20px;
@@ -1022,6 +1170,24 @@
 .contact_cont:hover .contact_cont_info {
   opacity: 1; 
   transform: translateY(37%); /* Sube al hacer hover */
+}
+
+
+/* Styles for tablets (mín. 480px to max. 768px) */
+@media (min-width: 480px) {
+    /* Styles for tablets */
+}
+
+/* Styles for desktops (mín. 768px to max. 992px+)) */
+@media (min-width: 768px) {
+    /* Styles for desktops */
+}
+
+/* Styles for large desktops (mín. 992px to max. infinite) */
+@media (min-width: 992px) {
+    .contact_cont {
+      height: 250px;
+    }
 }
 
 
@@ -1513,11 +1679,11 @@
   width: min-content;
   padding: 16px 20px;
   position: relative;
-  height: 2em;
+  height: 40px;
   border: 3px ridge var(--console-color);
   outline: none;
   transition: 1s;
-  border-radius: 0.3em;
+  border-radius: 5px;
 }
 
 .btn-timeline::after {
@@ -1547,11 +1713,6 @@
 .btn-timeline:hover::before, .btn-timeline:hover::after {
   transform: scale(0)
 }
-
-.btn-timeline:hover {
-  box-shadow: inset 0px 0px 25px var(--console-color);
-}
-
 
 
 
@@ -1754,4 +1915,39 @@
 
 .bg_cont_projects_move {
     background-color: var(--bg-primary);
+}
+
+.home_section_containers {
+    width: 100%;
+    cursor: auto;
+}
+
+/* CSS para el cursor */
+.font-xxxxl {
+    font-size: 50px;
+}
+
+/* Styles for small mobile phones (hasta 480px) */
+/* Styles for small mobile phones */
+
+/* Styles for tablets (mín. 480px to max. 768px) */
+@media (min-width: 480px) {
+    /* Styles for tablets */
+}
+
+/* Styles for desktops (mín. 768px to max. 992px+)) */
+@media (min-width: 768px) {
+    /* Styles for desktops */
+}
+
+/* Styles for large desktops (mín. 992px to max. infinite) */
+@media (min-width: 992px) {
+    /* Styles for large desktops */
+    .home_section_containers {
+        width: 75%
+    }
+
+    .font-xxxxl {
+        font-size: 69px;
+    }
 }

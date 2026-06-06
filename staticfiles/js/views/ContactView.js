@@ -268,30 +268,32 @@ const ContactView = {
                 <div class="contact_cont d-flex-col align-center justify-center gap-1">
 
                     <div class="contact_cont_title d-flex-col align-center justify-center gap-2">
-                        <div class="d-flex gap-1">
-                            <span class="text-console font-xl prompt-console" data-i18n="contact.echo">$ echo</span>
-                            <h2 class="text-console font-xl color-console typewriter-cursor" data-i18n="contact.thanks_message">"Thanks for stopping by"</h2>
-                        </div>
+                        <p class="">
+                            <span class="text-console font-xl prompt-console" data-i18n="contact.echo">$ echo </span>&nbsp;
+                            <span class="text-console font-xl color-console typewriter-cursor" data-i18n="contact.thanks_message">
+                                "Thanks for stopping by"
+                            </span>
+                        </p>
 
-                        <span class="font-lg text-console text-primary" data-i18n="contact.chat_invite"> 
+                        <span class="font-lg text-console text-primary text-break" data-i18n="contact.chat_invite"> 
                             If you want to chat, my emails are always open!
                         </span>
 
-                        <span class="font-md text-console prompt-console" data-i18n="contact.faster_response">
+                        <span class="font-md text-console prompt-console text-break" data-i18n="contact.faster_response">
                             I'll answer faster if you contact via email.
                         </span>
                     </div>
 
-                    <div class="contact_cont_info">
-                        <span class="text-console font-md text-secondary" data-i18n="contact.connection_message">
+                    <div class="contact_cont_info px-3">
+                        <span class="text-console font-md text-secondary text-break" data-i18n="contact.connection_message">
                             Connection established. Awaiting your message... :D
                         </span>
                     </div>
 
-                    <!-- text phone to prevent not hover --> 
+                    <!-- text phone to prevent not hover  
                     <span class="text-console font-md text-secondary d-flex-mobile" data-i18n="contact.connection_message_mobile">
                         Connection established. Awaiting your message... :D
-                    </span>
+                    </span> -->
                 </div>
             </div>
         </section>
