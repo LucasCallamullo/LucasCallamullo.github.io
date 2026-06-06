@@ -149,6 +149,95 @@ async function sm(form, spanForm) {
 }
 
 
+/**
+ * Inicializa el botón de copiar email al portapapeles
+ * Al hacer click, copia el email y muestra feedback visual temporal
+ */
+function initCopyEmailButton() {
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    if (!copyEmailBtn) return;
+
+    const emailToCopy = 'lucas.callamullo.dev@gmail.com';
+
+    /**
+     * Copia el email al portapapeles usando la API moderna
+     * @returns {Promise<boolean>} true si se copió correctamente, false si falló
+     */
+    async function copyToClipboard() {
+        try {
+            // API moderna (requiere HTTPS o localhost)
+            await navigator.clipboard.writeText(emailToCopy);
+            return true;
+        } catch (err) {
+            console.error('Error con clipboard API:', err);
+            
+            // Fallback para navegadores antiguos
+            try {
+                const textarea = document.createElement('textarea');
+                textarea.value = emailToCopy;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                const success = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return success;
+            } catch (fallbackErr) {
+                console.error('Error en fallback:', fallbackErr);
+                return false;
+            }
+        }
+    }
+
+    /**
+     * Muestra feedback visual temporal en el botón
+     * @param {HTMLElement} icon - Elemento del ícono
+     * @param {HTMLElement} textSpan - Elemento del texto
+     * @param {string} originalIconClass - Clase original del ícono
+     * @param {string} originalText - Texto original
+     */
+    function showFeedback(icon, textSpan, originalIconClass, originalText) {
+        // Cambiar ícono y texto
+        if (icon) icon.className = 'ri-check-line font-lg';
+        if (textSpan) {
+            const feedbackText = (CURRENT_LANG === 'en') ? 'Copied!' : '¡Copiado!';
+            textSpan.textContent = feedbackText;
+        }
+
+        // Restaurar después de 2 segundos
+        setTimeout(() => {
+            if (icon) icon.className = originalIconClass;
+            if (textSpan) textSpan.textContent = originalText;
+        }, 2000);
+    }
+
+    // Evento principal
+    copyEmailBtn.addEventListener('click', async () => {
+        // Guardar estado original ANTES de cualquier cambio
+        const icon = copyEmailBtn.querySelector('i');
+        const textSpan = copyEmailBtn.querySelector('.text-console');
+        const originalIconClass = icon ? icon.className : '';
+        const originalText = textSpan ? textSpan.textContent : '';
+
+        const copied = await copyToClipboard();
+        
+        if (copied) {
+            showFeedback(icon, textSpan, originalIconClass, originalText);
+        } else {
+            // Feedback de error (opcional)
+            if (textSpan) {
+                const originalTextBackup = textSpan.textContent;
+                textSpan.textContent = (CURRENT_LANG === 'en') ? 'Error!' : 'Error!';
+                setTimeout(() => {
+                    textSpan.textContent = originalTextBackup;
+                }, 1500);
+            }
+            console.error('No se pudo copiar el email');
+        }
+    });
+}
+
+
 const ContactView = {
     template: /*html*/`
         <div class="full-bg-secondary-dark d-flex-col justify-center gap-3 h-180">
@@ -378,5 +467,7 @@ const ContactView = {
                 await sm(form, spanForm);     // Handle form submission with feedback
             });
         }
+
+        initCopyEmailButton()
     }
 };
