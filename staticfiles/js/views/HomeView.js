@@ -136,8 +136,8 @@ const HomeView = {
                     <a class="btn btn-timeline hover-up gap-1 align-center justify-center download-cv" 
                         data-i18n="footer.href_download" 
                         target="_blank"
-                        download="LucasCallamullo_Backend_Resume.pdf"
-                        href="./CV/LucasCallamullo_Backend_Resume.pdf">
+                        download="LucasCallamullo_Software_Resume.pdf"
+                        href="./CV/LucasCallamullo_Software_Resume.pdf">
 
                         <i class="ri-file-pdf-2-line font-md-plus fw-normal prompt-console"></i>
                         <span class="text-primary text-console font-md-plus text-truncate" data-i18n="button.cv">

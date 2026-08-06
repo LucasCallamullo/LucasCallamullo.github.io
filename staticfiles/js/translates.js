@@ -118,8 +118,9 @@ function applyTranslations(callbacks = {}) {
         // Remove the key "footer.href_download" - only set if value exists
         if (value) e.href = value;
 
-        if (key == "href_download") {
-            const downValue = getTranslationValue(g_TRANSLATIONS, "download_file");
+        // this change download file
+        if (key == "footer.href_download") {
+            const downValue = getTranslationValue(g_TRANSLATIONS, "footer.download_file");
             if (downValue) e.download = downValue;
         }
     });
