@@ -17,6 +17,7 @@
     "button.contact": "Contact",
     "footer.resume": "Backend Developer building scalable APIs with Python & Java. PostgreSQL, Docker, and cloud deployments.",
     "footer.href_download": "./CV/LucasCallamullo_Backend_Resume.pdf",
+    "footer.download_file": "LucasCallamullo_Backend_Resume.pdf",
     "footer.download": "./download_resume.sh",
 
     "home.skills.title": "Featured Technologies", 

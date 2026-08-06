@@ -45,7 +45,7 @@ const projectsData = [
             "Synchronous/asynchronous communication between microservices. Docker Compose orchestration."
         ],
         techStack: ["Java 17", "Spring Boot", "Spring Cloud", "JWT", "Keycloak", "PostgreSQL", "Docker", "Docker Compose", "JUnit5"],
-        githubLink: "https://github.com/LucasCallamullo/java-backend-3k2",
+        githubLink: "https://github.com/LucasCallamullo/fleet-optimizer",
         liveLink: null
     },
     {

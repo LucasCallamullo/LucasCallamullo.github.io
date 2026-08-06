@@ -17,6 +17,7 @@
     "button.contact": "Contacto",
     "footer.resume": "Desarrollador backend que crea API escalables con Python y Java. PostgreSQL, Docker e implementaciones en la nube.",
     "footer.href_download": "./CV/LucasCallamullo_Backend_CV.pdf",
+    "footer.download_file": "LucasCallamullo_Backend_CV.pdf",
     "footer.download": "./descargar_cv.sh",
 
     "home.skills.title": "Tecnologías destacadas", 
