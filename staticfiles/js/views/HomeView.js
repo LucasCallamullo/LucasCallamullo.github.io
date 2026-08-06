@@ -138,7 +138,7 @@ const HomeView = {
                         target="_blank"
                         download="LucasCallamullo_Backend_Resume.pdf"
                         href="./CV/LucasCallamullo_Backend_Resume.pdf">
-                        
+
                         <i class="ri-file-pdf-2-line font-md-plus fw-normal prompt-console"></i>
                         <span class="text-primary text-console font-md-plus text-truncate" data-i18n="button.cv">
                             Download CV
@@ -281,13 +281,13 @@ const HomeView = {
     /* funcion que se ejecuta al terminar el renderizado del anterior html */ 
     onMount: function() { 
 
-        document.querySelectorAll('.download-cv').forEach(e => {
+        /* document.querySelectorAll('.download-cv').forEach(e => {
             const key = e.getAttribute('data-i18n');
             // quitar la key "footer.href_download"
             if (g_TRANSLATIONS[key]) {
                 e.href = g_TRANSLATIONS[key];
             }
-        });
+        }); */
 
         applyTranslations();
 
