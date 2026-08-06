@@ -29,7 +29,6 @@ build/
 
 # mis folders
 dsi/
-CV/
 proofs/
 
 package-lock.json
