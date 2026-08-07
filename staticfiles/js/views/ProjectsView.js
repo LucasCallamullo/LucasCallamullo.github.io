@@ -9,6 +9,7 @@ const projectsData = [
         date_en: "2024 - \nIn Progress",
         title_es: "E-commerce Engine",
         title_en: "E-commerce Engine",
+        imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
         icon: "ri-store-3-line",
         descriptionList_es: [
             "Motor modular de e-commerce con Django, Docker y Vanilla JS.",
@@ -33,18 +34,21 @@ const projectsData = [
         date_en: "2025 - \nIn Progress",
         title_es: "Microservicios · Gestión de flotas",
         title_en: "Microservices · Fleet Management",
+        imageUrl: "./staticfiles/images/fleet_optimizer_c4.png",
         icon: "ri-git-merge-line",
         descriptionList_es: [
-            "Sistema de gestión de contenedores y flotas con arquitectura de microservicios.",
-            "API Gateway (Spring Cloud Gateway), autenticación centralizada con Keycloak (OAuth2/JWT).",
-            "Comunicación síncrona/asíncrona entre microservicios. Docker Compose para orquestación."
+            "Sistema de logística con microservicios para gestión de paquetes, flota de vehículos y rutas de entrega.",
+            "API Gateway como punto de entrada único, autenticación centralizada con Keycloak (OAuth2/JWT).",
+            "Orquestación de envíos con validación de paquetes/vehículos, cálculo de rutas con OSRM y persistencia atómica.",
+            "Comunicación síncrona con Feign Clients, Docker Compose para 6 servicios, tests con JUnit 5 y Mockito."
         ],
         descriptionList_en: [
-            "Container and fleet management system based on microservices architecture.",
-            "API Gateway (Spring Cloud Gateway), centralized authentication with Keycloak (OAuth2/JWT).",
-            "Synchronous/asynchronous communication between microservices. Docker Compose orchestration."
+            "Logistics system with microservices for package, fleet, and delivery route management.",
+            "API Gateway as single entry point, centralized authentication with Keycloak (OAuth2/JWT).",
+            "Shipment orchestration with package/vehicle validation, route calculation with OSRM and atomic persistence.",
+            "Synchronous communication with Feign Clients, Docker Compose for 6 services, tests with JUnit 5 and Mockito."
         ],
-        techStack: ["Java 17", "Spring Boot", "Spring Cloud", "JWT", "Keycloak", "PostgreSQL", "Docker", "Docker Compose", "JUnit5"],
+        techStack: ["Java 17", "Spring Boot", "Spring Cloud", "JWT", "OAuth2", "PostgreSQL", "Docker", "Docker Compose", "JUnit5"],
         githubLink: "https://github.com/LucasCallamullo/fleet-optimizer",
         liveLink: null
     },
@@ -55,6 +59,7 @@ const projectsData = [
         date_en: "2026 - \nIn Progress",
         title_es: "Student Forum · API con JWT",
         title_en: "Student Forum · JWT Auth API",
+        imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
         icon: "ri-nodejs-line",
         descriptionList_es: [
             "API para foro estudiantil con Node.js, Express y Sequelize (PostgreSQL).",
@@ -113,9 +118,7 @@ function renderProjects() {
     projectsData.forEach((proj, index) => {
         
         // card header stuff
-        const imgUrl = (index % 2 == 0) ? "https://images.unsplash.com/photo-1555066931-4365d14bab8c"
-            : "https://img.magnific.com/free-vector/brochure-design-template-mockup-vector_53876-75862.jpg";
-            
+        const imgUrl = proj.imageUrl;
 
         // renderizas los devops, backend sobre la imagen
         const groupsStrings = proj.group || [];
@@ -130,8 +133,6 @@ function renderProjects() {
         const descriptionHtml = (descriptions) ? descriptions.map(line => 
             /*html*/`<p class="font-md text-secondary text-pre-wrap">${escapeHtml(line)}</p>`
         ).join('') : '';
-
-        
 
         // enlaces: si no hay liveLink, solo mostramos github; si existe, dos botones.
         const hasGithub = proj.githubLink;
@@ -165,7 +166,7 @@ function renderProjects() {
             <div class="project-card d-flex-col cont__to__animate  border-hover">
 
                 <div class="card_header">
-                    <img src="${imgUrl}" alt="" class="card_header_img">
+                    <img src="${imgUrl}" alt="Proyect Image" class="card_header_img">
 
                     <div class="card_header_date d-flex justify-start align-start">
                         <span class="font-md bolder text-console text-pre-wrap">${escapeHtml(dateText)}</span>
