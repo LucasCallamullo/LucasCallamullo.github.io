@@ -1,0 +1,225 @@
+
+
+/* ========================================
+   UTILITY FRAMEWORK - Atomic CSS Classes
+   ========================================
+   Framework educativo de CSS atómico
+   Cada clase hace UNA sola cosa (single responsibility)
+   ======================================== */
+
+/* ========================================
+   ESCALA DE TAMAÑOS (para referencia)
+   ========================================
+   Nivel | Píxeles | Rem (1rem = 16px)
+   ------|---------|------------------
+   0     | 0px     | 0rem
+   1     | 4px     | 0.25rem
+   2     | 8px     | 0.5rem
+   3     | 16px    | 1rem (base)
+   4     | 24px    | 1.5rem
+   5     | 32px    | 2rem
+   6     | 48px    | 3rem
+   ======================================== */
+
+/* ========================================
+   EJEMPLOS DE USO:
+   ========================================
+   
+   <!-- Grid con gap entre elementos -->
+   <div class="d-grid gap-3">
+       <div>Item 1</div>
+       <div>Item 2</div>
+   </div>
+   
+   <!-- Margen superior de 16px -->
+   <h1 class="mt-3">Título</h1>
+   
+   <!-- Padding interno de 24px en todos los lados -->
+   <div class="p-4">Contenido</div>
+   
+   <!-- Centrar horizontalmente un bloque -->
+   <div class="mx-auto" style="width: 300px;">Bloque centrado</div>
+   
+   ======================================== */
+
+/* ========================================
+   GAP - Espaciado entre elementos hijos (Grid/Flex)
+   ========================================
+   gap: Controla el espacio entre elementos hijos en contenedores 
+        display: grid o display: flex (con flex-wrap)
+   
+   Escala: 4px, 8px, 16px, 24px, 32px
+   ======================================== */
+.gap-1 { gap: 4px; }   /* Extra pequeño: 4px (0.25rem) */
+.gap-2 { gap: 8px; }   /* Pequeño: 8px (0.5rem) */
+.gap-3 { gap: 16px; }  /* Mediano: 16px (1rem) - Tamaño base */
+.gap-4 { gap: 24px; }  /* Grande: 24px (1.5rem) */
+.gap-5 { gap: 32px; }  /* Extra grande: 32px (2rem) */
+
+
+/* ========================================
+   MARGIN (mt-, mb-, ms-, me-)
+   ========================================
+   mt- = margin-top (superior)
+   mb- = margin-bottom (inferior)
+   ms- = margin-start (izquierda en LTR, derecha en RTL)
+   me- = margin-end (derecha en LTR, izquierda en RTL)
+   
+   Escala: 0, 4px, 8px, 16px, 24px, 32px, 48px
+   ======================================== */
+
+/* ----- MARGIN TOP (mt-) ----- */
+.mt-0 { margin-top: 0; }           /* Sin margen superior */
+.mt-1 { margin-top: 4px; }         /* Extra pequeño */
+.mt-2 { margin-top: 8px; }         /* Pequeño */
+.mt-3 { margin-top: 16px; }        /* Mediano (base) */
+.mt-4 { margin-top: 24px; }        /* Grande */
+.mt-5 { margin-top: 32px; }        /* Extra grande */
+.mt-6 { margin-top: 48px; }        /* Doble extra grande */
+
+/* ----- MARGIN BOTTOM (mb-) ----- */
+.mb-0 { margin-bottom: 0; }        /* Sin margen inferior */
+.mb-1 { margin-bottom: 4px; }      /* Extra pequeño */
+.mb-2 { margin-bottom: 8px; }      /* Pequeño */
+.mb-3 { margin-bottom: 16px; }     /* Mediano (base) */
+.mb-4 { margin-bottom: 24px; }     /* Grande */
+.mb-5 { margin-bottom: 32px; }     /* Extra grande */
+.mb-6 { margin-bottom: 48px; }     /* Doble extra grande */
+
+/* ----- MARGIN START (ms-) - Izquierda en LTR ----- */
+.ms-0 { margin-inline-start: 0; }      /* Sin margen izquierdo */
+.ms-1 { margin-inline-start: 4px; }    /* Extra pequeño */
+.ms-2 { margin-inline-start: 8px; }    /* Pequeño */
+.ms-3 { margin-inline-start: 16px; }   /* Mediano (base) */
+.ms-4 { margin-inline-start: 24px; }   /* Grande */
+.ms-5 { margin-inline-start: 32px; }   /* Extra grande */
+.ms-6 { margin-inline-start: 48px; }   /* Doble extra grande */
+
+/* ----- MARGIN END (me-) - Derecha en LTR ----- */
+.me-0 { margin-inline-end: 0; }        /* Sin margen derecho */
+.me-1 { margin-inline-end: 4px; }      /* Extra pequeño */
+.me-2 { margin-inline-end: 8px; }      /* Pequeño */
+.me-3 { margin-inline-end: 16px; }     /* Mediano (base) */
+.me-4 { margin-inline-end: 24px; }     /* Grande */
+.me-5 { margin-inline-end: 32px; }     /* Extra grande */
+.me-6 { margin-inline-end: 48px; }     /* Doble extra grande */
+
+/* ========================================
+   MARGIN SIMÉTRICO (mx-, my-)
+   ========================================
+   mx- = margin horizontal (izquierda + derecha)
+   my- = margin vertical (superior + inferior)
+   ======================================== */
+
+/* MARGIN HORIZONTAL (mx-) */
+.mx-0 { margin-inline: 0; }        /* Sin margen horizontal */
+.mx-1 { margin-inline: 4px; }      /* 4px izquierda + derecha */
+.mx-2 { margin-inline: 8px; }      /* 8px izquierda + derecha */
+.mx-3 { margin-inline: 16px; }     /* 16px izquierda + derecha */
+.mx-4 { margin-inline: 24px; }     /* 24px izquierda + derecha */
+.mx-5 { margin-inline: 32px; }     /* 32px izquierda + derecha */
+.mx-6 { margin-inline: 48px; }     /* 48px izquierda + derecha */
+
+/* MARGIN VERTICAL (my-) */
+.my-0 { margin-block: 0; }         /* Sin margen vertical */
+.my-1 { margin-block: 4px; }       /* 4px arriba + abajo */
+.my-2 { margin-block: 8px; }       /* 8px arriba + abajo */
+.my-3 { margin-block: 16px; }      /* 16px arriba + abajo */
+.my-4 { margin-block: 24px; }      /* 24px arriba + abajo */
+.my-5 { margin-block: 32px; }      /* 32px arriba + abajo */
+.my-6 { margin-block: 48px; }      /* 48px arriba + abajo */
+
+/* ========================================
+   MARGIN AUTOMÁTICO (para centrar)
+   ======================================== */
+.mx-auto { margin-inline: auto; }  /* Centra horizontalmente elementos con width definido */
+.my-auto { margin-block: auto; }   /* Centra verticalmente en flex/grid */
+
+/* ========================================
+   PADDING (pt-, pb-, ps-, pe-)
+   ========================================
+   Misma escala que margin pero para padding interno
+   ======================================== */
+
+.p-0 { padding: 0; }
+.p-1 { padding: 4px; }   
+.p-2 { padding: 8px; }    
+.p-3 { padding: 16px; } 
+
+/* Padding Top */
+.pt-0 { padding-top: 0; }
+.pt-1 { padding-top: 4px; }
+.pt-2 { padding-top: 8px; }
+.pt-3 { padding-top: 16px; }
+.pt-4 { padding-top: 24px; }
+.pt-5 { padding-top: 32px; }
+.pt-6 { padding-top: 48px; }
+
+/* Padding Bottom */
+.pb-0 { padding-bottom: 0; }
+.pb-1 { padding-bottom: 4px; }
+.pb-2 { padding-bottom: 8px; }
+.pb-3 { padding-bottom: 16px; }
+.pb-4 { padding-bottom: 24px; }
+.pb-5 { padding-bottom: 32px; }
+.pb-6 { padding-bottom: 48px; }
+
+/* Padding Start (izquierda) */
+.ps-0 { padding-inline-start: 0; }
+.ps-1 { padding-inline-start: 4px; }
+.ps-2 { padding-inline-start: 8px; }
+.ps-3 { padding-inline-start: 16px; }
+.ps-4 { padding-inline-start: 24px; }
+.ps-5 { padding-inline-start: 32px; }
+.ps-6 { padding-inline-start: 48px; }
+
+/* Padding End (derecha) */
+.pe-0 { padding-inline-end: 0; }
+.pe-1 { padding-inline-end: 4px; }
+.pe-2 { padding-inline-end: 8px; }
+.pe-3 { padding-inline-end: 16px; }
+.pe-4 { padding-inline-end: 24px; }
+.pe-5 { padding-inline-end: 32px; }
+.pe-6 { padding-inline-end: 48px; }
+
+/* Padding Horizontal y Vertical */
+.px-0 { padding-inline: 0; }
+.px-1 { padding-inline: 4px; }
+.px-2 { padding-inline: 8px; }
+.px-3 { padding-inline: 16px; }
+.px-4 { padding-inline: 24px; }
+.px-5 { padding-inline: 32px; }
+.px-6 { padding-inline: 48px; }
+
+.py-0 { padding-block: 0; }
+.py-1 { padding-block: 4px; }
+.py-2 { padding-block: 8px; }
+.py-3 { padding-block: 16px; }
+.py-4 { padding-block: 24px; }
+.py-5 { padding-block: 32px; }
+.py-6 { padding-block: 48px; }
+
+
+/* Desktop (mín. 992px) */
+@media (min-width: 992px) {
+    .gap-1 { gap: 0.5rem !important; }   /* 8px */
+    .gap-2 { gap: 1rem !important; }     /* 16px */
+    .gap-3 { gap: 1.5rem !important; }   /* 24px */
+    .gap-4 { gap: 2rem !important; }     /* 32px */
+    .gap-5 { gap: 2.5rem !important; }   /* 40px */
+    .gap-6 { gap: 3rem !important; }     /* 48px */
+
+    .mt-1 { margin-top: 0.5rem !important; }   /* 8px */
+    .mt-2 { margin-top: 1rem !important; }     /* 16px */
+    .mt-3 { margin-top: 1.5rem !important; }   /* 24px */
+    .mt-4 { margin-top: 2rem !important; }     /* 32px */
+    .mt-5 { margin-top: 2.5rem !important; }   /* 40px */
+    .mt-6 { margin-top: 3rem !important; }     /* 48px */
+
+    .mb-1 { margin-bottom: 0.5rem !important; }   /* 8px */
+    .mb-2 { margin-bottom: 1rem !important; }     /* 16px */
+    .mb-3 { margin-bottom: 1.5rem !important; }   /* 24px */
+    .mb-4 { margin-bottom: 2rem !important; }     /* 32px */
+    .mb-5 { margin-bottom: 2.5rem !important; }   /* 40px */
+    .mb-6 { margin-bottom: 3rem !important; }     /* 48px */
+}
