@@ -1,0 +1,72 @@
+---
+import '@shared/styles/global.css'
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+
+/* 
+<!-- Default / Light -->
+<html lang="en" data-theme="light">
+
+<!-- Dark Theme -->
+<html lang="en" data-theme="dark">
+
+<!-- Violet Theme -->
+<html lang="en" data-theme="violet">
+
+<!-- Blue Theme -->
+<html lang="en" data-theme="blue"></html>
+*/
+
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <meta name="theme-color" content="#000000"> --> 
+    <title>{title}</title>
+
+    <!-- Meta tags útiles para SEO y redes sociales -->
+    <meta name="description" content="Lucas Callamullo, Software Engineer from Córdoba, Argentina. 
+        I build production-ready e-commerce platforms, microservices with JWT authentication, and clean REST APIs. 
+        Skilled in Python/Django, Java/Spring Boot, Node.js/Express, Docker, and PostgreSQL.">
+    <meta name="author" content="Lucas Callamullo">
+
+    <!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lucas Callamullo · Software Engineer & Systems Engineering Student">
+    <meta property="og:description" content="Portfolio showcasing e-commerce engines, microservices architectures, 
+        and API development. Currently 4th year Systems Engineering at UTN.">
+
+    <meta property="og:url" content="https://lucascallamullo.github.io">
+    <meta property="og:site_name" content="Lucas Callamullo · Portfolio">
+    <meta property="og:image" content="https://lucascallamullo.github.io/staticfiles/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lucas Callamullo · Software Engineer">
+    <meta name="twitter:description" content="Building scalable backend systems. E-commerce, microservices, 
+        REST APIs. Python, Java, Node.js, Docker.">
+
+    <link rel="icon" type="image/svg+xml" href="./staticfiles/icon/terminal.svg">
+
+    <!-- Roboto font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen" data-theme="dark">
+    <!-- Navbar global -->
+    <slot /> <!-- AQUÍ SE RENDERIZA EL CONTENIDO DE INDEX.ASTRO -->
+    <!-- Footer global -->
+  </body>
+</html> 
