@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+/* ==========================================================================
+  1. TAILWIND THEME CONFIGURATION (V4)
+  This maps your CSS custom properties directly to Tailwind classes!
+  Example: 
+    var(--bg-primary) becomes `bg-primary` or `text-primary`.
+  Example:
+    ? color-main-light: var(--main-light-color);  Generates: bg-main-light | text-main-light | border-main-light 
+  ========================================================================== */
+@theme {
+  --font-sans: 'Montserrat', sans-serif;
+
+  /* Brand / Main Color Scale (e.g., bg-main-500, text-main-300) */
+  --color-main-300: var(--main-300);
+  --color-main-500: var(--main-500); /* Base Main Color */
+  --color-main-700: var(--main-700);
+
+  /* Surface / Background Color Scale (e.g., bg-surface-100, bg-surface-800) */
+  --color-surface-100: var(--surface-100); /* Lightest background */
+  --color-surface-200: var(--surface-200); /* Cards / Secondary bg */
+  --color-surface-800: var(--surface-800); /* Dark borders / Dark bg */
+  --color-surface-900: var(--surface-900); /* Pure base background */
+
+  /* Text Color Scale (e.g., text-content-main, text-content-muted) */
+  --color-content-main: var(--text-main);
+  --color-content-muted: var(--text-muted);
+
+  /* Fixed Brand Colors */
+  --color-brand-red: var(--color-red);
+  --color-brand-green: var(--color-green);
+  --color-brand-wsp: var(--color-wsp);
+
+  /* CUSTOM Brand Colors */
+  --color-console: var(--console-color);
+  --color-accent: var(--accent-color);
+}
+
+/** ==========================================================================
+   2. SHARED CONSTANTS (:root)
+   Static values shared across ALL themes.
+   ========================================================================== */
+:root {
+  --color-red: #e40707;
+  --color-green: #28a745;
+  --color-wsp: #2db742;
+}
+
+/** ==========================================================================
+   3. DYNAMIC THEMES (Shade Steps)
+   ========================================================================== */
+
+/* Light Theme */
+:root, [data-theme="light"] {
+  /* Main purple scale */
+  --main-300: #b785ff;
+  --main-500: #5e08e7; /* Base */
+  --main-700: #3f04a0;
+
+  /* Surface scale (Light shades) */
+  --surface-100: #ffffff; /* Base background */
+  --surface-200: #f7f7f7; /* Card background */
+  --surface-800: #e2e8f0; /* Borders / Dividers */
+  --surface-900: #cbd5e1; /* Dark contrast element */
+
+  /* Typography */
+  --text-main: #000000;
+  --text-muted: #6c757d;
+
+  /* Custom Accents */
+  --console-color: #059669;
+  --accent-color: #c47d00;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Main neon purple scale */
+  --main-300: #d86eff;
+  --main-500: #b000ff; /* Base */
+  --main-700: #7100a3;
+
+  /* Surface scale (Dark shades flipped!) */
+  --surface-100: #2d3748; /* Highlight cards */
+  --surface-200: #1e1e1e; /* Card background */
+  --surface-800: #181b20; /* Darker containers */
+  --surface-900: #121212; /* Base dark background */
+
+  /* Typography */
+  --text-main: #ffffff;
+  --text-muted: #b3b5b6;
+
+  /* Custom Accents */
+  --console-color: #00ff00;
+  --accent-color: #ffb800;
+}
+
+/* Violet Theme */
+[data-theme="violet"] {
+  --main-300: #c4b5fd;
+  --main-500: #8b5cf6;
+  --main-700: #6d28d9;
+
+  --surface-100: #231b42;
+  --surface-200: #17122b;
+  --surface-800: #120e22;
+  --surface-900: #0f0c1b;
+
+  --text-main: #f3f0ff;
+  --text-muted: #a78bfa;
+
+  --console-color: #00ff00;
+  --accent-color: #ffb800;
+}
+
+/* Blue Theme */
+[data-theme="blue"] {
+  --main-300: #7dd3fc;
+  --main-500: #0284c7;
+  --main-700: #0369a1;
+
+  --surface-100: #182a45;
+  --surface-200: #0f1d30;
+  --surface-800: #0a1422;
+  --surface-900: #07111e;
+
+  --text-main: #f0f9ff;
+  --text-muted: #38bdf8;
+
+  --console-color: #00ff00;
+  --accent-color: #ffb800;
+}
+
+/** ==========================================================================
+   4. BASE STYLES
+   ========================================================================== */
+html, body {
+  background-color: var(--surface-900);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
