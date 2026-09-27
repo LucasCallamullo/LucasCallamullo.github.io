@@ -1,0 +1,202 @@
+---
+// src/shared/components/Navbar.astro
+import { Icon } from 'astro-icon/components';
+import DropdownNav from '@shared/components/DropdownNav.astro';
+
+// Navigation menu links
+interface NavItem {
+  href: string;
+  i18n: string;
+  label: string;
+  nav: string;
+}
+
+const navItems: NavItem[] = [
+  { href: '/',         i18n: 'nav.home',     label: 'Home',     nav: 'home' },
+  { href: '/about',    i18n: 'nav.about',    label: 'About',    nav: 'about' },
+  { href: '/skills',   i18n: 'nav.skills',   label: 'Skills',   nav: 'skills' },
+  { href: '/projects', i18n: 'nav.projects', label: 'Projects', nav: 'projects' },
+  { href: '/contact',  i18n: 'nav.contact',  label: 'Contact',  nav: 'contact' },
+];
+
+// Defined themes for dynamic rendering
+const themes = [
+  { id: 'light', label: 'Light', icon: 'lucide:sun' },
+  { id: 'dark', label: 'Dark', icon: 'lucide:moon' },
+  { id: 'violet', label: 'Violet', icon: 'lucide:sparkles' },
+  { id: 'blue', label: 'Blue', icon: 'lucide:palette' },
+];
+
+const languages = [
+  { id: 'en', label: "EN English", labelMobile: 'EN', i18n: 'nav.btns.languageEN', icon: "/icons/flag_us.svg", alt: 'USA Flag' },
+  { id: 'es', label: "ES Spanish", labelMobile:'ES', i18n: 'nav.btns.languageES', icon: "/icons/flag_ar.svg", alt: 'ARG Flag' },
+];
+---
+
+<header class="fixed top-0 left-0 w-full bg-surface-900 transition-colors duration-300">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-21 h-full flex items-center justify-between">
+
+    <!-- Mobile Hamburger Button -->
+    <button 
+      id="mobileMenuBtn" 
+      aria-label="Toggle Mobile Menu"
+      class="md:hidden p-2 rounded-lg bg-surface-200 text-content-main border border-surface-800 cursor-pointer"
+    >
+      <Icon name="lucide:menu" id="iconMenu" class="w-5 h-5 block" />
+      <Icon name="lucide:x" id="iconClose" class="w-5 h-5 hidden" />
+    </button>
+    
+    <!-- Logo / Brand -->
+    <a href="#home" class="flex items-center gap-1.5 font-mono text-lg group">
+      <span class="text-console font_console font-bold text-xl">&gt;</span>
+      <span class="text-content-main font_console text-2xl">Lucas.dev</span>
+      <span class="text-console font_console blinking_underscore font-medium text-xl">_</span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-6">
+      <ul class="flex items-center gap-10 font-mono text-sm relative" id="navContainer">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} data-i18n={item.i18n} data-nav={item.nav}
+                class="nav__btn_nav text-content-muted hover:text-console transition-colors py-1 text-[18px] font_console">
+              {item.label}
+            </a>
+          </li>
+        ))}
+
+        <!-- nav__sliding_bar for sliding_nav.ts -->
+        <span class="nav__sliding_bar" aria-hidden="true"></span>
+      </ul>
+
+      <div class="h-4 w-px bg-surface-800"></div>
+
+      <!-- Controls: Theme & Language Dropdowns -->
+      <div class="flex items-center gap-3">
+        
+        <!-- ====================================
+        + Theme Dropdown Container 
+        ==================================== -->
+
+        <div class="relative group" id="themeDropdownContainer" data-open="false">
+          <button 
+            id="themeDropdownBtn" aria-label="Select Theme"
+            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-200 hover:bg-main-500 group-hover:bg-main-500
+            text-content-main transition-colors text-xs font_console border border-surface-800 cursor-pointer"
+          >
+            <Icon name="lucide:palette" class="w-4 h-4 text-content-muted text-[16px] group-hover:text-white" />
+            <span id="currentThemeLabel" class="capitalize text-[16px] font_console group-hover:text-white">Theme</span>
+            <Icon name="lucide:chevron-down" class="w-3 h-3 text-content-muted text-[16px] group-hover:text-white" />
+          </button>
+
+          <!-- Theme Options Menu -->
+          <DropdownNav id="themeMenu" align='right' animation="scale" class="w-36">
+            {themes.map((theme) => (
+              <button data-theme-select={theme.id} class="w-full flex items-center gap-2 px-3 py-2 text-content-main 
+                  hover:bg-main-500 transition-colors text-left cursor-pointer group/item">
+                <Icon name={theme.icon} class="w-4 h-4 text-content-muted group-hover/item:text-white" />
+                <span class="text-[16px] font_console group-hover/item:text-white">{theme.label}</span>
+              </button>
+            ))}
+          </DropdownNav>
+        </div>
+
+        <!-- ====================================
+        + Language Dropdown Container 
+        ==================================== -->
+        <div class="relative group" id="langDropdownContainer" data-open="false">
+          <button 
+            id="langDropdownBtn"
+            aria-label="Select Language"
+            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-200 hover:bg-main-500 group-hover:bg-main-500 
+            text-content-main transition-colors text-xs font_console border border-surface-800 cursor-pointer"
+          >
+            <Icon name="lucide:globe" class="w-4 h-4 text-content-muted group-hover:text-white text-[16px]" />
+            <span id="currentLangLabel" class="text-[16px] font_console group-hover:text-white">
+              EN
+            </span>
+            <Icon name="lucide:chevron-down" class="w-3 h-3 text-content-muted group-hover:text-white text-[16px]" />
+          </button>
+
+          <!-- Language Menu -->
+          <DropdownNav id="langMenu" align="left" animation="scale" class='w-36'>
+            {languages.map(lang => (
+              <button 
+                data-lang={lang.id} class="w-full flex items-center gap-2 px-3 py-2 text-content-main hover:bg-main-500
+                 hover:text-white transition-colors text-left cursor-pointer">
+                <img src={lang.icon} alt={lang.alt} class="w-4 h-3 rounded-sm object-cover" />
+                <span class="text-[16px] font_console" data-i18n={lang.i18n}>{lang.label}</span>
+              </button>
+            ))}
+          </DropdownNav>
+        </div>
+
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- ============================= 
+  +   Mobile Drawer Menu 
+  ============================= -->
+  <div 
+    id="mobileMenu"
+    class="hidden md:hidden border-b border-surface-800 bg-surface-900 px-4 pt-2 pb-6 space-y-4"
+  >
+    <ul class="flex flex-col gap-3 font-mono text-sm">
+      {navItems.map((item) => (
+        <li>
+          <a href={item.href} class="mobile-nav-link block py-2 text-content-muted hover:text-console transition-colors">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="pt-4 border-t border-surface-800 flex flex-col gap-3">
+      <!-- Mobile Theme Selector -->
+      <div>
+        <span class="text-xs font-mono text-content-muted block mb-2">Select Theme:</span>
+        <div class="grid grid-cols-2 gap-2">
+          {themes.map((theme) => (
+            <button data-theme-select={theme.id} class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-200 
+              text-content-main text-xs font-mono border border-surface-800 cursor-pointer">
+              <Icon name={theme.icon} class="w-4 h-4 text-content-muted"/>
+              <span>{theme.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile Language Selector -->
+      <div class="pt-2 border-t border-surface-800 flex items-center justify-between">
+        <span class="text-xs font-mono text-content-muted">Language:</span>
+        <div class="flex gap-2">
+
+          {languages.map(lang => (
+            <button 
+              data-lang={lang.id} class="px-2.5 py-1.5 rounded bg-surface-200 text-content-main text-xs 
+                font-mono border border-surface-800 cursor-pointer flex items-center gap-2">
+              <img src={lang.icon} alt={lang.alt} class="w-4 h-3 rounded-sm object-cover" />
+              <span class="text-[16px] font_console" data-i18n={lang.i18n}>{lang.labelMobile}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { initNavigation } from '@shared/scripts/navbar/navigation';
+  import '@shared/scripts/navbar/sliding_nav.ts';
+
+  
+
+  // 3. Corregido: astro:page-load cubre tanto la carga inicial como navegaciones con ClientRouter
+  document.addEventListener('astro:page-load', () => {
+    
+    initNavigation();
+  });
+</script>

@@ -1,0 +1,109 @@
+---
+// src/shared/components/DropdownNav.astro
+
+/**
+ * DropdownNav
+ * -----------
+ * A presentational dropdown menu panel.
+ *
+ * It renders the menu container only. The open/close behavior is driven by
+ * the parent wrapper (a `.group` element) toggling `data-open="true"|"false"`.
+ * That state is set by the JS controller in `shared/scripts/utils/dropdown.ts`.
+ *
+ * The component does NOT know what's inside the menu. Pass content via <slot />.
+ *
+ * @example
+ *   <div class="relative group" data-open="false" id="langDropdownContainer">
+ *     <button id="langDropdownBtn">…</button>
+ *     <DropdownNav id="langMenu" align="right" animation="scale">
+ *       <button data-lang="en">English</button>
+ *     </DropdownNav>
+ *   </div>
+ */
+
+interface Props {
+  /** Required DOM id — the JS controller uses it to find this node. */
+  id: string;
+
+  /** Horizontal anchor inside the parent container. Default: 'left'. */
+  align?: 'left' | 'right';
+
+  /** Entrance/exit animation preset. Default: 'scale'. */
+  animation?: 'fade' | 'slide' | 'scale' | 'none';
+
+  /** Extra classes appended last — can override any default. */
+  class?: string;
+
+  /** Any other valid HTML attribute (aria-*, data-*, role, etc.). */
+  [key: string]: unknown;
+}
+
+const {
+  id,
+  align = 'left',
+  animation = 'scale',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+/**
+ * Animation presets.
+ * Each preset has two parts:
+ *   - closed state: applied by default
+ *   - open state: applied when `.group[data-open="true"]` is an ancestor
+ *
+ * Tailwind needs literal class names at build time, so each preset is
+ * written out explicitly instead of being built from a template string.
+ */
+const ANIMATION_CLASSES: Record<
+  NonNullable<Props['animation']>,
+  string[]
+> = {
+  fade: [
+    'opacity-0',
+    'transition-opacity duration-300 ease-out',
+    'group-data-[open=true]:opacity-100',
+  ],
+  slide: [
+    'opacity-0 -translate-y-2',
+    'transition-all duration-300 ease-out',
+    'group-data-[open=true]:opacity-100',
+    'group-data-[open=true]:translate-y-0',
+  ],
+  scale: [
+    'opacity-0 -translate-y-2 scale-95 pointer-events-none',
+    'transition-all duration-300 ease-out',
+    'group-data-[open=true]:opacity-100',
+    'group-data-[open=true]:translate-y-0',
+    'group-data-[open=true]:scale-100',
+    'group-data-[open=true]:pointer-events-auto',
+  ],
+  none: [
+    'hidden',
+    'group-data-[open=true]:block',
+  ],
+};
+
+const animationClasses = ANIMATION_CLASSES[animation];
+---
+
+<div
+  id={id}
+  class:list={[
+    // --- Base panel styles -------------------------------------------------
+    'absolute bg-surface-200 border border-surface-800 rounded-lg shadow-xl',
+    'py-1 z-50 text-xs font_console origin-top',
+    
+    // --- Animation (depends on `animation` prop) ---------------------------
+    ...animationClasses,
+
+    // --- Horizontal alignment ---------------------------------------------
+    align === 'left' ? 'left-0' : 'right-0',
+
+    // --- Consumer overrides (applied last so they win) ---------------------
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</div>
