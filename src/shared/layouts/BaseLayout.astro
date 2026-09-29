@@ -1,5 +1,12 @@
 ---
 import '@shared/styles/global.css'
+import '@shared/styles/custom.css'
+
+
+import Navbar from '@components/Navbar.astro';
+
+// This is to enable SPA
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -20,17 +27,8 @@ const { title } = Astro.props;
 
 <!-- Blue Theme -->
 <html lang="en" data-theme="blue"></html>
-*/
 
----
-
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- <meta name="theme-color" content="#000000"> --> 
-    <title>{title}</title>
+<!-- <meta name="theme-color" content="#000000"> --> 
 
     <!-- Meta tags útiles para SEO y redes sociales -->
     <meta name="description" content="Lucas Callamullo, Software Engineer from Córdoba, Argentina. 
@@ -54,19 +52,69 @@ const { title } = Astro.props;
     <meta name="twitter:description" content="Building scalable backend systems. E-commerce, microservices, 
         REST APIs. Python, Java, Node.js, Docker.">
 
+*/
+
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>{title}</title>
+
     <link rel="icon" type="image/svg+xml" href="./staticfiles/icon/terminal.svg">
 
-    <!-- Roboto font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Slot para CSS o meta tags específicos de cada página -->
+    <slot name="head" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-
+    <!-- Enables client-side SPA navigation between pages -->
+    <ClientRouter fallback="swap"/>
   </head>
-  <body class="bg-slate-950 text-slate-100 min-h-screen" data-theme="dark">
-    <!-- Navbar global -->
-    <slot /> <!-- AQUÍ SE RENDERIZA EL CONTENIDO DE INDEX.ASTRO -->
-    <!-- Footer global -->
+
+
+  <body class="bg-slate-950 text-slate-100 min-h-screen">
+    <!-- Navbar global persistente -->
+    <Navbar transition:persist></Navbar>
+
+    <!-- Banner superior opcional -->
+    <slot name="banner-header" />
+
+    <main class="mx-auto py-6 space-y-10 max-w-6xl"> 
+      <!-- Contenido principal por defecto -->
+      <slot />
+    </main>
+
+    <!-- Banner inferior / CTA opcional -->
+    <slot name="banner-footer" />
+
+    <!-- Footer global 
+
+    
+    <script>
+      import { resetModals } from '@shared/scripts/utils/modal';
+
+      // Limpia el estado global antes de que Astro cambie de página.
+      document.addEventListener('astro:before-swap', resetModals);
+    </script>
+  -->
+    <script>
+      import { initTranslations, applyTranslations, } from '@shared/scripts/utils/translations';
+
+      // 1. Carga inicial: fetch del JSON + aplicar.
+      initTranslations();
+
+      // 2. Después de cada navegación SPA: solo reaplicar.
+      let firstLoad = true;
+
+      document.addEventListener('astro:page-load', () => {
+        if (firstLoad) {
+          firstLoad = false;
+          return; // initTranslations ya se encargó
+        }
+        applyTranslations();
+      });
+    </script>
   </body>
-</html> 
+</html>  

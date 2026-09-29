@@ -90,3 +90,18 @@ export function initThemeOptions(
     config.onSelect?.(value);
   });
 }
+
+
+/**
+ * Apply the stored theme to the incoming document BEFORE the swap,
+ * so the new page renders with the correct theme on its first paint.
+ */
+export function syncThemeBeforeSwap(event: Event): void {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (!isThemeId(stored)) return;
+
+  const newDoc = (event as any).newDocument as Document | undefined;
+  if (newDoc) {
+    newDoc.documentElement.setAttribute('data-theme', stored);
+  }
+}
