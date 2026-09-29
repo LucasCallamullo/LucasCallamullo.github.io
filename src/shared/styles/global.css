@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 @import "tailwindcss";
+@import "./custom.css";
 
 /* ==========================================================================
   1. TAILWIND THEME CONFIGURATION (V4)
@@ -30,6 +31,7 @@
   /* Fixed Brand Colors */
   --color-brand-red: var(--color-red);
   --color-brand-green: var(--color-green);
+  --color-brand-green-100: var(--color-green);
   --color-brand-wsp: var(--color-wsp);
 
   /* CUSTOM Brand Colors */
@@ -45,6 +47,7 @@
 :root {
   --color-red: #e40707;
   --color-green: #28a745;
+  --color-green-100: #10b981;
   --color-wsp: #2db742;
 
   --height-header: 80px
@@ -63,7 +66,7 @@
 
   /* Surface scale (Light shades) */
   --surface-100: #ffffff; /* Base background */
-  --surface-200: #f7f7f7; /* Card background */
+  --surface-200: #f0f2f5; /* Card background */
   --surface-800: #e2e8f0; /* Borders / Dividers */
   --surface-900: #cbd5e1; /* Dark contrast element */
 
@@ -86,9 +89,9 @@
 
   /* Surface scale (Dark shades flipped!) */
   --surface-100: #2d3748; /* Highlight cards */
-  --surface-200: #1e1e1e; /* Card background */
-  --surface-800: #181b20; /* Darker containers */
-  --surface-900: #121212; /* Base dark background */
+  --surface-200: #0a0e11; /* Card background */
+  --surface-800: #343a40; /* Darker containers   212529     181b20    */
+  --surface-900: #141b20; /* Base dark background    343a40     121212    */
 
   /* Typography */
   --text-main: #ffffff;
@@ -107,7 +110,7 @@
   --main-700: #6d28d9;
 
   --surface-100: #231b42;
-  --surface-200: #17122b;
+  --surface-200: #2e2455;
   --surface-800: #120e22;
   --surface-900: #0f0c1b;
 
@@ -125,7 +128,7 @@
   --main-700: #0369a1;
 
   --surface-100: #182a45;
-  --surface-200: #0f1d30;
+  --surface-200: #253f64;
   --surface-800: #0a1422;
   --surface-900: #07111e;
 
@@ -157,52 +160,4 @@ main {
   margin-top: var(--height-header);
 }
 
-/* z-index is set dynamically by modal.ts */
-.modal,
-.overlay {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
 
-.modal.is__open,
-.overlay.is__open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-
-/* Drawer: sale desde el borde izquierdo, ancho parcial */
-.drawer {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 65%;
-  max-width: 320px;
-  z-index: 50;
-  overflow-y: auto;
-  transform: translateX(-100%);
-  transition: transform 0.25s ease, opacity 0.2s ease;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.drawer.is__open {
-  transform: translateX(0);
-  opacity: 1;
-  pointer-events: auto;
-}

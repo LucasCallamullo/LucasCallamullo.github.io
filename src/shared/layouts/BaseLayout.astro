@@ -1,18 +1,36 @@
 ---
 import '@shared/styles/global.css'
-import '@shared/styles/custom.css'
+// import '@shared/styles/custom.css'
 
 
 import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
 
 // This is to enable SPA
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
+  /** Extra classes merged into the <main> element. */
+  mainClass?: string;
+  /** Max width preset for <main>. Default: 'md' (max-w-6xl). */
+  mainWidth?: 'sm' | 'md' | 'lg' | 'full';
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  mainClass = '',
+  mainWidth = 'md',
+} = Astro.props;
+
+export const WIDTH_CLASSES = {
+  sm: 'max-w-3xl mx-auto',
+  md: 'max-w-6xl mx-auto',
+  lg: 'max-w-7xl mx-auto',
+  full: 'max-w-none mx-auto',
+} as const;
+
+const widthClass = WIDTH_CLASSES[mainWidth];
 
 
 /* 
@@ -74,14 +92,15 @@ const { title } = Astro.props;
   </head>
 
 
-  <body class="bg-slate-950 text-slate-100 min-h-screen">
+  <body class="min-h-screen">
     <!-- Navbar global persistente -->
     <Navbar transition:persist></Navbar>
 
     <!-- Banner superior opcional -->
     <slot name="banner-header" />
 
-    <main class="mx-auto py-6 space-y-10 max-w-6xl"> 
+    <!-- mx-auto py-6 space-y-10 max-w-6xl   -- MAIN DEFAULT CLASS -->
+    <main class:list={['space-y-10', widthClass, mainClass]}>
       <!-- Contenido principal por defecto -->
       <slot />
     </main>
@@ -89,9 +108,10 @@ const { title } = Astro.props;
     <!-- Banner inferior / CTA opcional -->
     <slot name="banner-footer" />
 
-    <!-- Footer global 
+    <!-- Footer global -->
+    <Footer class:list={['space-y-10', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}> </Footer>
 
-    
+    <!--
     <script>
       import { resetModals } from '@shared/scripts/utils/modal';
 
@@ -100,7 +120,7 @@ const { title } = Astro.props;
     </script>
   -->
     <script>
-      import { initTranslations, applyTranslations, } from '@shared/scripts/utils/translations';
+      import { initTranslations, applyTranslations, } from '@shared/scripts/navbar/translations';
 
       // 1. Carga inicial: fetch del JSON + aplicar.
       initTranslations();

@@ -164,9 +164,17 @@ export function applyTranslations(
       el.value = value;
     } else if (el instanceof HTMLImageElement) {
       el.src = value;
+
     } else if (el instanceof HTMLAnchorElement && el.hasAttribute('href')) {
-      // el.href = value;
-      el.textContent = value;
+      
+      // ! This is only for cv download href
+      if (el.getAttribute('data-cv') === 'true') {
+        el.href = value;
+        el.download = resolveKey(el.getAttribute('data-altText') || '') || '';
+      } else {
+        el.textContent = value;
+      }
+
     } else {
       el.textContent = value;
     }

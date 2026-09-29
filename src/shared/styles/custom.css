@@ -1,7 +1,35 @@
+/* ============================================================
+   CUSTOM CLASSES INDEX
+   ------------------------------------------------------------
+   .font_console         → monospace font stack
+   .blinking_underscore  → blinking "_" cursor animation
+   .nav__btn_nav         → navbar button (active/hover color)
+   .nav__sliding_bar     → sliding underline under nav buttons
+   .modal / .overlay     → modal + backdrop
+   .drawer               → left-side mobile drawer
+   .hover-up             → lift effect (defined via @utility)
+   ============================================================ */
+/* En tu CSS global */
+@utility hover-up {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: transform;
 
+  &:active,
+  &:focus-visible {
+    transform: translateY(-0.25rem);
+  }
 
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-0.25rem);
+    }
+  }
+}
+
+/* FONT CONSOLE STYLES */
 .font_console {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 
@@ -9,12 +37,12 @@
     NAVBAR - EFFECTS
 */
 .blinking_underscore {
-    animation: blinkUnderscore 2s step-end infinite;
+  animation: blinkUnderscore 2s step-end infinite;
 }
 
 @keyframes blinkUnderscore {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 
@@ -56,5 +84,54 @@
 
 
 /* ============================================
-   Sliding Navigation
+  MODAL CLASS
 ============================================ */
+/* z-index is set dynamically by modal.ts */
+.modal,
+.overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal.is__open,
+.overlay.is__open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+/* Drawer: sale desde el borde izquierdo, ancho parcial */
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 65%;
+  max-width: 320px;
+  z-index: 50;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drawer.is__open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}

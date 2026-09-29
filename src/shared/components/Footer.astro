@@ -1,0 +1,145 @@
+---
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { navItems, SOCIAL_LINKS } from '@shared/data/links';
+import { iban } from 'astro:schema';
+import { isRenderTemplateResult } from 'astro/runtime/server/render/astro/render-template.js';
+
+interface Props {
+  class?: string;
+  classSon?: string;
+}
+
+const { 
+  class: className = '',
+  classSon: classSon = ''
+} = Astro.props;
+
+
+---
+
+<footer class:list={['bg-surface-900 pt-3 border-t border-content-muted', className]}>
+
+  <div class:list={['grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-3', classSon]}>
+
+    <!-- + CONTENEDOR CONSOLA -->
+    <div class="border border-content-muted rounded-lg hover:rounded-none transition-all duration-300 ease-out
+      p-4 w-full mx-auto flex flex-col bg-surface-200">
+
+      <h4>
+        <span class="font_console text-xl text-accent font-semibold">$</span>
+        <span class="font_console text-xl blinking_underscore font-semibold ms-1">_</span>
+        <span class="font_console text-xl text-accent font-semibold ms-1 tracking-wider">cat whoami.txt</span>
+      </h4>
+
+      <p class="mt-2">
+        <span class="font_console text-lg text-accent font-semibold">&gt;</span>
+        <span class="font_console text-lg blinking_underscore font-semibold ms-1">_</span>
+        <span class="font_console text-lg text-console font-semibold ms-1 tracking-wider">Lucas Callamullo</span>
+      </p>
+
+      <p class="mt-2">
+        <span class="font_console text-base text-accent font-semibold">&gt;</span>
+        <span class="font_console text-base blinking_underscore font-semibold ms-1">_</span>
+        <span class="font_console tracking-wider text-base font-medium text-justify text-content-muted ms-1" data-i18n={I18N.footer.resume}>
+          Backend Developer building scalable APIs with Python & Java. 
+          PostgreSQL, Docker, and cloud deployments.
+        </span>
+      </p>
+
+      <a class="mt-5 mb-1 w-min flex gap-3 group px-3 py-2 items-center justify-center
+        border-console border rounded hover:rounded-none transition-all duration-300 ease-out" 
+        data-i18n={I18N.links.cv.href}
+        data-altText={I18N.links.cv.altText}
+        data-cv="true"
+        target="_blank"
+        download={SOCIAL_LINKS.cv.altText}
+        href={SOCIAL_LINKS.cv.href}>
+          <Icon name={SOCIAL_LINKS.cv.icon} class="text-lg text-console group-hover:text-content-main"></Icon>
+          <span class="font_console text-base text-console group-hover:text-content-main tracking-wide" 
+            data-i18n={I18N.footer.downloadLabel}>
+            ./download_cv.sh
+          </span>
+      </a>
+    </div>
+
+    <!-- + CONTENEDOR CONSOLA -->
+    <div class="border border-content-muted rounded-lg hover:rounded-none transition-all duration-300 ease-out
+      p-4 w-full mx-auto flex flex-col bg-surface-200">
+
+      <h4>
+        <span class="font_console text-xl text-accent font-semibold">$</span>
+        <span class="font_console text-xl blinking_underscore font-semibold ms-1">_</span>
+        <span class="font_console text-xl text-accent font-semibold ms-1 tracking-wider">ls routes/</span>
+      </h4>
+
+      <ul class="mt-2 flex flex-col gap-2">
+        {navItems.map((item) => (
+          <li>
+            <a class="flex gap-2 w-min px-2 items-center justify-start group hover-up" data-nav={item.nav} href={item.href}>
+              <span class="font_console text-accent text-base font-semibold">&gt;</span>
+              <span class="font_console tracking-wider text-base group-hover:text-console lowercase truncate" 
+                data-i18n={item.i18n}>
+                  {item.label}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      
+    </div>
+
+    <!-- + CONTENEDOR CONSOLA -->
+    <div class="border border-content-muted rounded-lg hover:rounded-none transition-all duration-300 ease-out
+      p-4 w-full h-full justify-between mx-auto flex flex-col bg-surface-200">
+
+      <div>
+        <h4>
+          <span class="font_console text-xl text-accent font-semibold">$</span>
+          <span class="font_console text-xl blinking_underscore font-semibold ms-1">_</span>
+          <span class="font_console text-xl text-accent font-semibold ms-1 tracking-wider">ssh connect@lucas.dev</span>
+        </h4>
+
+
+        <ul class="mt-3 flex flex-col gap-2">
+          {Object.entries(SOCIAL_LINKS)
+            .filter(([key]) => key !== 'cv')
+            .map(([key, item]) => (
+            <li> 
+              <a class="flex gap-2 w-min px-2 items-center justify-start group hover-up" 
+                href={item.href} target="_blank">
+                  <Icon name={item.icon} class="text-xl group-hover:text-console"></Icon>
+                  <span class="font_console text-base group-hover:text-console" data-i18n={item.i18n}>{item.altText}</span>
+                  <Icon name="ri:external-link-fill" class="text-lg" ></Icon>
+              </a>
+            </li>
+          ))} 
+        </ul>
+      </div>
+ 
+      <p class="border-t border-surface-800 pt-3 flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-brand-green-100 shadow-brand-green-100 animate-pulse"></span>
+        <span class="text-content-muted font_console text-base">online · ART (UTC-3)</span>
+      </p>
+    </div>
+
+    <!-- LAST FOOTER STUFF -->
+    <div class="col-span-full border-t border-content-main mt-3 flex items-center justify-between">
+      <p class="p-3 flex gap-2 items-center">
+        <span class="font_console text-base tracking-wide text-accent">$</span>
+        <span class="font_console text-base tracking-wide text-console">echo</span>
+        <Icon name="ri:copyright-line" class="text-base"></Icon>
+        <span class="text-base tracking-wide ">2026 Lucas Callamullo · UTN</span>
+      </p>
+      <p class="p-3">
+        <span class="text-base tracking-wide" data-i18n={I18N.footer.build}>built with: </span>
+        <span class="text-base tracking-wide font-semibold text-console"> Astro</span>
+        <span class="text-base tracking-wide"> | </span>
+        <span class="text-base tracking-wide font-semibold text-console">TypeScript</span>
+        <span class="text-base tracking-wide"> | </span>
+        <span class="text-base tracking-wide font-semibold text-console">Tailwind</span>
+      </p>
+    </div>
+
+  </div>
+</footer>

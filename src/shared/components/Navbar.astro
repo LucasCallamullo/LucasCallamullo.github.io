@@ -1,23 +1,10 @@
 ---
 // src/shared/components/Navbar.astro
 import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { navItems } from '@shared/data/links';
 import DropdownNav from '@shared/components/DropdownNav.astro';
 
-// Navigation menu links
-interface NavItem {
-  href: string;
-  i18n: string;
-  label: string;
-  nav: string;
-}
-
-const navItems: NavItem[] = [
-  { href: '/',         i18n: 'nav.home',     label: 'Home',     nav: 'home' },
-  { href: '/about',    i18n: 'nav.about',    label: 'About',    nav: 'about' },
-  { href: '/skills',   i18n: 'nav.skills',   label: 'Skills',   nav: 'skills' },
-  { href: '/projects', i18n: 'nav.projects', label: 'Projects', nav: 'projects' },
-  { href: '/contact',  i18n: 'nav.contact',  label: 'Contact',  nav: 'contact' },
-];
 
 // Defined themes for dynamic rendering
 const themes = [
@@ -28,10 +15,10 @@ const themes = [
 ];
 
 const languages = [
-  { id: 'en', icon: "/icons/flag_us.svg", alt: 'USA Flag', label: "EN English", i18n: 'nav.languageEN',
-    i18nMobile: 'nav.languageMobileEN', labelMobile: 'EN' },
-  { id: 'es', icon: "/icons/flag_ar.svg", alt: 'ARG Flag', label: "ES Spanish", i18n: 'nav.languageES',
-    i18nMobile: 'nav.languageMobileES', labelMobile:'ES'},
+  { id: 'en', icon: "/icons/flag_us.svg", alt: 'USA Flag', label: "EN English", i18n: I18N.nav.languageEN,
+    i18nMobile: I18N.nav.mobile.langEN, labelMobile: 'EN' },
+  { id: 'es', icon: "/icons/flag_ar.svg", alt: 'ARG Flag', label: "ES Spanish", i18n: I18N.nav.languageES,
+    i18nMobile: I18N.nav.mobile.langES, labelMobile:'ES'},
 ];
 ---
 
@@ -168,7 +155,7 @@ const languages = [
       <div class="pt-4 border-t border-surface-800 flex flex-col gap-3">
         <!-- Mobile Theme Selector -->
         <div id="mobileMenu__theme_btns">
-          <span class="text-xs text-content-muted block mb-2 font_console" data-i18n="nav.mobile.themeLabel">Select Theme:</span>
+          <span class="text-xs text-content-muted block mb-2 font_console" data-i18n={I18N.nav.mobile.themeLabel}>Select Theme:</span>
           <div class="grid grid-cols-2 gap-2">
             {themes.map((theme) => (
               <button data-theme-select={theme.id} class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-200 
@@ -182,7 +169,7 @@ const languages = [
 
         <!-- Mobile Language Selector -->
         <div id="mobileMenu__lang_btns" class="pt-2 border-t border-surface-800 flex items-center justify-between">
-          <span class="text-xs font_console text-content-muted" data-i18n="nav.mobile.langLabel">Language:</span>
+          <span class="text-xs font_console text-content-muted" data-i18n={I18N.nav.mobile.langLabel}>Language:</span>
           <div class="flex gap-2">
             {languages.map(lang => (
               <button data-lang={lang.id} data-flag={lang.icon}

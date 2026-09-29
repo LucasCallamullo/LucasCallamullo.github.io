@@ -5,7 +5,7 @@ import { bindModal } from '@shared/scripts/utils/modal';
 import { initThemeOptions, syncThemeBeforeSwap } from './theme';
 import SlidingNavigation from '@shared/scripts/navbar/sliding_nav';
 
-import { initLanguageOptions } from '../utils/translations';
+import { initLanguageOptions } from './translations';
 
 
 export function initNavigation(): void {
