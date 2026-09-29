@@ -13,6 +13,10 @@ export function initNavigation(): void {
   // Every SPA navigation
   document.addEventListener('astro:page-load', () => {
 
+    // ======================================================
+    // +  DESKTOP
+    // ======================================================
+
     // --- Register THEME dropdown desktop ---
     const themeContainer = document.getElementById('themeDropdownContainer');
     const themeTrigger = document.getElementById('themeDropdownBtn');
@@ -47,9 +51,13 @@ export function initNavigation(): void {
     if (langMenu) {
       initLanguageOptions(langMenu);
     }
+
+    // set effects slide navbar effect
+    SlidingNavigation.getInstance().mount()
     
-
-
+    // ======================================================
+    // +  MOBILE
+    // ======================================================
     
     // --- Mobile drawer ---
     const modalMobile = bindModal({ 
@@ -58,9 +66,9 @@ export function initNavigation(): void {
       openBtnSelector: '#mobileMenuBtn' 
     });
 
-    const mobileThemeMenu = document.querySelector<HTMLElement>('#mobileMenu__theme_btns');
-    if (mobileThemeMenu) {
-      initThemeOptions(mobileThemeMenu, {
+    const mobThemeMenu = document.querySelector<HTMLElement>('#mobileMenu__theme_btns');
+    if (mobThemeMenu) {
+      initThemeOptions(mobThemeMenu, {
         onSelect: () => {
           if (!modalMobile) return;
           // Explicitly set the guard flag to true before triggering the handler
@@ -69,10 +77,11 @@ export function initNavigation(): void {
       });
     }
 
-
-
-    // set effects slide navbar effect
-    SlidingNavigation.getInstance().mount()
+    // language options on mobile menu
+    const mobLangMenu = document?.querySelector<HTMLElement>('#mobileMenu__lang_btns');
+    if (mobLangMenu) {
+      initLanguageOptions(mobLangMenu);
+    }
   });
 
   // Runs before Astro swaps the <body> — applies the theme to the incoming document.

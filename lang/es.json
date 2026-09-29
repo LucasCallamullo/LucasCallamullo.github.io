@@ -1,4 +1,21 @@
 {
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "languageEN": "EN Inglés",
+    "languageES": "ES Español",
+
+    "mobile": {
+      "themeLabel": "Seleccionar tema:", 
+      "langLabel": "Idiomas:",
+      "languageMobileES": "ES",
+      "languageMobileEN": "EN"
+    }
+  },
+
     "nav.home": "Inicio",
     "nav.about": "Sobre mí",
     "nav.skills": "Habilidades",

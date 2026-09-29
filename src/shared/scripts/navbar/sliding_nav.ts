@@ -103,6 +103,11 @@ class SlidingNavigation {
 
       this.setActiveButton(button);
     });
+
+    // ! THIS IS FROM ./utils/translations.ts
+    document.addEventListener('languagechange', (e) => {
+      document.fonts.ready.then(() => this.refreshBarPosition());
+    });
   }
 
   /**

@@ -1,9 +1,23 @@
 {
-    "nav.home": "Home",
-    "nav.about": "About",
-    "nav.skills": "Skills",
-    "nav.projects": "Projects",
-    "nav.contact": "Contact",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "languageEN": "EN English",
+    "languageES": "ES Spanish",
+
+    "mobile": {
+      "themeLabel": "Select Theme:",
+      "langLabel": "Languages:",
+      "languageMobileES": "ES",
+      "languageMobileEN": "EN"
+    }
+  }, 
+
+
+
     "hero.prefix": ">",
     "hero.name": "Lucas.dev",
     "prompt": "$",
