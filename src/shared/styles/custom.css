@@ -1,0 +1,60 @@
+
+
+.font_console {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+
+/**
+    NAVBAR - EFFECTS
+*/
+.blinking_underscore {
+    animation: blinkUnderscore 2s step-end infinite;
+}
+
+@keyframes blinkUnderscore {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* ============================================
+   Sliding Navigation
+============================================ */
+
+/* Botones de navegación */
+.nav__btn_nav {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav__btn_nav:hover,
+.nav__btn_nav.active {
+  color: var(--console-color);
+}
+
+/* La barra deslizante */
+.nav__sliding_bar {
+  position: absolute;
+  bottom: -8px;         
+  /* left: 0;              se calcula por JS */
+  /* width: 1px;           se calcula por JS */
+  height: 3px;
+  pointer-events: none;
+  border-radius: 2px;      /* 9999px */
+  background-color: var(--console-color);
+  box-shadow: 0 0 2px var(--console-color);
+
+ /* Solo `transform` se anima — es GPU-friendly y simétrico.  */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, width; 
+}
+
+
+/* ============================================
+   Sliding Navigation
+============================================ */

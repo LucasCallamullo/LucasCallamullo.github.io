@@ -29,6 +29,10 @@ export interface DropdownOptions {
 
   /** Open on hover (desktop). Default: true. */
   openOnHover?: boolean;
+
+  /** Close on leave (desktop). Default: true. */
+  closeOffHover?: boolean;
+
   /** Called when the menu opens. */
   onOpen?: () => void;
   /** Called when the menu closes. */
@@ -82,6 +86,9 @@ export class DropdownController {
   private trigger: HTMLElement;
   // private menu: HTMLElement;
   private openOnHover: boolean;
+  private closeOffHover: boolean;
+
+  // callbacks
   private onOpen?: () => void;
   private onClose?: () => void;
 
@@ -92,6 +99,7 @@ export class DropdownController {
     this.trigger = options.trigger;
     // this.menu = options.menu;
     this.openOnHover = options.openOnHover ?? true;
+    this.closeOffHover = options.closeOffHover ?? true;
     this.onOpen = options.onOpen;
     this.onClose = options.onClose;
 
@@ -158,6 +166,9 @@ export class DropdownController {
   private attachLocalListeners(): void {
     if (this.openOnHover) {
       this.container.addEventListener('mouseenter', () => this.open());
+    }
+
+    if (this.closeOffHover) {
       this.container.addEventListener('mouseleave', () => this.close());
     }
 

@@ -34,6 +34,7 @@
 
   /* CUSTOM Brand Colors */
   --color-console: var(--console-color);
+  --color-console-100: var(--console-color-light);
   --color-accent: var(--accent-color);
 }
 
@@ -45,6 +46,8 @@
   --color-red: #e40707;
   --color-green: #28a745;
   --color-wsp: #2db742;
+
+  --height-header: 80px
 }
 
 /** ==========================================================================
@@ -70,6 +73,7 @@
 
   /* Custom Accents */
   --console-color: #059669;
+  --console-color-light: #2e7d32;
   --accent-color: #c47d00;
 }
 
@@ -92,6 +96,7 @@
 
   /* Custom Accents */
   --console-color: #00ff00;
+  --console-color-light: #2e7d32;
   --accent-color: #ffb800;
 }
 
@@ -140,4 +145,64 @@ html, body {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  height: var(--height-header);      /* Altura según variable */
+  z-index: var(--z-index);           /* Sobre otros elementos */
+  border-bottom: 1px solid var(--console-color-light);
+}
+
+main {
+  margin-top: var(--height-header);
+}
+
+/* z-index is set dynamically by modal.ts */
+.modal,
+.overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal.is__open,
+.overlay.is__open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+/* Drawer: sale desde el borde izquierdo, ancho parcial */
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 65%;
+  max-width: 320px;
+  z-index: 50;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drawer.is__open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
