@@ -10,21 +10,36 @@
    .hover-up             → lift effect (defined via @utility)
    ============================================================ */
 /* En tu CSS global */
+@utility hover-up-sm {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: transform;
+  &:active, &:focus-visible { transform: translateY(-0.125rem); }
+  @media (hover: hover) { &:hover { transform: translateY(-0.125rem); } }
+}
+
 @utility hover-up {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   will-change: transform;
+  &:active, &:focus-visible { transform: translateY(-0.25rem); }
+  @media (hover: hover) { &:hover { transform: translateY(-0.25rem); } }
+}
 
-  &:active,
-  &:focus-visible {
-    transform: translateY(-0.25rem);
-  }
+@utility hover-up-lg {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: transform;
+  &:active, &:focus-visible { transform: translateY(-0.5rem); }
+  @media (hover: hover) { &:hover { transform: translateY(-0.5rem); } }
+}
 
-  @media (hover: hover) {
-    &:hover {
-      transform: translateY(-0.25rem);
-    }
-  }
+@utility hover-up-xl {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  will-change: transform;
+  &:active, &:focus-visible { transform: translateY(-1rem); }
+  @media (hover: hover) { &:hover { transform: translateY(-1rem); } }
 }
 
 /* FONT CONSOLE STYLES */

@@ -152,7 +152,7 @@ html, body {
 
 header {
   height: var(--height-header);      /* Altura según variable */
-  z-index: var(--z-index);           /* Sobre otros elementos */
+  z-index: 50;           /* Sobre otros elementos */
   border-bottom: 1px solid var(--console-color-light);
 }
 
@@ -161,3 +161,111 @@ main {
 }
 
 
+#whoami {
+  min-height: calc(100vh - var(--height-header));
+}
+
+
+/* ==============================================================
+  +  BUTTON EFFECT [ ----  ]
+/* ============================================================== */
+.btn_notched {
+  width: min-content;
+  position: relative;
+  /* padding: 16px 20px;
+  height: 40px; */
+  border: 3px ridge var(--console-color);
+  outline: none;
+  transition: 1s;
+  border-radius: 5px;
+}
+
+.btn_notched::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.btn_notched::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  transition: 0.5s;
+}
+
+.btn_notched:hover::before, .btn_notched:hover::after {
+  transform: scale(0)
+}
+
+.btn_notched_surface_900::after,
+.btn_notched_surface_900::before {
+  background-color: var(--surface-900);
+}
+
+
+/* ==============================================================
+  +  TECH SKILL [ - ]
+/* ============================================================== */
+.skillsSwiper {
+  width: 100%;
+    /* hidden   visible */
+  overflow: hidden;
+  cursor: grab;
+}
+
+.tech_group {
+  user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+
+  height: 150px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* Para mejorar el rendimiento en drag */
+  will-change: transform;
+}
+
+.tech_group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.2);
+}
+
+.tech_group svg {
+    object-fit: contain;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Comienza en gris y más tenue */
+    filter: grayscale(67%);
+    opacity: 0.7;
+}
+
+.tech_group svg:hover {
+    transform: scale(1.1);
+}
+
+/* Efecto al pasar el mouse sobre el slide completo */
+.tech_group:hover svg {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Efecto adicional: el resto de iconos del slide se atenúan */
+.tech_group:hover svg:not(:hover) {
+    filter: grayscale(25%);
+    opacity: 0.9;
+}
