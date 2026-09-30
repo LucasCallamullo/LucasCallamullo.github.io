@@ -39,8 +39,8 @@ export const I18N = {
     linkedin: 'links.linkedin',
     email: 'links.email',
     cv: {
-        href: 'links.cv.href',    
-        altText: 'links.cv.altText',
+      href: 'links.cv.href',    
+      altText: 'links.cv.altText',
     },
   },
 
@@ -48,6 +48,33 @@ export const I18N = {
     downloadLabel: 'footer.downloadLabel',
     resume: 'footer.resume',
     build: 'footer.build',
-  }
+  },
+
+  home: {
+    title: 'home.title',    // My Name
+    subtitle: 'home.subtitle',
+    spanOne: 'home.spanOne',
+    spanTwo: 'home.spanTwo',
+    btn: {
+      projects: 'home.btn.projects',
+      contact: 'home.btn.contact',
+      downloadCv: 'home.btn.downloadCv',
+    },
+    about: {
+      about_txt: 'home.about.about_txt',
+      about_p1_1: 'home.about.about_p1_1',
+      about_p1_2: 'home.about.about_p1_2',
+      about_p1_3: 'home.about.about_p1_3',
+      about_p2_1: 'home.about.about_p2_1',
+      about_p2_2: 'home.about.about_p2_2',
+      about_p2_3: 'home.about.about_p2_3',
+      about_p3_1: 'home.about.about_p3_1',
+    },
+    skills: {
+      title: 'home.skills.title',
+      subtitle: 'home.skills.subtitle',
+      btn: 'home.skills.btn',
+    },
+  },
 
 } as const;

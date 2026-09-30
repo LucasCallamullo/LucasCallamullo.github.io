@@ -114,28 +114,6 @@ export async function loadLanguage(lang: LangCode): Promise<void> {
 }
 
 /**
- * Sync the language trigger with the values stored in localStorage.
- *
- * Updates:
- *  - `#currentLangLabel` text → uppercase language code (e.g. "EN", "ES").
- *  - `#currentFlagLabel` src  → path to the flag icon.
- *
- * Values are read from localStorage so the trigger reflects the persisted
- * state without needing callers to pass `lang` / `flag` as parameters.
- */
-function syncLabelTranslations(): void {
-  const label = document.querySelector<HTMLElement>('#currentLangLabel');
-  if (label) {
-    label.textContent = localStorage.getItem(STORAGE_KEY)?.toLocaleUpperCase() || "EN";
-  }
-
-  const flagImg = document.querySelector<HTMLImageElement>('#currentFlagLabel');
-  if (flagImg) {
-    flagImg.src = localStorage.getItem(STORAGE_KEY_FLAG) || "/icons/flag_us.svg";
-  }
-}
-
-/**
  * Apply the current translations to every `[data-i18n]` element in the DOM.
  *
  * - Elements with a `value` attribute (inputs) get their value set.
@@ -180,9 +158,34 @@ export function applyTranslations(
     }
   });
 
+  // Single event: the language changed and the translations were applied.
+  document.dispatchEvent(new CustomEvent('applyTranslations'));
+
   // Run callbacks (re-render dynamic sections, etc.)
   for (const fn of Object.values(callbacks)) {
     if (typeof fn === 'function') fn();
+  }
+}
+
+/**
+ * Sync the language trigger with the values stored in localStorage.
+ *
+ * Updates:
+ *  - `#currentLangLabel` text → uppercase language code (e.g. "EN", "ES").
+ *  - `#currentFlagLabel` src  → path to the flag icon.
+ *
+ * Values are read from localStorage so the trigger reflects the persisted
+ * state without needing callers to pass `lang` / `flag` as parameters.
+ */
+function syncLabelTranslations(): void {
+  const label = document.querySelector<HTMLElement>('#currentLangLabel');
+  if (label) {
+    label.textContent = localStorage.getItem(STORAGE_KEY)?.toLocaleUpperCase() || "EN";
+  }
+
+  const flagImg = document.querySelector<HTMLImageElement>('#currentFlagLabel');
+  if (flagImg) {
+    flagImg.src = localStorage.getItem(STORAGE_KEY_FLAG) || "/icons/flag_us.svg";
   }
 }
 
