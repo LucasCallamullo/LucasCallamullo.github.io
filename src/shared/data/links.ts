@@ -73,7 +73,8 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
 /**
  * Valid nav identifiers. Adding a new route requires updating this union.
  */
-export type NavKey = 'home' | 'about' | 'skills' | 'projects' | 'contact';
+export type NavKey = 'home' | 'about' | 'skills' | 'projects' | 'contact'
+  | 'github' | 'linkedin' | 'email' | 'cv';
 
 // Navigation menu links
 export interface NavItem {
@@ -103,9 +104,12 @@ export const navItems: NavItem[] = [
  * Throws if the key is not in `navItems` (should never happen if NavKey
  * and navItems stay in sync).
  */
-export function getNavItem(nav: NavKey): NavItem {
+export function getNavItem(nav: NavKey): NavItem | null {
   const item = navItems.find((n) => n.nav === nav);
-  if (!item) throw new Error(`[nav] unknown nav key: "${nav}"`);
+  if (!item) {
+    return null;
+    // throw new Error(`[nav] unknown nav key: "${nav}"`);
+  }
   return item;
 }
 
@@ -113,5 +117,12 @@ export function getNavItem(nav: NavKey): NavItem {
  * Get only the href for a given nav key.
  */
 export function getNavHref(nav: NavKey): string {
-  return getNavItem(nav).href;
+
+  const itemNav = getNavItem(nav)
+  if (itemNav) return itemNav.href;
+
+  const itemSocial = SOCIAL_LINKS[nav];
+  if (itemSocial) return itemSocial.href;
+
+  throw new Error(`[nav] unknown nav key: "${nav}"`);
 }

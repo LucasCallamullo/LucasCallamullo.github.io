@@ -12,11 +12,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.135",
-    "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
     "astro-icon": "^1.2.0",
-    "swiper": "^14.2.0",
+    "swiper": "^14.2.0"
+  },
+  "devDependencies": {
+    "@iconify-json/devicon": "^1.2.68",
+    "@iconify-json/lucide": "^1.2.135",
+    "@iconify-json/ri": "^1.2.10",
+    "@iconify-json/skill-icons": "^1.2.4",
+    "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {

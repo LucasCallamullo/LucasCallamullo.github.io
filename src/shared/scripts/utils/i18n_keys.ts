@@ -75,6 +75,11 @@ export const I18N = {
       subtitle: 'home.skills.subtitle',
       btn: 'home.skills.btn',
     },
+    contact: {
+      title: 'home.contact.title',
+      span1: 'home.contact.span1',
+      span2: 'home.contact.span2',
+    },
   },
 
 } as const;

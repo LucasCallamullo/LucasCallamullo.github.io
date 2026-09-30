@@ -5,13 +5,13 @@ import Section from '@shared/components/Section.astro'
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import { TECH_STACK } from '@/shared/data/tech_stack';
+import { getOrderedTechs } from '@/shared/data/tech_stack';
 import { getNavHref, SOCIAL_LINKS } from '@/shared/data/links';
 
 
 
 // Define page metadata
-const title = "Callamullo Lucas · Software Engineer";
+const title = "Software Engineer · Callamullo Lucas";
 ---
 
 <BaseLayout title={title} mainWidth="full">
@@ -121,12 +121,11 @@ const title = "Callamullo Lucas · Software Engineer";
 
   <!-- Sección de Tecnologías / Skills  -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
-
     <div class="flex flex-col gap-3 justify-center items-center max-w-full md:max-w-6xl">
 
-      <h2 class="text-console text-3xl font_console tracking-wider" data-i18n={I18N.home.skills.title}>
+      <h3 class="text-console text-3xl font_console tracking-wider" data-i18n={I18N.home.skills.title}>
         Featured Technologies
-      </h2>
+      </h3>
       <span class="text-lg mb-5 font_console tracking-wider" data-i18n={I18N.home.skills.subtitle}>
         My daily stack for backend development, databases, and deployment.
       </span>
@@ -134,7 +133,7 @@ const title = "Callamullo Lucas · Software Engineer";
       <!-- + SWIPER CONTAINER -->
       <div class="swiper skillsSwiper">
         <div class="swiper-wrapper py-4">
-          {Object.values(TECH_STACK).map((tech) => {
+          {getOrderedTechs().map((tech) => {
             return (
               <div class="swiper-slide tech_group bg-surface-800 rounded-xl">
                 <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center" />
@@ -154,18 +153,52 @@ const title = "Callamullo Lucas · Software Engineer";
         </span>
         <Icon name="ri:external-link-line" class="text-xl" ></Icon>
       </a>
+
     </div>
   </Section> 
 
-          <!-- 
-<ul class="flex flex-wrap gap-2 mt-3">
-  {Object.values(TECH_STACK).map((tech) => (
-    <li class="flex items-center gap-1 px-2 py-1 rounded bg-surface-800">
-      <Icon name={tech.icon} class="w-8 h-8 text-2xl" />
-      <span class="text-xs font_console text-content-muted">{tech.name}</span>
-    </li>
-  ))}
-</ul> --> 
+
+  <!--  CONTACT Y GITHUB SECTION   -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class="flex justify-center items-center max-w-full md:max-w-6xl">
+      <div class="flex flex-col items-start justify-center gap-1 px-7 py-7 rounded-2xl hover-up-xl bg-surface-900 max-w-3xl">
+
+        <h3 class="font_console tracking-wider text-2xl text-console" data-i18n={I18N.home.contact.title}>
+          Let's build something that works.
+        </h3>
+
+        <p class="font_console text-lg mt-2">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.contact.span1}>
+            Backend development, REST APIs, and clean architectures. 
+          </span>
+        </p>
+
+        <p class="font_console text-lg mt-1">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.contact.span2}>
+            Happy to talk about code, learning, and projects that solve real problems.
+          </span>
+        </p>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full mt-4">
+          <a class="flex hover-up gap-2 items-center justify-center h-10 px-4 py-5 mt-2 self-center
+              btn_notched btn_notched_surface_900" href={getNavHref('contact')}>
+            <Icon name="ri:external-link-line" class="text-lg" />
+            <span class="text-lg" data-i18n={I18N.home.btn.contact}>Contact</span>
+          </a>
+
+          <a class="flex hover-up gap-2 items-center justify-center h-10 px-4 py-5 mt-2 self-center
+              btn_notched btn_notched_surface_900" href={getNavHref('github')} target="_blank">
+
+            <Icon name="ri:github-line" class="text-lg" />
+            <span class="text-lg">GitHub</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </Section>
 
 
   <script>
