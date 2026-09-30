@@ -1,46 +1,182 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
+import 'swiper/css';
+import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import Section from '@shared/components/Section.astro'
+
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { TECH_STACK } from '@/shared/data/tech_stack';
+import { getNavHref, SOCIAL_LINKS } from '@/shared/data/links';
+
+
 
 // Define page metadata
 const title = "Callamullo Lucas · Software Engineer";
 ---
 
-<BaseLayout title={title}>
-  <main class="max-w-4xl mx-auto py-10 px-4">
-    <h1 class="text-4xl font-bold mb-6">Hello, testing Astro for the first time!</h1>
+<BaseLayout title={title} mainWidth="full">
 
-    <div class="bg-primary-bg text-primary-text border border-border-cont p-6 rounded-lg">
-      <h2 class="text-main font-bold text-2xl">Project Title</h2>
-      <p class="text-secondary-text mt-2">Description text using secondary text color.</p>
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} id="whoami">
+
+    <!-- + MAIN DIV CONTAINER -->
+    <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl">
+      <div class="flex gap-1">
+        <span class="font_console tracking-wide text-3xl text-console">$</span>
+        <span class="font_console tracking-widest text-3xl font-bold text-accent">whoami</span>
+      </div>
+
+      <!-- + TEXT TO USE ON TYPEWRITER.ts -->
+      <h1 class="font_console tracking-wider text-6xl mt-8 typewriter-cursor font-medium" 
+        id="homeTitle" data-i18n={I18N.home.title}>Lucas Callamullo
+      </h1>
+      <h2 class="font_console tracking-wider text-4xl mt-7 text-accent font-medium" data-i18n={I18N.home.subtitle}>
+        Software Engineer
+      </h2>
+      <span class="font_console mt-7 text-lg" id="homeSpanOne" data-i18n={I18N.home.spanOne}>
+        Hi, I'm Lucas, you can see my projects and my skills on this page,
+      </span>
+      <span class="font_console mt-2 text-lg" id="homeSpanTwo" data-i18n={I18N.home.spanTwo}>
+        I'm mainly interested in backend development
+      </span>
       
-      <!-- Added id="theme-toggle" to reference the button in JS -->
-      <button 
-        id="theme-toggle" 
-        class="bg-main text-white px-4 py-2 rounded hover:bg-main-light transition-colors mt-4 cursor-pointer"
-      >
-        Switch Theme
-      </button>
+      <!-- + MAIN BUTTONS HOMEEE -->
+      <div class="flex flex-col sm:flex-row gap-7 mt-8" id="homeMainBtns">
+        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
+          btn_notched btn_notched_surface_900" href={getNavHref('projects')}>
+          <Icon name="ri:code-s-slash-line" class="text-xl text-accent"></Icon>
+          <span class="font_console truncate text-lg" data-i18n={I18N.home.btn.projects}>
+            View Projects
+          </span>
+        </a>
+
+        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
+          btn_notched btn_notched_surface_900" data-i18n={I18N.links.cv.href}
+          data-altText={I18N.links.cv.altText}
+          data-cv="true"
+          target="_blank"
+          download={SOCIAL_LINKS.cv.altText}
+          href={SOCIAL_LINKS.cv.href}>
+            <Icon name="ri:file-pdf-2-line" class="text-xl text-accent"></Icon>
+            <span class="font_console truncate text-lg" 
+              data-i18n={I18N.home.btn.downloadCv}>
+              Download CV
+            </span>
+        </a>
+
+        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
+          btn_notched btn_notched_surface_900" href={getNavHref('contact')}>
+          <Icon name="ri:send-plane-fill" class="text-xl text-accent"></Icon>
+          <span class="truncate text-lg" data-i18n={I18N.home.btn.contact}>
+            Contact
+          </span>
+        </a>
+      </div>
     </div>
-  </main>
+  </Section>
+
+   <!-- ABOUT SECTION ON HOME  -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl">
+      
+      <div class="flex flex-col items-start justify-center gap-1 px-7 py-7 rounded-2xl hover-up-xl bg-surface-900 max-w-3xl">
+
+        <h3 class="font_console text-xl tracking-wider flex gap-2 items-center justify-center">
+          <span class="text-accent">$</span>
+          <span class="text-accent">cat</span>
+          <span data-i18n={I18N.home.about.about_txt}>about.txt</span>
+          <span class="text-accent"> | head</span>
+          <span class="blinking_underscore font-medium">_</span>
+        </h3>
+
+        <p class="font_console text-lg tracking-wider mt-2">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.about.about_p1_1}>Hi, I'm Lucas. </span>
+          <span class="text-console" data-i18n={I18N.home.about.about_p1_2}>Backend / Full-Stack Software Engineer </span>
+          <span data-i18n={I18N.home.about.about_p1_3}>based in Córdoba, Argentina.</span>
+        </p>
+
+        <p class="font_console text-lg tracking-wider mt-1">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.about.about_p2_1}>Currently finishing 4th year of </span>
+          <span class="text-console" data-i18n={I18N.home.about.about_p2_2}>Systems Engineering </span>
+          <span data-i18n={I18N.home.about.about_p2_3}>at UTN.</span>
+        </p>
+
+        <p class="font_console text-lg tracking-wider mt-1">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.about.about_p3_1}>
+            I enjoy building things that work, teaching what I learn, and improving bit by bit.
+          </span>
+        </p>
+
+        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5 mt-2 self-center
+          btn_notched btn_notched_surface_900" href={getNavHref('about')}>
+          <span class="font_console text-accent truncate text-lg tracking-wider">$ cd&nbsp;</span>
+          <span class="font_console text-lg tracking-wider" data-i18n={I18N.home.about.about_txt}>about.txt</span>
+        </a>
+      </div>
+    </div>
+  </Section>
+
+
+  <!-- Sección de Tecnologías / Skills  -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+
+    <div class="flex flex-col gap-3 justify-center items-center max-w-full md:max-w-6xl">
+
+      <h2 class="text-console text-3xl font_console tracking-wider" data-i18n={I18N.home.skills.title}>
+        Featured Technologies
+      </h2>
+      <span class="text-lg mb-5 font_console tracking-wider" data-i18n={I18N.home.skills.subtitle}>
+        My daily stack for backend development, databases, and deployment.
+      </span>
+
+      <!-- + SWIPER CONTAINER -->
+      <div class="swiper skillsSwiper">
+        <div class="swiper-wrapper py-4">
+          {Object.values(TECH_STACK).map((tech) => {
+            return (
+              <div class="swiper-slide tech_group bg-surface-800 rounded-xl">
+                <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center" />
+                <span class="font_console mt-4">{tech.name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>  
+
+      <a class="flex hover-up-lg gap-3 items-center justify-center h-10 px-4 py-5 mt-5 group
+        btn_notched btn_notched_surface_900" data-nav="skills">
+
+        <span class="group-hover:text-console text-xl truncate font_console tracking-wider" 
+          data-i18n={I18N.home.skills.btn}>
+          View all skills
+        </span>
+        <Icon name="ri:external-link-line" class="text-xl" ></Icon>
+      </a>
+    </div>
+  </Section> 
+
+          <!-- 
+<ul class="flex flex-wrap gap-2 mt-3">
+  {Object.values(TECH_STACK).map((tech) => (
+    <li class="flex items-center gap-1 px-2 py-1 rounded bg-surface-800">
+      <Icon name={tech.icon} class="w-8 h-8 text-2xl" />
+      <span class="text-xs font_console text-content-muted">{tech.name}</span>
+    </li>
+  ))}
+</ul> --> 
+
+
+  <script>
+    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
+    import { initSkillsSwiper } from '@/home/scripts/utils/swiper';
+
+    function boot() {
+      setEventTypewriter();
+      initSkillsSwiper();
+    }
+
+    document.addEventListener('astro:page-load', boot);
+  </script>
 </BaseLayout>
-
-<script>
-  // This script runs entirely in the browser (client-side)
-  const toggleBtn = document.getElementById('theme-toggle');
-  
-  // Available themes defined in your global.css
-  const themes = ['light', 'dark', 'violet', 'blue'];
-  let currentThemeIndex = 0;
-
-  toggleBtn?.addEventListener('click', () => {
-    // Cycle to the next theme in the array
-    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-    const nextTheme = themes[currentThemeIndex];
-
-    // Update the data-theme attribute on the <html> tag
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    
-    // Update button text to reflect current active theme
-    toggleBtn.textContent = `Current Theme: ${nextTheme.toUpperCase()}`;
-  });
-</script>
