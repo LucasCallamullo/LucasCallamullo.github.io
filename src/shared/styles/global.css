@@ -269,3 +269,23 @@ main {
     filter: grayscale(25%);
     opacity: 0.9;
 }
+
+
+
+/* Cursor para el efecto typewriter - Personalizable */
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--console-color); }
+}
+
+@utility typewriter-cursor-fast {
+  border-right: 3px solid var(--console-color);
+  padding-right: 4px;
+  animation: blink 0.3s step-end infinite;
+}
+
+@utility typewriter-cursor {
+  border-right: 3px solid var(--console-color);
+  padding-right: 4px;
+  animation: blink 1.5s step-end infinite;
+}

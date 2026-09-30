@@ -22,13 +22,17 @@ class Typewriter {
   private static instance: Typewriter | null = null;
 
   private readonly speed: number;
+  private readonly initAfter: number;
 
-  private constructor(speed = 80) {
+  private constructor(speed: number, initAfter: number) {
     this.speed = speed;
+    this.initAfter = initAfter;
   }
 
-  public static getInstance(speed = 80): Typewriter {
-    if (!Typewriter.instance) Typewriter.instance = new Typewriter(speed);
+  public static getInstance(speed = 100, initAfter = 500): Typewriter {
+    // speed --> velocity of type any letter
+    // initAfter --> delay before start to type any letter
+    if (!Typewriter.instance) Typewriter.instance = new Typewriter(speed, initAfter);
     return Typewriter.instance;
   }
 
@@ -57,7 +61,7 @@ class Typewriter {
       }
     };
 
-    step();
+    setTimeout(step, this.initAfter);
   }
 
   /**
@@ -106,56 +110,125 @@ export const typewriter = Typewriter.getInstance();
 /**
  * Run the typewriter intro on the home page.
  *
- * Expects these elements (any missing one is skipped gracefully):
- *  - #title            → typed character by character
- *  - #main-span        → fades in after the title
- *  - #main-spann       → fades in after #main-span
- *  - #main-buttons     → fades in after #main-spann
- *
  * The title text is read from `data-original-text` first (set by
  * applyTranslations), falling back to the current textContent.
  */
-// src/shared/scripts/utils/typewriter.ts
 
-export function initTypewriter(): void {
-  const title = document.getElementById('homeTitle');
+interface SelectorParams {
+  /** CSS selector for the container to scope queries inside. */
+  container: string;
+  /** Selector for the element that gets typed (relative to container). */
+  title: string;
+  /** Selectors for elements that fade in after the title, in order. */
+  elementsToFade?: string[];
+}
+
+/**
+ * Initialize the typewriter intro effect on a scoped container.
+ *
+ * Reads a title element, wipes it, types its text character by character,
+ * then fades in a list of sibling elements one after another.
+ *
+ * The effect is scoped to `params.container`, so multiple typewriters can
+ * coexist on the same page without id collisions.
+ *
+ * @param params - Configuration (see `SelectorParams`).
+ *
+ * @example
+ *   initTypewriter({
+ *     container: '#hero',
+ *     title: '[data-typewriter]',
+ *     elementsToFade: ['[data-fade-1]', '[data-fade-2]', '[data-fade-3]'],
+ *   });
+ */
+export function initTypewriter(params: SelectorParams): void {
+  const container = document.querySelector<HTMLElement>(params.container);
+  if (!container) return;
+
+  const title = container.querySelector<HTMLElement>(params.title);
   if (!title) return;
 
-  const span1 = document.getElementById('homeSpanOne');
-  const span2 = document.getElementById('homeSpanTwo');
-  const buttons = document.getElementById('homeMainBtns');
-
+  // Capture the text before wiping the element. This is the string
+  // the typewriter will "type" back in.
   const titleText = title.textContent ?? '';
 
-  // Reset any leftover state from a previous run.
+  // Reset any leftover state from a previous run (e.g. after a language change
+  // or an Astro SPA navigation that reuses the same DOM node).
   title.textContent = '';
 
+  // Collect the elements that will fade in after the title finishes typing.
   const faders: HTMLElement[] = [];
-  if (span1) faders.push(span1);
-  if (span2) faders.push(span2);
-  if (buttons) faders.push(buttons);
 
-  for (const el of faders) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(15px)';
-    el.style.transition = 'opacity 300ms ease, transform 300ms ease';
-  } 
+  if (params.elementsToFade) {
+    for (const selector of params.elementsToFade) {
+      const el = container.querySelector<HTMLElement>(selector);
+      if (!el) continue;
 
-  title.textContent = '';
+      // Apply the "hidden" starting state immediately, so these elements
+      // are invisible while the title is being typed.
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(15px)';
+      el.style.transition = 'opacity 300ms ease, transform 300ms ease';
 
+      faders.push(el);
+    }
+  }
+
+  // Run the typewriter on the title. When it completes, fade in the
+  // collected elements sequentially.
   typewriter.type(title, titleText, () => {
+    // Build the sequence config. Each fader waits `delayBefore` ms
+    // after the previous one finishes, then fades over `duration` ms.
     const items: SequentialItem[] = [];
-
-    if (span1) items.push({ element: span1, delayBefore: 600, duration: 800 });
-    if (span2) items.push({ element: span2, delayBefore: 500, duration: 500 });
-    if (buttons) items.push({ element: buttons, delayBefore: 300, duration: 500 });
+    for (const el of faders) {
+      items.push({ 
+        element: el, 
+        delayBefore: 300, 
+        duration: 300 
+      });
+    } 
 
     typewriter.showSequential(items);
+
+    // Swap the cursor style: the "fast" blinking used while typing
+    // is replaced by a slower, calmer blink once the text is settled.
+    title.classList.remove('typewriter-cursor-fast');
+    title.classList.add('typewriter-cursor');
   });
 }
 
-export function setEventTypewriter(): void {
-  document.addEventListener('applyTranslations', (e) => {
-    document.fonts.ready.then(() => initTypewriter());
-  });
+
+interface DocumentExtended extends Document {
+  _typewriterRegistry?: SelectorParams[];
+  _typewriterListenerAttached?: boolean;
+}
+
+const doc = document as DocumentExtended;
+
+/**
+ * Register a typewriter configuration and ensure a single global listener
+ * runs them all on `applyTranslations`.
+ */
+export function setEventTypewriter(params: SelectorParams): void {
+  // Init registry once.
+  if (!doc._typewriterRegistry) doc._typewriterRegistry = [];
+
+  // Replace any existing entry for the same container (idempotent re-register).
+  const registry = doc._typewriterRegistry;
+  const idx = registry.findIndex((p) => p.container === params.container);
+  if (idx !== -1) registry[idx] = params;
+  else registry.push(params);
+
+  // Attach global listener once.
+  if (!doc._typewriterListenerAttached) {
+    doc._typewriterListenerAttached = true;
+
+    doc.addEventListener('applyTranslations', () => {
+      doc.fonts.ready.then(() => {
+        for (const p of doc._typewriterRegistry ?? []) {
+          initTypewriter(p);
+        }
+      });
+    });
+  }
 }

@@ -66,6 +66,13 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
     external: true,
     newTab: true,
   },
+  utn: {
+    i18n: I18N.links.utn,
+    href: 'https://www.frc.utn.edu.ar',
+    icon: 'ri:school-fill',
+    external: true,
+    newTab: true,
+  },
 };
 
 
@@ -74,7 +81,7 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
  * Valid nav identifiers. Adding a new route requires updating this union.
  */
 export type NavKey = 'home' | 'about' | 'skills' | 'projects' | 'contact'
-  | 'github' | 'linkedin' | 'email' | 'cv';
+  | 'github' | 'linkedin' | 'email' | 'cv' | 'utn';
 
 // Navigation menu links
 export interface NavItem {

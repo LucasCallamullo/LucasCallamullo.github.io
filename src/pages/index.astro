@@ -2,6 +2,7 @@
 import 'swiper/css';
 import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
 import Section from '@shared/components/Section.astro'
+import CardSection from '@shared/components/CardSection.astro'
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
@@ -26,21 +27,22 @@ const title = "Software Engineer · Callamullo Lucas";
       </div>
 
       <!-- + TEXT TO USE ON TYPEWRITER.ts -->
-      <h1 class="font_console tracking-wider text-6xl mt-8 typewriter-cursor font-medium" 
-        id="homeTitle" data-i18n={I18N.home.title}>Lucas Callamullo
+      <h1 class="font_console tracking-wider text-5xl md:text-6xl mt-5 md:mt-8 typewriter-cursor-fast font-medium" 
+        data-typewriter data-i18n={I18N.home.title}>Lucas Callamullo
       </h1>
-      <h2 class="font_console tracking-wider text-4xl mt-7 text-accent font-medium" data-i18n={I18N.home.subtitle}>
+      <h2 class="font_console tracking-wider text-3xl md:text-4xl mt-4 md:mt-7 text-accent font-medium" data-i18n={I18N.home.subtitle}>
         Software Engineer
       </h2>
-      <span class="font_console mt-7 text-lg" id="homeSpanOne" data-i18n={I18N.home.spanOne}>
+      <span class="font_console mt-7 text-base md:text-lg" data-fade-1 data-i18n={I18N.home.spanOne}>
         Hi, I'm Lucas, you can see my projects and my skills on this page,
       </span>
-      <span class="font_console mt-2 text-lg" id="homeSpanTwo" data-i18n={I18N.home.spanTwo}>
+      <span class="font_console mt-2 text-base md:text-lg" data-fade-2 data-i18n={I18N.home.spanTwo}>
         I'm mainly interested in backend development
       </span>
       
       <!-- + MAIN BUTTONS HOMEEE -->
-      <div class="flex flex-col sm:flex-row gap-7 mt-8" id="homeMainBtns">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-7 mt-8" data-fade-3>
+
         <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
           btn_notched btn_notched_surface_900" href={getNavHref('projects')}>
           <Icon name="ri:code-s-slash-line" class="text-xl text-accent"></Icon>
@@ -77,8 +79,7 @@ const title = "Software Engineer · Callamullo Lucas";
    <!-- ABOUT SECTION ON HOME  -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
     <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl">
-      
-      <div class="flex flex-col items-start justify-center gap-1 px-7 py-7 rounded-2xl hover-up-xl bg-surface-900 max-w-3xl">
+      <CardSection hover={true} bordered={true} class="bg-surface-900 max-w-3xl w-full">
 
         <h3 class="font_console text-xl tracking-wider flex gap-2 items-center justify-center">
           <span class="text-accent">$</span>
@@ -114,14 +115,14 @@ const title = "Software Engineer · Callamullo Lucas";
           <span class="font_console text-accent truncate text-lg tracking-wider">$ cd&nbsp;</span>
           <span class="font_console text-lg tracking-wider" data-i18n={I18N.home.about.about_txt}>about.txt</span>
         </a>
-      </div>
+      </CardSection>
     </div>
   </Section>
 
 
   <!-- Sección de Tecnologías / Skills  -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
-    <div class="flex flex-col gap-3 justify-center items-center max-w-full md:max-w-6xl">
+    <div class="flex flex-col gap-3 justify-center items-center max-w-full md:max-w-6xl p-5 md:p-7">
 
       <h3 class="text-console text-3xl font_console tracking-wider" data-i18n={I18N.home.skills.title}>
         Featured Technologies
@@ -161,7 +162,7 @@ const title = "Software Engineer · Callamullo Lucas";
   <!--  CONTACT Y GITHUB SECTION   -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
     <div class="flex justify-center items-center max-w-full md:max-w-6xl">
-      <div class="flex flex-col items-start justify-center gap-1 px-7 py-7 rounded-2xl hover-up-xl bg-surface-900 max-w-3xl">
+      <CardSection hover={true} bordered={true} class="bg-surface-900 max-w-3xl w-full">
 
         <h3 class="font_console tracking-wider text-2xl text-console" data-i18n={I18N.home.contact.title}>
           Let's build something that works.
@@ -196,7 +197,7 @@ const title = "Software Engineer · Callamullo Lucas";
           </a>
         </div>
 
-      </div>
+      </CardSection>
     </div>
   </Section>
 
@@ -206,7 +207,13 @@ const title = "Software Engineer · Callamullo Lucas";
     import { initSkillsSwiper } from '@/home/scripts/utils/swiper';
 
     function boot() {
-      setEventTypewriter();
+      // this events call init typewriter methods, only need the right selectors
+      setEventTypewriter({
+        container: '#whoami',
+        title: '[data-typewriter]',
+        elementsToFade: ['[data-fade-1]', '[data-fade-2]', '[data-fade-3]'],
+      });
+
       initSkillsSwiper();
     }
 

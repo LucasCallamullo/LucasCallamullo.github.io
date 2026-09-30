@@ -27,7 +27,7 @@ export type TechCategory =
 // ? https://icon-sets.iconify.design/devicon/
 // ? https://icon-sets.iconify.design/skill-icons/
 
-export const TECH_STACK: Record<string, Tech> = {
+export const TECH_STACK = {
   // --- Languages ---
   java:        { name: 'Java',         icon: 'devicon:java',         category: 'languages' },
   csharp:      { name: 'C#',           icon: 'devicon:csharp',       category: 'languages' },
@@ -69,7 +69,7 @@ export const TECH_STACK: Record<string, Tech> = {
   dockerCompose: { name: 'Docker Compose', icon: 'devicon:docker-wordmark', category: 'infra' },
   nginx:       { name: 'Nginx',        icon: 'devicon:nginx',        category: 'infra' },
   linux:       { name: 'Linux',        icon: 'devicon:linux',        category: 'infra' },
-
+  bash:        { name: 'Bash Scripts', icon: 'devicon:bash',         category: 'tools' },
   jwt:         { name: 'JWT',          icon: 'devicon:jwt',          category: 'infra' },
   oauth:       { name: 'OAuth',        icon: 'devicon:oauth',        category: 'infra' },
 
@@ -77,7 +77,6 @@ export const TECH_STACK: Record<string, Tech> = {
   git:         { name: 'Git',          icon: 'devicon:git',          category: 'tools' },
   github:      { name: 'GitHub',       icon: 'devicon:github',       category: 'tools' },
   ghactions:   { name: 'GitHub Actions', icon: 'devicon:githubactions', category: 'tools' },
-  bash:        { name: 'Bash',         icon: 'devicon:bash',         category: 'tools' },
   vscode:      { name: 'VSCode',       icon: 'devicon:vscode',       category: 'tools' },
   dbeaver:     { name: 'DBeaver',      icon: 'devicon:dbeaver',      category: 'tools' },
   ngrok:       { name: 'Ngrok',        icon: 'devicon:ngrok',        category: 'tools' },
@@ -87,18 +86,21 @@ export const TECH_STACK: Record<string, Tech> = {
   junit:       { name: 'JUnit 5',      icon: 'devicon:junit',        category: 'testing' },
   postman:     { name: 'Postman',      icon: 'devicon:postman',      category: 'testing' },
   swagger:     { name: 'Swagger',      icon: 'devicon:swagger',      category: 'testing' },
-};
+} as const satisfies Record<string, Tech>;
+
+export type TechKey = keyof typeof TECH_STACK;
+// → 'java' | 'csharp' | 'python' | 'springboot' | ... | 'swagger'
 
 /**
  * Preferred display order for the tech stack.
  * Ids must match keys in `TECH_STACK`.
  */
-export const TECH_STACK_ORDER: string[] = [
+export const TECH_STACK_ORDER: TechKey[] = [
   'junit', 'java', 'springboot', 'react', 'typescript', 'tailwind',
   'postgresql', 'docker', 'dockerCompose', 'redis',
   'csharp', 'dotnet', 
   'python', 'django', 'pytest', 'sqlite',
-  'javascript', 'git', 'bash', 'nginx', 'swagger', 'jwt'
+  'javascript', 'git', 'bash', 'nginx', 'swagger', 'jwt',
 ];
 
 
@@ -108,13 +110,12 @@ export const TECH_STACK_ORDER: string[] = [
  * Unknown ids are silently dropped (useful when a project references
  * a tech you removed later).
  *
- * @param ids - Array of keys in TECH_STACK (e.g. ['java', 'docker', 'postgresql'])
+ * @param ids - Array of keys (TechKey) in TECH_STACK (e.g. ['java', 'docker', 'postgresql'])
  * @returns Array of Tech in the same order as `ids`
  */
-export function getTechs(ids: string[]): Tech[] {
-  return ids
-    .map((id) => TECH_STACK[id])
-    .filter((tech): tech is Tech => Boolean(tech));
+export function getTechs(ids: TechKey[]): Tech[] {
+  return ids.map((id) => TECH_STACK[id]);
+  // .filter((tech): tech is Tech => Boolean(tech));
 }
 
 /**
@@ -126,21 +127,6 @@ export function getOrderedTechs(): Tech[] {
 
 
 
-
-
-
-
-/**
- * Resolve ids, but throw if any id is missing.
- * Use this in tests or during build to catch typos early.
- */
-export function getTechsStrict(ids: string[]): Tech[] {
-  return ids.map((id) => {
-    const tech = TECH_STACK[id];
-    if (!tech) throw new Error(`[tech-stack] unknown id: "${id}"`);
-    return tech;
-  });
-}
 
 /**
  * Get all techs in a given category.

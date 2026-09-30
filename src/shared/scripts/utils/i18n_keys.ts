@@ -38,6 +38,7 @@ export const I18N = {
     github: 'links.github',
     linkedin: 'links.linkedin',
     email: 'links.email',
+    utn: 'links.utn',
     cv: {
       href: 'links.cv.href',    
       altText: 'links.cv.altText',
@@ -79,6 +80,28 @@ export const I18N = {
       title: 'home.contact.title',
       span1: 'home.contact.span1',
       span2: 'home.contact.span2',
+    },
+  },
+
+  about: {
+    title: 'about.title',
+    subtitle: 'about.subtitle',
+    bio: {
+      p1: 'about.bio.p1',
+      p2: 'about.bio.p2',
+      p3: 'about.bio.p3',
+      p4: 'about.bio.p4',
+      p5: 'about.bio.p5',
+      p6: 'about.bio.p6',
+    },
+    stats: {
+      title: 'about.stats.title',
+      projectLabel: 'about.stats.projectLabel',
+      projectTotal: 'about.stats.projectTotal',
+      currentLabel: 'about.stats.currentLabel',
+      currentTotal: 'about.stats.currentTotal',
+      universityLabel: 'about.stats.universityLabel',
+      residenceLabel: 'about.stats.residenceLabel',
     },
   },
 

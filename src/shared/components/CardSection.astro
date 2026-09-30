@@ -1,0 +1,40 @@
+---
+// src/shared/components/CardSection.astro
+
+interface Props {
+  hover?: boolean;
+  bordered?: boolean;
+  paddingDef?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  hover = true,
+  bordered = true,
+  paddingDef = true,
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+/**
+ * @example 
+<CardSection hover={true} bordered={true} class="bg-surface-100 max-w-3xl w-full">
+  <p>Contenido</p>
+</CardSection>
+*/
+---
+
+<div
+  class:list={[
+    'flex flex-col items-start justify-center',
+    paddingDef && 'p-5 md:p-7',
+    'rounded-2xl',
+    hover && 'hover:rounded-xl hover-up-xl',
+    bordered && 'border-2 border-surface-200',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</div>
