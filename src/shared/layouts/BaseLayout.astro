@@ -124,19 +124,32 @@ const widthClass = WIDTH_CLASSES[mainWidth];
     <script>
       import { initTranslations, applyTranslations, } from '@shared/scripts/navbar/translations';
 
-      // 1. Carga inicial: fetch del JSON + aplicar.
+      import { initReveal } from '@shared/scripts/utils/reveal';
+
+      // 1. Initial load: fetch from JSON + apply.
       initTranslations();
 
-      // 2. Después de cada navegación SPA: solo reaplicar.
+      // 2. After each SPA navigation: simply re-apply.
       let firstLoad = true;
 
-      document.addEventListener('astro:page-load', () => {
+      // FUNCTION TO LOAD EVERY SPA PAGE
+      async function boot() {
+
+        //! DONT CHANGES THIS ORDER
         if (firstLoad) {
           firstLoad = false;
-          return; // initTranslations ya se encargó
+          return;       // initTranslations already handled it
         }
         applyTranslations();
-      });
+
+        // Reveal-on-scroll: el observer es único y se reutiliza.
+        // En cada navegación SPA se observan los [data-reveal] nuevos.
+        // Wait 200ms before revealing with anims by observer.
+        await new Promise((resolve) => setTimeout(resolve, 200));
+        initReveal({ once: true });
+      }
+
+      document.addEventListener('astro:page-load', boot);
     </script>
   </body>
 </html>  

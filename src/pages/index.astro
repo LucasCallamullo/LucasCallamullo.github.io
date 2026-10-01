@@ -79,7 +79,8 @@ const title = "Software Engineer · Callamullo Lucas";
    <!-- ABOUT SECTION ON HOME  -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
     <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl">
-      <CardSection hover={true} bordered={true} class="bg-surface-900 max-w-3xl w-full">
+      <CardSection hover={true} bordered={true} 
+        class="bg-surface-900 max-w-3xl w-full cont_animate__from_left_lg" data-reveal data-multi-anim>
 
         <h3 class="font_console text-xl tracking-wider flex gap-2 items-center justify-center">
           <span class="text-accent">$</span>
@@ -124,7 +125,8 @@ const title = "Software Engineer · Callamullo Lucas";
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
     <div class="flex flex-col gap-3 justify-center items-center max-w-full md:max-w-6xl p-5 md:p-7">
 
-      <h3 class="text-console text-3xl font_console tracking-wider" data-i18n={I18N.home.skills.title}>
+      <h3 class="text-console text-3xl font_console tracking-wider cont_animate__from_left_lg" 
+        data-i18n={I18N.home.skills.title} data-reveal data-multi-anim>
         Featured Technologies
       </h3>
       <span class="text-lg mb-5 font_console tracking-wider" data-i18n={I18N.home.skills.subtitle}>
@@ -137,8 +139,8 @@ const title = "Software Engineer · Callamullo Lucas";
           {getOrderedTechs().map((tech) => {
             return (
               <div class="swiper-slide tech_group bg-surface-800 rounded-xl">
-                <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center" />
-                <span class="font_console mt-4">{tech.name}</span>
+                <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center place-self-center mb-4" />
+                <span class="font_console">{tech.name}</span>
               </div>
             );
           })}
@@ -162,7 +164,8 @@ const title = "Software Engineer · Callamullo Lucas";
   <!--  CONTACT Y GITHUB SECTION   -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
     <div class="flex justify-center items-center max-w-full md:max-w-6xl">
-      <CardSection hover={true} bordered={true} class="bg-surface-900 max-w-3xl w-full">
+      <CardSection hover={true} bordered={true} class="bg-surface-900 max-w-3xl w-full cont_animate__from_left_lg"
+        data-reveal data-multi-anim>
 
         <h3 class="font_console tracking-wider text-2xl text-console" data-i18n={I18N.home.contact.title}>
           Let's build something that works.

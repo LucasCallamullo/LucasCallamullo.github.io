@@ -271,7 +271,9 @@ main {
 }
 
 
-
+/* ==============================================================
+  +  EFFECT TYPEWRITER --> use shared/scripts/utils/typewriter.ts
+/* ============================================================== */
 /* Cursor para el efecto typewriter - Personalizable */
 @keyframes blink {
   0%, 100% { border-color: transparent; }
@@ -288,4 +290,36 @@ main {
   border-right: 3px solid var(--console-color);
   padding-right: 4px;
   animation: blink 1.5s step-end infinite;
+}
+
+
+/* ==============================================================
+  +  EFFECT TYPEWRITER --> use shared/scripts/utils/reveal.ts
+/* ============================================================== */
+/* Initial state: shifted left, invisible */
+.cont_animate__from_left {
+  /*  position: relative;
+  overflow: hidden; */
+  opacity: 0;
+  transform: translateX(-40px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: opacity, transform;
+}
+
+.cont_animate__from_left_lg {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: opacity, transform;
+}
+
+/* Final state */
+.cont_animate__from_left[data-animate],
+.cont_animate__from_left_lg[data-animate] {
+  opacity: 1;
+  transform: translateX(0);
 }
