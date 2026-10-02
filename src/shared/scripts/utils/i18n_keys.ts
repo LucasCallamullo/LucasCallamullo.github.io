@@ -103,6 +103,134 @@ export const I18N = {
       universityLabel: 'about.stats.universityLabel',
       residenceLabel: 'about.stats.residenceLabel',
     },
+    milestone: {
+      title: 'about.milestone.title',
+      subtitle: 'about.milestone.subtitle',
+      stepSpan: 'about.milestone.stepSpan',
+    }
   },
+
+  // ! PROJECTS KEYS TO ADD MORE 
+  projects: {
+    links: {
+      youtube: {
+        label: 'projects.links.youtube.label',
+        altText: 'projects.links.youtube.altText',
+      },
+      github: {
+        label: 'projects.links.github.label',
+        altText: 'projects.links.github.altText',
+      },
+      university: {
+        label: 'projects.links.university.label',
+        altText: 'projects.links.university.altText',
+      },
+    },
+
+    fleet_optimizer: {
+      title: 'projects.fleet_optimizer.title',
+      milestone: 'projects.fleet_optimizer.milestone',
+      timeline: {
+        summary: 'projects.fleet_optimizer.timeline.summary',
+      },
+      project: {
+        summary: 'projects.fleet_optimizer.project.summary',
+        description: 'projects.fleet_optimizer.project.description',
+      },
+    },
+
+    university: {
+      title: 'projects.university.title',
+      milestone: 'projects.university.milestone',
+      timeline: {
+        summary: 'projects.university.timeline.summary',
+      },
+    },
+
+    ecommerce_dj: {
+      title: 'projects.ecommerce_dj.title',
+      milestone: 'projects.ecommerce_dj.milestone',
+      timeline: {
+        summary: 'projects.ecommerce_dj.timeline.summary',
+      },
+      project: {
+        summary: 'projects.ecommerce_dj.project.summary',
+        description: 'projects.ecommerce_dj.project.description',
+      },
+    },
+
+    portfolio: {
+      title: 'projects.portfolio.title',
+      milestone: 'projects.portfolio.milestone',
+      timeline: {
+        summary: 'projects.portfolio.timeline.summary',
+      },
+      project: {
+        summary: 'projects.portfolio.project.summary',
+        description: 'projects.portfolio.project.description',
+      },
+    },
+
+    dds_tutor: {
+      title: 'projects.dds_tutor.title',
+      milestone: 'projects.dds_tutor.milestone',
+      timeline: {
+        summary: 'projects.dds_tutor.timeline.summary',
+      },
+      project: {
+        summary: 'projects.dds_tutor.project.summary',
+        description: 'projects.dds_tutor.project.description',
+      },
+    },
+
+    backend_tp: {
+      title: 'projects.backend_tp.title',
+      milestone: 'projects.backend_tp.milestone',
+      timeline: {
+        summary: 'projects.backend_tp.timeline.summary',
+      },
+      project: {
+        summary: 'projects.backend_tp.project.summary',
+        description: 'projects.backend_tp.project.description',
+      },
+    },
+
+    py_tutor: {
+      title: 'projects.py_tutor.title',
+      milestone: 'projects.py_tutor.milestone',
+      timeline: {
+        summary: 'projects.py_tutor.timeline.summary',
+      },
+      project: {
+        summary: 'projects.py_tutor.project.summary',
+        description: 'projects.py_tutor.project.description',
+      },
+    },
+
+    no_country: {
+      title: 'projects.no_country.title',
+      milestone: 'projects.no_country.milestone',
+      timeline: {
+        summary: 'projects.no_country.timeline.summary',
+      },
+      project: {
+        summary: 'projects.no_country.project.summary',
+        description: 'projects.no_country.project.description',
+      },
+    },
+
+    pawn_cs: {
+      title: 'projects.pawn_cs.title',
+      milestone: 'projects.pawn_cs.milestone',
+      timeline: {
+        summary: 'projects.pawn_cs.timeline.summary',
+      },
+      project: {
+        summary: 'projects.pawn_cs.project.summary',
+        description: 'projects.pawn_cs.project.description',
+      },
+    },
+  },
+
 
 } as const;

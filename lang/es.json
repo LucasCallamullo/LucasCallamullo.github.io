@@ -86,8 +86,324 @@
       "currentTotal": "Ing. en Sistemas — 4°",
       "universityLabel": "Universidad:",
       "residenceLabel": "Residencia:"
+    },
+
+    "milestone": {
+      "title": "mis_hitos.log",
+      "subtitle": "Pequeño resumen de todo mi recorrido, como un histórico por pasos.",
+      "stepSpan": "Paso: "
     }
+
   },
+
+  "projects": {
+    "links": {
+      "youtube": {
+        "label": "Mi Canal de YT",
+        "altText": "Mira mi canal de YT."
+      },
+      "github": {
+        "label": "Ver código",
+        "altText": "Repositorio de GitHub"
+      },
+      "university": {
+        "label": "Mi universidad",
+        "altText": "Universidad Tecnologica Nacional - FRC"
+      }
+    },
+
+
+    "fleet_optimizer": {
+      "title": "Fleet Optimizer · Microservices Spring Boot",
+      "milestone": "Madurez técnica en microservicios, SOLID, Java & Spring Boot y React",
+      "timeline": {
+        "summary": [
+          "Este proyecto hace más énfasis en las transacciones entre distintos microservicios y bases de datos, además de la conexión de un frontend que permite realizar acciones sobre la API a través de Nginx.",
+          "Usé arquitectura Layered y despliegue multi-stage con Docker Compose: 6 microservicios, 1 frontend y 3 bases de datos.",
+          "Nginx como único punto de entrada, gateway centralizando la propagación de headers y rate-limiting.",
+          "El microservicio de auth se encarga de centralizar la autenticación con Auth0 y la validación de tokens."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Proyecto para la gestión de flotas y paquetes transportados desde un origen hacia un destino, llevando registro de rutas, estados de paquetes y capacidades de cada flota.",
+          "Diseñé una arquitectura de microservicios con Java 17 y Spring Boot (auth, routes, packages, fleets, geocoding y gateway), cada uno con su PostgreSQL cuando corresponde.",
+          "Implementé un API Gateway con validación de JWT y propagación del contexto de usuario. Centralicé la autenticación con Auth0 (OAuth 2.0 / OIDC).",
+          "Tests unitarios y de integración con JUnit 5 y Mockito, cubriendo todos los servicios y controladores con sus casos de éxito, errores y reglas de negocio.",
+          "Desarrollé el frontend en React, TypeScript y Tailwind CSS, con manejo de sesión JWT y consumo del gateway a través de Nginx."
+        ],
+        "description": [
+          "Este proyecto nace en parte del TP de backend que tenía algunas similitudes, aunque no era el mismo enfoque. Así que quise explorar un dominio que en cierto punto combinara con mi e-commerce engine, es decir un proyecto separado para abstraer toda la parte de gestión de paquetes, flotas y envíos, sobre todo una forma genérica de conectar a través del `ms-packages`, que vendría a ser una representación genérica de producto/s. Y obviamente reforzar mi manejo y conceptos en el stack de Java y Spring Boot.",
+          "Realmente implementar los distintos microservicios esta vez fue mucho más rápido y simple respecto a la última vez, debido a la experiencia general en distintos proyectos. Creo que es algo bueno de la experiencia de otros proyectos previos, aunque aún así siempre intentando seguir las mejores prácticas y principios SOLID sobre mi código.",
+          "Hablando de SOLID: más allá de que siempre los intento usar en mis proyectos, casi nunca termino de sacarles provecho, más allá de las interfaces para probar ciertos tests o mockear ciertas clases. Pero en este proyecto pasó algo particular, ya que si bien ahora uso Auth0 como servidor externo de autenticación, no siempre fue así.",
+          "Al principio la universidad tenía un servidor corriendo un Keycloak abierto a todos, que te permitía con el uso de sus credenciales realizar todo tu proceso de autenticación. Yo en ese entonces, de todas formas, había creado `AuthService` como interface y `KeycloakService` como la implementación, por seguir la Inversión de Dependencias de SOLID — esos principios que siempre intento aplicar pero nunca veo del todo su utilidad, ya que hago mis proyectos y no hay muchas situaciones que me obliguen a cambiar de DB o algo por el estilo.",
+          "Cuestión: ocurrió que desde la universidad dieron de baja el servidor de Keycloak y me quedé sin autenticación. Me vi obligado por algo externo a decidir: ¿JWT local? ¿Keycloak en mi Docker? ¿Buscar algún servicio de Auth0 en internet? Evaluando las ventajas de cada uno, decidí por la última, ya que la idea era mostrar la conexión entre distintos microservicios, sumado a que cuando despliegue esto en una VPS me sale más barato Auth0 en su free tier que la RAM que consume Keycloak en Docker.",
+          "Pero por esta situación externa me vi obligado a leer toda la documentación de Auth0 e implementarla en mi `ms-auth`, simplemente reemplazar la anterior implementación por la nueva y listo. Proyecto funcionando otra vez, sin afectar ninguno de los otros microservicios, y prácticamente solo tocar 3 o 4 archivitos por obvias razones de la nueva implementación. Ahí terminé de entender por qué estas buenas prácticas no son solo buenas prácticas: realmente, a medida que expando el proyecto, me facilita todo el trabajo esta buena división de tareas a través de seguir principios SOLID.",
+          "Otro de los desafíos fue asentar aún más el uso de React, TypeScript y Tailwind, más que nada enfocado en el stack empresarial, pero realmente terminar de comprender muy bien la división de responsabilidades del lado del frontend. Como lo dije antes, los conceptos —al menos a mí— se me asientan una vez los aplico, no tanto si solo los leo y nunca los uso.",
+          "Creo que lo que más me gusta de proyectos como este es poder ver más a profundidad el uso de Docker Compose para levantar multi-stage los distintos Dockerfiles, incluso aprendiendo más sobre cada uno. Ahora vi que podía, en cada microservicio de Java, en su Dockerfile declarar durante el tiempo de build una imagen de Maven para compilar el proyecto dentro de Docker, y que esa imagen se borre después durante la ejecución.",
+          "El uso de Nginx para servir estáticos delegando el peso del frontend al cliente sin ningún tipo de backend for frontend, simplemente sirviendo los estáticos al cliente directamente, y mediante React el consumo de la API a través de Nginx.",
+          "Poder utilizar más en profundidad JUnit 5 y Mockito para realizar tests unitarios y de integración sobre todos los servicios y controladores, pudiendo anticipar casos edge, optimizar queries de JPQL forzando lazy y solo haciendo joins en los casos donde corresponda.",
+          "Volver a orquestar la comunicación entre microservicios siento que es de las formas en que más se aprende a ir aumentando las capas de abstracción sobre proyectos que son así de complejos. Aunque todavía queda pendiente de mi parte ver cómo practicar más microservicios de forma asíncrona con eventos, investigar sobre patrones publish-subscribe y demás que voy aprendiendo por parte de la universidad.",
+          "Siento que cada vez le veo más utilidad al gateway general y la centralización de distintos conceptos que deberían ser abstractos para mis microservicios en general: por ejemplo, la autenticación, control de firmas, rate limiting, fallbacks y demás conceptos que iré aplicando.",
+          "Me gusta poder cada vez seguir configurando más Docker Compose, Dockerfiles e incluso los Nginx para seguir aprendiendo sobre cómo se utiliza. Me parece una forma de completar realmente el perfil de full-stack; solo me faltaría terminar de desplegar en VPS los Docker para aprender más de DevOps.",
+          "Realmente en este proyecto me sentí muy cómodo usando Java y Spring Boot. Siento mucha más madurez respecto al TP de backend, que era una primera impresión de microservicios. Y ahora, entre microservicios o monolitos modulares, realmente me siento muy cómodo en ambos, aunque siempre voy a defender el monolito modular para empezar cualquier proyecto.",
+          "Y seguramente ver cómo escalás con arquitecturas embebidas mezclando monolitos con gateway, o abstrayendo solo algún módulo que realmente necesite mejor escalabilidad horizontal o vertical, dejando un monolito modular core y un microservicio aislado que sí necesita escalar."
+        ]
+      }
+    },
+
+
+    "ecommerce_dj": {
+      "title": "Modular E-commerce · Python & Django",
+      "milestone": "Profundidad técnica con Python, Django, CSS & JS vanilla, optimizaciones con PostgreSQL y Redis",
+      "timeline": {
+        "summary": [
+          "De los proyectos más completos que hice. Aprendí muchísimo más allá de lo técnico, sobre cómo llevar una app full-stack de principio a fin.",
+          "Gané experiencia optimizando queries, usando cache con Redis, escribiendo triggers en PostgreSQL y armando despliegues multi-stage con Docker.",
+          "Entendí a fondo cómo funcionan los ORMs, sus ventajas y desventajas, y la concurrencia de múltiples instancias con Gunicorn."
+        ]
+      },
+      "project": {
+        "summary": [
+          "E-commerce engine al estilo Shopify. La idea era construir una plataforma altamente replicable a partir de distintos CSV de productos, configurables por cada tienda y su dueño.",
+          "Monolito modular con Python, Django y JavaScript vanilla, siguiendo la arquitectura estándar de Django adaptada a Layered.",
+          "Integración de pasarela de pagos (Mercado Pago API), cubriendo webhooks y tests unitarios y de integración con pytest.",
+          "Cache de queries con Redis, optimización de búsquedas con FTS e índices compuestos en PostgreSQL.",
+          "Despliegue multi-stage con Docker Compose. Concurrencia controlada: réplicas de la app con Gunicorn y balanceo de carga con Nginx."
+        ],
+        "description": [
+          "No fue mi primer proyecto de Django, pero sí fue el primero en el que quise ir mucho más a fondo para aprender y profundizar sobre una problemática de forma autodidacta. Ya tenía background de otros proyectos en Django, así que intenté usar las herramientas que tenía esos principios de 2024 para ir creciendo el proyecto.",
+          "La idea era básicamente qué tan difícil es hacer un ecommerce que sea escalable y se adapte para ser fácil de integrar y replicar cualquier tipo de comercio, teniendo una base y ciertos parámetros que cumplir por parte del CSV de entrada y/o relaciones de mis tablas de la DB.",
+          "Al principio el proyecto en sí tenía más una arquitectura estándar de Django, que iba evolucionando basado en distintos patrones o estructuras que iba pensando u observando a medida que el proyecto escalaba y ya no era un par de CRUDs, sino más de 10 módulos con más de 30 tablas.",
+          "Me causaba mucha gracia que, como esta etapa fue más autodidacta sin estructura formal, yo iba planteando como clases de utilidad donde encerraba lógica de negocio y queries del ORM reutilizables. Sin embargo, sumado a lo que aprendía en la facultad, la arquitectura se fue adaptando más a Layered, estructurado por capas, siguiendo ese patrón o refactorizando módulos para cumplirlo y que sea más fácil de leer para cualquiera, y no solo para quien usaba el estándar de Django.",
+          "Yo siento que le tengo mucho cariño a Python y Django por ser el primer framework y lenguaje que aprendí de manera tal que entiendo lo que pasa por detrás. Pero con el paso del tiempo y el uso de otros lenguajes me di cuenta de muchas limitaciones que tenía Django, sumado a mucha magia del ORM que ocurría detrás con Django y DRF.",
+          "Pero lejos de ser algo malo, como me encantaba la idea de optimizar Django, me llevó a aprenderlo más a profundidad. Por ejemplo, entender bien el concepto de lazy vs eager en la carga de datos, evitar los N + 1, optimizar consultas de datos sin saber realmente SQL crudo, hacer índices compuestos entendiendo los trade-offs de los mismos.",
+          "La lista puede seguir con PostgreSQL y optimizaciones de búsquedas mediante FTS (Full Text Search), poniendo un trigger que vectorizaba el nombre normalizado para búsquedas mucho más eficientes en el motor de PostgreSQL; hacer cache sobre consultas redundantes; el uso de Redis por encima del memcached de Django; la velocidad de Redis respecto al memcached de Django.",
+          "Otro ejemplo es DRF y sus propias queries. A veces usar la magia de protecciones o serializers de DRF me enseñó que los ORMs, salvo que te pongas detenidamente a hacer test de cuántos viajes hiciste hasta la DB, difícilmente puedas detectar algún viaje que no declaraste vos, y que lo hace el ORM por validar alguna constraint.",
+          "Creo que realmente la parte de todo este proyecto que lo seguí mucho tiempo, entre tiempos libres, fines de semana, etc., fue poder seguir aprendiendo sobre el mismo. Integrar APIs como la de Mercado Pago me obligó a investigar y aprender a usar herramientas como ngrok, que me permitían el uso de los webhooks del sandbox de Mercado Pago.",
+          "En este proyecto también aprendí, por sobre todo, JavaScript vanilla y CSS a fondo con el uso de variables, uso de temas oscuro y claro, CSS customizado con clases atómicas. Básicamente todo lo necesario para poder extrapolar cualquier framework de frontend que vi con el tiempo: me resultó muy simple gracias a todas las bases que me llevó hacer las interfaces del proyecto con Django Templates.",
+          "Aprendí a integrar a este proyecto muchas cosas que venía aprendiendo en el tiempo que realizaba y cursaba materias, como por ejemplo el uso de Docker, integrar multi-stage con Docker Compose, levantar réplicas de Django con Gunicorn, y el uso de una herramienta como Nginx que hacía de balanceador de carga y de proxy inverso. Me encantaba saber que podía optimizar servir estáticos a través de Nginx en lugar de Django, que era más lento, poder rechazar archivos pesados. Si bien no era un gateway, Nginx me daba una capa de seguridad extra a mi app que aprendí por mi cuenta.",
+          "El estado actual de esta app es que ya fue desplegada un tiempo en Railway, pero probablemente la suba a una VPS para probar demos en vivo, porque no, ya que es un MVP más que funcional para salir a venderlo. Aunque bueno, por motivos de que lo empecé hace mucho, realmente sé que había margen de mejora en muchas decisiones sobre mis entidades, tablas, relaciones, estructura de carpetas y separación de responsabilidades, que fui puliendo más con otros proyectos.",
+          "Yo creo, como dije en otros proyectos, que a programar realmente se aprende programando, y esto, con las mil formas de querer optimizar Django que fui buscando, me hizo aprender más que cualquier otro ORM. Ya que al tocar Spring Boot o EF Core, eran ridículamente optimizados en comparación, ya que por obvias razones los lenguajes estáticos ayudaban a esas optimizaciones, que claramente Python y Django con sus limitaciones no podrían igualar.",
+          "A nivel personal me sirvió mucho para explorar muchos aspectos que en la universidad nunca vi, más allá de un nivel teórico, y bajarlo a código me encanta porque no es solo un concepto al aire, es un hecho con un concepto, y siento que es la mejor forma de aprender un tema y hacerlo propio como conocimiento."
+        ]
+      }
+    },
+
+
+    "portfolio": {
+      "title": "My Portfolio · Astro, TS & Tailwind",
+      "milestone": "Frontend con profundidad en TypeScript & Tailwind",
+      "timeline": {
+        "summary": [
+          "Encaré mi portfolio en Astro como práctica para asentar TypeScript y Tailwind, y como excusa para entender cómo funciona un sitio liviano sin React.",
+          "Primera experiencia deployado en GitHub Pages con un GitHub Action que hace build y deploy en cada push a main."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Portfolio propio desde cero con Astro, ideal para no sobrecargar de JS al visitante.",
+          "Migrado desde HTML, CSS y JS vanilla hacia TypeScript, Tailwind y Astro para mejorar el rendimiento general, los efectos y el peso final de los archivos JS y CSS.",
+          "Está deployado en GitHub Pages con un GitHub Action que hace build y deploy en cada push a main."
+        ],
+        "description": [
+          "Siempre me causó gracia tener mi propio portfolio, pero nunca había empezado hasta que un día dije: ¿por qué no? Por aprender más sobre la santa trinidad (HTML, CSS, JS), además de que no era tan fan de React. Poder hacer un router personalizado desde cero, sin la sobrecarga de React, me lo propuse como desafío y se logró un buen primer resultado, sin la mejor estructura pero funcional.",
+          "Si bien alguno dirá: ¿por qué reinventar la rueda? Yo simplemente diría que quería aprender bien las bases, y me parecía un proyecto que me lo permitía por simplicidad: enfocarme solo en el frontend. Aunque ya tenía bastante experiencia en vanilla, simplemente quería poder hacer más con el mismo stack para crear un portfolio que me guste y me permita armar módulos, efectos y scripts genéricos para reutilizar en otros proyectos.",
+          "Diseñé un sistema de i18n casero (fetch de JSON + applyTranslations) en vez de usar una librería, para practicar TypeScript junto al disparo de eventos y captura desde otros scripts para ejecutar acciones (por ejemplo, un efecto typewriter que muestra letra a letra algunos títulos).",
+          "Si bien estuvo funcionando bien con GitHub Pages, ya que en muchas entrevistas te piden una página personal, me puse a practicar más con el stack empresarial de React. Pero a esto se le sumaba TypeScript y Tailwind, y si bien con cualquier LLM puedo iterar interfaces más que presentables, quiero saber más por debajo para poder modificar y personalizar según exigencias, y no solo algo genérico.",
+          "Entonces, aprovechando que quería fortalecer mi base de TypeScript y Tailwind, dije: ¿por qué no migrar mi portfolio para aprender más y dejarlo mucho más mantenible en el tiempo? Sumado a la migración, también empecé a explorar un poco GitHub Actions, y aunque no es un proceso exhaustivo de CI/CD, podría contar como mis primeros pasos en esta herramienta.",
+          "Dicho eso, obviamente, para no depender de React en un sitio que no lo necesita, dije: no quiero un portfolio pesado sin sentido, al final es básicamente mi propia landing page. Así que me puse a investigar, y una opción que cumplía con esto era Astro como SPA, lo cual me genera estáticos muy livianos y una forma de layouts que me recuerda a Django Templates.",
+          "Es por esto que estoy migrando y haciendo mi portfolio totalmente mantenible a futuro, además de muchos más efectos de CSS, aprendizaje de Tailwind más a profundidad (no solo clases básicas de utilidad, sino autogeneradas, groups, etc.), y mayor conocimiento en TypeScript sobre tipados, interfaces y genéricos."
+        ]
+      }
+    },
+
+
+    "dds_tutor": {
+      "title": "Tutoriales · JS/React",
+      "milestone": "Tutoriales técnicos sobre JavaScript y React",
+      "timeline": {
+        "summary": [
+          "Clases tutoriales realizando prácticas con React, Express, comunicación Backend & Frontend, JWT y seguridad.",
+          "Estas clases las grabé como ayuda para mis compañeros de la universidad, en la materia de Desarrollo de Software."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Clases guiadas sobre Desarrollo de Software y la construcción de apps web end-to-end, conectando DB, Backend y Frontend.",
+          "Tutorial de backend con JS, Express, Sequelize y SQLite para uso del ORM, middlewares, errorHandlers, autenticación y autorización con JWT, y Arquitectura Layered.",
+          "Tutorial de frontend: estructura HTML, propiedades CSS, manejo del DOM con JS. Uso de React con la separación más estándar de hooks, clients, api, components, layouts, estilos y clases atómicas de Tailwind."
+        ],
+        "description": [
+          "Estas clases grabadas surgieron en cierto punto como una protesta, ya que cuando cursé la materia realmente casi todos los temas ya los tenía vistos con anticipación, así que era más un repaso de varias cosas. Pero también sucedía que, bueno, Universidad Pública supongamos, donde los profes que había en todas las cátedras —por dichos de muchos compañeros— eran bastante cuestionables.",
+          "Creo que eso, sumado a que quería darle más cariño al canal de YT, me llevó a grabar alrededor de 15 clases promediando una hora cada una. Presentaba los temas de una forma más gráfica, conectando todo un proyecto que seguía una idea, y no improvisando ejercicios pequeños que nunca se combinan.",
+          "Mi idea era realmente mostrar todo el flujo que ocurría en layered, ORMs y demás cosas que extrapolaba de conocimiento de otros frameworks de backend como Django o Spring Boot.",
+          "Pero por mi parte también me servía para poder terminar de estudiar y aprender temas que medio siempre daba por sentado, como JWT o middlewares e interceptores de responses, errors y demás. Realmente grabar los videos, sumado a guías de estudio, me ayudaba a terminar de entender estos conceptos más a profundidad. Sin tenerlos ahí como una palabra que escuché alguna vez, sino como un concepto que ahora podría explicar en cualquier momento.",
+          "Otra cosa que aprendí fue por fin soltar quizás mi JavaScript vainilla, ya que tuve que aprender React por la materia. En gran medida me di cuenta de la herramienta tan potente que es. Pero algo que me gusta mucho es que el hecho de haber practicado tanto JS pelado hizo que el paso a React realmente no fuera confuso ni difícil, ya que era simplemente hacer declarativas cosas que yo ya hacía imperativas, o buscar declarar métodos genéricos de forma imperativa para el mismo resultado.",
+          "Me di cuenta de que aprender cualquier framework de frontend es, en gran medida, aprender a estructurar responsabilidades de forma distinta. Me pasó con Astro (que me recordaba a Django Templates) y con React Native (que es casi igual a React, pero cambia con Expo).",
+          "En resumen, fueron clases siguiendo ese objetivo y mostrando toda la materia quizás de una forma más práctica. Aunque bueno, al final el parcial terminaba siendo teórico, lo cual sigo sintiendo que no tiene sentido: una materia de programación no debería ser teórica. A programar no se aprende en la teoría, se aprende en la práctica.",
+          "Para mí, a programar se aprende programando. El marco teórico obviamente importa, pero si no lo aplicás no sirve más allá de una idea y no un hecho."
+        ]
+      }
+    },
+
+
+    "backend_tp": {
+      "title": "Microservices · Java & Spring Boot",
+      "milestone": "Microservicios & Docker Compose, primer contacto",
+      "timeline": {
+        "summary": [
+          "Mi primer contacto con microservicios, Docker Compose y Keycloak. Antes de esto solo había trabajado con backends monolíticos.",
+          "Trabajo en equipo (3 integrantes). Mi rol fue integrar la comunicación entre microservicios, configurar Keycloak y armar el Docker Compose multi-stage.",
+          "Sin proponérmelo, terminé siendo el referente técnico del equipo: me consultaban dudas de Spring, Docker y arquitectura."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Trabajo práctico de Backend UTN: gestión de solicitudes de transporte de contenedores desde un punto A a un punto B.",
+          "Arquitectura de 3 microservicios + API Gateway como único punto de entrada. Autenticación centralizada con Keycloak local, todo levantado con un solo `docker-compose up` usando multi-stage builds.",
+          "Mi rol: coordinar la comunicación entre microservicios, asegurar transacciones síncronas entre ellos y la correcta persistencia entre las bases de datos. También hice revisión sobre los microservicios base realizados por mis compañeros.",
+          "Integramos la API de Google Maps para calcular distancias y rutas posibles entre los puntos de origen y destino."
+        ],
+        "description": [
+          "Respecto a este proyecto de Backend, no creo que sea mi mejor código, pero tampoco es el peor. El resultado que tuvimos fue bastante bien organizado, pero por sobre todo eso creo que en general nos faltaba algún par de proyectos aplicando layered al grupo para que saliera mucho más prolija la división de responsabilidades por capas. Igual quedó muy acorde al final, con correcciones de último momento.",
+          "Realmente me gustó desarrollar el proyecto con compañeros como Belén y Juan, con quienes pudimos organizar y coordinar nuestros microservicios, supervisando o haciendo mejoras y comentarios entre los tres sobre cómo definir la relación entre entidades, cuántos microservicios hacer, qué otras tablas realizar y demás.",
+          "El nivel técnico del proyecto igual creo que para esa altura del año nos sobrepasaba, pero se pudo terminar. Y sobre todo me parecía muy interesante poder no solo tener una visión teórica de microservicios, sino también práctica de cómo se aplica. Aunque con esta experiencia y otras en otros proyectos, realmente no la recomendaría si somos pocos. Después de todo es prácticamente lo que dice cualquier libro de arquitectura de software y estilos arquitectónicos: microservicios es algo muy puntual en ciertas organizaciones y con ciertos niveles de escalabilidad.",
+          "Pero de todas formas me resultó un proyecto muy bueno y presentable como idea inicial de que sé Java, Spring Boot, Docker y Microservicios, muchas herramientas que me sirvieron para seguir creciendo y aprendiendo.",
+          "Este también fue mi entrada al uso de Docker para todos mis proyectos. Prácticamente acá aprendí sobre Docker, Docker Compose y Dockerfiles. Aunque si bien me ayudaba con Bash para muchas tareas (por ejemplo, compilar con Maven mi backend en Java de forma automatizada), me permitió entender bien conceptos de networks, volumes y puertos.",
+          "Si tuviera que agregar algo más, sería la cantidad de malos deseos que le deseo a levantar Keycloak en local. Pero al final, solucionarlo siento que es parte de muchas problemáticas que se presentan, y saber resolverlas o poder resolverlas es lo que termina de afianzar mucho más el conocimiento. En este caso, resulta que para firmar un token de Keycloak en un mismo Docker con tu Backend, no tenés que usar ni la red interna ni localhost, ya que en ambos casos rompe la firma e invalida el token.",
+          "Resulta que la firma de un token desde otro Docker levantado separado de tu Docker de backend sí la acepta con localhost. Sin embargo, desde el mismo —por más que expongas el puerto— no la acepta, y aún sigo preguntándome el motivo. Pero bueno, lo importante, si alguien lee esto, es: Windows + R → powershell → ipconfig; buscá la IPv4 y esto te da tu IP local, propia de tu internet, y podés firmar el token con esa IP. Y ahora sí, Keycloak reconocerá la firma como válida.",
+          "Es gracioso, pero este concepto con el tiempo lo podés aplicar a tantas cosas que me pareció uno de los mayores aprendizajes de este proyecto. Por ejemplo, siendo el Lucas del futuro hoy (2026), lo estoy usando en mi proyecto de seminario de Analista en Sistemas para probar de manera local la API backend en Java (monolito modular; y sí, ya aclaramos que siempre empezar con monolitos modulares es la mejor opción). Simplemente conecto mi React Native al cliente de Axios con el ipconfig de mi internet y puedo hacer pruebas sin tener que estar abriendo un puerto en ngrok ni nada por el estilo, simplificando el proceso de pruebas locales.",
+          "Como conclusión, creo que todos estos proyectos que vamos haciendo —por más que a veces sean universitarios— dependiendo el caso pueden ayudar a ganar experiencia que extrapolamos a otros proyectos, y eso es lo mejor. Rescato este TP porque, si bien podría ser más completo, también fue mi inicio en microservicios, Spring Boot y carpetas layered tan estructurado."
+        ]
+      }
+    },
+
+
+    "py_tutor": {
+      "title": "Tutor Programación · Algoritmos & Backend",
+      "milestone": "Docencia y comunicación",
+      
+      "timeline": {
+        "summary": [
+          "Mi experiencia más gratificante en IT hasta ahora.",
+          "Preparé a +150 estudiantes en Algoritmos, Estructuras de Datos, POO, Bash Scripts y Backend.",
+          "Me sirvió para reafianzar conocimientos en Python y Java."
+        ]
+      },
+      "project": {
+        "summary": [
+          "¿Por qué empecé a dar clases? Después de mi primer año quería empezar a trabajar en IT, pero me di cuenta de que con solo Python no alcanzaba, así que ya en primero ayudaba a muchos compañeros con Algoritmos en Python y dije: ¿por qué no dar clases particulares a un precio accesible?",
+          "Ser profesor de Algoritmos con Python fue de las cosas que más me gustaron, ya que siempre intenté compartir mi emoción y amor hacia entender cómo funcionan los programas de forma imperativa, cómo tenían un sentido lógico y un porqué.",
+          "Este trabajo me hizo conocer a mucha gente, y que mucha otra me reconozca. De las mejores experiencias."
+        ],
+        "description": [
+          "Siendo justos, no tenía la necesidad de un trabajo estable, así que decidí arriesgarme y 'emprender': dije, ¿por qué no dar clases particulares? A mí me gusta, me sirve para seguir practicando las bases de Python, lo puedo hacer virtualmente — y no contaba con esto — pero realmente me permitía conocer a mucha gente.",
+          "Creo que por cómo lo menciono realmente pareciera ideal el trabajo para mí, pero tenía sus cosas buenas, como las mencionadas, y también malas. Por ejemplo, más allá del trabajo de dar clases, cómo te agota las cuerdas vocales, y sobre todo la cantidad de horas repitiendo los mismos ejercicios, problemas, enunciados, lo limitante que podía llegar a ser una materia básica de algoritmos.",
+          "Tener que buscar gente, gente que te trataba mal por solo mandarles un mensaje ofreciendo clases porque, bueno, es un país libre, supongo. El riesgo de exponerte, cantidad de números baneados, u horas buscando gente para poder tener clientela a lo largo del año. De todas formas, más allá de todo eso, como dije antes, era un trabajo muy idóneo para seguir estudiando, aprendiendo más de Python y sobre todo saber bajar ideas de programación a veces a gente no técnica directamente.",
+          "A pesar de todo lo dicho, trabajar de esto me encantó. Estuve casi 2 años y medio dando clases sobre todo Algoritmos, pero con el tiempo se sumaban otras materias (Paradigmas de Programación, Backend de Aplicaciones) que iba promocionando o simplemente sabía por anticipado, ya que estudiaba y avanzaba en paralelo muchos conceptos que se repetían en las materias.",
+          "Aún así, a finales del verano del 25' 'colgué el teclado de profe' después de año y medio, ya que por ahí era cansador repetir los mismos temas una y otra vez, y quería trabajar en el mundo IT nuevamente. Lo bueno es que esto me permitió publicar y abrir un canal de YouTube subiendo contenido o clases grabadas para, de todas formas, seguir ayudando a gente, así como alguna vez me ayudaron al empezar con los game mods.",
+          "Paradójicamente, la vida no es lo que uno espera, y pese a que ahora sí llegaba a varias entrevistas laborales (ya que ahora sabía Python, Django, DRF, JavaScript, HTML, CSS, Tailwind, PostgreSQL, Git), aún así por a, b o c no era suficiente. Después de un par de meses buscando y arrancado otro año en la facultad, el canal de YT que era para 'regalar' clases y seguir ayudando terminó sirviendo de publicidad para mí, sumado al año anterior con muchas recomendaciones, y pude otro año volver a ser profe con menor carga en general y menos búsqueda de clientes, que era lo más pesado.",
+          "Con menos carga laboral, mayor tiempo para seguir aprendiendo y dedicándole más tiempo a la facultad y mi vida personal, a finales del verano del 26' definitivamente dije: decido cerrar esta etapa de dar clases y me concentro en mi título de Analista en Sistemas. Aún así, el canal de YT, sin publicidad de mi parte, terminó siendo una biblia de Algoritmos más o menos para los chicos de primero, lo cual me alegra, porque en gran medida siempre me gusta compartir lo que me divierte y poder ayudar devolviendo lo que alguna vez me ayudaron cuando empecé a programar en los foros de AlliedModders con Pawn.",
+          "De paso, el canal de YT lo seguí usando para mostrar las materias de programación que vemos en la facultad, así que en general termina siendo un conocimiento general que va a quedar para la facultad y todos los futuros ingresantes que quieran aprender Algoritmos, Backend, Frontend, Base de Datos, Bash Scripts o Paradigmas de la Programación. Siento que es una buena forma de poder grabar contenido de muchas cosas relacionadas con la programación en general, pero relacionada a la estructura formal y estructurada de la universidad, ya que la práctica y el marco teórico terminan complementándose demasiado bien.",
+          "Hoy en día sigo actualizando cada tanto el canal de YT con contenido de alguna materia, sumado a guías super completas de materias de programación que pueden ser pesadas por los libros, además de que bueno como dije antes hice de mi canal por así decirlo mi propio 'foro' donde siempre estoy dispuesto a canales de comunicación para ayudar con cualquier problema, duda o inconveniente y de vuelta lo mismo me causa mucha gracia cuando me reconocen en la facultad por los videos de Backend, Desarrollo o Base de datos muchos compañeros de tercero, cuarto y quinto que vieron mis videos explicando las materias o parciales de la mismas."
+        ]
+      }
+    },
+
+
+
+    "no_country": {
+      "title": "No Country · Food Recycling App",
+      "milestone": "Primer trabajo en equipo real",
+      "timeline": {
+        "summary": [
+          "Primera experiencia de trabajo colaborativo (4 integrantes) con dailys, deadlines, slack y MVP por sprints.",
+          "Mi rol: Full-Stack, incluyendo el despliegue de la app en Railway y la coordinación del equipo.",
+          "Sobre todo desarrollé la parte de trabajar en equipo con Git y GitHub: ramas, pull requests, reviews."
+        ]
+      },
+      "project": {
+        "summary": [
+          "MVP solicitado por No Country: una app web que permitía a restaurantes, panaderías y verdulerías cargar sus productos perecederos en oferta para los usuarios, maximizando ganancias.",
+          "Como todos teníamos poca experiencia, el MVP fue un monolito modular con Django y SSR usando Django Templates, JavaScript y Tailwind, sobre una base de datos PostgreSQL configurada en Railway.",
+          "Mi rol fue Full-Stack y coordinación del equipo: backend con Django, deploy en Railway, configuración de gunicorn y variables de entorno.",
+          "Parte de mi rol también fue coordinar y hacer revisiones sobre los commits que realizaban mis compañeros."
+        ],
+        "description": [
+          "Esta fue una experiencia que encontré de casualidad navegando entre foros, donde recomendaban participar de la iniciativa de No Country, una organización que te reúne y te empareja con otras personas que quieren entender cómo funciona o cómo se puede trabajar en equipo: tener dailys, feedback, reviews sobre el proyecto, aprender a trabajar en grupo y con deadlines impuestas.",
+          "Particularmente me gustó mucho porque conocí a compañeros como Leyla, Fede y Nico, con quienes pudimos hacer un buen equipo para llevar a cabo el proyecto.",
+          "El proyecto fue elegido por nosotros como grupo: una app web que permitiera a verdulerías, panaderías y restaurantes poner en oferta sus productos que fueran perecederos o próximos a estarlo, publicarlos para que usuarios interesados en ahorrar vieran la oferta y fueran a buscarlos.",
+          "Básicamente encontramos una solución a algo que de por sí ya ocurría: muchas panaderías suelen poner en oferta facturas de ayer o cosas por el estilo. Realmente el proyecto tenía bastante potencial, pero lo dejamos en un MVP porque en general no teníamos el mejor nivel técnico para seguirlo mejorando o depurando.",
+          "Mi experiencia fue positiva y recomendaría a cualquiera con conocimiento en algún framework de backend, frontend o DevOps anotarse, ya que te permite conocer gente, hacer contactos, trabajar en grupo, entender o manejar acuerdos respecto de qué manda el back y el front, y aprender sobre otras áreas para adaptarse. Por ejemplo, en principio éramos 10, pero solo quedamos 4 que no abandonamos después de la primera semana.",
+          "Gracias a este proyecto aprendí muchísimo sobre Git y GitHub, además de afianzar conocimientos de Django, poder comunicarme con mis compañeros para llegar a acuerdos o tareas a realizar, y mejorar las presentaciones orales, ya que debíamos presentar el proyecto frente a todos los participantes de esa ronda."
+        ]
+      }
+    },
+
+
+    "university": {
+      "title": "Ingeniería en Sistemas · UTN",
+      "milestone": "Formalización de conocimientos",
+      "timeline": {
+        "summary": [
+          "Ingresé a la Universidad, enfocado en mejorar mi capacidad de resolución de problemas a partir del Software.",
+          "Actualmente soy estudiante avanzado de la carrera (3rd year+)."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Actualmente estudiando Ingeniería en Sistemas, encaminado a sacar mis títulos de Analista en Sistemas, Licenciatura en Ciberseguridad y Licenciatura en Inteligencia Artificial."
+        ],
+        "description": [
+          "Este sería un texto muy largo sobre cómo empezó todo en la facultad y por qué elegí anotarme después de que me gustó la programación."
+        ]
+      }
+    },
+
+
+    "pawn_cs": {
+      "title": "Game Modder · CS 1.6",
+      "milestone": "Origen autodidacta",
+      "timeline": {
+        "summary": [
+          "Mis primeros scripts, usados en servidores online de CS 1.6.",
+          "Fue mi primer acercamiento con la programación pese a no entender mucho, me gustaba crear plugins dentro del juego.",
+          "Como los plugins eran muy utilizados, me permitió tener clientes de forma freelance para actualizar mi PC."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Counter-Strike mods escritos en Pawn. De mis primeros trabajos freelance.",
+          "Consistía en leer un proyecto base de unos modos de juego SuperHero y Paintball, y a partir de esto crear scripts de forma autodidacta.",
+          "Como no existían los LLM realmente, tenía que leer muchos códigos de ejemplo y leer incansable cantidad de foros en busca de respuestas."
+        ],
+        "description": [
+          "Fue mi primera experiencia con la programación, aunque de programar solo sabía If, Else básicamente jajajaj, supongo que también como la época era la cuarentena me permitía tener tiempo libre ya que solo trabajaba, y como mi computadora de ese entonces solo me dejaba jugar a juegos como CS 1.6, pude quizás interesarme más por el juego y sus mods que jugaba cuando era más chico.",
+          "Cuestión que hacer scripts y usar un compilador, que para mí en ese entonces era solo un programita donde tiraba los scripts y salía un plugin .amxx para usar. Algo que al menos sí me ayudaba o me entretenía mucho era más buscar soluciones en código, pese a no saber casi nada de código, lo cual era más raro de buscar, pero como tenía mucho conocimiento sobre los modos de juego podía saber exactamente qué hacía cada parte del código por experiencia del juego.",
+          "O sea fue todo un proceso de Ingeniería inversa para poder extrapolar información de qué hacía un bloque de código y reutilizarlo en otro lugar para simplemente hacer el plugin como yo quería, con los efectos que me inventara o combinara de otros códigos existentes.",
+          "Me pasaba muchas horas leyendo y por sobre todo prueba y error, pero tanto tiempo invertido al menos tuvo su ganancia ya que me permitió abrir mi servidor, mantenerlo con la ayuda de la gente, hacer una comunidad en Argentina, pero por sobre todo casi que una comunidad mundial, ya que mucha gente parece le tenía cariño y nostalgia al modo SuperHero del CS 1.6, entre esa comunidad conocí a mucha gente de Europa que sabemos a diferencia de LATAM en general ganan muy bien, y no tenían problema en invertir para que yo les escribiera plugins personalizados para sus servidores, ya que acá no podían jugar por el ping.",
+          "Cuestión, gracias a eso pude conocer a gente muy copada, encontrar un lenguaje en común con el inglés, poder ofrecer un producto, sí plugins de CS, ni yo lo hubiera pensado pero me fascinó, porque amaba programar esos plugins cada uno era literalmente un desafío, tiempo después descubrí que encima Pawn que es un lenguaje al estilo de C, no es de los mejores lenguajes para acercarte a la programación de nivel inicial, pero me permitió extrapolar tantas cosas sin darme cuenta que agradezco que el CS haya sido escrito en Pawn.",
+          "También creo que de no haberme acercado así a la programación jamás se me hubiera ocurrido querer aprender tanto sobre este tema o interesarme tanto.",
+          "Algo que me causa mucha gracia, es todo lo que se puede aprender con poca estructura, realmente después de haberme anotado a Ingeniería en Sistemas y haber cursado el primer año, con conocimiento en Algoritmos y Estructuras de datos con Python, y extrapolar ese conocimiento hacia Pawn y volver a ver los scripts que había escrito fue como, quién escribió esto no sabía nada, y la cantidad de cosas que pude volver a estructurar y hacerlas mucho más mantenibles fue impresionante, aunque seguía sin saber prácticamente nada al menos ahora aparte de If, Else, sabía qué era un for y arrays y con eso volví a estructurar los scripts.",
+          "Con todo esto siento que fue la mejor forma de empezar a programar o interesarme por el mundo IT, hoy cambió mucho pero en cierta medida el punto sigue siendo el mismo, cuantos más proyectos, cuantos más problemas intente solucionar, más información que voy a poder extrapolar para el próximo o anteriores proyectos por refactorizar."
+        ]
+      }
+    }
+
+
+  },
+
+
+
+
+
+
+
+
+
+
+  
 
   "about2": {
 
@@ -154,7 +470,7 @@
       "university": "Página de la Universidad"
   },
 
-  "projects": {
+  "projects22": {
       "ping": "    docker ps -a/",
       "exploring": "Listado de proyectos y aplicaciones desplegados",
       "featured": "Proyectos Destacados",

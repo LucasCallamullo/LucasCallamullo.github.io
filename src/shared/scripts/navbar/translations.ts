@@ -32,7 +32,7 @@ const VALID_LANGS: readonly LangCode[] = ['en', 'es'];
  *     projects: { label: { span1: "A", span2: "B" } }
  *   }
  */
-type TranslationValue = string | { [key: string]: TranslationValue };
+type TranslationValue = string | string[] | { [key: string]: TranslationValue };
 type Translations = Record<string, TranslationValue>;
 
 let currentLang: LangCode = DEFAULT_LANG;
@@ -55,6 +55,31 @@ function getInitialLanguage(): LangCode {
 }
 
 /**
+ * Une los elementos si es un arreglo, o retorna la cadena intacta.
+ */
+function formatTranslationValue(
+  value: string | string[],
+  joinMode: string | null
+): string {
+  if (typeof value === 'string') return value;
+
+  // Manejo de arreglos según el atributo data-i18n-join
+  switch (joinMode) {
+    case 'space':
+      return value.join(' ');
+    case 'newline':
+    case '\n':
+      return value.join('\n');
+    case 'br':
+      return value.join('');
+    default:
+      return value.join(' '); // Separador por defecto si es una lista
+  }
+}
+
+
+
+/**
  * Resolve a dot-separated key against the translations tree.
  *
  * Supports two shapes:
@@ -63,15 +88,15 @@ function getInitialLanguage(): LangCode {
  *
  * Tries flat first, then nested. Returns undefined if not found.
  */
-function resolveKey(key: string): string | undefined {
+function resolveKey(key: string): string | string[] | undefined {
   // Try 1: flat lookup.
   const flat = translations[key];
-  if (typeof flat === 'string') return flat;
+  if (typeof flat === 'string' || Array.isArray(flat)) return flat;
 
   // Try 2: nested lookup.
   const nested = key.split('.').reduce<TranslationValue | undefined>(
     (acc, part) => {
-      if (acc && typeof acc === 'object' && part in acc) {
+      if (acc && typeof acc === 'object' && !Array.isArray(acc) && part in acc) {
         return acc[part];
       }
       return undefined;
@@ -79,12 +104,89 @@ function resolveKey(key: string): string | undefined {
     translations
   );
 
-  return typeof nested === 'string' ? nested : undefined;
+  if (typeof nested === 'string' || Array.isArray(nested)) {
+    return nested;
+  }
+
+  return undefined;
 }
 
 // -----------------------------------------------------------------------------
 // Core: load + apply
 // -----------------------------------------------------------------------------
+
+/**
+ * Apply the current translations to every `[data-i18n]` element in the DOM.
+ *
+ * - Elements with a `value` attribute (inputs) get their value set.
+ * - Elements with a `href` attribute (links) get their href set.
+ * - Everything else gets its `textContent` set.
+ *
+ * @param callbacks Optional map of functions to run after applying translations.
+ *                  Useful for re-rendering dynamic sections.
+ */
+export function applyTranslations(
+  callbacks: Record<string, () => void> = {}
+): void {
+  // sync label flags 
+  syncLabelTranslations();
+
+  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (!key) return;
+
+    const value = resolveKey(key);
+    if (value === undefined) return;
+
+    //! RENDER LISTS STRINGS FROM JSON
+    if (Array.isArray(value)) {
+      // type joinMode = 'space' | 'newline' | '\n' | 'br' | '' | null;
+      const dataJoin = el.getAttribute('data-i18n-join') || '';
+      el.textContent = formatTranslationValue(value, dataJoin);
+      // <ul>, <ol>, <p>, <span>, etc. — list translation
+      return;
+    }
+
+    // <input> / <textarea> — value translation
+    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+      el.value = value;
+      return;
+    }
+
+    // <img> — src translation
+    if (el instanceof HTMLImageElement) {
+      el.src = value;
+      return;
+    }
+
+    // <a data-cv="true"> — CV download link
+    if (el instanceof HTMLAnchorElement && el.hasAttribute('href')) {
+      // !==== This is only for cv download href
+      if (el.getAttribute('data-cv') === 'true') {
+        el.href = value;
+
+        const newHref = resolveKey(el.getAttribute('data-altText') || '') || '';
+        if (!Array.isArray(newHref)) el.download = newHref;
+        
+        return;
+      }
+      // <a> — text translation
+      el.textContent = value;
+      return;
+    }
+
+    // Generic HTMLElement — text translation
+    el.textContent = value;
+  });
+
+  // Single event: the language changed and the translations were applied.
+  document.dispatchEvent(new CustomEvent('applyTranslations'));
+
+  // Run callbacks (re-render dynamic sections, etc.)
+  for (const fn of Object.values(callbacks)) {
+    if (typeof fn === 'function') fn();
+  }
+}
 
 /**
  * Fetch the JSON file for `lang`, store it, and re-apply all translations.
@@ -110,60 +212,6 @@ export async function loadLanguage(lang: LangCode): Promise<void> {
     );
   } catch (err) {
     console.error('[i18n] failed to load language:', err);
-  }
-}
-
-/**
- * Apply the current translations to every `[data-i18n]` element in the DOM.
- *
- * - Elements with a `value` attribute (inputs) get their value set.
- * - Elements with a `href` attribute (links) get their href set.
- * - Everything else gets its `textContent` set.
- *
- * @param callbacks Optional map of functions to run after applying translations.
- *                  Useful for re-rendering dynamic sections.
- */
-export function applyTranslations(
-  callbacks: Record<string, () => void> = {}
-): void {
-
-  syncLabelTranslations();
-
-  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
-    const key = el.getAttribute('data-i18n');
-    if (!key) return;
-
-    const value = resolveKey(key);
-    if (value === undefined) return;
-
-    el.setAttribute('data-original-text', value);
-
-    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-      el.value = value;
-    } else if (el instanceof HTMLImageElement) {
-      el.src = value;
-
-    } else if (el instanceof HTMLAnchorElement && el.hasAttribute('href')) {
-      
-      // ! This is only for cv download href
-      if (el.getAttribute('data-cv') === 'true') {
-        el.href = value;
-        el.download = resolveKey(el.getAttribute('data-altText') || '') || '';
-      } else {
-        el.textContent = value;
-      }
-
-    } else {
-      el.textContent = value;
-    }
-  });
-
-  // Single event: the language changed and the translations were applied.
-  document.dispatchEvent(new CustomEvent('applyTranslations'));
-
-  // Run callbacks (re-render dynamic sections, etc.)
-  for (const fn of Object.values(callbacks)) {
-    if (typeof fn === 'function') fn();
   }
 }
 
