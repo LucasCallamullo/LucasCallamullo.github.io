@@ -1,0 +1,81 @@
+---
+import '@shared/styles/global.css'
+import '@shared/styles/custom.css'
+
+// Define page metadata
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+// Define page metadata
+const title = "Callamullo Lucas · Software Engineer";
+---
+
+<BaseLayout title={title}>
+
+  <button id="btnOpenModal" class="px-4 py-2 bg-blue-600 rounded">
+    Abrir modal A
+  </button>
+
+  <!-- ============ MODAL A ============ -->
+  <div
+    id="myModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+  >
+    <div class="modal__content p-6 bg-amber-200 text-black rounded-lg">
+      <h2>Modal A</h2>
+      <p>Este es el modal principal.</p>
+
+      <button
+        id="btnOpenModal2"
+        class="px-3 py-1 bg-emerald-600 text-white rounded"
+      >
+        Abrir modal B (dentro de A)
+      </button>
+
+      <button
+        type="button"
+        class="modal__btn_close px-3 py-1 bg-red-600 text-white rounded"
+      >
+        Cerrar A
+      </button>
+    </div>
+  </div>
+  <div id="myOverlay" class="overlay"></div>
+
+  <!-- ============ MODAL B ============ -->
+  <div
+    id="myModal2"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+  >
+    <div class="modal__content p-6 bg-emerald-200 text-black rounded-lg">
+      <h2>Modal B</h2>
+      <p>Este se abrió dentro del A.</p>
+
+      <button
+        type="button"
+        class="modal__btn_close px-3 py-1 bg-red-600 text-white rounded"
+      >
+        Cerrar B
+      </button>
+    </div>
+  </div>
+  <div id="myOverlay2" class="overlay"></div>
+
+
+  
+  <script>
+    import { bindModal } from '@shared/scripts/utils/modal';
+
+    function initModals() {
+      bindModal({ modalSelector: '#myModal',  overlaySelector: '#myOverlay',  openBtnSelector: '#btnOpenModal'  });
+      bindModal({ modalSelector: '#myModal2', overlaySelector: '#myOverlay2', openBtnSelector: '#btnOpenModal2' });
+    }
+
+    document.addEventListener('astro:page-load', initModals);
+  </script>
+</BaseLayout>

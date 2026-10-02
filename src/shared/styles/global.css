@@ -36,7 +36,8 @@
 
   /* CUSTOM Brand Colors */
   --color-console: var(--console-color);
-  --color-console-100: var(--console-color-light);
+  --color-console-100: var(--console-color-100);
+  --color-console-400: var(--console-color-400);
   --color-accent: var(--accent-color);
 }
 
@@ -76,7 +77,9 @@
 
   /* Custom Accents */
   --console-color: #059669;
-  --console-color-light: #2e7d32;
+  --console-color-100: #10b981;
+  --console-color-400: #2e7d32; 
+
   --accent-color: #c47d00;
 }
 
@@ -99,7 +102,8 @@
 
   /* Custom Accents */
   --console-color: #00ff00;
-  --console-color-light: #2e7d32;
+  --console-color-100: #38ef7d;
+  --console-color-400: #2e7d32;
   --accent-color: #ffb800;
 }
 
@@ -118,6 +122,8 @@
   --text-muted: #a78bfa;
 
   --console-color: #00ff00;
+  --console-color-100: #38ef7d;
+  --console-color-400: #2e7d32;
   --accent-color: #ffb800;
 }
 
@@ -136,6 +142,8 @@
   --text-muted: #38bdf8;
 
   --console-color: #00ff00;
+  --console-color-100: #38ef7d;
+  --console-color-400: #2e7d32;
   --accent-color: #ffb800;
 }
 
@@ -159,6 +167,16 @@ header {
 main {
   margin-top: var(--height-header);
 }
+
+
+ul {
+  list-style: none;                           /* Sin viñetas */
+  -webkit-tap-highlight-color: transparent;   /* Sin resaltado al tocar */
+}
+
+a { text-decoration: none; }                  /* Sin subrayado */
+
+
 
 
 #whoami {
@@ -187,7 +205,6 @@ main {
   left: 3%;
   width: 95%;
   height: 40%;
-  
   transition: 0.5s;
   transform-origin: center;
 }
@@ -210,6 +227,16 @@ main {
 .btn_notched_surface_900::after,
 .btn_notched_surface_900::before {
   background-color: var(--surface-900);
+}
+
+.btn_notched_surface_800::after,
+.btn_notched_surface_800::before {
+  background-color: var(--surface-800);
+}
+
+.btn_notched_surface_200::after,
+.btn_notched_surface_200::before {
+  background-color: var(--surface-200);
 }
 
 
@@ -322,4 +349,150 @@ main {
 .cont_animate__from_left_lg[data-animate] {
   opacity: 1;
   transform: translateX(0);
+}
+
+
+/* ==============================================================
+  +  EFFECT timeline_classic
+/* ============================================================== */
+.timeline_cont_line {
+  position: relative;
+  padding: 16px 0;
+}
+
+/* Línea vertical: en mobile va a la izquierda (20px) */
+.timeline_cont_line::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--console-color-100);
+  transform: translateX(-50%);
+}
+
+/* Mobile: todos los items van a la derecha de la línea */
+.timeline_cont__item {
+  position: relative;
+  width: 100%;
+  padding-left: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.timeline_cont__icon {
+  position: absolute;
+  top: 20px;
+  box-shadow: 0 0 6px var(--console-color);
+  border-radius: 50%;
+  z-index: 2; 
+  left: -8px;
+  right: auto;
+}
+
+
+@media (min-width: 768px) {
+  /* Línea vertical al centro */
+  .timeline_cont_line::before {
+    left: 50%;
+  }
+
+  /* Items impares: a la izquierda de la línea */
+  .timeline_cont__item:nth-child(odd) {
+    width: 50%;
+    padding-left: 0;
+    padding-right: 28px;
+    justify-content: flex-end; 
+  } 
+
+  /* Items pares: a la derecha de la línea */
+  .timeline_cont__item:nth-child(even) {
+    width: 50%;
+    margin-left: 50%;
+    padding-left: 28px;
+    justify-content: flex-start;
+  }
+
+  .timeline_cont__item:nth-child(odd) .timeline_cont__icon {
+    left: auto;
+    right: -20px;
+  }
+
+  .timeline_cont__item:nth-child(even) .timeline_cont__icon {
+    left: -20px;
+    right: auto;
+  }
+}
+
+/* Base: estado inicial + transición (aplica a ambas direcciones) */
+.timeline_animate__from_left,
+.timeline_animate__from_right {
+  opacity: 0;
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: opacity, transform;
+
+  /* Mobile-first: ambos entran desde la izquierda por defecto */
+  transform: translateX(-40px);
+}
+
+/* Estado final (común a ambos) */
+.timeline_animate__from_left[data-animate],
+.timeline_animate__from_right[data-animate] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Desktop (md: 768px+): los pares entran desde la derecha */
+@media (min-width: 768px) {
+  .timeline_animate__from_right {
+    transform: translateX(80px);
+  }
+
+  .timeline_animate__from_left {
+    transform: translateX(-80px);
+  }
+
+  /* Necesario porque el estado final ya no coincide con el inicial */
+  .timeline_animate__from_right[data-animate] {
+    transform: translateX(0);
+  }
+}
+
+
+/* ==============================================================
+   Effect: grayscale → color on group hover
+   --------------------------------------------------------------
+   - Icons start slightly grayscale and dim.
+   - When hovering ANYWHERE on the `.group` parent, all icons
+     regain full color and full opacity.
+   - The icon directly under the cursor scales up a bit more.
+   ============================================================== */
+.effect_grayscale svg {
+  filter: grayscale(70%);
+  opacity: 0.65;
+  transition:
+    filter 0.35s ease,
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: filter, opacity, transform;
+}
+
+/* Group hover: every icon in the card recovers color */
+.group:hover .effect_grayscale svg {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Icon directly hovered: a bit more scale */
+.effect_grayscale svg:hover {
+  transform: scale(1.12);
+}
+
+/* Optional: dim the other icons when one is hovered */
+.effect_grayscale:hover svg:not(:hover) {
+  filter: grayscale(30%);
+  opacity: 0.85;
 }

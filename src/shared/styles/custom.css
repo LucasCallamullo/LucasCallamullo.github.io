@@ -2,7 +2,7 @@
    CUSTOM CLASSES INDEX
    ------------------------------------------------------------
    .font_console         → monospace font stack
-   .blinking_underscore  → blinking "_" cursor animation
+   .blinking_underscore  → blinking "_"  animation
    .nav__btn_nav         → navbar button (active/hover color)
    .nav__sliding_bar     → sliding underline under nav buttons
    .modal / .overlay     → modal + backdrop
@@ -12,15 +12,13 @@
 /* En tu CSS global */
 @utility hover-up-sm {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
   will-change: transform;
   &:active, &:focus-visible { transform: translateY(-0.125rem); }
   @media (hover: hover) { &:hover { transform: translateY(-0.125rem); } }
 }
 
-@utility hover-up {
+@utility hover-up { 
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
   will-change: transform;
   &:active, &:focus-visible { transform: translateY(-0.25rem); }
   @media (hover: hover) { &:hover { transform: translateY(-0.25rem); } }
@@ -28,7 +26,6 @@
 
 @utility hover-up-lg {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
   will-change: transform;
   &:active, &:focus-visible { transform: translateY(-0.5rem); }
   @media (hover: hover) { &:hover { transform: translateY(-0.5rem); } }
@@ -36,7 +33,6 @@
 
 @utility hover-up-xl {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
   will-change: transform;
   &:active, &:focus-visible { transform: translateY(-1rem); }
   @media (hover: hover) { &:hover { transform: translateY(-1rem); } }
