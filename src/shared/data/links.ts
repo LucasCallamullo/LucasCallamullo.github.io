@@ -12,7 +12,7 @@ export interface SiteLink {
   /** Destination URL. External links should use absolute URLs. */
   href: string;
 
-  /** Iconify icon name (e.g. `lucide:github`, `simple-icons:linkedin`). */
+  /** Iconify icon name (e.g. `ri:github`, `simple-icons:linkedin`). */
   icon: string;
 
   /** Optional: show an "external link" indicator next to the label. */
@@ -62,7 +62,7 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
     i18n: I18N.links.cv.href,
     href: './CV/LucasCallamullo_Software_Resume.pdf',
     altText: 'LucasCallamullo_Software_Resume.pdf',
-    icon: 'lucide:file-text',
+    icon: 'ri:file-pdf-2-line',
     external: true,
     newTab: true,
   },
