@@ -27,7 +27,7 @@ const DEFAULT_OPTIONS: SkillsSwiperOptions = {
 
   // Autoplay para que se mueva solo (y se detenga al interactuar) ---
   autoplay: {
-    delay: 1000,             // 0 segundos entre transiciones → movimiento continuo
+    delay: 900,             // 0 segundos entre transiciones → movimiento continuo
     disableOnInteraction: false, // Se detiene si el usuario interactúa (drag o click)
     pauseOnMouseEnter: true,   // No se pausa al hacer hover, para mantener fluidez
     // stopOnLastSlide: false,

@@ -102,7 +102,7 @@ const widthClass = WIDTH_CLASSES[mainWidth];
     <slot name="banner-header" />
 
     <!-- mx-auto py-6 space-y-10 max-w-6xl   -- MAIN DEFAULT CLASS -->
-    <main class:list={['space-y-10', widthClass, mainClass]}>
+    <main class:list={['', widthClass, mainClass]}>
       <!-- Contenido principal por defecto -->
       <slot />
     </main>
@@ -111,7 +111,7 @@ const widthClass = WIDTH_CLASSES[mainWidth];
     <slot name="banner-footer" />
 
     <!-- Footer global -->
-    <Footer class:list={['space-y-10', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}> </Footer>
+    <Footer class:list={['', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}> </Footer>
 
     <!--
     <script>

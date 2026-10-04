@@ -20,6 +20,12 @@ interface Props {
   /** Extra classes appended last — can override any default. */
   class?: string;
 
+  paddingX?: boolean;
+
+  paddingY?: boolean;
+
+  justifyCenter?: boolean;
+
   /** Any other HTML attribute (aria-*, data-*, etc.). */
   [key: string]: unknown;
 }
@@ -27,6 +33,11 @@ interface Props {
 const {
   id,
   class: className = '',
+
+  paddingX = true,
+  paddingY = true,
+  justifyCenter = true,
+
   ...rest
 } = Astro.props;
 
@@ -36,8 +47,10 @@ const {
   id={id}
   class:list={[
     // Base layout (always applied)
-    'flex flex-col justify-center items-center',
-    'py-6 px-2 sm:px-4 lg:px-18',
+    'flex flex-col',
+    justifyCenter && 'justify-center items-center',
+    paddingY && 'py-6',
+    paddingX && 'px-2 sm:px-4 lg:px-18',
     
     // Width
     'w-full',

@@ -43,15 +43,15 @@ const title = "Software Engineer · Callamullo Lucas";
       <!-- + MAIN BUTTONS HOMEEE -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-7 mt-8" data-fade-3>
 
-        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
           btn_notched btn_notched_surface_900" href={getNavHref('projects')}>
           <Icon name="ri:code-s-slash-line" class="text-xl text-accent"></Icon>
-          <span class="font_console truncate text-lg" data-i18n={I18N.home.btn.projects}>
+          <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.projects}>
             View Projects
           </span>
         </a>
 
-        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
           btn_notched btn_notched_surface_900" data-i18n={I18N.links.cv.href}
           data-altText={I18N.links.cv.altText}
           data-cv="true"
@@ -59,16 +59,16 @@ const title = "Software Engineer · Callamullo Lucas";
           download={SOCIAL_LINKS.cv.altText}
           href={SOCIAL_LINKS.cv.href}>
             <Icon name="ri:file-pdf-2-line" class="text-xl text-accent"></Icon>
-            <span class="font_console truncate text-lg" 
+            <span class="font_console tracking-wider truncate text-lg" 
               data-i18n={I18N.home.btn.downloadCv}>
               Download CV
             </span>
         </a>
 
-        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
           btn_notched btn_notched_surface_900" href={getNavHref('contact')}>
           <Icon name="ri:send-plane-fill" class="text-xl text-accent"></Icon>
-          <span class="truncate text-lg" data-i18n={I18N.home.btn.contact}>
+          <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.contact}>
             Contact
           </span>
         </a>
@@ -78,7 +78,8 @@ const title = "Software Engineer · Callamullo Lucas";
 
    <!-- ABOUT SECTION ON HOME  -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl">
+    <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl py-7">
+
       <CardSection hover={true} bordered={true} 
         class="bg-surface-900 max-w-3xl w-full cont_animate__from_left_lg" data-reveal data-multi-anim>
 
@@ -111,10 +112,15 @@ const title = "Software Engineer · Callamullo Lucas";
           </span>
         </p>
 
-        <a class="flex hover-up gap-1 items-center justify-center h-10 px-4 py-5 mt-2 self-center
-          btn_notched btn_notched_surface_900" href={getNavHref('about')}>
-          <span class="font_console text-accent truncate text-lg tracking-wider">$ cd&nbsp;</span>
-          <span class="font_console text-lg tracking-wider" data-i18n={I18N.home.about.about_txt}>about.txt</span>
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 mt-4 self-center
+          btn_notched btn_notched_surface_900 font_console text-lg group font-bold" 
+          href={getNavHref('about')}
+        >
+          <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
+          <span class="text-console truncate tracking-wider font-bold" data-i18n={I18N.home.about.about_txt}>
+            about
+          </span>
+          <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
         </a>
       </CardSection>
     </div>
@@ -123,38 +129,53 @@ const title = "Software Engineer · Callamullo Lucas";
 
   <!-- Sección de Tecnologías / Skills  -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
-    <div class="flex flex-col gap-3 justify-center items-center max-w-full md:max-w-6xl p-5 md:p-7">
+    <div class="flex flex-col gap-5 justify-center items-center max-w-full md:max-w-6xl py-7">
 
-      <h3 class="text-console text-3xl font_console tracking-wider cont_animate__from_left_lg" 
-        data-i18n={I18N.home.skills.title} data-reveal data-multi-anim>
-        Featured Technologies
-      </h3>
-      <span class="text-lg mb-5 font_console tracking-wider" data-i18n={I18N.home.skills.subtitle}>
-        My daily stack for backend development, databases, and deployment.
-      </span>
+      <div class="flex flex-col gap-5 text-center justify-center cont_animate__from_left_lg"
+        data-reveal data-multi-anim
+      >
+        <h3 class="text-console text-3xl font_console tracking-wider " 
+          data-i18n={I18N.home.skills.title} >
+          Featured Technologies
+        </h3>
+        <span class="text-lg font_console tracking-wider" data-i18n={I18N.home.skills.subtitle}>
+          My daily stack for backend development, databases, and deployment.
+        </span>
+      </div>
 
       <!-- + SWIPER CONTAINER -->
       <div class="swiper skillsSwiper">
-        <div class="swiper-wrapper py-4">
+        <div class="swiper-wrapper py-4 overflow-visible">
           {getOrderedTechs().map((tech) => {
             return (
-              <div class="swiper-slide tech_group bg-surface-800 rounded-xl">
+              <div class="swiper-slide tech_group bg-surface-800 rounded-xl cont_border_effect">
                 <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center place-self-center mb-4" />
                 <span class="font_console">{tech.name}</span>
+
+                {/* <!-- Effects absolute --> */}
+                <span class="cont_border__anim_effect border-console rounded-xl border-2"></span>
               </div>
             );
           })}
         </div>
       </div>  
 
-      <a class="flex hover-up-lg gap-3 items-center justify-center h-10 px-4 py-5 mt-5 group
-        btn_notched btn_notched_surface_900 cursor-pointer">
-
+      <a class="flex hover-up items-center justify-center h-10 px-4 py-5 mt-2 self-center
+        btn_notched btn_notched_surface_900 font_console text-lg group" 
+        href={getNavHref('skills')}
+      >
+        <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
+        <span class="text-console truncate tracking-wider font-bold" data-i18n={I18N.home.skills.btn}>
+          skills
+        </span>
+        <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
+        <!--  
         <span class="group-hover:text-console text-xl truncate font_console tracking-wider" 
           data-i18n={I18N.home.skills.btn}>
           View all skills
-        </span>
+        </span> 
         <Icon name="ri:external-link-line" class="text-xl" ></Icon>
+        -->
       </a>
 
     </div>
@@ -163,9 +184,10 @@ const title = "Software Engineer · Callamullo Lucas";
 
   <!--  CONTACT Y GITHUB SECTION   -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class="flex justify-center items-center max-w-full md:max-w-6xl">
-      <CardSection hover={true} bordered={true} class="bg-surface-900 max-w-3xl w-full cont_animate__from_left_lg"
-        data-reveal data-multi-anim>
+    <div class="flex justify-center items-center max-w-full md:max-w-6xl py-7">
+
+      <CardSection class="bg-surface-900 max-w-3xl w-full cont_animate__from_right_lg"
+        hover={true} bordered={true} data-reveal data-multi-anim >
 
         <h3 class="font_console tracking-wider text-2xl text-console" data-i18n={I18N.home.contact.title}>
           Let's build something that works.
@@ -185,19 +207,28 @@ const title = "Software Engineer · Callamullo Lucas";
           </span>
         </p>
 
+        <!-- Buttons ref -->
         <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full mt-4">
-          <a class="flex hover-up gap-2 items-center justify-center h-10 px-4 py-5 mt-2 self-center
-              btn_notched btn_notched_surface_900" href={getNavHref('contact')}>
-            <Icon name="ri:external-link-line" class="text-lg" />
-            <span class="text-lg" data-i18n={I18N.home.btn.contact}>Contact</span>
+
+          <a class="flex hover-up items-center justify-center h-10 px-4 py-5 self-center
+            btn_notched btn_notched_surface_900 font_console text-lg group" 
+            href={getNavHref('contact')}
+          >
+            <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
+            <span class="text-console truncate tracking-wider font-bold" 
+              data-i18n={I18N.home.contact.btn}>contact</span>
+            <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
           </a>
 
-          <a class="flex hover-up gap-2 items-center justify-center h-10 px-4 py-5 mt-2 self-center
-              btn_notched btn_notched_surface_900" href={getNavHref('github')} target="_blank">
-
-            <Icon name="ri:github-line" class="text-lg" />
-            <span class="text-lg">GitHub</span>
+          <a class="flex hover-up items-center justify-center h-10 px-4 py-5 self-center gap-2
+            btn_notched btn_notched_surface_900 font_console text-lg group" 
+            href={getNavHref('github')} target="_blank"
+          >
+            <span class="text-content-muted truncate group-hover:text-accent font-bold">$ open</span>
+            <span class="text-console truncate tracking-wider font-bold">GitHub</span>
+            <Icon name="ri:github-line" class="h-6 w-6 group-hover:text-console-400" />
           </a>
+
         </div>
 
       </CardSection>
