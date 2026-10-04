@@ -44,7 +44,7 @@
       "downloadCv": "Descargar CV"
     },
     "about": {
-      "about_txt": "sobre_mi.txt",
+      "about_txt": "sobre_mi",
       "about_p1_1": "Hola, soy Lucas. ",
       "about_p1_2": "Backend / Full-Stack Software Engineer ",
       "about_p1_3": "vivo en Córdoba, Argentina.",
@@ -58,12 +58,13 @@
     "skills": {
       "title": "Tecnologías Destacadas",
       "subtitle": "Mi Stack diario para Backend, Frontend, Bases de Datos e Implementación.",
-      "btn": "Mira mis skills"
+      "btn": "habilidades"
     },
     "contact": {
       "title": "Construyamos algo que funcione.",
       "span1": "Desarrollo Backend, APIs REST y Arquitecturas escalables.",
-      "span2": "Feliz de charlar sobre código, aprendizaje y proyectos que resuelven problemas reales."
+      "span2": "Feliz de charlar sobre código, aprendizaje y proyectos que resuelven problemas reales.",
+      "btn": "contacto"
     }
   },
 
@@ -87,14 +88,124 @@
       "universityLabel": "Universidad:",
       "residenceLabel": "Residencia:"
     },
-
+    "timeline": {
+      "title": "'Career Timeline'",
+      "subtitle": "Dónde empezó todo, y a dónde me llevó."
+    },
     "milestone": {
       "title": "mis_hitos.log",
       "subtitle": "Pequeño resumen de todo mi recorrido, como un histórico por pasos.",
       "stepSpan": "Paso: "
     }
-
   },
+
+  "skills": {
+    "title": "ls -la habilidades/",
+    "subtitle": "Explorando experiencia técnica.",
+
+    "languages": "Lenguajes",
+    "backend": "Back-End",
+    "frontend": "Front-End",
+    "databases": "Bases de Datos",
+    "proxies": "Contenedores & Reverse Proxies",
+    "devops": "DevOps & Automatización",
+    "testing": "Testing & Documentación",
+
+    "main": {
+      "subtitle": "Donde tengo más experiencia práctica."
+    },
+    "carousel": {
+      "title": "'Carrusel de mi Stack Principal'",
+      "subtitle": "Las tecnologías que uso a diario, en rotación."
+    },
+    "all": {
+      "title": "all-techs/",
+      "subtitle": "Todo lo que usé a lo largo de los proyectos."
+    }
+  },
+
+
+  
+
+
+
+  
+  "skills2": {
+      "featured": "",
+      "subFeatured": "Herramientas y stacks con los que he trabajado",
+      "exploring": "Explorando experiencia técnica",
+      "languages": "Lenguajes",
+      "backend": "Back-End",
+      "frontend": "Front-End",
+      "databases": "Bases de Datos",
+      "containers": "Contenedores y Proxy Inverso",
+      "devops": "DevOps y Automatización",
+      "testing": "Pruebas y Documentación"
+  },
+
+  "contact": {
+      "ping": "    ping contacto.servidor",
+      "establishing": "Estableciendo conexión con el punto de comunicación",
+      "title": "Contáctame",
+      "name_label": "Nombre:",
+      "email_label": "Correo:",
+      "message_label": "Mensaje:",
+      "send_button": "Enviar",
+      "availability_title": "Estado de Disponibilidad",
+      "open_to_opportunities": "Abierto a oportunidades",
+      "response_time": "Tiempo de respuesta: Dentro de 24 horas",
+      "timezone": "ART (UTC-3)",
+      "location": "Córdoba, Argentina",
+      "connect_title": "Conecta Conmigo",
+      "github_tag": "Ir a GitHub",
+      "github_text": "Git Hub",
+      "linkedin_tag": "Ir a Linkedin",
+      "linkedin_text": "Linkedin",
+      "email_tag": "Envíame un Correo",
+      "email_text": "Correo",
+      "copy_tag": "Copiar Correo",
+      "copy_text": "Correo",
+      "echo": "$ echo",
+      "thanks_message": "\"Gracias por visitar\"",
+      "chat_invite": "Si quieres conversar, ¡mis correos están siempre abiertos!",
+      "faster_response": "Responderé más rápido si contactas por correo.",
+      "connection_message": "Conexión establecida. Esperando tu mensaje... :D",
+      "connection_message_mobile": "Conexión establecida. Esperando tu mensaje... :D",
+      "email_success": "Mensaje enviado exitosamente!",
+      "email_error": "Algo salió mal. Por favor, inténtalo de nuevo.",
+      "email_thanks_success": "Gracias!"
+  },
+
+
+
+  "external": {
+      "code": "Código",
+      "external": "Sitio",
+      "youtube": "YouTube",
+      "github": "Ver en GitHub",
+      "youtube_playlist": "Lista de YouTube",
+      "youtube_channel": "Canal de YouTube",
+      "university": "Página de la Universidad"
+  },
+
+  "projects22": {
+      "ping": "    docker ps -a/",
+      "exploring": "Listado de proyectos y aplicaciones desplegados",
+      "featured": "Proyectos Destacados",
+      "subFeatured": "Repositorios documentados y demos desplegadas en una VPS",
+      "move_title": "Más en GitHub",
+      "move_span_1": "Gran parte de mi progreso en distintos proyectos (backend, frontend, Python, Java) está documentado en mi GitHub",
+      "move_span_2": "Experimentos personales, aplicaciones y proyectos secundarios están en GitHub.",
+      "move_btn": "Contactar"
+  },
+
+
+
+
+
+
+
+
 
   "projects": {
     "links": {
@@ -392,92 +503,7 @@
     }
 
 
-  },
-
-
-
-
-
-
-
-
-
-
-  
-
-  "about2": {
-
-
-      "timeline": "Experiencia Timeline",
-      "sub_timeline": "De trabajos de facultad a sistemas robustos con arquitectura profesional"
-  },
-  
-  "skills": {
-      "featured": "Tecnologías Destacadas",
-      "subFeatured": "Herramientas y stacks con los que he trabajado",
-      "exploring": "Explorando experiencia técnica",
-      "languages": "Lenguajes",
-      "backend": "Back-End",
-      "frontend": "Front-End",
-      "databases": "Bases de Datos",
-      "containers": "Contenedores y Proxy Inverso",
-      "devops": "DevOps y Automatización",
-      "testing": "Pruebas y Documentación"
-  },
-
-  "contact": {
-      "ping": "    ping contacto.servidor",
-      "establishing": "Estableciendo conexión con el punto de comunicación",
-      "title": "Contáctame",
-      "name_label": "Nombre:",
-      "email_label": "Correo:",
-      "message_label": "Mensaje:",
-      "send_button": "Enviar",
-      "availability_title": "Estado de Disponibilidad",
-      "open_to_opportunities": "Abierto a oportunidades",
-      "response_time": "Tiempo de respuesta: Dentro de 24 horas",
-      "timezone": "ART (UTC-3)",
-      "location": "Córdoba, Argentina",
-      "connect_title": "Conecta Conmigo",
-      "github_tag": "Ir a GitHub",
-      "github_text": "Git Hub",
-      "linkedin_tag": "Ir a Linkedin",
-      "linkedin_text": "Linkedin",
-      "email_tag": "Envíame un Correo",
-      "email_text": "Correo",
-      "copy_tag": "Copiar Correo",
-      "copy_text": "Correo",
-      "echo": "$ echo",
-      "thanks_message": "\"Gracias por visitar\"",
-      "chat_invite": "Si quieres conversar, ¡mis correos están siempre abiertos!",
-      "faster_response": "Responderé más rápido si contactas por correo.",
-      "connection_message": "Conexión establecida. Esperando tu mensaje... :D",
-      "connection_message_mobile": "Conexión establecida. Esperando tu mensaje... :D",
-      "email_success": "Mensaje enviado exitosamente!",
-      "email_error": "Algo salió mal. Por favor, inténtalo de nuevo.",
-      "email_thanks_success": "Gracias!"
-  },
-
-
-
-  "external": {
-      "code": "Código",
-      "external": "Sitio",
-      "youtube": "YouTube",
-      "github": "Ver en GitHub",
-      "youtube_playlist": "Lista de YouTube",
-      "youtube_channel": "Canal de YouTube",
-      "university": "Página de la Universidad"
-  },
-
-  "projects22": {
-      "ping": "    docker ps -a/",
-      "exploring": "Listado de proyectos y aplicaciones desplegados",
-      "featured": "Proyectos Destacados",
-      "subFeatured": "Repositorios documentados y demos desplegadas en una VPS",
-      "move_title": "Más en GitHub",
-      "move_span_1": "Gran parte de mi progreso en distintos proyectos (backend, frontend, Python, Java) está documentado en mi GitHub",
-      "move_span_2": "Experimentos personales, aplicaciones y proyectos secundarios están en GitHub.",
-      "move_btn": "Contactar"
   }
+
+
 }

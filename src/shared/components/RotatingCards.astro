@@ -1,0 +1,117 @@
+---
+// src/shared/components/RotatingCards.astro
+import { Icon } from 'astro-icon/components';
+
+// ========================================================================
+//  COLORS
+// ========================================================================
+
+const COLORS = {
+  // cyan:   '142, 249, 252',
+  // mint:   '142, 252, 204',
+  // green:  '142, 252, 157',
+  // lime:   '215, 252, 142',
+  // yellow: '252, 252, 142',
+  // amber:  '252, 208, 142',
+  red:    '252, 142, 142',
+  pink:   '252, 142, 239',
+  purple: '204, 142, 252',
+  // blue:   '142, 202, 252',
+} as const;
+
+export type ColorKey = keyof typeof COLORS;
+
+const COLORS_LIST: string[] = Object.values(COLORS);
+
+/**
+ * Get a color RGB string from an explicit key or by index (wraps around).
+ */
+function getColor(key: ColorKey | null | undefined, index: number): string {
+  // return COLORS['pink'];
+  if (key && key in COLORS) return COLORS[key];
+  return COLORS_LIST[index % COLORS_LIST.length];
+}
+
+// ========================================================================
+//  TYPES
+// ========================================================================
+
+export interface Card {
+  /** Named color from COLORS. If omitted, uses the color by index. */
+  color?: ColorKey | null;
+  /** Iconify icon name (optional). */
+  icon?: string;
+  /** Label text (optional). */
+  label?: string;
+  /** Background image URL (optional). */
+  image?: string;
+}
+
+interface Props {
+  cards: Card[];
+  width?: number;
+  height?: number;
+  radius?: number;
+  gap?: number;
+  duration?: string;
+  rotateX?: number;
+}
+
+// ========================================================================
+//  COMPUTED
+// ========================================================================
+
+const {
+  cards,
+  width = 100,
+  height = 150,
+  radius,
+  gap = 50,
+  duration = '20s',
+  rotateX = -4,  // define los grados de inclinicacion del  carousel en general
+} = Astro.props;
+
+const quantity = cards.length;
+
+// Radio mínimo para que no se solapen:
+// r = (w / 2) / sin(π / n)
+const minRadius = Math.ceil((width / 2) / Math.sin(Math.PI / quantity));
+const computedRadius = radius ?? minRadius + gap;
+---
+
+<div class="carousel_rotate__wrapper">
+  <div
+    class="carousel_rotate__inner"
+    style={`
+      --w-carousel-rotate: ${width}px;
+      --h-carousel-rotate: ${height}px;
+      --radius-carousel-rotate: ${computedRadius}px;
+      --quantity-carousel-rotate: ${quantity};
+      --spin-duration-carousel-rotate: ${duration};
+      --rotateX-carousel-rotate: ${rotateX}deg;
+    `}
+  >
+    {cards.map((card, index) => (
+      <div
+        class="carousel_rotate__card"
+        style={`
+          --index-carousel-rotate: ${index};
+          --color-card-carousel-rotate: ${getColor(card.color, index)};
+        `}
+      >
+        <div
+          class="carousel_rotate__img group"
+          style={card.image ? `background-image: url(${card.image});` : ''}
+        >
+          {card.icon && <Icon name={card.icon} class="w-13 h-13 hover-up-lg cursor-pointer" />}
+          {card.label && (
+            <span class="mt-2 font_console text-sm group-hover:text-console
+             text-black text-center leading-tight">
+              {card.label}
+            </span>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

@@ -45,7 +45,7 @@
       "downloadCv": "Download CV"
     },
     "about": {
-      "about_txt": "about.txt",
+      "about_txt": "about",
       "about_p1_1": "Hi, I'm Lucas. ",
       "about_p1_2": "Backend / Full-Stack Software Engineer ",
       "about_p1_3": "based in Córdoba, Argentina.",
@@ -59,12 +59,13 @@
     "skills": {
       "title": "Featured Technologies",
       "subtitle": "My daily stack for backend & frontend development, databases, and deployment.",
-      "btn": "View all Skills"
+      "btn": "skills"
     },
     "contact": {
       "title": "Let's build something that works.",
       "span1": "Backend & Frontend Development, REST APIs and Clean Architectures.",
-      "span2": "Happy to talk about code, learning, and projects that solve real problems."
+      "span2": "Happy to talk about code, learning, and projects that solve real problems.",
+      "btn": "contact"
     }
   },
 
@@ -90,6 +91,11 @@
       "residenceLabel": "Location:"
     },
 
+    "timeline": {
+      "title": "'Career Timeline'",
+      "subtitle": "Where it all started, and where it led me."
+    },
+
     "milestone": {
       "title": "milestones.log",
       "subtitle": "A brief summary of my entire journey—a step-by-step chronicle.",
@@ -97,12 +103,93 @@
     }
   },
 
+  "skills": {
+    "title": "ls -la skills/",
+    "subtitle": "Exploring technical expertise.",
+
+    "languages": "Languages",
+    "backend": "Back-End",
+    "frontend": "Front-End",
+    "databases": "Databases",
+    "proxies": "Containers & Reverse Proxies",
+    "devops": "DevOps & Automation",
+    "testing": "Testing & Docs",
+
+    "main": {
+      "subtitle": "Where I have the most hands-on experience."
+    },
+    "carousel": {
+      "title": "'My Main Stack Carousel'",
+      "subtitle": "The technologies I use daily, on rotation."
+    },
+    "all": {
+      "title": "all-techs/",
+      "subtitle": "Everything I've used across projects."
+    }
+  },
 
 
 
 
 
+        
+    "skills2": {
+        "featured": "Featured Technologies",
+        "subFeatured": "Tooling and stacks I have worked with",
+        "exploring": "Exploring technical expertise",
+        "languages": "Languages",
+        "backend": "Back-End",
+        "frontend": "Front-End",
+        "databases": "Databases",
+        "containers": "Containers & Reverse Proxies",
+        "devops": "DevOps & Automation",
+        "testing": "Testing & Docs"
+    },
 
+    "contact": {
+        "ping": "    ping contact.server",
+        "establishing": "Establishing connection to communication endpoint",
+        "title": "Contact Me",
+        "name_label": "Name:",
+        "email_label": "Email:",
+        "message_label": "Message:",
+        "send_button": "Send",
+        "availability_title": "Availability Status",
+        "open_to_opportunities": "Open to opportunities",
+        "response_time": "Response time: Within 24 hours",
+        "timezone": "ART (UTC-3)",
+        "location": "Córdoba, Argentine",
+        "connect_title": "Connect With Me",
+        "github_tag": "Go GitHub",
+        "github_text": "Git Hub",
+        "linkedin_tag": "Go Linkedin",
+        "linkedin_text": "Linkedin",
+        "email_tag": "Send Me Email!",
+        "email_text": "Email",
+        "copy_tag": "Copy Email!",
+        "copy_text": "Email",
+        "echo": "$ echo",
+        "thanks_message": "\"Thanks for stopping by\"",
+        "chat_invite": "If you want to chat, my emails are always open!",
+        "faster_response": "I'll answer faster if you contact via email.",
+        "connection_message": "Connection established. Awaiting your message... :D",
+        "connection_message_mobile": "Connection established. Awaiting your message... :D",
+        "email_success": "Message sent successfully!",
+        "email_error": "Something went wrong. Please try again.",
+        "email_thanks_success": "Thank u!"
+    },
+
+    "projects2": {
+        "ping": "    docker ps -a/",
+        "exploring": "Listing deployed projects and applications",
+        "featured": "Featured Projects",
+        "subFeatured": "Documented repositories and demos deployed on a VPS",
+        "move_title": "More on GitHub",
+        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
+        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
+        "move_btn": "Get In Touch"
+    },
+ 
 
 
 
@@ -404,86 +491,7 @@
       }
     }
 
-  },
+  }
 
 
-
-
-    "about2": {
-
-
-        "timeline": "Career Timeline",
-        "sub_timeline": "From university assignments to robust systems with professional architecture"
-    },
-
-
-        
-    "skills": {
-        "featured": "Featured Technologies",
-        "subFeatured": "Tooling and stacks I have worked with",
-        "exploring": "Exploring technical expertise",
-        "languages": "Languages",
-        "backend": "Back-End",
-        "frontend": "Front-End",
-        "databases": "Databases",
-        "containers": "Containers & Reverse Proxies",
-        "devops": "DevOps & Automation",
-        "testing": "Testing & Docs"
-    },
-
-    "contact": {
-        "ping": "    ping contact.server",
-        "establishing": "Establishing connection to communication endpoint",
-        "title": "Contact Me",
-        "name_label": "Name:",
-        "email_label": "Email:",
-        "message_label": "Message:",
-        "send_button": "Send",
-        "availability_title": "Availability Status",
-        "open_to_opportunities": "Open to opportunities",
-        "response_time": "Response time: Within 24 hours",
-        "timezone": "ART (UTC-3)",
-        "location": "Córdoba, Argentine",
-        "connect_title": "Connect With Me",
-        "github_tag": "Go GitHub",
-        "github_text": "Git Hub",
-        "linkedin_tag": "Go Linkedin",
-        "linkedin_text": "Linkedin",
-        "email_tag": "Send Me Email!",
-        "email_text": "Email",
-        "copy_tag": "Copy Email!",
-        "copy_text": "Email",
-        "echo": "$ echo",
-        "thanks_message": "\"Thanks for stopping by\"",
-        "chat_invite": "If you want to chat, my emails are always open!",
-        "faster_response": "I'll answer faster if you contact via email.",
-        "connection_message": "Connection established. Awaiting your message... :D",
-        "connection_message_mobile": "Connection established. Awaiting your message... :D",
-        "email_success": "Message sent successfully!",
-        "email_error": "Something went wrong. Please try again.",
-        "email_thanks_success": "Thank u!"
-    },
-
-
-    "external": {
-        "code": "Code",
-        "external": "External",
-        "youtube": "YouTube",
-        "github": "View on GitHub",
-        "youtube_playlist": "YouTube Playlist",
-        "youtube_channel": "YouTube Channel",
-        "university": "University Page"
-    },
-
-    "projects2": {
-        "ping": "    docker ps -a/",
-        "exploring": "Listing deployed projects and applications",
-        "featured": "Featured Projects",
-        "subFeatured": "Documented repositories and demos deployed on a VPS",
-        "move_title": "More on GitHub",
-        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
-        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
-        "move_btn": "Get In Touch"
-    }
- 
 }

@@ -92,7 +92,7 @@
 
   /* Surface scale (Dark shades flipped!) */
   --surface-100: #2d3748; /* Highlight cards */
-  --surface-200: #0a0e11; /* Card background */
+  --surface-200: #0a0e11; /* Card background 0a0e11 */
   --surface-800: #343a40; /* Darker containers   212529     181b20    */
   --surface-900: #141b20; /* Base dark background    343a40     121212    */
 
@@ -169,6 +169,7 @@ main {
 }
 
 
+
 ul {
   list-style: none;                           /* Sin viñetas */
   -webkit-tap-highlight-color: transparent;   /* Sin resaltado al tocar */
@@ -176,12 +177,11 @@ ul {
 
 a { text-decoration: none; }                  /* Sin subrayado */
 
-
-
-
 #whoami {
   min-height: calc(100vh - var(--height-header));
 }
+
+
 
 
 /* ==============================================================
@@ -190,9 +190,8 @@ a { text-decoration: none; }                  /* Sin subrayado */
 .btn_notched {
   width: min-content;
   position: relative;
-  /* padding: 16px 20px;
-  height: 40px; */
-  border: 3px ridge var(--console-color);
+  /* ridge */
+  border: 3px solid var(--console-color);
   outline: none;
   transition: 1s;
   border-radius: 5px;
@@ -240,6 +239,8 @@ a { text-decoration: none; }                  /* Sin subrayado */
 }
 
 
+
+
 /* ==============================================================
   +  TECH SKILL [ - ]
 /* ============================================================== */
@@ -249,6 +250,7 @@ a { text-decoration: none; }                  /* Sin subrayado */
   overflow: hidden;
   cursor: grab;
 }
+
 
 .tech_group {
   user-select: none;
@@ -298,6 +300,8 @@ a { text-decoration: none; }                  /* Sin subrayado */
 }
 
 
+
+
 /* ==============================================================
   +  EFFECT TYPEWRITER --> use shared/scripts/utils/typewriter.ts
 /* ============================================================== */
@@ -320,40 +324,44 @@ a { text-decoration: none; }                  /* Sin subrayado */
 }
 
 
+
+
 /* ==============================================================
-  +  EFFECT TYPEWRITER --> use shared/scripts/utils/reveal.ts
+  +  EFFECT CONT SLIDE FROM LEFT --> EFFECTS FOR OBSERVER
 /* ============================================================== */
 /* Initial state: shifted left, invisible */
-.cont_animate__from_left {
+.cont_animate__from_left,
+.cont_animate__from_left_lg {
   /*  position: relative;
   overflow: hidden; */
   opacity: 0;
-  transform: translateX(-40px);
   transition:
     opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
     transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   will-change: opacity, transform;
 }
 
-.cont_animate__from_left_lg {
-  opacity: 0;
-  transform: translateX(-100px);
-  transition:
-    opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
-    transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  will-change: opacity, transform;
-}
+.cont_animate__from_left { transform: translateX(-40px); }
+.cont_animate__from_left_lg { transform: translateX(-100px); }
+
+.cont_animate__from_right { transform: translateX(40px); }
+.cont_animate__from_right_lg { transform: translateX(100px); }
+
 
 /* Final state */
 .cont_animate__from_left[data-animate],
-.cont_animate__from_left_lg[data-animate] {
+.cont_animate__from_left_lg[data-animate],
+.cont_animate__from_right[data-animate],
+.cont_animate__from_right_lg[data-animate] {
   opacity: 1;
   transform: translateX(0);
 }
 
 
+
+
 /* ==============================================================
-  +  EFFECT timeline_classic
+  +  EFFECT timeline_classic, EFFECTS FOR OBSERVER
 /* ============================================================== */
 .timeline_cont_line {
   position: relative;
@@ -462,6 +470,8 @@ a { text-decoration: none; }                  /* Sin subrayado */
 }
 
 
+
+
 /* ==============================================================
    Effect: grayscale → color on group hover
    --------------------------------------------------------------
@@ -496,3 +506,349 @@ a { text-decoration: none; }                  /* Sin subrayado */
   filter: grayscale(30%);
   opacity: 0.85;
 }
+
+
+
+
+/* ==============================================================
+   Effect: animated gradient border
+   --------------------------------------------------------------
+   Draws a moving gradient border around a container using
+   two pseudo-elements
+
+   Usage:
+     <div class="cont__border_animate">...</div>
+     <div class="cont__border_animate cont__border_animate_console">...</div>
+   ============================================================== */
+
+.cont__border_animate {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: var(--surface-800);
+  /* Ensure content stacks above the pseudo elements */
+  isolation: isolate;
+  transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+              transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+/* Gradient layer (the border itself) */
+.cont__border_animate::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+
+    background: linear-gradient(
+        90deg,
+        var(--surface-200),
+        var(--surface-100),
+        var(--surface-200)
+    );
+    /* ! MUST COME AFTER `background` — the shorthand resets background-size */
+    background-size: 200% 100%;
+    animation: gradientSlide 4s ease-in-out infinite;
+    z-index: 0;
+    border-radius: 20px;
+}
+
+@keyframes gradientSlide {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* Inner layer (solid fill that covers the center) */
+.cont__border_animate::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border-radius: 18px;
+  z-index: 1;
+  background-color: var(--surface-800);
+}
+
+/* ! Content must stack above ::before and ::after */
+.cont__border_animate > * {
+    position: relative;
+    z-index: 3;
+}
+
+/* Modifier: override the gradient (keep `background-image` + `background-size`) */
+.cont__border_animate_console::before {
+  /* ! Use `background-image` (not `background`) so `background-size` is not reset */
+  background-image: linear-gradient(90deg, var(--main-700), var(--main-500), var(--main-300));
+  background-size: 200% 100%;
+  animation: gradientSlide 4s ease-in-out infinite;
+}
+
+
+
+
+/* ==============================================================
+   Effect: inset frame on hover
+   --------------------------------------------------------------
+   Adds an animated inner frame that appears when the user hovers
+   over the container.
+
+   Expected markup:
+     <div class="cont_border_effect">
+       <span class="cont_border__anim_effect"></span>
+       <!-- content -->
+     </div>
+
+   The `.cont_border__anim_effect` element should have its own
+   border or background defined (e.g. `border: 2px solid ...`)
+   — this stylesheet only handles the animation.
+   ============================================================== */
+
+.cont_border_effect {
+  place-content: center;
+  position: relative;
+  overflow: hidden;
+  /* transition: all 0.5s ease-in-out; */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The animated frame. Invisible and rotated by default. */
+.cont_border__anim_effect {
+  /* Needs a solid border / background of its own to be visible.
+     e.g. border: 2px solid var(--console-color); */
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: rotate(10deg);
+  /* transition: all 0.5s ease-in-out; */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* On hover: flatten corners, scale up slightly. */
+.cont_border_effect:hover {
+  /* padding: 16px; */
+  transform: scale(1.06);
+}
+
+/* On hover: the frame appears, straightens and insets. */
+.cont_border_effect:hover .cont_border__anim_effect {
+  /* inset: 15px; transform: rotate(0); */
+  transform: rotate(0) scale(1);
+  opacity: 1;
+}
+
+
+
+
+/* ==============================================================
+   Effect: 3D button lift on container hover
+   --------------------------------------------------------------
+   When the user hovers anywhere on the `.cont_btns_3d` container,
+   every child marked with `.cont_btns_3d__btn_effect` tilts back
+   slightly on the X axis and lifts up, casting a soft shadow.
+
+   Expected markup:
+     <div class="cont_btns_3d">
+       <button class="cont_btns_3d__btn_effect">...</button>
+       <button class="cont_btns_3d__btn_effect">...</button>
+       <button class="cont_btns_3d__btn_effect">...</button>
+     </div>
+
+   Note: delays are only applied on hover so buttons return to
+   their resting state together when the mouse leaves.
+   ============================================================== */
+
+/* Container: sets up the 3D perspective anchored at the bottom,
+   so the tilt reads as "lifting from the base". */
+.cont_btns_3d {
+  perspective: 800px;
+  perspective-origin: center bottom;
+}
+
+/* Each button: smooth transform + shadow transitions.
+   `transform-origin: bottom` keeps the pivot at the button's base. */
+.cont_btns_3d__btn_effect {
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  transform-origin: center bottom;
+}
+
+/* On container hover: every button tilts back and lifts up. */
+.cont_btns_3d:hover .cont_btns_3d__btn_effect {
+  transform: rotateX(-10deg) translateX(10px) translateY(-10px);
+  /* transform: rotateX(-10deg) translateY(-10px); */
+  box-shadow: 0 2px 6px -2px var(--text-muted); /* rgba(0, 0, 0, 0.4)*/
+}
+
+/* Staggered delays (short cascade, 150ms apart).
+   Applied only on :hover so the return transition is synchronized. */
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(1) { transition-delay: 0.15s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(2) { transition-delay: 0.30s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(3) { transition-delay: 0.45s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(4) { transition-delay: 0.60s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(5) { transition-delay: 0.75s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(6) { transition-delay: 0.90s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(7) { transition-delay: 1.05s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(8) { transition-delay: 1.20s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(9) { transition-delay: 1.35s; }
+
+
+
+
+.btn__glass_effect {
+  position: relative;
+  overflow: hidden;
+  /* transition: color 0.3s ease; */
+  isolation: isolate;
+}
+
+/* Shine layer */
+.btn__glass_effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Ancho del brillo: 50% del contenedor */
+  width: 33%;
+  height: 100%;
+  /* Empieza fuera, a la izquierda */
+  transform: translateX(-133%) skewX(-20deg);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent 100%
+  );
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover: brilla una vez y vuelve */
+.btn__glass_effect:hover::before {
+  transform: translateX(300%) skewX(-21deg);
+}
+
+/* Hover: cambiar color del texto */
+.btn__glass_effect:hover {
+  color: #82ffc9;
+}
+
+/* Contenido por encima del brillo */
+.btn__glass_effect > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+/* ==============================================================
+   Effect: rotating cards (3D carousel)
+   --------------------------------------------------------------
+   Renders a set of cards arranged in a 3D wheel and rotates
+   the whole wheel continuously around the Y axis.
+
+   Each card is positioned around an imaginary circle:
+     - `rotateY` spreads the cards evenly around the wheel.
+     - `translateZ` pushes them outward to the wheel radius.
+
+   The number of cards and each card's index are passed in from
+   the Astro component (`RotatingCards.astro`) as CSS custom
+   properties, so the CSS stays generic and reusable:
+
+     --quantity-carousel-rotate   → total number of cards
+     --index-carousel-rotate      → index of the current card (0-based)
+     --color-card-carousel-rotate → RGB triplet for the card's color
+
+   The component computes the radius so cards don't overlap:
+     radius = (width / 2) / sin(π / quantity) + gap
+
+   Related component: `src/shared/components/RotatingCards.astro`
+   ============================================================== */
+
+.carousel_rotate__wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  place-items: center;
+  /* overflow: hidden; */
+}
+
+.carousel_rotate__inner {
+  /* Size of each card and geometry of the wheel.
+     Values are set from the Astro component via inline styles. */
+  --w-carousel-rotate: 100px;
+  --h-carousel-rotate: 150px;
+  --radius-carousel-rotate: 150px;
+  --rotateX-carousel-rotate: -15deg;
+  --perspective-carousel-rotate: 1000px;
+  --spin-duration-carousel-rotate: 20s;
+
+  position: relative;
+  width: var(--w-carousel-rotate);
+  height: var(--h-carousel-rotate);
+  transform-style: preserve-3d;
+  animation: rotate-wheel var(--spin-duration-carousel-rotate) linear infinite;
+}
+
+/* The whole wheel rotates around Y, with a slight X tilt for depth. */
+@keyframes rotate-wheel {
+  from {
+    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(0deg);
+  }
+  to {
+    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(360deg);
+  }
+}
+
+/* Each card is placed around the wheel using its index and the
+   total quantity, then pushed outward by the radius. */
+.carousel_rotate__card {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgb(var(--color-card-carousel-rotate));
+  border-radius: 12px;
+  overflow: hidden;
+  transform:
+    rotateY(calc((360deg / var(--quantity-carousel-rotate)) * var(--index-carousel-rotate)))
+    translateZ(var(--radius-carousel-rotate));
+
+  /* Comment out to make cards on the back side visible too. */
+  backface-visibility: hidden;
+}
+
+/* Card inner layout: vertical stack, centered content, and a
+   radial gradient tinted by the card's color. */
+.carousel_rotate__img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(var(--color-card-carousel-rotate), 0.2) 0%,
+      rgba(var(--color-card-carousel-rotate), 0.6) 80%,
+      rgba(var(--color-card-carousel-rotate), 0.9) 100%
+    );
+  /* If a background-image is set inline, it sits above the gradient */
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+
+
+
+
+

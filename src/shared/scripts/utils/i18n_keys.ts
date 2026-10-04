@@ -80,6 +80,7 @@ export const I18N = {
       title: 'home.contact.title',
       span1: 'home.contact.span1',
       span2: 'home.contact.span2',
+      btn: 'home.contact.btn',
     },
   },
 
@@ -103,12 +104,46 @@ export const I18N = {
       universityLabel: 'about.stats.universityLabel',
       residenceLabel: 'about.stats.residenceLabel',
     },
+    timeline: {
+      title: 'about.timeline.title',
+      subtitle: 'about.timeline.subtitle',
+    },
+
     milestone: {
       title: 'about.milestone.title',
       subtitle: 'about.milestone.subtitle',
       stepSpan: 'about.milestone.stepSpan',
     }
   },
+
+  skills: {
+    title: 'skills.title',
+    subtitle: 'skills.subtitle',
+
+    languages: 'skills.languages',
+    backend: 'skills.backend',
+    frontend: 'skills.frontend',
+    mobile: 'skills.mobile',
+    databases: 'skills.databases',
+    devops: 'skills.devops',
+    tools: 'skills.tools',
+    testing: 'skills.testing',
+    api: 'skills.api',
+    games: 'skills.games',
+
+    main: {
+      subtitle: 'skills.main.subtitle',
+    },
+    carousel: {
+      title: 'skills.carousel.title',
+      subtitle: 'skills.carousel.subtitle',
+    },
+    all: {
+      title: 'skills.all.title',
+      subtitle: 'skills.all.subtitle',
+    },
+  },
+
 
   // ! PROJECTS KEYS TO ADD MORE 
   projects: {

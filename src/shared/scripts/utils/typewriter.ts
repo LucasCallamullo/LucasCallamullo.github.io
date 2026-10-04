@@ -29,7 +29,7 @@ class Typewriter {
     this.initAfter = initAfter;
   }
 
-  public static getInstance(speed = 100, initAfter = 500): Typewriter {
+  public static getInstance(speed = 100, initAfter = 400): Typewriter {
     // speed --> velocity of type any letter
     // initAfter --> delay before start to type any letter
     if (!Typewriter.instance) Typewriter.instance = new Typewriter(speed, initAfter);
