@@ -1,6 +1,5 @@
 // src/shared/data/projects.ts
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import { getTechs } from '@shared/data/tech_stack';
 import type { TagKey } from '@shared/data/tags';
 import type { TechKey } from '@shared/data/tech_stack';
 
@@ -53,7 +52,7 @@ export interface ImagesProject {
 /** Single entry inside the timeline. */
 export interface TimelineEntry {
   /** Display order (lower = first). */
-  order?: number | null;
+  order: number | null;
   /** Iconify icon name. */
   icon: string;
   /**
@@ -66,7 +65,7 @@ export interface TimelineEntry {
 /** Single entry inside the project detail. */
 export interface ProjectEntry {
   /** Display order (lower = first). */
-  order?: number | null;
+  order: number | null;
   /**
    * i18n key for the short summary. Can be a single key or an array of keys.
    */
@@ -90,16 +89,18 @@ export interface Project {
   title: string;              //! I18N
   milestone?: string | null;     //! I18N
 
+  isMain: boolean;
+
   /** Date range. */
   date: ProjectDate;
 
   /** Tech ids — resolved via `getTechs()` when rendering. */
   coreTechs: TechKey[];
 
-  extraTechs?: TechKey[];
+  extraTechs: TechKey[] | null;
 
   /** Extra techs shown only on the detail page. */
-  otherTechs?: TechKey[];
+  otherTechs: TechKey[] | null;
 
   /** External links (repo, live, etc.). */
   links: ExternalLink[];
@@ -114,10 +115,10 @@ export interface Project {
   hrefAstro?: string | null;
 
   /** External image URLs. */
-  images?: ImagesProject[] | null;
+  images: ImagesProject[];
 
   /** Tags for filtering. */
-  tags?: TagKey[] | null;
+  tags: TagKey[] | null;
 }
 
 /*
@@ -135,10 +136,12 @@ export interface Project {
 //  +  PROJECTS
 // ========================================================================
 export const PROJECTS = {
+
   //! =================== PROJECT
   fleet_optimizer: {
     title: I18N.projects.fleet_optimizer.title,
     date: { start: '2026-03', end: '2026-07' },
+    isMain: true,
     tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Microservices', 'Layered', 'Full-Stack'],
     coreTechs: [
       'java', 'springboot', 'junit', 'typescript', 'react', 
@@ -160,6 +163,7 @@ export const PROJECTS = {
       summary: I18N.projects.fleet_optimizer.timeline.summary,
     },
     project: {
+      order: 20,
       summary: I18N.projects.fleet_optimizer.project.summary,
       description: I18N.projects.fleet_optimizer.project.description,
     },
@@ -172,6 +176,7 @@ export const PROJECTS = {
   dds_tutor: {
     title: I18N.projects.dds_tutor.title,
     date: { start: '2026-03', end: '2026-06' },
+    isMain: true,
     tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
     coreTechs: [
       'typescript', 'javascript', 'react', 'tailwind', 'postgresql',  
@@ -193,6 +198,7 @@ export const PROJECTS = {
       summary: I18N.projects.dds_tutor.timeline.summary,
     },
     project: {
+      order: 38,
       summary: I18N.projects.dds_tutor.project.summary,
       description: I18N.projects.dds_tutor.project.description,
     },
@@ -205,6 +211,7 @@ export const PROJECTS = {
   portfolio: {
     title: I18N.projects.portfolio.title,
     date: { start: '2026-01', end: '2026-02' },
+    isMain: false,
     tags: ['Front-end', 'DevOps'],
     coreTechs: [
       'astro', 'typescript', 'tailwind', 'ghActions', 'ghPages'
@@ -224,6 +231,7 @@ export const PROJECTS = {
       summary: I18N.projects.portfolio.timeline.summary,
     },
     project: {
+      order: 42,
       summary: I18N.projects.portfolio.project.summary,
       description: I18N.projects.portfolio.project.description,
     },
@@ -236,6 +244,7 @@ export const PROJECTS = {
   ecommerce_dj: {
     title: I18N.projects.ecommerce_dj.title,
     date: { start: '2024-03', end: '2025-12' },
+    isMain: true,
     tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
     coreTechs: [
       'python', 'django', 'pytest', 'javascript', 'tailwind',
@@ -257,6 +266,7 @@ export const PROJECTS = {
       summary: I18N.projects.ecommerce_dj.timeline.summary,
     },
     project: {
+      order: 30,
       summary: I18N.projects.ecommerce_dj.project.summary,
       description: I18N.projects.ecommerce_dj.project.description,
     },
@@ -269,6 +279,7 @@ export const PROJECTS = {
   backend_tp: {
     title: I18N.projects.backend_tp.title,
     date: { start: '2025-08', end: '2025-10' },
+    isMain: false,
     tags: ['Back-end', 'Database', 'DevOps', 'Microservices', 'Layered'],
     coreTechs: [
       'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 
@@ -288,6 +299,7 @@ export const PROJECTS = {
       summary: I18N.projects.backend_tp.timeline.summary,
     },
     project: {
+      order: 47,
       summary: I18N.projects.backend_tp.project.summary,
       description: I18N.projects.backend_tp.project.description,
     },
@@ -300,6 +312,7 @@ export const PROJECTS = {
   no_country: {
     title: I18N.projects.no_country.title,
     date: { start: '2024-07', end: '2024-11' },
+    isMain: false,
     tags: ['Back-end', 'Front-end', 'DevOps', 'Database', 'Full-Stack', 'Monolith Modular'],
     coreTechs: [
       'python', 'django', 'javascript', 'tailwind', 'railway',
@@ -319,6 +332,7 @@ export const PROJECTS = {
       summary: I18N.projects.no_country.timeline.summary,
     },
     project: {
+      order: 50,
       summary: I18N.projects.no_country.project.summary,
       description: I18N.projects.no_country.project.description,
     },
@@ -331,13 +345,11 @@ export const PROJECTS = {
   py_tutor: {
     title: I18N.projects.py_tutor.title,
     date: { start: '2023-11', end: '2026-03' },
+    isMain: false,
     tags: ['Tutorial'],
-    coreTechs: [
-      'python', 'java', 'bash', 'git', 
-    ],
-    extraTechs: [
-      'vscode', 'github',
-    ],
+    coreTechs: ['python', 'java', 'bash', 'git'],
+    extraTechs: ['vscode', 'github'],
+    otherTechs: null,
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/Tutoring-Algorithms-Data-Structures' },
       { ...youtubeExt },
@@ -348,6 +360,7 @@ export const PROJECTS = {
       summary: I18N.projects.py_tutor.timeline.summary,
     },
     project: {
+      order: 51,
       summary: I18N.projects.py_tutor.project.summary,
       description: I18N.projects.py_tutor.project.description,
     },
@@ -360,14 +373,14 @@ export const PROJECTS = {
   university: {
     title: I18N.projects.university.title,
     date: { start: '2023-03', end: null },
+    isMain: false,
     tags: ['Microservices', 'Monolith Modular', 'Full-Stack'],
-    coreTechs: [
-      'python', 'java', 'springboot', 'react', 'docker', 'bash', 'linux', 
-    ],
+    coreTechs: ['python', 'java', 'springboot', 'react', 'docker', 'bash', 'linux'],
     extraTechs: [
       'nodejs', 'express', 'sequelize', 'javascript', 'html5', 'css3', 
       'sqlServer', 'jwt', 'git', 
     ],
+    otherTechs: null,
     links: [{ ...univExt }],
     timeline: {
       order: 52,
@@ -384,12 +397,11 @@ export const PROJECTS = {
   pawn_cs: {
     title: I18N.projects.pawn_cs.title,
     date: { start: '2021-03', end: '2022-12' },
-    coreTechs: [
-      'pawn', 'counterStrike', 'git', 
-    ],
-    extraTechs: [
-      'github'
-    ],
+    isMain: false,
+    tags: [],
+    coreTechs: ['pawn', 'counterStrike', 'git'],
+    extraTechs: ['github'],
+    otherTechs: null,
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/pawn-project-mod-cs-game' },
     ],
@@ -399,6 +411,7 @@ export const PROJECTS = {
       summary: I18N.projects.pawn_cs.timeline.summary,
     },
     project: {
+      order: 55,
       summary: I18N.projects.pawn_cs.project.summary,
       description: I18N.projects.pawn_cs.project.description,
     },
@@ -506,4 +519,64 @@ export function getProjects(options: TimelineQueryOptions & { sortBy?: 'timeline
     const bOrder = b.timeline?.order ?? Number.MAX_SAFE_INTEGER;
     return dir * (aOrder - bOrder);
   });
+}
+
+
+
+
+
+interface ProjectQueryOptions {
+  /** Filter by isMain. undefined = all. */
+  isMain?: boolean;
+  /** Filter by tag key. */
+  tag?: TagKey;
+  /** Filter by tech key (must be in `techs`). */
+  tech?: TechKey;
+  /** Sort order. Default: 'date-desc'. */
+  sortBy?: 'date-asc' | 'date-desc' | 'order';
+}
+
+export function getProjectsForPage(options: ProjectQueryOptions = {}) {
+  const { isMain, tag, tech, sortBy = 'date-desc' } = options;
+
+  let entries = Object.entries(PROJECTS).map(([id, project]) => ({ id, ...project }));
+
+  if (isMain !== undefined) {
+    entries = entries.filter((p) => p.isMain === isMain);
+  }
+  if (tag) {
+    entries = entries.filter((p) => hasValue(p.tags, tag));
+  }
+  if (tech) {
+    entries = entries.filter((p) => {
+      const allTechs = [
+        ...p.coreTechs,
+        ...(p.extraTechs ?? []),
+        ...(p.otherTechs ?? []),
+      ];
+      return hasValue(allTechs, tech);
+    });
+  }
+
+  switch (sortBy) {
+    case 'date-asc':
+      entries.sort((a, b) => new Date(a.date.start).getTime() - new Date(b.date.start).getTime());
+      break;
+    case 'date-desc':
+      entries.sort((a, b) => new Date(b.date.start).getTime() - new Date(a.date.start).getTime());
+      break;
+    case 'order':
+      entries.sort((a, b) => (a.project?.order ?? 0) - (b.project?.order ?? 0));
+      break;
+  }
+
+  return entries;
+}
+
+/**
+ * Check if a value is in an array, with proper type narrowing.
+ * Works with readonly arrays of literals.
+ */
+function hasValue<T>(arr: readonly T[] | null | undefined, value: T): boolean {
+  return arr?.some((item) => item === value) ?? false;
 }

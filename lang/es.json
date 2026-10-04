@@ -124,24 +124,38 @@
     }
   },
 
+  "projectsPage": {
+    "title": "ls -la proyectos/",
+    "subtitle": "Una selección de proyectos construidos de end-to-end.",
 
-  
+    "projects": {
+      "title": "'Featured Projects'",
+      "subtitle": "Los proyectos de los que estoy más orgulloso.",
+      "details": "Más detalles"
+    },
 
-
-
-  
-  "skills2": {
-      "featured": "",
-      "subFeatured": "Herramientas y stacks con los que he trabajado",
-      "exploring": "Explorando experiencia técnica",
-      "languages": "Lenguajes",
-      "backend": "Back-End",
-      "frontend": "Front-End",
-      "databases": "Bases de Datos",
-      "containers": "Contenedores y Proxy Inverso",
-      "devops": "DevOps y Automatización",
-      "testing": "Pruebas y Documentación"
+    "touch": {
+      "title": "Más en GitHub",
+      "p1": "Vas a encontrar la mayoría de mi trabajo en GitHub.",
+      "p2": "Más allá de lo destacado acá: experimentos, dotfiles y proyectos paralelos.",
+      "btn": "Contactame"
+    }
   },
+  
+
+
+
+  "projects22": {
+      "ping": "    docker ps -a/",
+      "exploring": "Listado de proyectos y aplicaciones desplegados",
+      "featured": "Proyectos Destacados",
+      "subFeatured": "Repositorios documentados y demos desplegadas en una VPS",
+      "move_title": "Más en GitHub",
+      "move_span_1": "Gran parte de mi progreso en distintos proyectos (backend, frontend, Python, Java) está documentado en mi GitHub",
+      "move_span_2": "Experimentos personales, aplicaciones y proyectos secundarios están en GitHub.",
+      "move_btn": "Contactar"
+  },
+  
 
   "contact": {
       "ping": "    ping contacto.servidor",
@@ -177,27 +191,6 @@
   },
 
 
-
-  "external": {
-      "code": "Código",
-      "external": "Sitio",
-      "youtube": "YouTube",
-      "github": "Ver en GitHub",
-      "youtube_playlist": "Lista de YouTube",
-      "youtube_channel": "Canal de YouTube",
-      "university": "Página de la Universidad"
-  },
-
-  "projects22": {
-      "ping": "    docker ps -a/",
-      "exploring": "Listado de proyectos y aplicaciones desplegados",
-      "featured": "Proyectos Destacados",
-      "subFeatured": "Repositorios documentados y demos desplegadas en una VPS",
-      "move_title": "Más en GitHub",
-      "move_span_1": "Gran parte de mi progreso en distintos proyectos (backend, frontend, Python, Java) está documentado en mi GitHub",
-      "move_span_2": "Experimentos personales, aplicaciones y proyectos secundarios están en GitHub.",
-      "move_btn": "Contactar"
-  },
 
 
 

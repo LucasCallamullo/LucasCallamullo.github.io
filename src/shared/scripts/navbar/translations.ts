@@ -54,6 +54,13 @@ function getInitialLanguage(): LangCode {
   return isLangCode(stored) ? stored : DEFAULT_LANG;
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 /**
  * Une los elementos si es un arreglo, o retorna la cadena intacta.
  */
@@ -63,11 +70,16 @@ function formatTranslationValue(
 ): string {
   if (typeof value === 'string') return value;
 
+  if (joinMode === 'newline') {
+    return value
+      .map((line) => `<span>${escapeHtml(line)}</span>`)
+      .join('');
+  }
+
   // Manejo de arreglos según el atributo data-i18n-join
   switch (joinMode) {
     case 'space':
       return value.join(' ');
-    case 'newline':
     case '\n':
       return value.join('\n');
     case 'br':
@@ -142,7 +154,15 @@ export function applyTranslations(
     if (Array.isArray(value)) {
       // type joinMode = 'space' | 'newline' | '\n' | 'br' | '' | null;
       const dataJoin = el.getAttribute('data-i18n-join') || '';
-      el.textContent = formatTranslationValue(value, dataJoin);
+      const textOrSpans = formatTranslationValue(value, dataJoin);
+
+      // directamente agrego los span al element, util para descriptions y styles
+      if (dataJoin === 'newline') {
+        el.innerHTML = textOrSpans;
+        return;
+      }
+
+      el.textContent = textOrSpans
       // <ul>, <ol>, <p>, <span>, etc. — list translation
       return;
     }

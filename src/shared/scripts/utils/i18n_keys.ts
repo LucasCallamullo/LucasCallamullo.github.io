@@ -144,6 +144,22 @@ export const I18N = {
     },
   },
 
+  projectsPage: {
+    title: 'projectsPage.title',
+    subtitle: 'projectsPage.subtitle',
+
+    projects: {
+      title: 'projectsPage.projects.title',
+      subtitle: 'projectsPage.projects.subtitle',
+      details: 'projectsPage.projects.details',
+    },
+    touch: {
+      title: 'projectsPage.touch.title',
+      p1: 'projectsPage.touch.p1',
+      p2: 'projectsPage.touch.p2',
+      btn: 'projectsPage.touch.btn',
+    }
+  },
 
   // ! PROJECTS KEYS TO ADD MORE 
   projects: {

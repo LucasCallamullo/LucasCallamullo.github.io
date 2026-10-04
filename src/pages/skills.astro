@@ -1,22 +1,13 @@
 ---
 import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
 import Section from '@shared/components/Section.astro'
-import CardSection from '@shared/components/CardSection.astro'
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-
-import { getProjects, formatDateRange } from '@shared/data/projects';
 import { getGroupedTechs } from '@shared/data/tech_stack';
-import { getNavHref } from '@shared/data/links';
-
-
 
 import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
 import { fade } from 'astro:transitions';
-
-
-
 
 const groups = getGroupedTechs({ 
   categories:[
@@ -66,7 +57,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
   </Section>
 
 
-  <!-- + Sección of MAIN SKILLS -->
+  <!-- + section of MAIN SKILLS -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
     <div class:list={['px-2 md:px-4 py-6', WIDTH_CLASSES.md]}>
 
@@ -219,7 +210,6 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
     </div>  
   </Section>
-
 
 
   <script>

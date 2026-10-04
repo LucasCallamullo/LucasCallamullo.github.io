@@ -1,81 +1,200 @@
 ---
-import '@shared/styles/global.css'
-import '@shared/styles/custom.css'
+import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import Section from '@shared/components/Section.astro'
+
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { getTechs } from '@shared/data/tech_stack';
+import { getNavHref } from '@shared/data/links';
+import { getProjectsForPage, formatDateRange } from '@shared/data/projects';
+
+// Featured: solo los main
+const featured = getProjectsForPage({ isMain: true, sortBy: 'order' });
 
 // Define page metadata
-import BaseLayout from '@layouts/BaseLayout.astro';
-
-// Define page metadata
-const title = "Callamullo Lucas · Software Engineer";
+const title = "Projects · Callamullo Lucas · Software Engineer";
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} mainWidth="full">
 
-  <button id="btnOpenModal" class="px-4 py-2 bg-blue-600 rounded">
-    Abrir modal A
-  </button>
-
-  <!-- ============ MODAL A ============ -->
-  <div
-    id="myModal"
-    class="modal"
-    role="dialog"
-    aria-modal="true"
-    aria-hidden="true"
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} id='projectsMain' 
+    paddingY={false} justifyCenter={false}
   >
-    <div class="modal__content p-6 bg-amber-200 text-black rounded-lg">
-      <h2>Modal A</h2>
-      <p>Este es el modal principal.</p>
-
-      <button
-        id="btnOpenModal2"
-        class="px-3 py-1 bg-emerald-600 text-white rounded"
-      >
-        Abrir modal B (dentro de A)
-      </button>
-
-      <button
-        type="button"
-        class="modal__btn_close px-3 py-1 bg-red-600 text-white rounded"
-      >
-        Cerrar A
-      </button>
+    <!-- + MAIN DIV CONTAINER -->
+    <div class:list={[
+      'flex flex-col w-full max-w-full', 
+      'gap-5 md:gap-6 px-3 md:px-5 py-10', 
+      WIDTH_CLASSES.md
+    ]}>
+      <h1 class="flex gap-3 font_console text-4xl">
+        <span class="text-accent">$</span>
+        <span class="typewriter-cursor-fast" data-typewriter data-i18n={I18N.projectsPage.title}>ls -la projects/</span>
+      </h1>
+      <span class="text-content-muted text-lg font_console tracking-wide" data-fade-1 data-i18n={I18N.projectsPage.subtitle}>
+        A selection of projects built end-to-end.
+      </span>
     </div>
-  </div>
-  <div id="myOverlay" class="overlay"></div>
-
-  <!-- ============ MODAL B ============ -->
-  <div
-    id="myModal2"
-    class="modal"
-    role="dialog"
-    aria-modal="true"
-    aria-hidden="true"
-  >
-    <div class="modal__content p-6 bg-emerald-200 text-black rounded-lg">
-      <h2>Modal B</h2>
-      <p>Este se abrió dentro del A.</p>
-
-      <button
-        type="button"
-        class="modal__btn_close px-3 py-1 bg-red-600 text-white rounded"
-      >
-        Cerrar B
-      </button>
-    </div>
-  </div>
-  <div id="myOverlay2" class="overlay"></div>
-
-
+  </Section>
   
-  <script>
-    import { bindModal } from '@shared/scripts/utils/modal';
 
-    function initModals() {
-      bindModal({ modalSelector: '#myModal',  overlaySelector: '#myOverlay',  openBtnSelector: '#btnOpenModal'  });
-      bindModal({ modalSelector: '#myModal2', overlaySelector: '#myOverlay2', openBtnSelector: '#btnOpenModal2' });
+  <!-- + section of MAIN PROJECTS -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
+
+      <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
+        data-reveal data-multi-anim
+      >
+        <h2 class="font_console text-3xl flex items-center gap-2 tracking-wider">
+          <span class="text-accent">$</span>
+          <span class="text-content-muted">cat</span>
+          <span class="text-console font-bold" data-i18n={I18N.projectsPage.projects.title}>'Featured Projects'</span>
+        </h2>
+        <span class="text-lg font_console tracking-wide text-content-muted"
+          data-i18n={I18N.projectsPage.projects.subtitle}
+        >
+          The projects I'm most proud of.
+        </span>
+      </div>
+
+      <!-- RESUMEN PROJECTS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full max-w-full">
+        {featured.map((p, index) => (
+
+          <div data-reveal data-multi-anim
+            class:list={[
+              'rounded-xl flex flex-col border border-transparent',
+              'hover:border-console hover:border hover-up-lg',
+              index % 2 === 0 ? 'timeline_animate__from_left' : 'timeline_animate__from_right',
+          ]}>
+
+            <div class="h-50 w-full rounded-t-xl relative">
+              <div class="absolute left-0 top-0 rounded-tl-xl rounded-br-xl truncate bg-console-400 px-3 py-1.5">
+                <span class="text-white font_console ">{formatDateRange(p.date)}</span>
+              </div>
+
+              <button class="absolute right-0 top-0 rounded-tr-xl rounded-bl-xl cursor-pointer
+                flex justify-center items-center px-3 py-1.5 bg-console-400">
+                <Icon name="ri:fullscreen-fill" class="h-5 w-5"></Icon>
+              </button>
+ 
+              <img src={p.images[0].href} alt={p.title} class="h-full w-full object-cover rounded-t-xl">
+            </div>
+
+            {/* TECH LABELS RESUME */}
+            <div class="flex flex-col px-3 pt-3 pb-5 bg-surface-900 rounded-b-xl font_console flex-1">
+              <h3 class="text-console text-lg tracking-wider" data-i18n={p.title}></h3>
+
+              {/* DESCRIPTION */}
+              <div data-i18n={p.project?.summary} data-i18n-join="newline"
+                class="flex flex-col gap-3 text-base text-content-muted mt-4"
+              >
+              </div>
+
+              <div class="flex flex-wrap gap-2 mt-3">
+                {getTechs([...p.coreTechs, ...p.extraTechs]).map((tech) => (
+                  <div class="flex gap-2 px-2.5 py-1 items-center justify-center rounded-xl bg-surface-200
+                    border border-console-400 hover-up group"
+                  >
+                    <Icon name={tech.icon} class="h-4 w-4"> </Icon> 
+                    <span class="text-base group-hover:text-console-100">{tech.name}</span>
+                  </div>
+                  
+                ))} 
+              </div>
+
+              <div class="flex flex-wrap gap-3 mt-5">
+                {p.links.map((link) => (
+                  <a class="flex gap-2 px-3.5 py-1.5 items-center justify-center rounded-2xl
+                    text-black bg-blue-200 hover:bg-blue-400 
+                    border border-console-400 hover-up-lg"
+                    href={link.href} target="_blank"
+                  >
+                    <Icon name={link.icon} class="h-5 w-5"> </Icon> 
+                    <span class="text-base" data-i18n={link.i18n}>
+                      {link.altText}</span>
+                  </a>
+                ))}
+
+                <a class="flex gap-2 px-3.5 py-1.5 items-center justify-center rounded-2xl
+                  text-black bg-blue-200 hover:bg-blue-400 
+                  border border-console-400 hover-up-lg"
+                  href={p.hrefAstro}
+                >
+                  <Icon name="devicon:astro" class="h-5 w-5"> </Icon> 
+                  <span class="text-base" data-i18n={I18N.projectsPage.projects.details}>
+                    More details
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </Section> 
+
+
+  <!-- + section of GET IN TOUCH -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
+
+      <div data-reveal
+        class:list={[
+          'flex flex-col justify-center items-center bg-surface-800', 
+          'font_console py-6 rounded-2xl cont_animate__from_left', 
+          WIDTH_CLASSES.sm
+      ]}>
+
+        <h2 class="text-console text-3xl tracking-wider" data-i18n={I18N.projectsPage.touch.title}>
+          More on GitHub
+        </h2>
+
+        <span class="text-content-muted mt-3" data-i18n={I18N.projectsPage.touch.p1}>
+          You'll find most of my work on GitHub.
+        </span>
+        <span class="text-content-muted mt-2" data-i18n={I18N.projectsPage.touch.p2}>
+          Beyond what's featured here: experiments, dotfiles and side projects.
+        </span>
+
+        <div class="flex flex-col md:flex-row gap-3.5 justify-center items-center w-min mt-4
+          text-base">
+          <a class="flex justify-center items-center gap-2 py-2 w-40
+            btn__glass_effect bg-console-400 rounded-3xl hover-up-lg flex-1
+            border-2 border-console-100" 
+            href={getNavHref('github')} target="_blank"
+          > 
+            <Icon name="ri:github-line" class="h-5 w-5"></Icon>
+            <span class="truncate">GitHub</span> 
+          </a>
+          <a class="flex justify-center items-center gap-2 py-2 w-40
+            btn__glass_effect bg-console-400 rounded-3xl hover-up-lg flex-1
+            border-2 border-console-100" 
+            href={getNavHref('contact')}
+          > 
+            <Icon name="ri:mail-send-line" class="h-5 w-5"></Icon>
+            <span class="truncate" data-i18n={I18N.projectsPage.touch.btn}>Get In Touch</span> 
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </Section> 
+
+  <script>
+    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
+
+    async function boot() {
+      // this events call init typewriter methods, only need the right selectors
+      setEventTypewriter({
+        container: '#projectsMain',
+        title: '[data-typewriter]',
+        elementsToFade: ['[data-fade-1]'],
+      });
     }
 
-    document.addEventListener('astro:page-load', initModals);
+    document.addEventListener('astro:page-load', boot);
   </script>
 </BaseLayout>

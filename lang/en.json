@@ -128,24 +128,38 @@
     }
   },
 
+  "projectsPage": {
+    "title": "ls -la projects/",
+    "subtitle": "A selection of projects built end-to-end.",
 
-
-
-
-        
-    "skills2": {
-        "featured": "Featured Technologies",
-        "subFeatured": "Tooling and stacks I have worked with",
-        "exploring": "Exploring technical expertise",
-        "languages": "Languages",
-        "backend": "Back-End",
-        "frontend": "Front-End",
-        "databases": "Databases",
-        "containers": "Containers & Reverse Proxies",
-        "devops": "DevOps & Automation",
-        "testing": "Testing & Docs"
+    "projects": {
+      "title": "'Featured Projects'",
+      "subtitle": "The projects I'm most proud of.",
+      "details": "More details"
     },
 
+    "touch": {
+      "title": "More on GitHub",
+      "p1": "You'll find most of my work on GitHub.",
+      "p2": "Beyond what's featured here: experiments, dotfiles and side projects.",
+      "btn": "Get In Touch"
+    }
+  },
+
+
+    "projects2": {
+        "ping": "    docker ps -a/",
+        "exploring": "Listing deployed projects and applications",
+        "featured": "Featured Projects",
+        "subFeatured": "Documented repositories and demos deployed on a VPS",
+        "move_title": "More on GitHub",
+        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
+        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
+        "move_btn": "Get In Touch"
+    },
+ 
+
+        
     "contact": {
         "ping": "    ping contact.server",
         "establishing": "Establishing connection to communication endpoint",
@@ -179,17 +193,6 @@
         "email_thanks_success": "Thank u!"
     },
 
-    "projects2": {
-        "ping": "    docker ps -a/",
-        "exploring": "Listing deployed projects and applications",
-        "featured": "Featured Projects",
-        "subFeatured": "Documented repositories and demos deployed on a VPS",
-        "move_title": "More on GitHub",
-        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
-        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
-        "move_btn": "Get In Touch"
-    },
- 
 
 
 
