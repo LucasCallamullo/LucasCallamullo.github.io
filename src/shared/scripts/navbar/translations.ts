@@ -42,6 +42,10 @@ let translations: Translations = {};
 // Helpers
 // -----------------------------------------------------------------------------
 
+export function getCurrentLang(): string {
+  return localStorage.getItem(STORAGE_KEY) || 'en';
+}
+
 function isLangCode(value: string | null): value is LangCode {
   return value !== null && (VALID_LANGS as readonly string[]).includes(value);
 }

@@ -13,6 +13,9 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['.ngrok-free.app', '.ngrok.app', '.ngrok-free.dev']
+    }
   }
 });

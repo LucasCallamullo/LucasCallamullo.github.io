@@ -17,21 +17,29 @@
 
   "links": {
     "github": "GitHub",
+    "other_github": "Go GitHub",
     "linkedin": "LinkedIn",
+    "other_linkedin": "Go LinkedIn",
     "email": "Email",
+    "other_email": "Go Email",
     "utn": "UTN",
     "cv": {
       "href": "./CV/LucasCallamullo_Software_Resume.pdf",    
       "altText": "LucasCallamullo_Software_Resume.pdf"
+    },
+    "cv_contact": {
+      "cv": "Resume.pdf",    
+      "other_cv": "Download!",
+      "href": "./CV/LucasCallamullo_Software_Resume.pdf"
     }
   },
+
 
   "footer": {
     "downloadLabel": "./download_resume.sh",
     "resume": "Backend Developer building scalable APIs with Python & Java. PostgreSQL, Docker, and cloud deployments.",
     "build": "build with:"
   },
-
 
 
   "home": {
@@ -69,6 +77,7 @@
     }
   },
 
+
   "about": {
     "title": "cat about.txt",
     "subtitle": "Displaying professional background.",
@@ -103,6 +112,7 @@
     }
   },
 
+
   "skills": {
     "title": "ls -la skills/",
     "subtitle": "Exploring technical expertise.",
@@ -128,6 +138,7 @@
     }
   },
 
+
   "projectsPage": {
     "title": "ls -la projects/",
     "subtitle": "A selection of projects built end-to-end.",
@@ -147,51 +158,31 @@
   },
 
 
-    "projects2": {
-        "ping": "    docker ps -a/",
-        "exploring": "Listing deployed projects and applications",
-        "featured": "Featured Projects",
-        "subFeatured": "Documented repositories and demos deployed on a VPS",
-        "move_title": "More on GitHub",
-        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
-        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
-        "move_btn": "Get In Touch"
+  "contact": {
+    "title": "ping contact.server",
+    "subtitle": "Establishing connection to communication endpoint",
+    "form": {
+      "title": "'Contact Me'",
+      "name": "Your Name:",
+      "email": "Email:",
+      "message": "Message:",
+      "btn": "Send"
     },
- 
-
-        
-    "contact": {
-        "ping": "    ping contact.server",
-        "establishing": "Establishing connection to communication endpoint",
-        "title": "Contact Me",
-        "name_label": "Name:",
-        "email_label": "Email:",
-        "message_label": "Message:",
-        "send_button": "Send",
-        "availability_title": "Availability Status",
-        "open_to_opportunities": "Open to opportunities",
-        "response_time": "Response time: Within 24 hours",
-        "timezone": "ART (UTC-3)",
-        "location": "Córdoba, Argentine",
-        "connect_title": "Connect With Me",
-        "github_tag": "Go GitHub",
-        "github_text": "Git Hub",
-        "linkedin_tag": "Go Linkedin",
-        "linkedin_text": "Linkedin",
-        "email_tag": "Send Me Email!",
-        "email_text": "Email",
-        "copy_tag": "Copy Email!",
-        "copy_text": "Email",
-        "echo": "$ echo",
-        "thanks_message": "\"Thanks for stopping by\"",
-        "chat_invite": "If you want to chat, my emails are always open!",
-        "faster_response": "I'll answer faster if you contact via email.",
-        "connection_message": "Connection established. Awaiting your message... :D",
-        "connection_message_mobile": "Connection established. Awaiting your message... :D",
-        "email_success": "Message sent successfully!",
-        "email_error": "Something went wrong. Please try again.",
-        "email_thanks_success": "Thank u!"
+    "extra": {
+      "title": "'Availability Status'",
+      "subtitle": "Open to opportunities.",
+      "span1": "Response time: Within 24 hours",
+      "span2": "ART (UTC-3)",
+      "title2": "'Connect With Me'",
+      "copy_email": "Copy Email"
     },
+    "end": {
+      "title": "\"Thanks for stopping by\"",
+      "span1": "If you want to chat, my emails are always open!",
+      "span2": "I'll answer faster if you contact via email.",
+      "span3": "Connection established. Awaiting your message... :D"
+    }
+  },
 
 
 

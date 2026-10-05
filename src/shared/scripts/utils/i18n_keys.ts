@@ -36,8 +36,18 @@ export const I18N = {
 
   links: {
     github: 'links.github',
+    other_github: 'links.other_github',
     linkedin: 'links.linkedin',
+    other_linkedin: 'links.other_linkedin',
     email: 'links.email',
+    other_email: 'links.other_email',
+    
+    cv_contact: {
+      cv: 'links.cv_contact.cv',
+      other_cv: 'links.cv_contact.other_cv',
+      href: 'links.cv_contact.href',
+    },
+
     utn: 'links.utn',
     cv: {
       href: 'links.cv.href',    
@@ -158,6 +168,36 @@ export const I18N = {
       p1: 'projectsPage.touch.p1',
       p2: 'projectsPage.touch.p2',
       btn: 'projectsPage.touch.btn',
+    }
+  },
+
+  contact: {
+    title: 'contact.title',
+    subtitle: 'contact.subtitle',
+
+    form: {
+      title: 'contact.form.title',
+      name: 'contact.form.name',
+      email: 'contact.form.email',
+      message: 'contact.form.message',
+      btn: 'contact.form.btn',
+    },
+    extra: {
+      title: 'contact.extra.title',
+      subtitle: 'contact.extra.subtitle',
+      span1: 'contact.extra.span1',
+      span2: 'contact.extra.span2',
+
+      title2: 'contact.extra.title2',
+
+      copy_email: 'contact.extra.copy_email',
+    },
+
+    end: {
+      title: 'contact.end.title',
+      span1: 'contact.end.span1',
+      span2: 'contact.end.span2',
+      span3: 'contact.end.span3',
     }
   },
 

@@ -18,12 +18,20 @@
 
   "links": {
     "github": "GitHub",
+    "other_github": "Ir GitHub",
     "linkedin": "LinkedIn",
+    "other_linkedin": "Ir LinkedIn",
     "email": "Email",
+    "other_email": "Ir Email",
     "utn": "UTN",
     "cv": {
-        "href": "./CV/LucasCallamullo_Backend_CV.pdf",    
-        "altText": "LucasCallamullo_Backend_CV.pdf"
+      "href": "./CV/LucasCallamullo_Backend_CV.pdf",    
+      "altText": "LucasCallamullo_Backend_CV.pdf"
+    },
+    "cv_contact": {
+      "cv": "CV.pdf",    
+      "other_cv": "Descargar!",
+      "href": "./CV/LucasCallamullo_Backend_CV.pdf"
     }
   },
 
@@ -144,51 +152,32 @@
   
 
 
-
-  "projects22": {
-      "ping": "    docker ps -a/",
-      "exploring": "Listado de proyectos y aplicaciones desplegados",
-      "featured": "Proyectos Destacados",
-      "subFeatured": "Repositorios documentados y demos desplegadas en una VPS",
-      "move_title": "Más en GitHub",
-      "move_span_1": "Gran parte de mi progreso en distintos proyectos (backend, frontend, Python, Java) está documentado en mi GitHub",
-      "move_span_2": "Experimentos personales, aplicaciones y proyectos secundarios están en GitHub.",
-      "move_btn": "Contactar"
+  "contact": {
+    "title": "ping contacto.servidor",
+    "subtitle": "Estableciendo conexión con el punto de comunicación",
+    "form": {
+      "title": "'Contáctame'",
+      "name": "Tú Nombre:",
+      "email": "Email:",
+      "message": "Mensaje:",
+      "btn": "Enviar"
+    },
+    "extra": {
+      "title": "'Disponibilidad'",
+      "subtitle": "Abierto a oportunidades.",
+      "span1": "Tiempo de respuesta: Dentro de 24 horas",
+      "span2": "ART (UTC-3)",
+      "title2": "'Conecta Conmigo'",
+      "copy_email": "Copy Email"
+    },
+    "end": {
+      "title": "\"Gracias por visitar\"",
+      "span1": "Si quieres conversar, mis emails están siempre abiertos!",
+      "span2": "Responderé más rápido si contactas por email.",
+      "span3": "Conexión establecida. Esperando tu mensaje... :D"
+    }
   },
   
-
-  "contact": {
-      "ping": "    ping contacto.servidor",
-      "establishing": "Estableciendo conexión con el punto de comunicación",
-      "title": "Contáctame",
-      "name_label": "Nombre:",
-      "email_label": "Correo:",
-      "message_label": "Mensaje:",
-      "send_button": "Enviar",
-      "availability_title": "Estado de Disponibilidad",
-      "open_to_opportunities": "Abierto a oportunidades",
-      "response_time": "Tiempo de respuesta: Dentro de 24 horas",
-      "timezone": "ART (UTC-3)",
-      "location": "Córdoba, Argentina",
-      "connect_title": "Conecta Conmigo",
-      "github_tag": "Ir a GitHub",
-      "github_text": "Git Hub",
-      "linkedin_tag": "Ir a Linkedin",
-      "linkedin_text": "Linkedin",
-      "email_tag": "Envíame un Correo",
-      "email_text": "Correo",
-      "copy_tag": "Copiar Correo",
-      "copy_text": "Correo",
-      "echo": "$ echo",
-      "thanks_message": "\"Gracias por visitar\"",
-      "chat_invite": "Si quieres conversar, ¡mis correos están siempre abiertos!",
-      "faster_response": "Responderé más rápido si contactas por correo.",
-      "connection_message": "Conexión establecida. Esperando tu mensaje... :D",
-      "connection_message_mobile": "Conexión establecida. Esperando tu mensaje... :D",
-      "email_success": "Mensaje enviado exitosamente!",
-      "email_error": "Algo salió mal. Por favor, inténtalo de nuevo.",
-      "email_thanks_success": "Gracias!"
-  },
 
 
 

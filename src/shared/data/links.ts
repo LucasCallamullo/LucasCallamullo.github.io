@@ -9,6 +9,8 @@ export interface SiteLink {
   /** i18n key for the visible label. See `I18N` for available keys. */
   i18n: string;
 
+  i18n_other: string;
+
   /** Destination URL. External links should use absolute URLs. */
   href: string;
 
@@ -34,6 +36,7 @@ export interface SiteLink {
 export const SOCIAL_LINKS: Record<string, SiteLink> = {
   github: {
     i18n: I18N.links.github,
+    i18n_other: I18N.links.other_github,
     href: 'https://github.com/lucascallamullo',
     icon: 'ri:github-fill',
     external: true,
@@ -43,7 +46,8 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
   },
   linkedin: {
     i18n: I18N.links.linkedin,
-    href: 'https://linkedin.com/in/lucascallamullo',
+    i18n_other: I18N.links.other_linkedin,
+    href: 'https://www.linkedin.com/in/lucas-callamullo/',
     icon: 'ri:linkedin-fill',
     external: true,
     newTab: true,
@@ -52,7 +56,8 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
   },
   email: {
     i18n: I18N.links.email,
-    href: 'mailto:lucas@example.com',
+    i18n_other: I18N.links.other_email,
+    href: 'mailto:lucas.callamullo.dev@gmail.com',
     icon: 'ri:mail-line',
     external: false,
     ariaLabel: "Email",
@@ -60,14 +65,26 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
   },
   cv: {
     i18n: I18N.links.cv.href,
+    i18n_other: I18N.links.cv.href,
     href: './CV/LucasCallamullo_Software_Resume.pdf',
     altText: 'LucasCallamullo_Software_Resume.pdf',
     icon: 'ri:file-pdf-2-line',
     external: true,
     newTab: true,
   },
+  cv_contact: {
+    // i18n: I18N.links.cv.href,
+    i18n: I18N.links.cv_contact.cv,
+    i18n_other: I18N.links.cv_contact.other_cv,
+    href: I18N.links.cv_contact.href,
+    altText: 'LucasCallamullo_Software_Resume.pdf',
+    icon: 'ri:download-2-line',
+    external: true,
+    newTab: true,
+  },
   utn: {
     i18n: I18N.links.utn,
+    i18n_other: I18N.links.utn,
     href: 'https://www.frc.utn.edu.ar',
     icon: 'ri:school-fill',
     external: true,
@@ -81,7 +98,7 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
  * Valid nav identifiers. Adding a new route requires updating this union.
  */
 export type NavKey = 'home' | 'about' | 'skills' | 'projects' | 'contact'
-  | 'github' | 'linkedin' | 'email' | 'cv' | 'utn';
+  | 'github' | 'linkedin' | 'email' | 'cv' | 'cv_contact' | 'utn';
 
 // Navigation menu links
 export interface NavItem {
@@ -120,6 +137,7 @@ export function getNavItem(nav: NavKey): NavItem | null {
   return item;
 }
 
+
 /**
  * Get only the href for a given nav key.
  */
@@ -132,4 +150,52 @@ export function getNavHref(nav: NavKey): string {
   if (itemSocial) return itemSocial.href;
 
   throw new Error(`[nav] unknown nav key: "${nav}"`);
+}
+
+
+/**
+ * Get multiple nav items by their keys.
+ * Looks in `navItems` first, then falls back to `SOCIAL_LINKS`.
+ * Returns only the items that exist — silently drops unknown keys.
+ *
+ * @example
+ *   getNavItems(['github', 'linkedin', 'contact']);
+ */
+export function getNavItems(navs: NavKey[]): NavItem[] {
+  const items: NavItem[] = [];
+
+  for (const nav of navs) {
+    const internal = navItems.find((n) => n.nav === nav);
+    if (internal) {
+      items.push(internal);
+      continue;
+    }
+
+    const social = SOCIAL_LINKS[nav];
+    if (social) {
+      items.push({
+        href: social.href,
+        i18n: social.i18n,
+        label: social.altText ?? nav,
+        nav,
+      });
+    }
+  }
+
+  return items;
+}
+
+/**
+ * Get one or more social links by their keys.
+ * Returns only the ones that exist — silently drops unknown keys.
+ *
+ * @example
+ *   getSocialLinks(['github', 'linkedin']);
+ */
+export function getSocialLinks(
+  keys: (keyof typeof SOCIAL_LINKS)[]
+): SiteLink[] {
+  return keys
+    .map((key) => SOCIAL_LINKS[key])
+    .filter((item): item is SiteLink => item !== undefined);
 }
