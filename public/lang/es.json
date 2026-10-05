@@ -25,13 +25,13 @@
     "other_email": "Ir Email",
     "utn": "UTN",
     "cv": {
-      "href": "./CV/LucasCallamullo_Backend_CV.pdf",    
+      "href": "/CV/LucasCallamullo_Backend_CV.pdf",    
       "altText": "LucasCallamullo_Backend_CV.pdf"
     },
     "cv_contact": {
       "cv": "CV.pdf",    
       "other_cv": "Descargar!",
-      "href": "./CV/LucasCallamullo_Backend_CV.pdf"
+      "href": "/CV/LucasCallamullo_Backend_CV.pdf"
     }
   },
 

@@ -24,13 +24,13 @@
     "other_email": "Go Email",
     "utn": "UTN",
     "cv": {
-      "href": "./CV/LucasCallamullo_Software_Resume.pdf",    
+      "href": "/CV/LucasCallamullo_Software_Resume.pdf",    
       "altText": "LucasCallamullo_Software_Resume.pdf"
     },
     "cv_contact": {
       "cv": "Resume.pdf",    
       "other_cv": "Download!",
-      "href": "./CV/LucasCallamullo_Software_Resume.pdf"
+      "href": "/CV/LucasCallamullo_Software_Resume.pdf"
     }
   },
 

@@ -66,7 +66,7 @@ export const SOCIAL_LINKS: Record<string, SiteLink> = {
   cv: {
     i18n: I18N.links.cv.href,
     i18n_other: I18N.links.cv.href,
-    href: './CV/LucasCallamullo_Software_Resume.pdf',
+    href: '/CV/LucasCallamullo_Software_Resume.pdf',
     altText: 'LucasCallamullo_Software_Resume.pdf',
     icon: 'ri:file-pdf-2-line',
     external: true,
