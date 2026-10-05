@@ -1,0 +1,29 @@
+{
+  "name": "astro",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.3.3",
+    "astro-icon": "^1.2.0",
+    "swiper": "^14.2.0"
+  },
+  "devDependencies": {
+    "@iconify-json/devicon": "^1.2.68",
+    "@iconify-json/ri": "^1.2.10",
+    "@iconify-json/thesvg-color": "^1.2.14",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

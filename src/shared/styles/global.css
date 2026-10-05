@@ -1,0 +1,971 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+@import "tailwindcss";
+@import "./custom.css";
+
+/* ==========================================================================
+  1. TAILWIND THEME CONFIGURATION (V4)
+  This maps your CSS custom properties directly to Tailwind classes!
+  Example: 
+    var(--bg-primary) becomes `bg-primary` or `text-primary`.
+  Example:
+    ? color-main-light: var(--main-light-color);  Generates: bg-main-light | text-main-light | border-main-light 
+  ========================================================================== */
+@theme {
+  --font-sans: 'Montserrat', sans-serif;
+
+  /* Brand / Main Color Scale (e.g., bg-main-500, text-main-300) */
+  --color-main-300: var(--main-300);
+  --color-main-500: var(--main-500); /* Base Main Color */
+  --color-main-700: var(--main-700);
+
+  /* Surface / Background Color Scale (e.g., bg-surface-100, bg-surface-800) */
+  --color-surface-100: var(--surface-100); /* Lightest background */
+  --color-surface-200: var(--surface-200); /* Cards / Secondary bg */
+  --color-surface-800: var(--surface-800); /* Dark borders / Dark bg */
+  --color-surface-900: var(--surface-900); /* Pure base background */
+
+  /* Text Color Scale (e.g., text-content-main, text-content-muted) */
+  --color-content-main: var(--text-main);
+  --color-content-muted: var(--text-muted);
+
+  /* Fixed Brand Colors */
+  --color-brand-red: var(--color-red);
+  --color-brand-green: var(--color-green);
+  --color-brand-green-100: var(--color-green);
+  --color-brand-wsp: var(--color-wsp);
+
+  /* CUSTOM Brand Colors */
+  --color-console: var(--console-color);
+  --color-console-100: var(--console-color-100);
+  --color-console-400: var(--console-color-400);
+  --color-accent: var(--accent-color);
+}
+
+/** ==========================================================================
+   2. SHARED CONSTANTS (:root)
+   Static values shared across ALL themes.
+   ========================================================================== */
+:root {
+  --color-red: #e40707;
+  --color-green: #28a745;
+  --color-green-100: #10b981;
+  --color-wsp: #2db742;
+
+  --height-header: 80px
+}
+
+/** ==========================================================================
+   3. DYNAMIC THEMES (Shade Steps)
+   ========================================================================== */
+
+/* Light Theme */
+:root, [data-theme="light"] {
+  /* Main purple scale */
+  --main-300: #b785ff;
+  --main-500: #5e08e7; /* Base */
+  --main-700: #3f04a0;
+
+  /* Surface scale (Light shades) */
+  --surface-100: #ffffff; /* Base background */
+  --surface-200: #f0f2f5; /* Card background */
+  --surface-800: #e2e8f0; /* Borders / Dividers */
+  --surface-900: #cbd5e1; /* Dark contrast element */
+
+  /* Typography */
+  --text-main: #000000;
+  --text-muted: #6c757d;
+
+  /* Custom Accents */
+  --console-color: #059669;
+  --console-color-100: #10b981;
+  --console-color-400: #2e7d32; 
+
+  --accent-color: #c47d00;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Main neon purple scale */
+  --main-300: #d86eff;
+  --main-500: #b000ff; /* Base */
+  --main-700: #7100a3;
+
+  /* Surface scale (Dark shades flipped!) */
+  --surface-100: #2d3748; /* Highlight cards */
+  --surface-200: #0a0e11; /* Card background 0a0e11 */
+  --surface-800: #343a40; /* Darker containers   212529     181b20    */
+  --surface-900: #141b20; /* Base dark background    343a40     121212    */
+
+  /* Typography */
+  --text-main: #ffffff;
+  --text-muted: #b3b5b6;
+
+  /* Custom Accents */
+  --console-color: #00ff00;
+  --console-color-100: #38ef7d;
+  --console-color-400: #2e7d32;
+  --accent-color: #ffb800;
+}
+
+/* Violet Theme */
+[data-theme="violet"] {
+  --main-300: #c4b5fd;
+  --main-500: #8b5cf6;
+  --main-700: #6d28d9;
+
+  --surface-100: #231b42;
+  --surface-200: #2e2455;
+  --surface-800: #120e22;
+  --surface-900: #0f0c1b;
+
+  --text-main: #f3f0ff;
+  --text-muted: #a78bfa;
+
+  --console-color: #00ff00;
+  --console-color-100: #38ef7d;
+  --console-color-400: #2e7d32;
+  --accent-color: #ffb800;
+}
+
+/* Blue Theme */
+[data-theme="blue"] {
+  --main-300: #7dd3fc;
+  --main-500: #0284c7;
+  --main-700: #0369a1;
+
+  --surface-100: #182a45;
+  --surface-200: #253f64;
+  --surface-800: #0a1422;
+  --surface-900: #07111e;
+
+  --text-main: #f0f9ff;
+  --text-muted: #38bdf8;
+
+  --console-color: #00ff00;
+  --console-color-100: #38ef7d;
+  --console-color-400: #2e7d32;
+  --accent-color: #ffb800;
+}
+
+/** ==========================================================================
+   4. BASE STYLES
+   ========================================================================== */
+html, body {
+  background-color: var(--surface-900);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  height: var(--height-header);      /* Altura según variable */
+  z-index: 50;           /* Sobre otros elementos */
+  border-bottom: 1px solid var(--console-color-400);
+}
+
+main {
+  margin-top: var(--height-header);
+}
+
+
+
+ul {
+  list-style: none;                           /* Sin viñetas */
+  -webkit-tap-highlight-color: transparent;   /* Sin resaltado al tocar */
+}
+
+a { text-decoration: none; }                  /* Sin subrayado */
+
+#whoami {
+  min-height: calc(100vh - var(--height-header));
+}
+
+
+
+
+/* ==============================================================
+  +  BUTTON EFFECT [ ----  ]
+/* ============================================================== */
+.btn_notched {
+  width: min-content;
+  position: relative;
+  /* ridge */
+  border: 3px solid var(--console-color);
+  outline: none;
+  transition: 1s;
+  border-radius: 5px;
+}
+
+.btn_notched::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.btn_notched::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  transition: 0.5s;
+}
+
+.btn_notched:hover::before, .btn_notched:hover::after {
+  transform: scale(0)
+}
+
+.btn_notched_surface_900::after,
+.btn_notched_surface_900::before {
+  background-color: var(--surface-900);
+}
+
+.btn_notched_surface_800::after,
+.btn_notched_surface_800::before {
+  background-color: var(--surface-800);
+}
+
+.btn_notched_surface_200::after,
+.btn_notched_surface_200::before {
+  background-color: var(--surface-200);
+}
+
+
+
+
+/* ==============================================================
+  +  TECH SKILL [ - ]
+/* ============================================================== */
+.skillsSwiper {
+  width: 100%;
+    /* hidden   visible */
+  overflow: hidden;
+  cursor: grab;
+}
+
+
+.tech_group {
+  user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+
+  height: 150px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* Para mejorar el rendimiento en drag */
+  will-change: transform;
+}
+
+.tech_group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.2);
+}
+
+.tech_group svg {
+    object-fit: contain;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Comienza en gris y más tenue */
+    filter: grayscale(67%);
+    opacity: 0.7;
+}
+
+.tech_group svg:hover {
+    transform: scale(1.1);
+}
+
+/* Efecto al pasar el mouse sobre el slide completo */
+.tech_group:hover svg {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Efecto adicional: el resto de iconos del slide se atenúan */
+.tech_group:hover svg:not(:hover) {
+    filter: grayscale(25%);
+    opacity: 0.9;
+}
+
+
+
+
+/* ==============================================================
+  +  EFFECT TYPEWRITER --> use shared/scripts/utils/typewriter.ts
+/* ============================================================== */
+/* Cursor para el efecto typewriter - Personalizable */
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--console-color); }
+}
+
+@utility typewriter-cursor-fast {
+  border-right: 3px solid var(--console-color);
+  padding-right: 4px;
+  animation: blink 0.3s step-end infinite;
+}
+
+@utility typewriter-cursor {
+  border-right: 3px solid var(--console-color);
+  padding-right: 4px;
+  animation: blink 1.5s step-end infinite;
+}
+
+
+
+
+/* ==============================================================
+  +  EFFECT CONT SLIDE FROM LEFT --> EFFECTS FOR OBSERVER
+/* ============================================================== */
+/* Initial state: shifted left, invisible */
+.cont_animate__from_left,
+.cont_animate__from_left_lg {
+  /*  position: absolute;
+  overflow: hidden;  */
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: opacity, transform;
+}
+
+.cont_animate__from_left { transform: translateX(-40px); }
+.cont_animate__from_left_lg { transform: translateX(-100px); }
+
+.cont_animate__from_right { transform: translateX(40px); }
+.cont_animate__from_right_lg { transform: translateX(100px); }
+
+
+/* Final state */
+.cont_animate__from_left[data-animate],
+.cont_animate__from_left_lg[data-animate],
+.cont_animate__from_right[data-animate],
+.cont_animate__from_right_lg[data-animate] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
+
+/* ==============================================================
+  +  EFFECT timeline_classic, EFFECTS FOR OBSERVER
+/* ============================================================== */
+.timeline_cont_line {
+  position: relative;
+  padding: 16px 0;
+}
+
+/* Línea vertical: en mobile va a la izquierda (20px) */
+.timeline_cont_line::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--console-color-100);
+  transform: translateX(-50%);
+}
+
+/* Mobile: todos los items van a la derecha de la línea */
+.timeline_cont__item {
+  position: relative;
+  width: 100%;
+  padding-left: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.timeline_cont__icon {
+  position: absolute;
+  top: 20px;
+  box-shadow: 0 0 6px var(--console-color);
+  border-radius: 50%;
+  z-index: 2; 
+  left: -8px;
+  right: auto;
+}
+
+
+@media (min-width: 768px) {
+  /* Línea vertical al centro */
+  .timeline_cont_line::before {
+    left: 50%;
+  }
+
+  /* Items impares: a la izquierda de la línea */
+  .timeline_cont__item:nth-child(odd) {
+    width: 50%;
+    padding-left: 0;
+    padding-right: 28px;
+    justify-content: flex-end; 
+  } 
+
+  /* Items pares: a la derecha de la línea */
+  .timeline_cont__item:nth-child(even) {
+    width: 50%;
+    margin-left: 50%;
+    padding-left: 28px;
+    justify-content: flex-start;
+  }
+
+  .timeline_cont__item:nth-child(odd) .timeline_cont__icon {
+    left: auto;
+    right: -20px;
+  }
+
+  .timeline_cont__item:nth-child(even) .timeline_cont__icon {
+    left: -20px;
+    right: auto;
+  }
+}
+
+/* Base: estado inicial + transición (aplica a ambas direcciones) */
+.timeline_animate__from_left,
+.timeline_animate__from_right {
+  opacity: 0;
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: opacity, transform;
+
+  /* Mobile-first: ambos entran desde la izquierda por defecto */
+  transform: translateX(-40px);
+}
+
+/* Estado final (común a ambos) */
+.timeline_animate__from_left[data-animate],
+.timeline_animate__from_right[data-animate] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Desktop (md: 768px+): los pares entran desde la derecha */
+@media (min-width: 768px) {
+  .timeline_animate__from_right {
+    transform: translateX(80px);
+  }
+
+  .timeline_animate__from_left {
+    transform: translateX(-80px);
+  }
+
+  /* Necesario porque el estado final ya no coincide con el inicial */
+  .timeline_animate__from_right[data-animate] {
+    transform: translateX(0);
+  }
+}
+
+
+
+
+/* ==============================================================
+   Effect: grayscale → color on group hover
+   --------------------------------------------------------------
+   - Icons start slightly grayscale and dim.
+   - When hovering ANYWHERE on the `.group` parent, all icons
+     regain full color and full opacity.
+   - The icon directly under the cursor scales up a bit more.
+   ============================================================== */
+.effect_grayscale svg {
+  filter: grayscale(70%);
+  opacity: 0.65;
+  transition:
+    filter 0.35s ease,
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: filter, opacity, transform;
+}
+
+/* Group hover: every icon in the card recovers color */
+.group:hover .effect_grayscale svg {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Icon directly hovered: a bit more scale */
+.effect_grayscale svg:hover {
+  transform: scale(1.12);
+}
+
+/* Optional: dim the other icons when one is hovered */
+.effect_grayscale:hover svg:not(:hover) {
+  filter: grayscale(30%);
+  opacity: 0.85;
+}
+
+
+
+
+/* ==============================================================
+   Effect: animated gradient border
+   --------------------------------------------------------------
+   Draws a moving gradient border around a container using
+   two pseudo-elements
+
+   Usage:
+     <div class="cont__border_animate">...</div>
+     <div class="cont__border_animate cont__border_animate_console">...</div>
+   ============================================================== */
+
+.cont__border_animate {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: var(--surface-800);
+  /* Ensure content stacks above the pseudo elements */
+  isolation: isolate;
+  transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+              transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+/* Gradient layer (the border itself) */
+.cont__border_animate::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+
+    background: linear-gradient(
+        90deg,
+        var(--surface-200),
+        var(--surface-100),
+        var(--surface-200)
+    );
+    /* ! MUST COME AFTER `background` — the shorthand resets background-size */
+    background-size: 200% 100%;
+    animation: gradientSlide 4s ease-in-out infinite;
+    z-index: 0;
+    border-radius: 20px;
+}
+
+@keyframes gradientSlide {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* Inner layer (solid fill that covers the center) */
+.cont__border_animate::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border-radius: 18px;
+  z-index: 1;
+  background-color: var(--surface-800);
+}
+
+/* ! Content must stack above ::before and ::after */
+.cont__border_animate > * {
+    position: relative;
+    z-index: 3;
+}
+
+/* Modifier: override the gradient (keep `background-image` + `background-size`) */
+.cont__border_animate_console::before {
+  /* ! Use `background-image` (not `background`) so `background-size` is not reset */
+  background-image: linear-gradient(90deg, var(--main-700), var(--main-500), var(--main-300));
+  background-size: 200% 100%;
+  animation: gradientSlide 4s ease-in-out infinite;
+}
+
+
+
+
+/* ==============================================================
+   Effect: inset frame on hover
+   --------------------------------------------------------------
+   Adds an animated inner frame that appears when the user hovers
+   over the container.
+
+   Expected markup:
+     <div class="cont_border_effect">
+       <span class="cont_border__anim_effect"></span>
+       <!-- content -->
+     </div>
+
+   The `.cont_border__anim_effect` element should have its own
+   border or background defined (e.g. `border: 2px solid ...`)
+   — this stylesheet only handles the animation.
+   ============================================================== */
+
+.cont_border_effect {
+  place-content: center;
+  position: relative;
+  overflow: hidden;
+  /* transition: all 0.5s ease-in-out; */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The animated frame. Invisible and rotated by default. */
+.cont_border__anim_effect {
+  /* Needs a solid border / background of its own to be visible.
+     e.g. border: 2px solid var(--console-color); */
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: rotate(10deg);
+  /* transition: all 0.5s ease-in-out; */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* On hover: flatten corners, scale up slightly. */
+.cont_border_effect:hover {
+  /* padding: 16px; */
+  transform: scale(1.06);
+}
+
+/* On hover: the frame appears, straightens and insets. */
+.cont_border_effect:hover .cont_border__anim_effect {
+  /* inset: 15px; transform: rotate(0); */
+  transform: rotate(0) scale(1);
+  opacity: 1;
+}
+
+
+
+
+/* ==============================================================
+   Effect: 3D button lift on container hover
+   --------------------------------------------------------------
+   When the user hovers anywhere on the `.cont_btns_3d` container,
+   every child marked with `.cont_btns_3d__btn_effect` tilts back
+   slightly on the X axis and lifts up, casting a soft shadow.
+
+   Expected markup:
+     <div class="cont_btns_3d">
+       <button class="cont_btns_3d__btn_effect">...</button>
+       <button class="cont_btns_3d__btn_effect">...</button>
+       <button class="cont_btns_3d__btn_effect">...</button>
+     </div>
+
+   Note: delays are only applied on hover so buttons return to
+   their resting state together when the mouse leaves.
+   ============================================================== */
+
+/* Container: sets up the 3D perspective anchored at the bottom,
+   so the tilt reads as "lifting from the base". */
+.cont_btns_3d {
+  perspective: 800px;
+  perspective-origin: center bottom;
+}
+
+/* Each button: smooth transform + shadow transitions.
+   `transform-origin: bottom` keeps the pivot at the button's base. */
+.cont_btns_3d__btn_effect {
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  transform-origin: center bottom;
+}
+
+/* On container hover: every button tilts back and lifts up. */
+.cont_btns_3d:hover .cont_btns_3d__btn_effect {
+  transform: rotateX(-10deg) translateX(10px) translateY(-10px);
+  /* transform: rotateX(-10deg) translateY(-10px); */
+  box-shadow: 0 2px 6px -2px var(--text-muted); /* rgba(0, 0, 0, 0.4)*/
+}
+
+/* Staggered delays (short cascade, 150ms apart).
+   Applied only on :hover so the return transition is synchronized. */
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(1) { transition-delay: 0.15s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(2) { transition-delay: 0.30s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(3) { transition-delay: 0.45s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(4) { transition-delay: 0.60s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(5) { transition-delay: 0.75s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(6) { transition-delay: 0.90s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(7) { transition-delay: 1.05s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(8) { transition-delay: 1.20s; }
+.cont_btns_3d:hover .cont_btns_3d__btn_effect:nth-child(9) { transition-delay: 1.35s; }
+
+
+
+
+.btn__glass_effect {
+  position: relative;
+  overflow: hidden;
+  /* transition: color 0.3s ease; */
+  isolation: isolate;
+}
+
+/* Shine layer */
+.btn__glass_effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Ancho del brillo: 50% del contenedor */
+  width: 33%;
+  height: 100%;
+  /* Empieza fuera, a la izquierda */
+  transform: translateX(-133%) skewX(-20deg);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent 100%
+  );
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover: brilla una vez y vuelve */
+.btn__glass_effect:hover::before {
+  transform: translateX(300%) skewX(-21deg);
+}
+
+/* Hover: cambiar color del texto */
+.btn__glass_effect:hover {
+  color: #82ffc9;
+}
+
+/* Contenido por encima del brillo */
+.btn__glass_effect > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+/* ==============================================================
+   Effect: rotating cards (3D carousel)
+   --------------------------------------------------------------
+   Renders a set of cards arranged in a 3D wheel and rotates
+   the whole wheel continuously around the Y axis.
+
+   Each card is positioned around an imaginary circle:
+     - `rotateY` spreads the cards evenly around the wheel.
+     - `translateZ` pushes them outward to the wheel radius.
+
+   The number of cards and each card's index are passed in from
+   the Astro component (`RotatingCards.astro`) as CSS custom
+   properties, so the CSS stays generic and reusable:
+
+     --quantity-carousel-rotate   → total number of cards
+     --index-carousel-rotate      → index of the current card (0-based)
+     --color-card-carousel-rotate → RGB triplet for the card's color
+
+   The component computes the radius so cards don't overlap:
+     radius = (width / 2) / sin(π / quantity) + gap
+
+   Related component: `src/shared/components/RotatingCards.astro`
+   ============================================================== */
+
+.carousel_rotate__wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  place-items: center;
+  overflow: hidden; /*  */
+}
+
+.carousel_rotate__inner {
+  /* Size of each card and geometry of the wheel.
+     Values are set from the Astro component via inline styles. */
+  --w-carousel-rotate: 100px;
+  --h-carousel-rotate: 150px;
+  --radius-carousel-rotate: 150px;
+  --rotateX-carousel-rotate: -15deg;
+  --perspective-carousel-rotate: 1000px;
+  --spin-duration-carousel-rotate: 20s;
+
+  position: relative;
+  width: var(--w-carousel-rotate);
+  height: var(--h-carousel-rotate);
+  transform-style: preserve-3d;
+  animation: rotate-wheel var(--spin-duration-carousel-rotate) linear infinite;
+}
+
+/* The whole wheel rotates around Y, with a slight X tilt for depth. */
+@keyframes rotate-wheel {
+  from {
+    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(0deg);
+  }
+  to {
+    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(360deg);
+  }
+}
+
+/* Each card is placed around the wheel using its index and the
+   total quantity, then pushed outward by the radius. */
+.carousel_rotate__card {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgb(var(--color-card-carousel-rotate));
+  border-radius: 12px;
+  overflow: hidden;
+  transform:
+    rotateY(calc((360deg / var(--quantity-carousel-rotate)) * var(--index-carousel-rotate)))
+    translateZ(var(--radius-carousel-rotate));
+
+  /* Comment out to make cards on the back side visible too. */
+  backface-visibility: hidden;
+}
+
+/* Card inner layout: vertical stack, centered content, and a
+   radial gradient tinted by the card's color. */
+.carousel_rotate__img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(var(--color-card-carousel-rotate), 0.2) 0%,
+      rgba(var(--color-card-carousel-rotate), 0.6) 80%,
+      rgba(var(--color-card-carousel-rotate), 0.9) 100%
+    );
+  /* If a background-image is set inline, it sits above the gradient */
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+
+
+
+
+
+
+.btn_move__cont_svg {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn_move__cont_svg:hover .btn_move__svg_svg {
+  animation: swing 1.2s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+@keyframes swing {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(20deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(-20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+
+
+
+
+
+
+/* CONTACT FORM */
+.btn_w_tag {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn_w_tag__top {
+  position: absolute;
+  top: 0;
+  height: 32px;  /* depende de heigth y top para el espaciado */
+  margin-left: 10%;
+  width: 80%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn_w_tag:hover .btn_w_tag__top {
+  top: -40px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* .btn_w_tag:hover,
+.btn_w_tag:hover .btn_w_tag__top, */
+.btn_w_tag:hover .btn_w_tag__top::before {
+  /*background: linear-gradient(320deg, var(--grad-end), var(--grad-start)); */
+  margin-bottom: -4px;
+  background: linear-gradient(320deg, var(--main-300), var(--main-700));
+}
+
+.btn_w_tag__top::before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+
+
+
+
+
+
+
+
+
+.loader_snake {
+  display: flex;
+}
+
+.loader_snake .dot_snake {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid #212121;
+  background: #16b0c1;
+  animation: jump 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes jump {
+  100% {
+    background: #661e92;
+    transform: translateY(-3rem) scale(1.9);
+  }
+}
+
+.loader_snake .dot_snake:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.loader_snake .dot_snake:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader_snake .dot_snake:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.loader_snake .dot_snake:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.loader_snake .dot_snake:nth-child(5) {
+  animation-delay: 0.5s;
+}

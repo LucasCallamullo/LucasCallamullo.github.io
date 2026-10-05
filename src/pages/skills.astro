@@ -1,0 +1,229 @@
+---
+import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import Section from '@shared/components/Section.astro'
+
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { getGroupedTechs } from '@shared/data/tech_stack';
+
+import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
+import { fade } from 'astro:transitions';
+
+const groups = getGroupedTechs({ 
+  categories:[
+    'backend', 'languages', 'frontend', 'databases',
+    'devops', 'tools', 'testing', 'api'
+  ] 
+});
+
+const mainStack = getGroupedTechs({ 
+  categories:[
+    'backend', 'languages', 'frontend', 'databases',
+    'devops', 'tools', 'testing'
+  ],
+  onlyMain: true 
+});
+
+const cardsCarousel: Card[] = mainStack.flatMap((group) =>
+  group.techs.map((t) => ({
+    icon: t.icon,
+    label: t.name,     
+  }))
+);
+
+// Define page metadata
+const title = "Skills · Callamullo Lucas · Software Engineer";
+---
+
+<BaseLayout title={title} mainWidth="full">
+
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} id='skillsMain' 
+    paddingY={false} justifyCenter={false}
+  >
+    <!-- + MAIN DIV CONTAINER -->
+    <div class:list={[
+      'flex flex-col w-full', 
+      'gap-5 md:gap-6 px-3 md:px-5 py-10', 
+      WIDTH_CLASSES.md
+    ]}>
+      <h1 class="flex gap-3 font_console text-4xl">
+        <span class="text-accent">$</span>
+        <span class="typewriter-cursor-fast" data-typewriter data-i18n={I18N.skills.title}>ls -la skills/</span>
+      </h1>
+      <span class="text-content-muted text-lg font_console tracking-wide" data-fade-1 data-i18n={I18N.skills.subtitle}>
+        Exploring technical expertise.
+      </span>
+    </div>
+  </Section>
+
+
+  <!-- + section of MAIN SKILLS -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
+
+      <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
+        data-reveal data-multi-anim
+      >
+        <h2 class="font_console text-3xl flex items-center gap-2 tracking-wider">
+          <span class="text-accent">$</span>
+          <span class="text-content-muted">cat</span>
+          <span class="text-console font-bold">'Main-Stack'</span>
+        </h2>
+        <span class="text-lg font_console tracking-wide text-content-muted"
+          data-i18n={I18N.skills.main.subtitle}
+        >
+          Where I have the most hands-on experience.
+        </span>
+      </div>
+      
+      <!-- STACK MAIN CARDS -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4.5 mt-7">
+        {mainStack.map((group) => (
+          <div class="flex flex-col rounded-xl bg-surface-200
+            cont_border_effect cont_btns_3d cont_animate__from_left_lg"
+            data-reveal
+          >
+            <h3 class="font_console text-lg text-accent uppercase tracking-wider
+              bg-surface-200 px-4 py-2.5">
+              <span data-i18n={group.category.i18n}>{group.category.label}</span>
+            </h3>
+
+            <div class="flex flex-wrap flex-1 bg-surface-900 px-3 py-4 gap-2">
+              {group.techs.map((tech) => (
+                <button class="flex items-center gap-2 w-min h-min px-2.5 py-1.5 cursor-pointer rounded-2xl z-30
+                  cont_btns_3d__btn_effect border border-console-400 btn__glass_effect">
+                  <Icon
+                    name={tech.icon}
+                    class={`w-6 h-6 ${tech.isOnlyLightTheme ? 'bg-white rounded-md p-0.5' : ''}`}
+                  />
+                  <span class="font_console text-sm text-content-main truncate">
+                    {tech.name}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* <!-- Effects absolute --> */}
+            <span class="cont_border__anim_effect border-console rounded-xl border-2"></span>
+          </div>
+        ))}
+      </div>
+
+
+    </div>
+  </Section>
+
+
+  <!-- + SECTION ---- STACK CAROUSEL MAIN CARDS -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false} paddingX={false}>
+    <div class:list={[
+      'w-full flex flex-col gap-8 py-10', 
+      WIDTH_CLASSES.md
+    ]}>
+
+      <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg px-2 md:px-4"
+        data-reveal data-multi-anim
+      >
+        <h2 class="font_console text-3xl flex flex-wrap text-center justify-center items-center gap-2 tracking-wider">
+          <span class="text-accent">$</span>
+          <span class="text-content-muted">cat</span>
+          <span class="text-console font-bold" data-i18n={I18N.skills.carousel.title}>
+            'My Main Stack Carousel'
+          </span>
+        </h2>
+        <span class="text-base font_console tracking-wide text-content-muted"
+          data-i18n={I18N.skills.carousel.subtitle}
+        >
+          The technologies I use daily, on rotation.
+        </span>
+      </div>
+
+      <div class:list={["h-55 w-full px-2 md:px-4", WIDTH_CLASSES.md]}>
+        <RotatingCards cards={cardsCarousel} />
+      </div>
+    
+    </div>  
+  </Section>
+
+
+  <!-- + Sección of RESUME  SKILLS -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
+
+      <div class="flex flex-col gap-3 items-center justify-center p-2 mb-4 md:mb-5 cont_animate__from_left_lg"
+        data-reveal data-multi-anim
+      >
+        <h2 class="font_console text-3xl flex flex-wrap items-center justify-center text-center gap-2 tracking-wider">
+          <span class="text-accent">$&nbsp;</span>
+          <span class="text-content-muted">ls -la&nbsp;</span>
+          <span class="text-console font-bold" data-i18n={I18N.skills.all.title}>
+            all-techs/
+          </span>
+        </h2> 
+        <span data-i18n={I18N.skills.all.subtitle}
+          class="font_console text-content-muted text-lg font-md tracking-wide" > 
+          Everything I've used across projects.
+        </span>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 relative">
+        {groups.map((group, index) => (
+          <section data-reveal
+            class:list={[
+              'border rounded-2xl border-emerald-500 h-full flex flex-col relative cont_btns_3d',
+              index % 2 === 0 ? 'timeline_animate__from_left' : 'timeline_animate__from_right',
+            ]}
+          >
+            <div class="bg-surface-200 rounded-t-2xl flex justify-between items-center px-4 py-3">
+              <h3 data-i18n={group.category.i18n} class="font_console text-console tracking-wider font-xl">
+                {group.category.label}
+              </h3>
+              <div class="flex gap-2">
+                <span class="rounded-full bg-red-500 h-3 w-3 border border-surface-900"></span>
+                <span class="rounded-full bg-yellow-500 h-3 w-3 border border-surface-900"></span>
+                <span class="rounded-full bg-green-500 h-3 w-3 border border-surface-900"></span>
+              </div>
+            </div>
+
+            {/* <!-- grid md:grid-cols-3 --> */}
+            <div class="bg-surface-900 rounded-b-2xl flex-wrap flex w-full flex-1 justify-start items-start
+              gap-2.5 px-4 py-4 overflow-auto relative ">
+                {group.techs.map((tech) => (
+                  <button class="flex items-center gap-2 px-3.5 py-2 cont__border_animate w-min 
+                    cont_btns_3d__btn_effect cursor-pointer"
+                  >
+                    <Icon
+                      name={tech.icon}
+                      class:list={[
+                        "h-5 w-5 object-contain",
+                        tech.isOnlyLightTheme ? 'bg-white rounded-2xl p-0.5' : ''
+                      ]}
+                    />
+                    <span class="font_console text-base truncate">{tech.name}</span>
+                  </button>
+                ))}
+            </div>
+          </section>
+        ))}
+      </div> 
+
+
+    </div>  
+  </Section>
+
+
+  <script>
+    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
+
+    async function boot() {
+      // this events call init typewriter methods, only need the right selectors
+      setEventTypewriter({
+        container: '#skillsMain',
+        title: '[data-typewriter]',
+        elementsToFade: ['[data-fade-1]'],
+      });
+    }
+
+    document.addEventListener('astro:page-load', boot);
+  </script>
+</BaseLayout>

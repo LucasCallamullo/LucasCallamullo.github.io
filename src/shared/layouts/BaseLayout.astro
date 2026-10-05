@@ -1,0 +1,159 @@
+---
+import '@shared/styles/global.css'
+import '@shared/styles/custom.css'
+
+
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+
+// This is to enable SPA
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  /** Extra classes merged into the <main> element. */
+  mainClass?: string;
+  /** Max width preset for <main>. Default: 'md' (max-w-6xl). */
+  mainWidth?: 'sm' | 'md' | 'lg' | 'full';
+}
+
+const {
+  title,
+  mainClass = '',
+  mainWidth = 'md',
+} = Astro.props;
+
+export const WIDTH_CLASSES = {
+  sm: 'max-w-3xl mx-auto',
+  md: 'max-w-6xl mx-auto',
+  lg: 'max-w-7xl mx-auto',
+  full: 'max-w-none mx-auto',
+} as const;
+
+const widthClass = WIDTH_CLASSES[mainWidth];
+
+
+/* 
+<!-- Default / Light -->
+<html lang="en" data-theme="light">
+
+<!-- Dark Theme -->
+<html lang="en" data-theme="dark">
+
+<!-- Violet Theme -->
+<html lang="en" data-theme="violet">
+
+<!-- Blue Theme -->
+<html lang="en" data-theme="blue"></html>
+
+<!-- <meta name="theme-color" content="#000000"> --> 
+*/
+
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{title}</title>
+
+    <!--  -->
+    <link rel="icon" type="image/svg+xml" href="./icons/terminal.svg">
+    
+    <!-- Meta tags útiles para SEO y redes sociales -->
+    <meta name="description" content="Lucas Callamullo, Software Engineer from Córdoba, Argentina. 
+        I build production-ready e-commerce platforms, microservices with JWT authentication, and clean REST APIs. 
+        Skilled in Python/Django, Java/Spring Boot, Node.js/Express, Docker, and PostgreSQL.">
+    <meta name="author" content="Lucas Callamullo">
+
+    <!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lucas Callamullo · Software Engineer & Systems Engineering Student">
+    <meta property="og:description" content="Portfolio showcasing e-commerce engines, microservices architectures, 
+        and API development. Currently 4th year Systems Engineering at UTN.">
+
+    <meta property="og:url" content="https://lucascallamullo.github.io">
+    <meta property="og:site_name" content="Lucas Callamullo · Portfolio">
+    <meta property="og:image" content="https://lucascallamullo.github.io/staticfiles/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lucas Callamullo · Software Engineer">
+    <meta name="twitter:description" content="Building scalable backend systems. E-commerce, microservices, 
+        REST APIs. Python, Java, Node.js, Docker.">
+    
+    <!-- Slot para CSS o meta tags específicos de cada página -->
+    <slot name="head" />
+
+    <!-- Enables client-side SPA navigation between pages -->
+    <ClientRouter fallback="swap"/>
+  </head>
+
+
+  <body class="min-h-screen">
+    <!-- Navbar global persistente -->
+    <Navbar transition:persist class:list={['', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}></Navbar>
+
+    <!-- Banner superior opcional -->
+    <slot name="banner-header" />
+
+    <!-- mx-auto py-6 space-y-10 max-w-6xl   -- MAIN DEFAULT CLASS -->
+    <main class:list={['', widthClass, mainClass]}>
+      <!-- Contenido principal por defecto -->
+      <slot />
+    </main>
+
+    <!-- Banner inferior / CTA opcional -->
+    <slot name="banner-footer" />
+
+    <!-- Footer global -->
+    <Footer class:list={['', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}> </Footer>
+
+    <!--
+    <script>
+      import { resetModals } from '@shared/scripts/utils/modal';
+
+      // Limpia el estado global antes de que Astro cambie de página.
+      document.addEventListener('astro:before-swap', resetModals);
+    </script>
+  -->
+    <script>
+      import { initTranslations, applyTranslations, } from '@shared/scripts/navbar/translations';
+
+      import { initReveal } from '@shared/scripts/utils/reveal';
+
+      // 1. Initial load: fetch from JSON + apply.
+      initTranslations();
+
+      // Reveal-on-scroll: el observer es único y se reutiliza.
+      // En cada navegación SPA se observan los [data-reveal] nuevos.
+      // Wait 200ms before revealing with anims by observer.
+      initReveal({ once: true });
+
+      // 2. After each SPA navigation: simply re-apply.
+      let firstLoad = true;
+
+      // FUNCTION TO LOAD EVERY SPA PAGE
+      async function boot() {
+
+        //! DONT CHANGES THIS ORDER
+        if (firstLoad) {
+          firstLoad = false;
+          return;       // initTranslations already handled it
+        }
+
+        applyTranslations();
+
+        // Reveal-on-scroll: el observer es único y se reutiliza.
+        // En cada navegación SPA se observan los [data-reveal] nuevos.
+        // Wait 200ms before revealing with anims by observer.
+        await new Promise((resolve) => setTimeout(resolve, 200));
+        initReveal({ once: true });
+      }
+
+      document.addEventListener('astro:page-load', boot);
+
+    </script>
+  </body>
+</html>  

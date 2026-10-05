@@ -17,20 +17,25 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Archivos temporales
 *.tmp
 *.temp
 *.bak
 
-# Build outputs (si los tienes)
+# Build outputs 
 dist/
 build/
 
-# mis folders
-dsi/
-proofs/
+# generated types
+.astro/
 
-package-lock.json
-package.json
-server.js
+# environment variables
+.env
+.env.production
+
+# My folders
+proofs/

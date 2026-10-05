@@ -1,0 +1,269 @@
+---
+import 'swiper/css';
+import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import Section from '@shared/components/Section.astro'
+import CardSection from '@shared/components/CardSection.astro'
+
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { getOrderedTechs } from '@/shared/data/tech_stack';
+import { getNavHref, SOCIAL_LINKS } from '@/shared/data/links';
+
+
+
+// Define page metadata
+const title = "Software Engineer · Callamullo Lucas";
+---
+
+<BaseLayout title={title} mainWidth="full">
+
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} id="whoami">
+
+    <!-- + MAIN DIV CONTAINER -->
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full",
+      WIDTH_CLASSES.md
+    ]}>
+      <div class="flex gap-1">
+        <span class="font_console tracking-wide text-3xl text-console">$</span>
+        <span class="font_console tracking-widest text-3xl font-bold text-accent">whoami</span>
+      </div>
+
+      <!-- + TEXT TO USE ON TYPEWRITER.ts -->
+      <h1 class="font_console text-center tracking-wider text-5xl md:text-6xl mt-5 md:mt-8 typewriter-cursor-fast font-medium" 
+        data-typewriter data-i18n={I18N.home.title}>Lucas Callamullo
+      </h1>
+      <h2 class="font_console tracking-wider text-3xl md:text-4xl mt-4 md:mt-7 text-accent font-medium" data-i18n={I18N.home.subtitle}>
+        Software Engineer
+      </h2>
+      <span class="font_console mt-7 text-base md:text-lg" data-fade-1 data-i18n={I18N.home.spanOne}>
+        Hi, I'm Lucas, you can see my projects and my skills on this page,
+      </span>
+      <span class="font_console mt-2 text-base md:text-lg" data-fade-2 data-i18n={I18N.home.spanTwo}>
+        I'm mainly interested in backend development
+      </span>
+      
+      <!-- + MAIN BUTTONS HOMEEE -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-7 mt-8" data-fade-3>
+
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
+          btn_notched btn_notched_surface_900" href={getNavHref('projects')}>
+          <Icon name="ri:code-s-slash-line" class="text-xl text-accent"></Icon>
+          <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.projects}>
+            View Projects
+          </span>
+        </a>
+
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
+          btn_notched btn_notched_surface_900" data-i18n={I18N.links.cv.href}
+          data-altText={I18N.links.cv.altText}
+          data-cv="true"
+          target="_blank"
+          download={SOCIAL_LINKS.cv.altText}
+          href={SOCIAL_LINKS.cv.href}>
+            <Icon name="ri:file-pdf-2-line" class="text-xl text-accent"></Icon>
+            <span class="font_console tracking-wider truncate text-lg" 
+              data-i18n={I18N.home.btn.downloadCv}>
+              Download CV
+            </span>
+        </a>
+
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
+          btn_notched btn_notched_surface_900" href={getNavHref('contact')}>
+          <Icon name="ri:send-plane-fill" class="text-xl text-accent"></Icon>
+          <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.contact}>
+            Contact
+          </span>
+        </a>
+      </div>
+    </div>
+  </Section>
+
+   <!-- ABOUT SECTION ON HOME  -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full py-7",
+      WIDTH_CLASSES.md
+    ]}>
+
+      <CardSection hover={true} bordered={true} 
+        class="bg-surface-900 max-w-3xl w-full cont_animate__from_left_lg" data-reveal data-multi-anim>
+
+        <h3 class="font_console text-xl tracking-wider flex gap-2 items-center justify-center">
+          <span class="text-accent">$</span>
+          <span class="text-accent">cat</span>
+          <span data-i18n={I18N.home.about.about_txt}>about.txt</span>
+          <span class="text-accent"> | head</span>
+          <span class="blinking_underscore font-medium">_</span>
+        </h3>
+
+        <p class="font_console text-lg tracking-wider mt-2">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.about.about_p1_1}>Hi, I'm Lucas. </span>
+          <span class="text-console" data-i18n={I18N.home.about.about_p1_2}>Backend / Full-Stack Software Engineer </span>
+          <span data-i18n={I18N.home.about.about_p1_3}>based in Córdoba, Argentina.</span>
+        </p>
+
+        <p class="font_console text-lg tracking-wider mt-1">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.about.about_p2_1}>Currently finishing 4th year of </span>
+          <span class="text-console" data-i18n={I18N.home.about.about_p2_2}>Systems Engineering </span>
+          <span data-i18n={I18N.home.about.about_p2_3}>at UTN.</span>
+        </p>
+ 
+        <p class="font_console text-lg tracking-wider mt-1">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.about.about_p3_1}>
+            I enjoy building things that work, teaching what I learn, and improving bit by bit.
+          </span>
+        </p>
+
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 mt-4 self-center
+          btn_notched btn_notched_surface_900 font_console text-lg group font-bold" 
+          href={getNavHref('about')}
+        >
+          <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
+          <span class="text-console truncate tracking-wider font-bold" data-i18n={I18N.home.about.about_txt}>
+            about
+          </span>
+          <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
+        </a>
+      </CardSection>
+
+    </div>
+  </Section>
+
+
+  <!-- Sección de Tecnologías / Skills  -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full py-7 gap-5",
+      WIDTH_CLASSES.md
+    ]}>
+
+      <div class="flex flex-col gap-5 text-center justify-center cont_animate__from_left_lg"
+        data-reveal data-multi-anim
+      >
+        <h3 class="text-console text-3xl font_console tracking-wider " 
+          data-i18n={I18N.home.skills.title} >
+          Featured Technologies
+        </h3>
+        <span class="text-lg font_console tracking-wider" data-i18n={I18N.home.skills.subtitle}>
+          My daily stack for backend development, databases, and deployment.
+        </span>
+      </div>
+
+      <!-- + SWIPER CONTAINER -->
+      <div class="swiper skillsSwiper">
+        <div class="swiper-wrapper py-4 overflow-visible">
+          {getOrderedTechs().map((tech) => {
+            return (
+              <div class="swiper-slide tech_group bg-surface-800 rounded-xl cont_border_effect">
+                <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center place-self-center mb-4" />
+                <span class="font_console">{tech.name}</span>
+
+                {/* <!-- Effects absolute --> */}
+                <span class="cont_border__anim_effect border-console rounded-xl border-2"></span>
+              </div>
+            );
+          })}
+        </div>
+      </div>  
+
+      <a class="flex hover-up items-center justify-center h-10 px-4 py-5 mt-2 self-center
+        btn_notched btn_notched_surface_900 font_console text-lg group" 
+        href={getNavHref('skills')}
+      >
+        <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
+        <span class="text-console truncate tracking-wider font-bold" data-i18n={I18N.home.skills.btn}>
+          skills
+        </span>
+        <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
+        <!--  
+        <span class="group-hover:text-console text-xl truncate font_console tracking-wider" 
+          data-i18n={I18N.home.skills.btn}>
+          View all skills
+        </span> 
+        <Icon name="ri:external-link-line" class="text-xl" ></Icon>
+        -->
+      </a>
+
+    </div>
+  </Section> 
+
+
+  <!--  CONTACT Y GITHUB SECTION   -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full py-7",
+      WIDTH_CLASSES.md
+    ]}>
+
+      <CardSection class="bg-surface-900 max-w-3xl w-full cont_animate__from_right"
+        hover={true} bordered={true} data-reveal data-multi-anim >
+
+        <h3 class="font_console tracking-wider text-2xl text-console" data-i18n={I18N.home.contact.title}>
+          Let's build something that works.
+        </h3>
+
+        <p class="font_console text-lg mt-2">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.contact.span1}>
+            Backend development, REST APIs, and clean architectures. 
+          </span>
+        </p>
+
+        <p class="font_console text-lg mt-1">
+          <span class="text-console">&gt; </span>
+          <span data-i18n={I18N.home.contact.span2}>
+            Happy to talk about code, learning, and projects that solve real problems.
+          </span>
+        </p>
+
+        <!-- Buttons ref -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full mt-4">
+
+          <a class="flex hover-up items-center justify-center h-10 px-4 py-5 self-center
+            btn_notched btn_notched_surface_900 font_console text-lg group" 
+            href={getNavHref('contact')}
+          >
+            <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
+            <span class="text-console truncate tracking-wider font-bold" 
+              data-i18n={I18N.home.contact.btn}>contact</span>
+            <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
+          </a>
+
+          <a class="flex hover-up items-center justify-center h-10 px-4 py-5 self-center gap-2
+            btn_notched btn_notched_surface_900 font_console text-lg group" 
+            href={getNavHref('github')} target="_blank"
+          >
+            <span class="text-content-muted truncate group-hover:text-accent font-bold">$ open</span>
+            <span class="text-console truncate tracking-wider font-bold">GitHub</span>
+            <Icon name="ri:github-line" class="h-6 w-6 group-hover:text-console-400" />
+          </a>
+
+        </div>
+
+      </CardSection>
+    </div>
+  </Section>
+
+
+  <script>
+    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
+    import { initSkillsSwiper } from '@/home/scripts/utils/swiper';
+
+    function boot() {
+      // this events call init typewriter methods, only need the right selectors
+      setEventTypewriter({
+        container: '#whoami',
+        title: '[data-typewriter]',
+        elementsToFade: ['[data-fade-1]', '[data-fade-2]', '[data-fade-3]'],
+      });
+
+      initSkillsSwiper();
+    }
+
+    document.addEventListener('astro:page-load', boot);
+  </script>
+</BaseLayout>

@@ -1,132 +1,491 @@
 {
-    "nav.home": "Home",
-    "nav.about": "About",
-    "nav.skills": "Skills",
-    "nav.projects": "Projects",
-    "nav.contact": "Contact",
-    "hero.prefix": ">",
-    "hero.name": "Lucas.dev",
-    "prompt": "$",
-    "whoami": "whoami",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "languageEN": "EN English",
+    "languageES": "ES Spanish",
+    "mobile": {
+      "themeLabel": "Select Theme:",
+      "langLabel": "Languages:",
+      "langES": "ES",
+      "langEN": "EN"
+    }
+  }, 
+
+  "links": {
+    "github": "GitHub",
+    "other_github": "Go GitHub",
+    "linkedin": "LinkedIn",
+    "other_linkedin": "Go LinkedIn",
+    "email": "Email",
+    "other_email": "Go Email",
+    "utn": "UTN",
+    "cv": {
+      "href": "./CV/LucasCallamullo_Software_Resume.pdf",    
+      "altText": "LucasCallamullo_Software_Resume.pdf"
+    },
+    "cv_contact": {
+      "cv": "Resume.pdf",    
+      "other_cv": "Download!",
+      "href": "./CV/LucasCallamullo_Software_Resume.pdf"
+    }
+  },
+
+
+  "footer": {
+    "downloadLabel": "./download_resume.sh",
+    "resume": "Backend Developer building scalable APIs with Python & Java. PostgreSQL, Docker, and cloud deployments.",
+    "build": "build with:"
+  },
+
+
+  "home": {
     "title": "Lucas Callamullo",
     "subtitle": "Software Engineer",
-    "description.line1": "Hi, I'm Lucas, you can see my projects and my skills on this page,",
-    "description.line2": "I'm mainly interested in backend development",
-    "button.projects": "View Projects",
-    "button.cv": "Download CV",
-    "button.contact": "Contact",
-    "footer.resume": "Backend Developer building scalable APIs with Python & Java. PostgreSQL, Docker, and cloud deployments.",
-    "footer.href_download": "./CV/LucasCallamullo_Software_Resume.pdf",
-    "footer.download_file": "LucasCallamullo_Software_Resume.pdf",
-    "footer.download": "./download_resume.sh",
-
-    "home.skills.title": "Featured Technologies", 
-    "home.skills.subtitle": "My daily stack for backend development, databases, and deployment.",
-    "home.skills.button": "View all skills",
-
-    "home": {
-        "about_txt": "about.txt",
-        "about_p1": "Hi, I'm Lucas.",
-        "about_p2": " based in Córdoba, Argentina.",
-        "about_p3": "Currently finishing 4th year of",
-        "about_p4": "Systems Engineering at UTN.",
-        "about_p5": "I enjoy building things that work, teaching what I learn, and improving bit by bit.",
-
-        "contact_p1": "Let's build something that works.",
-        "contact_p2": "Backend development, REST APIs, and clean architectures.",
-        "contact_p3": "Happy to talk about code, learning, and projects that solve real problems.",
-        "contact_btn": "Contact"
+    "spanOne": "Hi, I'm Lucas, you can see my projects and my skills on this page,",
+    "spanTwo": "I'm mainly interested in backend development",
+    "btn": {
+      "projects": "View Projects",
+      "contact": "Contact",
+      "downloadCv": "Download CV"
     },
-
-    
-    "skills": {
-        "featured": "Featured Technologies",
-        "subFeatured": "Tooling and stacks I have worked with",
-        "exploring": "Exploring technical expertise",
-        "languages": "Languages",
-        "backend": "Back-End",
-        "frontend": "Front-End",
-        "databases": "Databases",
-        "containers": "Containers & Reverse Proxies",
-        "devops": "DevOps & Automation",
-        "testing": "Testing & Docs"
-    },
-
-    "contact": {
-        "ping": "    ping contact.server",
-        "establishing": "Establishing connection to communication endpoint",
-        "title": "Contact Me",
-        "name_label": "Name:",
-        "email_label": "Email:",
-        "message_label": "Message:",
-        "send_button": "Send",
-        "availability_title": "Availability Status",
-        "open_to_opportunities": "Open to opportunities",
-        "response_time": "Response time: Within 24 hours",
-        "timezone": "ART (UTC-3)",
-        "location": "Córdoba, Argentine",
-        "connect_title": "Connect With Me",
-        "github_tag": "Go GitHub",
-        "github_text": "Git Hub",
-        "linkedin_tag": "Go Linkedin",
-        "linkedin_text": "Linkedin",
-        "email_tag": "Send Me Email!",
-        "email_text": "Email",
-        "copy_tag": "Copy Email!",
-        "copy_text": "Email",
-        "echo": "$ echo",
-        "thanks_message": "\"Thanks for stopping by\"",
-        "chat_invite": "If you want to chat, my emails are always open!",
-        "faster_response": "I'll answer faster if you contact via email.",
-        "connection_message": "Connection established. Awaiting your message... :D",
-        "connection_message_mobile": "Connection established. Awaiting your message... :D",
-        "email_success": "Message sent successfully!",
-        "email_error": "Something went wrong. Please try again.",
-        "email_thanks_success": "Thank u!"
-    },
-
     "about": {
-        "ping": "    cat about.txt",
-        "establishing": "Displaying professional background",
-        
-        "p_1": "Hi! I'm Lucas Callamullo, a backend / full stack developer based in Córdoba, Argentina.",
-        "p_2": "I've been fascinated by programming logic ever since I started modifying game mods. I probably spend more time than I should coding some idea.",
-        "p_3": "Over the last 3 years, I built my own RoadMap — a self-taught Full-Stack journey focused on building real-world applications from scratch. Alongside that, I'm currently in my fourth year of Systems Engineering at UTN.",
-        "p_4": "Teaching was one of the experiences I enjoyed the most. What I loved about this RoadMap was teaching programming (Algorithms and Paradigms) for university courses over 2 years. It taught me how to break down complex ideas into plain language and introduced me to amazing people who are now friends.",
-        "p_5": "My technical experience covers ",
-        "p_6": "To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. I love that code is our medium to turn any idea into reality.",
+      "about_txt": "about",
+      "about_p1_1": "Hi, I'm Lucas. ",
+      "about_p1_2": "Backend / Full-Stack Software Engineer ",
+      "about_p1_3": "based in Córdoba, Argentina.",
 
-        "stats_1": "Projects: ",
-        "stats_2": "4+ Completed",
-        "stats_3": "DevOps: ",
-        "stats_4": "Currently: ",
-        "stats_5": "4th year Systems Eng.",
-        "stats_6": "Location: ",
-        "stats_7": "University: ",
+      "about_p2_1": "Currently finishing 4th year of ",
+      "about_p2_2": "Systems Engineering ",
+      "about_p2_3": "at UTN.",
 
-        "timeline": "Career Timeline",
-        "sub_timeline": "From university assignments to robust systems with professional architecture"
+      "about_p3_1": "I enjoy building things that work, teaching what I learn, and improving bit by bit."
+    },
+    "skills": {
+      "title": "Featured Technologies",
+      "subtitle": "My daily stack for backend & frontend development, databases, and deployment.",
+      "btn": "skills"
+    },
+    "contact": {
+      "title": "Let's build something that works.",
+      "span1": "Backend & Frontend Development, REST APIs and Clean Architectures.",
+      "span2": "Happy to talk about code, learning, and projects that solve real problems.",
+      "btn": "contact"
+    }
+  },
+
+
+  "about": {
+    "title": "cat about.txt",
+    "subtitle": "Displaying professional background.",
+    "bio": {
+      "p1": "Hi! I'm Lucas Callamullo, a Backend / Full stack developer based in Córdoba, Argentina.",
+      "p2": "I've been fascinated by programming logic ever since I started modifying game mods. I probably spend more time than I should coding some idea.",
+      "p3": "Over the last 3 years, I built my own RoadMap — a self-taught Full-Stack journey focused on building real-world applications from scratch. Alongside that, I'm currently in my fourth year of Systems Engineering at UTN.",
+      "p4": "Teaching was one of the experiences I enjoyed the most. What I loved about this RoadMap was teaching programming (Algorithms and Paradigms) for university courses over 2 years. It taught me how to break down complex ideas into plain language and introduced me to amazing people who are now friends.",
+      "p5": "My technical experience covers",
+      "p6": "To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. I love that code is our medium to turn any idea into reality."
+    },
+    
+    "stats": {
+      "title": "stats.txt",
+      "projectLabel": "Projects:",
+      "projectTotal": "4+ Completed",
+      "currentLabel": "Currently:",
+      "currentTotal": "Systems Eng. — 4th year",
+      "universityLabel": "University:",
+      "residenceLabel": "Location:"
     },
 
-    "external": {
-        "code": "Code",
-        "external": "External",
-        "youtube": "YouTube",
-        "github": "View on GitHub",
-        "youtube_playlist": "YouTube Playlist",
-        "youtube_channel": "YouTube Channel",
-        "university": "University Page"
+    "timeline": {
+      "title": "'Career Timeline'",
+      "subtitle": "Where it all started, and where it led me."
     },
+
+    "milestone": {
+      "title": "milestones.log",
+      "subtitle": "A brief summary of my entire journey—a step-by-step chronicle.",
+      "stepSpan": "Step: "
+    }
+  },
+
+
+  "skills": {
+    "title": "ls -la skills/",
+    "subtitle": "Exploring technical expertise.",
+
+    "languages": "Languages",
+    "backend": "Back-End",
+    "frontend": "Front-End",
+    "databases": "Databases",
+    "proxies": "Containers & Reverse Proxies",
+    "devops": "DevOps & Automation",
+    "testing": "Testing & Docs",
+
+    "main": {
+      "subtitle": "Where I have the most hands-on experience."
+    },
+    "carousel": {
+      "title": "'My Main Stack Carousel'",
+      "subtitle": "The technologies I use daily, on rotation."
+    },
+    "all": {
+      "title": "all-techs/",
+      "subtitle": "Everything I've used across projects."
+    }
+  },
+
+
+  "projectsPage": {
+    "title": "ls -la projects/",
+    "subtitle": "A selection of projects built end-to-end.",
 
     "projects": {
-        "ping": "    docker ps -a/",
-        "exploring": "Listing deployed projects and applications",
-        "featured": "Featured Projects",
-        "subFeatured": "Documented repositories and demos deployed on a VPS",
-        "move_title": "More on GitHub",
-        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
-        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
-        "move_btn": "Get In Touch"
+      "title": "'Featured Projects'",
+      "subtitle": "The projects I'm most proud of.",
+      "details": "More details"
+    },
+
+    "touch": {
+      "title": "More on GitHub",
+      "p1": "You'll find most of my work on GitHub.",
+      "p2": "Beyond what's featured here: experiments, dotfiles and side projects.",
+      "btn": "Get In Touch"
     }
- 
+  },
+
+
+  "contact": {
+    "title": "ping contact.server",
+    "subtitle": "Establishing connection to communication endpoint",
+    "form": {
+      "title": "'Contact Me'",
+      "name": "Your Name:",
+      "email": "Email:",
+      "message": "Message:",
+      "btn": "Send"
+    },
+    "extra": {
+      "title": "'Availability Status'",
+      "subtitle": "Open to opportunities.",
+      "span1": "Response time: Within 24 hours",
+      "span2": "ART (UTC-3)",
+      "title2": "'Connect With Me'",
+      "copy_email": "Copy Email"
+    },
+    "end": {
+      "title": "\"Thanks for stopping by\"",
+      "span1": "If you want to chat, my emails are always open!",
+      "span2": "I'll answer faster if you contact via email.",
+      "span3": "Connection established. Awaiting your message... :D"
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+  "projects": {
+    "links": {
+      "youtube": {
+        "label": "My channel YT",
+        "altText": "Check out my YouTube channel."
+      },
+      "github": {
+        "label": "View code",
+        "altText": "GitHub Repository."
+      },
+      "university": {
+        "label": "My university",
+        "altText": "National Technological University - FRC"
+      }
+    },
+
+
+    "fleet_optimizer": {
+      "title": "Fleet Optimizer · Microservices Spring Boot",
+      "milestone": "Technical maturity in microservices, SOLID, Java & Spring Boot and React",
+      "timeline": {
+        "summary": [
+          "This project puts more emphasis on transactions between different microservices and databases, plus the connection of a frontend that lets users perform actions on the API through Nginx.",
+          "I used a Layered architecture and multi-stage Docker Compose deploy: 6 microservices, 1 frontend and 3 databases.",
+          "Nginx as the single entry point, gateway centralizing header propagation and rate-limiting.",
+          "The auth microservice handles centralized authentication with Auth0 and token validation."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Project for managing fleets and packages transported from an origin to a destination, keeping track of routes, package statuses and each fleet's capacity.",
+          "I designed a microservices architecture with Java 17 and Spring Boot (auth, routes, packages, fleets, geocoding and gateway), each with its own PostgreSQL when applicable.",
+          "I implemented an API Gateway with JWT validation and user context propagation. I centralized authentication with Auth0 (OAuth 2.0 / OIDC).",
+          "Unit and integration tests with JUnit 5 and Mockito, covering all services and controllers with their success cases, errors and business rules.",
+          "I built the frontend in React, TypeScript and Tailwind CSS, with JWT session handling and gateway consumption through Nginx."
+        ],
+        "description": [
+          "This project was born partly from the backend assignment, which had some similarities although it wasn't the same focus. So I wanted to explore a domain that would eventually connect with my e-commerce engine — a separate project to abstract all the package, fleet and shipping management, and above all a generic way to connect through `ms-packages`, which is basically a generic representation of product(s). And obviously to reinforce my handling and concepts around the Java and Spring Boot stack.",
+          "Implementing the different microservices this time was much faster and simpler compared to last time, thanks to the overall experience from other projects. I think that's a good thing about prior project experience — although still always trying to follow best practices and SOLID principles in my code.",
+          "Speaking of SOLID: beyond always trying to use it in my projects, I almost never really get the full benefit out of it, beyond interfaces for testing or mocking certain classes. But in this project something particular happened, because although I now use Auth0 as the external auth server, it wasn't always that way.",
+          "At first, the university had a server running an open Keycloak instance available to everyone, which let you do your whole authentication process with its credentials. At that point, I had already created `AuthService` as an interface and `KeycloakService` as the implementation, to follow the Dependency Inversion principle of SOLID — those principles I always try to apply but never fully see the point of, since I build my own projects and there aren't many situations forcing me to swap a DB or something like that.",
+          "Then it happened: the university decommissioned the Keycloak server and I was left without authentication. I was forced by an external factor to decide: local JWT? Keycloak in my Docker? Find some Auth0-like service on the internet? Weighing the pros of each, I went with the last one, since the idea was to show communication between different microservices, plus when I deploy this on a VPS, Auth0's free tier is cheaper than the RAM Keycloak consumes in Docker.",
+          "But because of this external situation, I had to read all of Auth0's documentation and implement it in my `ms-auth` — just replacing the old implementation with the new one and done. Project working again, without affecting any of the other microservices, and practically only touching 3 or 4 small files due to the obvious specifics of the new implementation. That's when I finally understood why these good practices aren't just good practices: as the project grows, this clean separation of tasks through SOLID principles makes everything easier.",
+          "Another challenge was to further solidify my use of React, TypeScript and Tailwind, mostly focused on the enterprise stack, but really to fully understand the separation of responsibilities on the frontend. As I said before, concepts — at least for me — really sink in once I apply them, not so much if I just read them and never use them.",
+          "I think what I like most about projects like this is being able to dig deeper into Docker Compose for spinning up multi-stage Dockerfiles, learning more about each one. Now I saw that I could, in each Java microservice's Dockerfile, declare a Maven image during the build stage to compile the project inside Docker, and have that image discarded afterwards during execution.",
+          "Using Nginx to serve static files, delegating frontend weight to the client without any backend-for-frontend, just serving statics directly to the client, with React consuming the API through Nginx.",
+          "Being able to use JUnit 5 and Mockito more in depth for unit and integration tests across all services and controllers, anticipating edge cases, optimizing JPQL queries by forcing lazy loading and only doing joins when appropriate.",
+          "Orchestrating communication between microservices again, I feel, is one of the best ways to keep adding layers of abstraction on projects that are this complex. Although I still have pending to see how to practice more async microservices with events, research publish-subscribe patterns and so on, which I keep learning at university.",
+          "I feel I see more and more value in the general gateway and centralizing different concepts that should be abstract for my microservices in general: for example, authentication, signature verification, rate limiting, fallbacks and other concepts I'll keep applying.",
+          "I like being able to keep configuring more Docker Compose, Dockerfiles and even Nginx to keep learning how they're used. I think it's a way to really complete the full-stack profile; the only thing missing is finishing the VPS deploy of the Docker setup to learn more about DevOps.",
+          "Honestly, in this project I felt very comfortable using Java and Spring Boot. I feel much more maturity compared to the backend assignment, which was a first impression of microservices. And now, between microservices and modular monoliths, I really feel comfortable with both, although I'll always defend modular monoliths to start any project.",
+          "And surely see how you scale with embedded architectures mixing monoliths with gateway, or abstracting only a module that really needs better horizontal or vertical scalability, leaving a core modular monolith and an isolated microservice that does need to scale."
+        ]
+      }
+    },
+
+
+    "university": {
+      "title": "Systems Engineering · UTN",
+      "milestone": "Formalizing knowledge",
+      "timeline": {
+        "summary": [
+          "I entered university, focused on improving my problem-solving skills through Software.",
+          "I'm currently an advanced student in the program (3rd year+)."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Currently studying Systems Engineering, on track to earn my degrees as a Systems Analyst, a Bachelor's in Cybersecurity and a Bachelor's in Artificial Intelligence."
+        ],
+        "description": [
+          "This would be a very long text about how everything started at university and why I decided to enroll after I got into programming."
+        ]
+      }
+    },
+
+
+   "ecommerce_dj": {
+      "title": "Modular E-commerce · Python & Django",
+      "milestone": "Deep technical work with Python, Django, vanilla CSS & JS, PostgreSQL and Redis optimizations",
+      "timeline": {
+        "summary": [
+          "One of the most complete projects I've built. I learned a lot beyond the technical side — how to take a full-stack app from start to finish.",
+          "I gained experience optimizing queries, using Redis for caching, writing PostgreSQL triggers and building multi-stage Docker deploys.",
+          "I understood ORMs deeply — their advantages and disadvantages — and how to run multiple app instances concurrently with Gunicorn."
+        ]
+      },
+      "project": {
+        "summary": [
+          "E-commerce engine in the style of Shopify. The idea was to build a highly replicable platform from different product CSVs, configurable by each store and its owner.",
+          "Modular monolith built with Python, Django and vanilla JavaScript, following Django's standard architecture adapted to a layered approach.",
+          "Payment gateway integration (Mercado Pago API), covering webhooks and unit and integration tests with pytest.",
+          "Query caching with Redis, search optimization with FTS and composite indexes in PostgreSQL.",
+          "Multi-stage Docker Compose deploy. Controlled concurrency: app replicas with Gunicorn and load balancing with Nginx."
+        ],
+        "description": [
+          "It wasn't my first Django project, but it was the first one where I wanted to go much deeper to learn and dig into a problem on my own. I already had background from other Django projects, so I tried to use the tools I had in early 2024 to keep growing the project.",
+          "The idea was basically: how hard is it to build an e-commerce that's scalable and adaptable, easy to integrate and replicate for any type of business, with a base and certain parameters to meet from the input CSV and/or the relations in my DB tables.",
+          "At first, the project had more of a standard Django architecture, which I kept evolving based on different patterns or structures I was thinking about or observing as the project scaled — and it stopped being a couple of CRUDs and became more than 10 modules with over 30 tables.",
+          "It made me laugh that, since this stage was more self-taught without formal structure, I kept creating utility classes where I wrapped business logic and reusable ORM queries. But combined with what I was learning at university, the architecture gradually shifted more toward Layered — structured by layers, following that pattern or refactoring modules to comply with it, so it'd be easier to read for anyone, not just for whoever used the Django standard.",
+          "I feel I have a lot of affection for Python and Django, since it was the first framework and language I learned in a way where I understood what was happening underneath. But over time and with other languages, I realized many limitations Django had, plus a lot of ORM magic happening behind the scenes with Django and DRF.",
+          "But far from being a bad thing, since I loved the idea of optimizing Django, it led me to learn it more deeply. For example, really understanding lazy vs eager loading, avoiding N + 1, optimizing data queries without actually knowing raw SQL, building composite indexes and understanding their trade-offs.",
+          "The list goes on with PostgreSQL and search optimizations via FTS (Full Text Search), setting up a trigger that vectorized the normalized name for much more efficient searches in the PostgreSQL engine; caching redundant queries; using Redis over Django's memcached; the speed of Redis compared to Django's memcached.",
+          "Another example is DRF and its own queries. Sometimes using DRF's magic protections or serializers taught me that ORMs — unless you sit down and carefully test how many trips you made to the DB — make it hard to detect a trip you didn't declare yourself, but that the ORM does to validate some constraint.",
+          "I think the part of this project that I kept going for a long time, between free time, weekends, etc., was being able to keep learning from it. Integrating APIs like Mercado Pago forced me to research and learn to use tools like ngrok, which let me use the webhooks from Mercado Pago's sandbox.",
+          "In this project I also learned, above all, vanilla JavaScript and CSS in depth — variables, dark and light themes, custom CSS with atomic classes. Basically everything needed to extrapolate to any frontend framework I saw later: it became very simple thanks to all the foundations I built making the project's interfaces with Django Templates.",
+          "I learned to integrate into this project many things I was learning while taking courses — like Docker, multi-stage builds with Docker Compose, spinning up Django replicas with Gunicorn, and using a tool like Nginx as a load balancer and reverse proxy. I loved knowing I could optimize serving static files through Nginx instead of Django (which was slower), and reject heavy files. Even though it wasn't a gateway, Nginx gave my app an extra security layer I learned on my own.",
+          "The current state of this app is that it was deployed for a while on Railway, but I'll probably move it to a VPS to run live demos — why not, since it's a more-than-functional MVP ready to be sold. Although, because I started it long ago, I really know there was room for improvement in many decisions about my entities, tables, relations, folder structure and separation of responsibilities, which I kept polishing in other projects.",
+          "I believe, as I said in other projects, that you really learn to program by programming. And this — with the thousand ways of trying to optimize Django I kept searching for — made me learn more than any other ORM. When I touched Spring Boot or EF Core, they were ridiculously optimized in comparison, since for obvious reasons static languages helped those optimizations, which Python and Django with their limitations clearly couldn't match.",
+          "On a personal level, it helped me a lot to explore many aspects I never saw at university beyond a theoretical level, and turning them into code is something I love, because it's not just a concept floating in the air — it's a fact with a concept. And I feel that's the best way to learn a topic and make it your own as knowledge."
+        ]
+      }
+    },
+
+
+    "portfolio": {
+      "title": "My Portfolio · Astro, TS & Tailwind",
+      "milestone": "Frontend depth in TypeScript & Tailwind",
+      "timeline": {
+        "summary": [
+          "I set out to build my portfolio in Astro as practice to solidify TypeScript and Tailwind, and as an excuse to understand how a lightweight site works without React.",
+          "First experience deploying to GitHub Pages with a GitHub Action that builds and deploys on every push to main."
+        ]
+      },
+      "project": {
+        "summary": [
+          "My own portfolio built from scratch with Astro, ideal to avoid overloading visitors with JS.",
+          "Migrated from HTML, CSS and vanilla JS to TypeScript, Tailwind and Astro to improve overall performance, effects, and the final weight of JS and CSS files.",
+          "It's deployed on GitHub Pages with a GitHub Action that builds and deploys on every push to main."
+        ],
+        "description": [
+          "I always found the idea of having my own portfolio funny, but I had never started until one day I said: why not? To learn more about the holy trinity (HTML, CSS, JS), and also because I wasn't that much of a React fan. Being able to build a custom router from scratch, without React's overhead, I set it as a challenge, and it turned out to be a good first result — not the best structure, but functional.",
+          "Some might say: why reinvent the wheel? I'd simply say I wanted to learn the basics well, and this seemed like a project that would let me do that by focusing only on the frontend. Even though I already had quite a bit of vanilla experience, I simply wanted to do more with it, to build a portfolio I actually liked and that would let me create modules, effects and generic scripts to reuse in other projects.",
+          "I designed a custom i18n system (JSON fetch + applyTranslations) instead of using a library, to practice TypeScript along with dispatching events and capturing them from other scripts to run actions (for example, a typewriter effect that shows some titles letter by letter).",
+          "Even though it was working fine on GitHub Pages — since many interviews ask for a personal page — I started practicing more with the enterprise React stack. But to this I was adding TypeScript and Tailwind, and although with any LLM I can iterate more-than-presentable interfaces, I want to know more under the hood to be able to modify and customize according to requirements, not just something generic.",
+          "So, taking advantage of wanting to strengthen my TypeScript and Tailwind base, I said: why not migrate my portfolio to learn more and make it much more maintainable over time? Along with the migration, I also started exploring GitHub Actions a bit, and although it's not an exhaustive CI/CD process, it could count as my first steps with this tool.",
+          "That said, obviously, to avoid depending on React in a site that doesn't need it, I said: I don't want a heavy portfolio that makes no sense — at the end of the day, it's basically my own landing page. So I started researching, and one option that fit this was Astro as an SPA, which generates very lightweight static files and has a layout system that reminds me of Django Templates.",
+          "That's why I'm migrating and building my portfolio fully maintainable for the future, plus many more CSS effects, deeper Tailwind learning (not just basic utility classes, but autogenerated ones, groups, etc.), and more TypeScript knowledge around typing, interfaces and generics."
+        ]
+      }
+    },
+
+    "dds_tutor": {
+      "title": "Tutorials · JS/React",
+      "milestone": "Technical teaching on JavaScript and React",
+      "timeline": {
+        "summary": [
+          "Tutorial classes with hands-on practice in React, Express, Backend & Frontend communication, JWT and security.",
+          "I recorded these classes as help for my university classmates, in the Software Development course."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Guided classes on Software Development and building end-to-end web apps, connecting DB, Backend and Frontend.",
+          "Backend tutorial with JS, Express, Sequelize and SQLite: using the ORM, middlewares, errorHandlers, JWT authentication and authorization, and Layered Architecture.",
+          "Frontend tutorial: HTML structure, CSS properties, DOM manipulation with JS. Using React with the most standard separation of hooks, clients, api, components, layouts, styles and Tailwind atomic classes."
+        ],
+        "description": [
+          "These recorded classes came out at some point as a form of protest. When I took the course, I had already seen almost all the topics in advance, so it was more of a review of several things. But it also happened that, well, Public University let's say, where the professors across all the chairs —according to many classmates— were pretty questionable.",
+          "I think that, added to wanting to give my YT channel some more love, led me to record around 15 classes, averaging one hour each. I presented the topics in a more graphical way, connecting a whole project that followed one idea, instead of improvising small exercises that never come together.",
+          "My idea was really to show the whole flow that happened across layered, ORMs and other things I was extrapolating from other backend frameworks like Django or Spring Boot.",
+          "But for my part, it also helped me finish studying and learning topics I had always kind of taken for granted, like JWT or middlewares and response interceptors, errors and so on. Recording the videos, plus study guides, really helped me finish understanding these concepts more deeply. Not as a word I once heard, but as a concept I could now explain at any moment.",
+          "Another thing I learned was finally letting go of my vanilla JavaScript, since I had to learn React for the course. To a large extent I realized how powerful a tool it is. But something I really like is that having practiced plain JS so much made the transition to React not confusing or hard at all —it was just doing declaratively things I was already doing imperatively, or trying to declare generic methods imperatively for the same result.",
+          "I realized that learning any frontend framework is, to a large extent, learning to structure responsibilities differently. It happened to me with Astro (which reminded me of Django Templates) and with React Native (which is almost identical to React, but changes with Expo).",
+          "In short, they were classes following that goal, showing the whole subject maybe in a more practical way. Although, well, in the end the midterm ended up being theoretical, which I still feel doesn't make sense: a programming course shouldn't be theoretical. You don't learn to program in theory, you learn in practice.",
+          "To me, you learn to program by programming. The theoretical framework obviously matters, but if you don't apply it, it's worth no more than an idea, not a fact."
+        ]
+      }
+    },
+
+
+    "backend_tp": {
+      "title": "Microservices · Java & Spring Boot",
+      "milestone": "Microservices & Docker Compose, first contact", 
+      "timeline": {
+        "summary": [
+          "My first contact with microservices, Docker Compose and Keycloak. Before this I had only worked with monolithic backends.",
+          "Teamwork (3 members). My role was to integrate the communication between microservices, configure Keycloak and build the multi-stage Docker Compose setup.",
+          "Without really aiming for it, I ended up being the team's technical reference: they came to me with questions about Spring, Docker and architecture."
+        ]
+      },
+      "project": {
+        "summary": [
+          "University Backend assignment: managing container transport requests from point A to point B.",
+          "Architecture of 3 microservices + API Gateway as the single entry point. Centralized authentication with local Keycloak, all spun up with a single `docker-compose up` using multi-stage builds.",
+          "My role: coordinating communication between microservices, ensuring synchronous transactions between them and correct persistence across databases. I also reviewed the base microservices my teammates built.",
+          "We integrated the Google Maps API to calculate distances and possible routes between origin and destination points."
+        ],
+        "description": [
+          "About this Backend project: I don't think it's my best code, but it's not the worst either. The result we got was pretty well organized, but above all I think we were missing a couple more projects applying the layered pattern as a group, so that the division of responsibilities across layers would have come out much cleaner. Still, it ended up fitting together well with some last-minute fixes.",
+          "I really enjoyed developing this project with teammates like Belén and Juan, with whom we managed to organize and coordinate our microservices, supervising or making improvements and comments among the three of us about how to define entity relationships, how many microservices to build, what other tables to create, and so on.",
+          "The technical level of the project, honestly, I think was above us at that point in the year, but we managed to finish it. And above all, I found it very interesting to have not just a theoretical view of microservices, but also a practical one of how they're applied. Although with this experience and others in other projects, I really wouldn't recommend it if the team is small. After all, it's basically what any software architecture book says: microservices are something very specific to certain organizations and certain levels of scalability.",
+          "But either way, I found it a very good and presentable project as an initial proof that I know Java, Spring Boot, Docker and Microservices — a lot of tools that helped me keep growing and learning.",
+          "This was also my entry point to using Docker in all my projects. Practically here I learned Docker, Docker Compose and Dockerfiles. And although I was already using Bash for many tasks (for example, automating Maven builds of my Java backend), this let me really understand concepts like networks, volumes and ports.",
+          "If I had to add anything else, it would be the amount of ill will I wish upon getting Keycloak to run locally. But in the end, solving it is part of the many problems that come up, and knowing how to solve them is what really cements the knowledge. In this case, it turns out that to sign a Keycloak token from the same Docker as your backend, you must not use either the internal network or localhost, because both break the signature and invalidate the token.",
+          "It turns out that signing a token from a different Docker, separate from your backend Docker, does accept localhost. However, from the same one — no matter how much you expose the port — it doesn't, and I'm still wondering why. But anyway, the important thing, if anyone reads this, is: Windows + R → powershell → ipconfig; find the IPv4 address, and that gives you your local IP, tied to your internet connection. You can sign the token with that IP, and now Keycloak will recognize the signature as valid.",
+          "It's funny, but over time you can apply this concept to so many things that I consider it one of the biggest learnings from this project. For example, the future me (2026) is using it in my Systems Analyst seminar project to test a Java backend API locally (modular monolith — and yes, we already established that starting with modular monoliths is always the best option). I just connect my React Native app to the Axios client using my internet's ipconfig, and I can run tests without having to open a port on ngrok or anything like that, simplifying the local testing process.",
+          "As a conclusion, I think all these projects we build — even if sometimes they're university assignments — can help gain experience that we extrapolate to other projects, and that's the best part. I'm fond of this one because, even though it could be more complete, it was also my start with microservices, Spring Boot and layered folders done this structured."
+        ]
+      }
+    },
+
+
+    "py_tutor": {
+      "title": "Programming Tutor · Algorithms & Backend",
+      "milestone": "Teaching and communication", 
+      "timeline": {
+        "summary": [
+          "My most rewarding experience in IT so far.",
+          "I tutored +150 students in Algorithms, Data Structures, OOP, Bash Scripts and Backend.",
+          "It helped me reinforce my knowledge of Python and Java."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Why did I start teaching? After my first year I wanted to start working in IT, but I realized Python alone wasn't enough. So already in first year I was helping many classmates with Algorithms in Python, and I said: why not offer private lessons at an affordable price?",
+          "Being an Algorithms tutor with Python was one of the things I enjoyed most, since I always tried to share my excitement and love for understanding how programs work imperatively — how they have a logical meaning and a why.",
+          "This job made me meet a lot of people, and made many others recognize me. One of the best experiences."
+        ],
+        "description": [
+          "To be fair, I didn't need a stable job, so I decided to take the risk and 'go on my own': I said, why not give private lessons? I enjoy it, it helps me keep practicing the foundations of Python, I can do it virtually — which I wasn't counting on — but it really let me meet a lot of people.",
+          "From the way I describe it, the job really sounds ideal for me, but it had its good sides (as mentioned) and also bad ones. For example, beyond the actual work of teaching, how it wears out your vocal cords, and above all the number of hours repeating the same exercises, problems and prompts, and how limiting a basic algorithms course could be.",
+          "Having to look for people, people who treated you badly just for sending them a message offering lessons because, well, it's a free country, I guess. The risk of exposing yourself, the number of banned numbers, the hours spent looking for people to build up a client base over the year. Still, beyond all that, as I said before, it was a very suitable job for continuing to study, learning more Python and above all learning how to break programming ideas down for people who weren't technical at all.",
+          "Despite everything I've said, I loved working in this. I spent almost 2 and a half years teaching, mostly Algorithms, but over time other subjects got added (Programming Paradigms, Backend of Applications) that I was either promoting or simply knew in advance, since I was studying and moving in parallel through many concepts that repeated across subjects.",
+          "Even so, at the end of summer '25 I 'hung up the tutor keyboard' after a year and a half, since repeating the same topics over and over was tiring, and I wanted to work in IT again. The good thing is that this let me publish and open a YouTube channel, uploading content or recorded lessons to keep helping people anyway, just like I was once helped when I started with game mods.",
+          "Paradoxically, life isn't what you expect, and even though now I actually was getting interviews (since I now knew Python, Django, DRF, JavaScript, HTML, CSS, Tailwind, PostgreSQL, Git), still for one reason or another it wasn't enough. After a couple of months of searching and starting another year at university, the YT channel that was meant to 'give away' lessons and keep helping ended up serving as advertising for me, added to the previous year's many recommendations, and I was able to tutor again for another year with less overall workload and less client hunting, which was the heaviest part.",
+          "With less work, more time to keep learning and to dedicate to university and my personal life, at the end of summer '26 I definitively decided to close this teaching chapter and focus on my Systems Analyst degree. Even so, the YT channel, without any advertising on my part, ended up being more or less an Algorithms bible for the first-year students, which makes me happy, because I really like sharing what I enjoy and giving back what I was once helped with when I started programming on the AlliedModders forums with Pawn.",
+          "By the way, I kept using the YT channel to show the programming subjects we cover at university, so overall it ends up being general knowledge that will stay for the university and for all future students who want to learn Algorithms, Backend, Frontend, Databases, Bash Scripts or Programming Paradigms. I feel it's a good way to record content on many programming-related topics, but tied to the formal and structured university framework, since practice and theory end up complementing each other extremely well.",
+          "Today I still update the YT channel every now and then with content from some subject, plus super complete guides for programming subjects that can be heavy when you go through the books. And also, as I said before, I kind of made my channel my own 'forum', where I'm always open to communication channels to help with any problem, doubt or issue. And again, it makes me laugh when people at university recognize me from the Backend, Development or Database videos — many classmates from third, fourth and fifth year who watched my videos explaining subjects or their midterms."
+        ]
+      }
+    },
+
+
+    "no_country": {
+      "title": "No Country · Food Recycling App",
+      "milestone": "First real team project with Django",
+      "timeline": {
+        "summary": [
+          "First collaborative work experience (4 members) with dailys, deadlines, Slack and MVP by sprints.",
+          "My role: Full-Stack, including deploying the app on Railway and coordinating the team.",
+          "Most of all, I developed the teamwork side with Git and GitHub: branches, pull requests, reviews."
+        ]
+      },
+      "project": {
+        "summary": [
+          "MVP requested by No Country: a web app that let restaurants, bakeries and greengrocers list their perishable products on sale for users, maximizing profits.",
+          "Since we all had little experience, the MVP was a modular monolith built with Django and SSR using Django Templates, JavaScript and Tailwind, on a PostgreSQL database configured on Railway.",
+          "My role was Full-Stack and team coordination: Django backend, Railway deploy, gunicorn setup and environment variables.",
+          "Part of my role was also to coordinate and review the commits my teammates made."
+        ],
+        "description": [
+          "This was an experience I found by chance while browsing forums, where they recommended joining the No Country initiative — an organization that pairs you up with other people who want to understand how working in a team actually works: dailys, feedback, project reviews, learning to work in groups and with imposed deadlines.",
+          "I particularly enjoyed it because I met teammates like Leyla, Fede and Nico, and together we managed to build a good team to carry the project forward.",
+          "The project was chosen by us as a group: a web app that let greengrocers, bakeries and restaurants put their perishable or soon-to-be-perishable products on sale, publish them so users interested in saving money would see the offer and go pick them up.",
+          "Basically, we found a solution to something that was already happening: many bakeries tend to put yesterday's pastries on sale or similar. The project really had a lot of potential, but we left it at an MVP because overall we didn't have the technical level to keep improving or refining it.",
+          "My experience was positive and I'd recommend anyone with knowledge of any backend, frontend or DevOps framework to sign up, since it lets you meet people, make contacts, work in groups, understand or manage agreements about what the back and front send to each other, and learn about other areas to adapt. For example, at first we were 10, but only 4 of us stayed past the first week.",
+          "Thanks to this project I learned a ton about Git and GitHub, reinforced my Django knowledge, learned to communicate with my teammates to reach agreements or define tasks, and improved my oral presentations, since we had to present the project in front of all the participants of that round."
+        ]
+      }
+    },
+
+
+    "pawn_cs": {
+      "title": "Game Modder · CS 1.6",
+      "milestone": "Self-taught origin",
+      "timeline": {
+        "summary": [
+          "My first scripts, used on online CS 1.6 servers.",
+          "It was my first contact with programming. I didn't understand much, but I loved creating plugins for the game.",
+          "Since the plugins were widely used, it let me get freelance clients to upgrade my PC."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Counter-Strike mods written in Pawn. One of my first freelance jobs.",
+          "It consisted of reading a base project of some SuperHero and Paintball game modes, and from there writing scripts on my own.",
+          "Since LLMs didn't really exist back then, I had to read a lot of example code and go through endless forums looking for answers."
+        ],
+        "description": [
+          "It was my first experience with programming, although I basically only knew If and Else lol. I guess the timing helped too — it was during lockdown, I had free time since I was only working, and since my computer back then could only run games like CS 1.6, I ended up getting more into the game and the mods I used to play as a kid.",
+          "So writing scripts and using a compiler, which for me back then was just a small program where I dropped the scripts and out came an .amxx plugin to use. What did help me or at least kept me entertained was searching for solutions in code, even though I barely knew any code, which made it harder to search for. But since I knew the game modes really well, I could tell exactly what each part of the code did from playing experience.",
+          "So it was really a whole reverse-engineering process — pulling information out of what a block of code did and reusing it somewhere else to just make the plugin the way I wanted, with effects I came up with or combined from other existing code.",
+          "I spent many hours reading and, above all, trial and error. But all that time at least paid off: it let me open my own server, keep it running with help from people, build a community in Argentina, and above all almost a worldwide community, since a lot of people seemed to have a soft spot and nostalgia for the SuperHero mode in CS 1.6. Through that community I met many people from Europe who, unlike LATAM in general, earn very well, and had no problem paying me to write custom plugins for their servers, since they couldn't play here because of ping.",
+          "So thanks to that I got to meet really cool people, find a common language in English, and offer a product — yeah, CS plugins, I never would have thought of it, but I loved it, because I loved programming those plugins, each one was literally a challenge. Later I found out that Pawn, which is a C-style language, isn't exactly one of the best languages to get into programming as a beginner, but it let me extrapolate so many things without realizing it that I'm grateful CS was written in Pawn.",
+          "I also think that if I hadn't gotten into programming this way, I never would have thought of learning so much about this topic or getting so interested in it.",
+          "Something that makes me laugh is how much you can learn with so little structure. Really, after enrolling in Systems Engineering and finishing my first year, with knowledge of Algorithms and Data Structures in Python, and extrapolating that knowledge to Pawn and looking back at the scripts I had written, it was like — who wrote this? They knew nothing. And the amount of things I was able to restructure and make much more maintainable was impressive, even though I still barely knew anything. At least now, besides If and Else, I knew what a for loop and arrays were, and with that I restructured the scripts.",
+          "With all this, I feel like it was the best way to start programming or get into the IT world. Today it's changed a lot, but in a way the point is still the same: the more projects, the more problems I try to solve, the more information I'll be able to extrapolate for the next project or to refactor previous ones."
+        ]
+      }
+    }
+
+  }
+
+
 }

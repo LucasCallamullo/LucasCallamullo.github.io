@@ -1,0 +1,132 @@
+{
+    "nav.home": "Home",
+    "nav.about": "About",
+    "nav.skills": "Skills",
+    "nav.projects": "Projects",
+    "nav.contact": "Contact",
+    "hero.prefix": ">",
+    "hero.name": "Lucas.dev",
+    "prompt": "$",
+    "whoami": "whoami",
+    "title": "Lucas Callamullo",
+    "subtitle": "Software Engineer",
+    "description.line1": "Hi, I'm Lucas, you can see my projects and my skills on this page,",
+    "description.line2": "I'm mainly interested in backend development",
+    "button.projects": "View Projects",
+    "button.cv": "Download CV",
+    "button.contact": "Contact",
+    "footer.resume": "Backend Developer building scalable APIs with Python & Java. PostgreSQL, Docker, and cloud deployments.",
+    "footer.href_download": "./CV/LucasCallamullo_Software_Resume.pdf",
+    "footer.download_file": "LucasCallamullo_Software_Resume.pdf",
+    "footer.download": "./download_resume.sh",
+
+    "home.skills.title": "Featured Technologies", 
+    "home.skills.subtitle": "My daily stack for backend development, databases, and deployment.",
+    "home.skills.button": "View all skills",
+
+    "home": {
+        "about_txt": "about.txt",
+        "about_p1": "Hi, I'm Lucas.",
+        "about_p2": " based in Córdoba, Argentina.",
+        "about_p3": "Currently finishing 4th year of",
+        "about_p4": "Systems Engineering at UTN.",
+        "about_p5": "I enjoy building things that work, teaching what I learn, and improving bit by bit.",
+
+        "contact_p1": "Let's build something that works.",
+        "contact_p2": "Backend development, REST APIs, and clean architectures.",
+        "contact_p3": "Happy to talk about code, learning, and projects that solve real problems.",
+        "contact_btn": "Contact"
+    },
+
+    
+    "skills": {
+        "featured": "Featured Technologies",
+        "subFeatured": "Tooling and stacks I have worked with",
+        "exploring": "Exploring technical expertise",
+        "languages": "Languages",
+        "backend": "Back-End",
+        "frontend": "Front-End",
+        "databases": "Databases",
+        "containers": "Containers & Reverse Proxies",
+        "devops": "DevOps & Automation",
+        "testing": "Testing & Docs"
+    },
+
+    "contact": {
+        "ping": "    ping contact.server",
+        "establishing": "Establishing connection to communication endpoint",
+        "title": "Contact Me",
+        "name_label": "Name:",
+        "email_label": "Email:",
+        "message_label": "Message:",
+        "send_button": "Send",
+        "availability_title": "Availability Status",
+        "open_to_opportunities": "Open to opportunities",
+        "response_time": "Response time: Within 24 hours",
+        "timezone": "ART (UTC-3)",
+        "location": "Córdoba, Argentine",
+        "connect_title": "Connect With Me",
+        "github_tag": "Go GitHub",
+        "github_text": "Git Hub",
+        "linkedin_tag": "Go Linkedin",
+        "linkedin_text": "Linkedin",
+        "email_tag": "Send Me Email!",
+        "email_text": "Email",
+        "copy_tag": "Copy Email!",
+        "copy_text": "Email",
+        "echo": "$ echo",
+        "thanks_message": "\"Thanks for stopping by\"",
+        "chat_invite": "If you want to chat, my emails are always open!",
+        "faster_response": "I'll answer faster if you contact via email.",
+        "connection_message": "Connection established. Awaiting your message... :D",
+        "connection_message_mobile": "Connection established. Awaiting your message... :D",
+        "email_success": "Message sent successfully!",
+        "email_error": "Something went wrong. Please try again.",
+        "email_thanks_success": "Thank u!"
+    },
+
+    "about": {
+        "ping": "    cat about.txt",
+        "establishing": "Displaying professional background",
+        
+        "p_1": "Hi! I'm Lucas Callamullo, a backend / full stack developer based in Córdoba, Argentina.",
+        "p_2": "I've been fascinated by programming logic ever since I started modifying game mods. I probably spend more time than I should coding some idea.",
+        "p_3": "Over the last 3 years, I built my own RoadMap — a self-taught Full-Stack journey focused on building real-world applications from scratch. Alongside that, I'm currently in my fourth year of Systems Engineering at UTN.",
+        "p_4": "Teaching was one of the experiences I enjoyed the most. What I loved about this RoadMap was teaching programming (Algorithms and Paradigms) for university courses over 2 years. It taught me how to break down complex ideas into plain language and introduced me to amazing people who are now friends.",
+        "p_5": "My technical experience covers ",
+        "p_6": "To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. I love that code is our medium to turn any idea into reality.",
+
+        "stats_1": "Projects: ",
+        "stats_2": "4+ Completed",
+        "stats_3": "DevOps: ",
+        "stats_4": "Currently: ",
+        "stats_5": "4th year Systems Eng.",
+        "stats_6": "Location: ",
+        "stats_7": "University: ",
+
+        "timeline": "Career Timeline",
+        "sub_timeline": "From university assignments to robust systems with professional architecture"
+    },
+
+    "external": {
+        "code": "Code",
+        "external": "External",
+        "youtube": "YouTube",
+        "github": "View on GitHub",
+        "youtube_playlist": "YouTube Playlist",
+        "youtube_channel": "YouTube Channel",
+        "university": "University Page"
+    },
+
+    "projects": {
+        "ping": "    docker ps -a/",
+        "exploring": "Listing deployed projects and applications",
+        "featured": "Featured Projects",
+        "subFeatured": "Documented repositories and demos deployed on a VPS",
+        "move_title": "More on GitHub",
+        "move_span_1": "Most of my progress on different projects (backend, frontend, Python, Java) is documented on my GitHub.",
+        "move_span_2": "Personal experiments, applications, and side projects are on GitHub.",
+        "move_btn": "Get In Touch"
+    }
+ 
+}

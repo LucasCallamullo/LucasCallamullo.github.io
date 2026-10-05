@@ -1,0 +1,357 @@
+---
+import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import Section from '@shared/components/Section.astro'
+import CardSection from '@shared/components/CardSection.astro'
+
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+
+import { getProjects, formatDateRange } from '@shared/data/projects';
+import { getTechs } from '@shared/data/tech_stack';
+import { getNavHref } from '@shared/data/links';
+
+// retrieve stack list to complete
+const frontend = getTechs(['typescript', 'react', 'tailwind', 'javascript']);
+const backend = getTechs(['java', 'springboot', 'csharp', 'dotnet']);
+const databases = getTechs(['postgresql', 'redis']);
+const devops = getTechs(['dockerCompose', 'nginx', 'linux', 'bash']);
+const mainTechs = getTechs(['java', 'springboot', 'junit', 'typescript', 'react', 'postgresql', 'docker', 'nginx']);
+
+interface TechRow {
+  label: string;
+  items: ReturnType<typeof getTechs>;
+}
+
+const techRows: TechRow[] = [
+  { label: 'Frontend:', items: frontend },
+  { label: 'Backend:',  items: backend },
+  { label: 'DB:',       items: databases },
+  { label: 'DevOps:',   items: devops },
+];
+
+// Ordenar los proyectos por fecha, ascendente.
+const timelineProjects = getProjects({ hasTimeline: true, sortBy: 'timeline', orderBy: 'asc' });
+const milestones = getProjects({ hasTimeline: true, sortBy: 'timeline', orderBy: 'desc' });
+
+// Define page metadata
+const title = "About · Callamullo Lucas · Software Engineer";
+---
+
+<BaseLayout title={title} mainWidth="full">
+
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} id='aboutMain' paddingY={false} justifyCenter={false}>
+    <!-- + MAIN DIV CONTAINER -->
+    <div class:list={[
+      'flex flex-col w-full', 
+      'gap-5 md:gap-6 px-3 md:px-5 py-10', 
+      WIDTH_CLASSES.md
+    ]}>
+      <h1 class="flex gap-3 font_console text-4xl">
+        <span class="text-accent">$</span>
+        <span class="typewriter-cursor-fast" data-typewriter 
+          data-i18n={I18N.about.title}>cat about.txt</span>
+      </h1>
+      <span class="text-content-muted text-lg" data-fade-1 data-i18n={I18N.about.subtitle}>
+        Displaying professional background.
+      </span>
+    </div>
+  </Section>
+
+
+  <!-- + Sección of RESUME BIO -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={[
+      'md:px-4 py-10 gap-6 md:gap-8 grid md:grid-cols-3 w-full', 
+      WIDTH_CLASSES.md
+    ]}>
+
+      <CardSection class="bg-surface-900 max-w-3xl md:col-span-2 gap-3 cont_animate__from_left_lg w-full" 
+        hover={false} bordered={true} data-reveal>
+
+        <h2 class="font_console text-2xl flex gap-2 border-b-2 pb-3 w-full border-content-muted">
+          <span class="text-accent">$</span>
+          <span class="text-console">cat</span>
+          <span>bio.txt</span>
+        </h2>
+
+        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p1} data-reveal>
+          Hi! I'm Lucas Callamullo, a Backend / Full stack developer based in Córdoba, Argentina.
+        </p>
+
+        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p2} data-reveal>
+          I've been fascinated by programming logic ever since I started modifying game mods. 
+          I probably spend more time than I should coding some idea.
+        </p>
+        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p3} data-reveal>
+          Over the last 3 years, I built my own RoadMap — a self-taught Full-Stack journey focused on building real-world 
+          applications from scratch. Alongside that, I'm currently in my fourth year of Systems Engineering at UTN.
+        </p>
+        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p4} data-reveal>
+          Teaching was one of the experiences I enjoyed the most. What I loved about this RoadMap was teaching programming 
+          (Algorithms and Paradigms) for university courses over 2 years. It taught me how to break down complex ideas into 
+          plain language and introduced me to amazing people who are now friends.
+        </p>
+
+        <p class="font_console text-base text-justify cont_animate__from_left" data-reveal> 
+          <span data-i18n={I18N.about.bio.p5}>My technical experience covers</span>
+          <b class="text-console bolder tracking-wider">&nbsp;e2e</b>
+          &nbsp;(<b class="text-main-500 tracking-wider">EndToEnd</b>) Apps: 
+        </p>
+
+        <!-- + RENDER GENERICS TECHS -->
+        {techRows.map(({ label, items }) => (
+          <p class="font_console text-base flex items-center justify-center ms-1 md:ms-6 flex-wrap cont_animate__from_left" 
+            data-reveal data-multi-anim>
+            <strong class="text-accent">{label}</strong>
+            {items.map((t, index) => (
+              <>
+                <Icon name={t.icon} class="ms-3" />
+                <span class="ms-2 truncate">{t.name}</span>
+                {index < items.length - 1 && <span class="ms-2 text-console">|</span>}
+              </>
+            ))}
+          </p>
+        ))}
+
+        <p class="font_console text-base text-justify mt-2 cont_animate__from_left" data-i18n={I18N.about.bio.p6} data-reveal>
+          To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. 
+          I love that code is our medium to turn any idea into reality.
+        </p>
+      </CardSection>
+
+      <!-- + QUICK STATS SECTION ---> 
+      <CardSection class="bg-surface-900 max-w-3xl h-min gap-3 p-2 md:p-4 w-full cont_animate__from_left" data-reveal
+        hover={false} bordered={true} paddingDef={false}>
+
+        <h3 class="flex gap-1 items-center justify-start font_console text-xl cont_animate__from_left" data-reveal>
+          <span class="text-accent">$</span>
+          <span class="text-console">cat</span>
+          <span data-i18n={I18N.about.stats.title}>stats.txt</span>
+        </h3>
+
+        <div class="grid grid-cols-[auto_1fr] w-full font_console text-base md:text-lg gap-x-2 gap-y-1.5">
+
+          <span class="text-content-muted cont_animate__from_left" data-i18n={I18N.about.stats.projectLabel} data-reveal>
+            Projects:</span>
+          <span class="text-right text-console cont_animate__from_left" data-i18n={I18N.about.stats.projectTotal} data-reveal>
+            4+ Completed</span>
+
+          <span class="text-content-muted cont_animate__from_left" data-i18n={I18N.about.stats.currentLabel} data-reveal>
+            Currently:</span>
+          <span class="text-right text-console cont_animate__from_left" data-i18n={I18N.about.stats.currentTotal} data-reveal>
+            Systems Eng. — 4th year</span>
+
+          <span class="text-content-muted cont_animate__from_left" data-i18n={I18N.about.stats.universityLabel} data-reveal>
+            University:</span>
+          <a class="text-right hover:text-main-500 w-min truncate place-self-end cont_animate__from_left" 
+            href={getNavHref('utn')} target="_blank" data-reveal> 
+            UTN · FRC</a>
+
+          <span class="text-content-muted cont_animate__from_left" data-i18n={I18N.about.stats.residenceLabel} data-reveal>
+            Location:</span>
+          <span class="text-right cont_animate__from_left" data-reveal>
+            Córdoba, Argentina</span>
+
+          <strong class="mt-3 col-span-2 flex flex-wrap w-full gap-1 items-center text-content-muted" data-reveal> 
+            Main Stack:
+          </strong>
+
+          <ul class="w-full col-span-2 gap-2 grid grid-cols-2">
+            {mainTechs.map((t, index) => (
+              <li
+                class:list={[
+                  'flex flex-wrap items-center gap-2 cont_animate__from_left',
+                  // Si es impar (segundo, cuarto, etc.), alinearlo a la derecha.
+                  index % 2 === 1 && 'place-self-end',
+                ]}
+                data-reveal data-multi-anim
+              >
+                <Icon name={t.icon} />
+                <span class="truncate text-accent">{t.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </CardSection>
+
+    </div>
+  </Section>
+
+
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={[
+      'md:px-4 py-5 w-full', 
+      WIDTH_CLASSES.md
+    ]}>
+
+      <!-- + TIMELINE --> 
+      <div class="flex flex-col align-center justify-center text-center gap-5 cont_animate__from_left" 
+        data-reveal data-multi-anim>
+
+        <h2 class="font_console text-3xl tracking-wider flex flex-wrap items-center justify-center gap-2">
+          <span class="text-accent">$</span>
+          <span class="text-content-main">cat</span>
+          <span class="text-console font-bold" data-i18n={I18N.about.timeline.title}>
+            'Career Timeline'
+          </span>
+        </h2>
+
+        <span class="text-lg text-content-muted font_console" data-i18n={I18N.about.timeline.subtitle}>
+          From university assignments to robust systems with professional architecture
+        </span>
+      </div>
+
+      <ul class="timeline_cont_line flex flex-col gap-4 md:gap-0.5 w-full mt-6" id="classicTimeline"> 
+        {timelineProjects.map((p, index) => (
+          <li class="timeline_cont__item">
+            <div data-reveal data-multi-anim
+              class:list={[
+                'w-full flex flex-col rounded-2xl py-3 px-4',
+                'bg-surface-900  border border-surface-200 hover-up-lg',
+                index % 2 === 0 ? 'timeline_animate__from_left' : 'timeline_animate__from_right',
+              ]}
+            >
+
+              <div
+                class:list={[
+                  'flex items-center justify-center gap-2 bg-surface-100 w-min',
+                  'truncate px-3 py-1 rounded-2xl',
+                  index % 2 === 0 ? 'self-start' : 'self-end',
+                ]}
+              >
+                <Icon name={p.timeline?.icon ?? 'ri:calendar-line'} class="h-4 w-4 text-console" />
+                <span class="text-sm font_console text-accent font-bold">{formatDateRange(p.date, 'en')}</span>
+              </div>
+
+              <h3 data-i18n={p.title}
+                class:list={[
+                  'gap-2 font_console text-xl tracking-wider text-console mt-4 mb-4',
+                  index % 2 === 0 ? 'self-start pl-2' : 'self-end pr-2',
+                ]}
+              >
+                Ecommerce Engine
+              </h3>
+
+              <p data-i18n={p.timeline?.summary} data-i18n-join="space"
+                class:list={[
+                  'gap-2 font_console text-base text-content-muted text-justify',
+                  index % 2 === 0 ? 'self-start pl-2' : 'self-end pr-2',
+                ]}
+              >
+                This is mi own complete project.
+              </p>
+
+              <div class:list={[
+                'flex gap-3 p-2 mt-2 flex-wrap',
+                index % 2 === 0 ? 'self-start pl-2' : 'self-end pr-2',
+              ]}>
+                {p.links.map((link) => (
+                  <a target={link.newTab ? '_blank' : undefined} href={link.href}
+                    class:list={[
+                      'flex hover-up-lg items-center justify-center btn_notched btn_notched_surface_900',
+                      'h-10 px-3 py-2 gap-2 group',
+                    ]}
+                  >
+                    <Icon name={link.icon} class="h-5.5 w-5.5" />
+                    <span data-i18n={link.i18n} class="font_console truncate tracking-wide">Link Label</span>
+                  </a>
+                ))}
+              </div>
+
+            </div>
+
+            <div class="timeline_cont__icon bg-console-400 h-10 w-10 border border-console-100
+              flex items-center justify-center">
+              <Icon name={p.timeline?.icon ?? 'ri:calendar-line'} class="h-5.5 w-5.5 text-white" />
+            </div>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </Section>
+
+  
+  <!-- + MILESTONES SECTION  -->
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={[
+      'md:px-4 py-7 w-full', 
+      WIDTH_CLASSES.md
+    ]}>
+
+      <div class="flex flex-col gap-4 timeline_animate__from_left items-center justify-center w-full flex-wrap" 
+        data-reveal data-multi-anim>
+        <h2 class="font_console text-3xl flex flex-wrap items-center gap-2 tracking-wider">
+          <span class="text-accent">$</span>
+          <span class="text-content-muted">cat</span>
+          <span class="text-console font-bold" data-i18n={I18N.about.milestone.title}>milestones.log</span>
+        </h2>
+        <span class="font_console text-base text-content-muted tracking-wider" data-i18n={I18N.about.milestone.subtitle}>
+          A brief summary of my entire journey—a step-by-step chronicle.
+        </span>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 md:px-10 py-6 w-full">
+        {milestones.map((p, index) => (
+          <div data-reveal data-multi-anim
+            class:list={[
+              'flex flex-col gap-1 p-3 rounded-xl transition-colors border group flex-wrap',
+              'bg-surface-900 border-surface-800 max-w-full',
+              'hover:bg-surface-200 hover:border-surface-900 hover-up-lg',
+              index % 2 === 0 ? 'timeline_animate__from_left' : 'timeline_animate__from_right',
+            ]}
+          >
+            {/* <!-- CARDS CONTENT --> */}
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+              <p class="font_console text-sm text-content-muted group-hover:text-content-main">
+                <span class="group-hover:text-console-100"
+                  data-i18n={I18N.about.milestone.stepSpan}>
+                  Step:
+                </span>
+                <span class="group-hover:text-console-100"> {index + 1}</span>
+                <span class=""> | {formatDateRange(p.date)}</span>
+              </p>
+              <span class="w-3 h-3 rounded-full bg-brand-green-100 shadow-brand-green-100 animate-pulse"></span>
+            </div>
+
+            <span class="font_console text-base text-console font-bold mt-2 wrap-break-word" 
+              data-i18n={p.title}>title</span>
+
+            <span class="font_console text-sm text-accent mt-1 wrap-break-word" 
+              data-i18n={p.milestone}>milestone description</span>
+
+            <div class="flex gap-3 mt-3 flex-wrap effect_grayscale">
+              {getTechs(p.coreTechs).map((tech) => (
+                <Icon
+                  name={tech.icon}
+                  class={
+                    `self-center place-self-center h-6 w-6
+                    ${tech.isOnlyLightTheme ? 'bg-white rounded-2xl p-0.5' : ''}`}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+  </Section>
+
+
+  <script>
+    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
+
+    async function boot() {
+      // this events call init typewriter methods, only need the right selectors
+      setEventTypewriter({
+        container: '#aboutMain',
+        title: '[data-typewriter]',
+        elementsToFade: ['[data-fade-1]'],
+      });
+    }
+
+    document.addEventListener('astro:page-load', boot);
+  </script>
+
+</BaseLayout>

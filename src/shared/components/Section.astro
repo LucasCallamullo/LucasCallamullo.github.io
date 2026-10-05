@@ -1,0 +1,65 @@
+---
+// src/shared/components/Section.astro
+
+/**
+ * Section
+ * -------
+ * Layout wrapper for page sections.
+ * Provides a consistent vertical rhythm and horizontal padding,
+ * plus optional width preset and background.
+ *
+ * @example
+ *   <Section id="whoami" class="surface-900">
+ *     <p>Content</p>
+ *   </Section>
+ */
+interface Props {
+  /** Optional DOM id (useful for anchors and JS hooks). */
+  id?: string;
+
+  /** Extra classes appended last — can override any default. */
+  class?: string;
+
+  paddingX?: boolean;
+
+  paddingY?: boolean;
+
+  justifyCenter?: boolean;
+
+  /** Any other HTML attribute (aria-*, data-*, etc.). */
+  [key: string]: unknown;
+}
+
+const {
+  id,
+  class: className = '',
+
+  paddingX = true,
+  paddingY = true,
+  justifyCenter = true,
+
+  ...rest
+} = Astro.props;
+
+---
+
+<section
+  id={id}
+  class:list={[
+    // Base layout (always applied)
+    'flex flex-col',
+    justifyCenter && 'justify-center items-center',
+    paddingY && 'py-6',
+    paddingX && 'px-2 sm:px-4 lg:px-18',
+    
+    // Width
+    'w-full',
+    'mx-auto',
+
+    // Consumer overrides
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</section>
