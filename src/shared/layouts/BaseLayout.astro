@@ -1,6 +1,6 @@
 ---
 import '@shared/styles/global.css'
-// import '@shared/styles/custom.css'
+import '@shared/styles/custom.css'
 
 
 import Navbar from '@components/Navbar.astro';
@@ -47,7 +47,20 @@ const widthClass = WIDTH_CLASSES[mainWidth];
 <html lang="en" data-theme="blue"></html>
 
 <!-- <meta name="theme-color" content="#000000"> --> 
+*/
 
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{title}</title>
+
+    <!--  -->
+    <link rel="icon" type="image/svg+xml" href="./icons/terminal.svg">
+    
     <!-- Meta tags útiles para SEO y redes sociales -->
     <meta name="description" content="Lucas Callamullo, Software Engineer from Córdoba, Argentina. 
         I build production-ready e-commerce platforms, microservices with JWT authentication, and clean REST APIs. 
@@ -69,22 +82,6 @@ const widthClass = WIDTH_CLASSES[mainWidth];
     <meta name="twitter:title" content="Lucas Callamullo · Software Engineer">
     <meta name="twitter:description" content="Building scalable backend systems. E-commerce, microservices, 
         REST APIs. Python, Java, Node.js, Docker.">
-
-*/
-
----
-
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    
-    <title>{title}</title>
-
-    <!-- 
-    <link rel="icon" type="image/svg+xml" href="./public/icons/terminal.svg">
-    -->
     
     <!-- Slot para CSS o meta tags específicos de cada página -->
     <slot name="head" />
@@ -96,7 +93,7 @@ const widthClass = WIDTH_CLASSES[mainWidth];
 
   <body class="min-h-screen">
     <!-- Navbar global persistente -->
-    <Navbar transition:persist></Navbar>
+    <Navbar transition:persist class:list={['', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}></Navbar>
 
     <!-- Banner superior opcional -->
     <slot name="banner-header" />
@@ -129,6 +126,11 @@ const widthClass = WIDTH_CLASSES[mainWidth];
       // 1. Initial load: fetch from JSON + apply.
       initTranslations();
 
+      // Reveal-on-scroll: el observer es único y se reutiliza.
+      // En cada navegación SPA se observan los [data-reveal] nuevos.
+      // Wait 200ms before revealing with anims by observer.
+      initReveal({ once: true });
+
       // 2. After each SPA navigation: simply re-apply.
       let firstLoad = true;
 
@@ -140,6 +142,7 @@ const widthClass = WIDTH_CLASSES[mainWidth];
           firstLoad = false;
           return;       // initTranslations already handled it
         }
+
         applyTranslations();
 
         // Reveal-on-scroll: el observer es único y se reutiliza.
@@ -150,6 +153,7 @@ const widthClass = WIDTH_CLASSES[mainWidth];
       }
 
       document.addEventListener('astro:page-load', boot);
+
     </script>
   </body>
 </html>  

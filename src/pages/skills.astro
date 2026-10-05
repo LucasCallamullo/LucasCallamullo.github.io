@@ -42,7 +42,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
   >
     <!-- + MAIN DIV CONTAINER -->
     <div class:list={[
-      'flex flex-col w-full max-w-full', 
+      'flex flex-col w-full', 
       'gap-5 md:gap-6 px-3 md:px-5 py-10', 
       WIDTH_CLASSES.md
     ]}>
@@ -59,7 +59,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
   <!-- + section of MAIN SKILLS -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class:list={['px-2 md:px-4 py-6', WIDTH_CLASSES.md]}>
+    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
 
       <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
         data-reveal data-multi-anim
@@ -121,10 +121,10 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
       WIDTH_CLASSES.md
     ]}>
 
-      <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
+      <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg px-2 md:px-4"
         data-reveal data-multi-anim
       >
-        <h2 class="font_console text-3xl flex items-center gap-2 tracking-wider">
+        <h2 class="font_console text-3xl flex flex-wrap text-center justify-center items-center gap-2 tracking-wider">
           <span class="text-accent">$</span>
           <span class="text-content-muted">cat</span>
           <span class="text-console font-bold" data-i18n={I18N.skills.carousel.title}>
@@ -138,7 +138,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
         </span>
       </div>
 
-      <div class="h-55 w-full min-w-full">
+      <div class:list={["h-55 w-full px-2 md:px-4", WIDTH_CLASSES.md]}>
         <RotatingCards cards={cardsCarousel} />
       </div>
     
@@ -148,18 +148,18 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
   <!-- + Sección of RESUME  SKILLS -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class:list={['px-2 md:px-4 py-6', WIDTH_CLASSES.md]}>
+    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
 
       <div class="flex flex-col gap-3 items-center justify-center p-2 mb-4 md:mb-5 cont_animate__from_left_lg"
         data-reveal data-multi-anim
       >
-        <h2 class="font_console text-3xl flex items-center gap-2 tracking-wider">
+        <h2 class="font_console text-3xl flex flex-wrap items-center justify-center text-center gap-2 tracking-wider">
           <span class="text-accent">$&nbsp;</span>
           <span class="text-content-muted">ls -la&nbsp;</span>
           <span class="text-console font-bold" data-i18n={I18N.skills.all.title}>
             all-techs/
           </span>
-        </h2>
+        </h2> 
         <span data-i18n={I18N.skills.all.subtitle}
           class="font_console text-content-muted text-lg font-md tracking-wide" > 
           Everything I've used across projects.

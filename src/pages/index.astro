@@ -20,14 +20,17 @@ const title = "Software Engineer · Callamullo Lucas";
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} id="whoami">
 
     <!-- + MAIN DIV CONTAINER -->
-    <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl">
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full",
+      WIDTH_CLASSES.md
+    ]}>
       <div class="flex gap-1">
         <span class="font_console tracking-wide text-3xl text-console">$</span>
         <span class="font_console tracking-widest text-3xl font-bold text-accent">whoami</span>
       </div>
 
       <!-- + TEXT TO USE ON TYPEWRITER.ts -->
-      <h1 class="font_console tracking-wider text-5xl md:text-6xl mt-5 md:mt-8 typewriter-cursor-fast font-medium" 
+      <h1 class="font_console text-center tracking-wider text-5xl md:text-6xl mt-5 md:mt-8 typewriter-cursor-fast font-medium" 
         data-typewriter data-i18n={I18N.home.title}>Lucas Callamullo
       </h1>
       <h2 class="font_console tracking-wider text-3xl md:text-4xl mt-4 md:mt-7 text-accent font-medium" data-i18n={I18N.home.subtitle}>
@@ -78,7 +81,10 @@ const title = "Software Engineer · Callamullo Lucas";
 
    <!-- ABOUT SECTION ON HOME  -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class="flex flex-col justify-center items-center max-w-full md:max-w-6xl py-7">
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full py-7",
+      WIDTH_CLASSES.md
+    ]}>
 
       <CardSection hover={true} bordered={true} 
         class="bg-surface-900 max-w-3xl w-full cont_animate__from_left_lg" data-reveal data-multi-anim>
@@ -123,13 +129,17 @@ const title = "Software Engineer · Callamullo Lucas";
           <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
         </a>
       </CardSection>
+
     </div>
   </Section>
 
 
   <!-- Sección de Tecnologías / Skills  -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
-    <div class="flex flex-col gap-5 justify-center items-center max-w-full md:max-w-6xl py-7">
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full py-7 gap-5",
+      WIDTH_CLASSES.md
+    ]}>
 
       <div class="flex flex-col gap-5 text-center justify-center cont_animate__from_left_lg"
         data-reveal data-multi-anim
@@ -184,9 +194,12 @@ const title = "Software Engineer · Callamullo Lucas";
 
   <!--  CONTACT Y GITHUB SECTION   -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class="flex justify-center items-center max-w-full md:max-w-6xl py-7">
+    <div class:list={[
+      "flex flex-col justify-center items-center max-w-full py-7",
+      WIDTH_CLASSES.md
+    ]}>
 
-      <CardSection class="bg-surface-900 max-w-3xl w-full cont_animate__from_right_lg"
+      <CardSection class="bg-surface-900 max-w-3xl w-full cont_animate__from_right"
         hover={true} bordered={true} data-reveal data-multi-anim >
 
         <h3 class="font_console tracking-wider text-2xl text-console" data-i18n={I18N.home.contact.title}>

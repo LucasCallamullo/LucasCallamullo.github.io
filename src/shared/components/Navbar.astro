@@ -20,12 +20,24 @@ const languages = [
   { id: 'es', icon: "/icons/flag_ar.svg", alt: 'ARG Flag', label: "ES Spanish", i18n: I18N.nav.languageES,
     i18nMobile: I18N.nav.mobile.langES, labelMobile:'ES'},
 ];
+
+interface Props {
+  class?: string;
+  classSon?: string;
+}
+
+const { 
+  class: className = '',
+  classSon: classSon = ''
+} = Astro.props;
 ---
 
-<header class="fixed top-0 left-0 w-full max-w-full bg-surface-900 transition-colors duration-300">
+<header class:list={["fixed top-0 left-0 w-full bg-surface-900 transition-colors duration-300", className]}>
 
-  <div class="max-w-full md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-18 h-full flex items-center justify-between
-  border-b border-console">
+  <div class:list={[
+    "mx-auto px-4 sm:px-6 lg:px-18 h-full flex items-center justify-between w-full",
+    classSon
+  ]}>
 
     <!-- Mobile Hamburger Button -->
     <button 
@@ -128,8 +140,12 @@ const languages = [
   <!-- Mobile Drawer -->
   <div
     id="mobileMenu"
-    class="drawer drawer--left md:hidden border-b border-surface-800 bg-surface-900 px-4 pt-2 pb-6 space-y-4"
-  >
+    class:list={[
+      "drawer drawer--left md:hidden border-b border-surface-800 bg-surface-900",
+      "px-3 pt-2 pb-6 space-y-4 w-full",
+      classSon
+  ]}>
+
     <div class="modal__content h-full w-full flex flex-col gap-4">
       <button
         type="button"

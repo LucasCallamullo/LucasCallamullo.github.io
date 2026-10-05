@@ -22,7 +22,7 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
   >
     <!-- + MAIN DIV CONTAINER -->
     <div class:list={[
-      'flex flex-col w-full max-w-full', 
+      'flex flex-col w-full', 
       'gap-5 md:gap-6 px-3 md:px-5 py-10', 
       WIDTH_CLASSES.md
     ]}>
@@ -44,7 +44,7 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
       <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
         data-reveal data-multi-anim
       >
-        <h2 class="font_console text-3xl flex items-center gap-2 tracking-wider">
+        <h2 class="font_console text-3xl flex flex-wrap justify-center text-center items-center gap-2 tracking-wider">
           <span class="text-accent">$</span>
           <span class="text-content-muted">cat</span>
           <span class="text-console font-bold" data-i18n={I18N.projectsPage.projects.title}>'Featured Projects'</span>
@@ -56,11 +56,13 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
         </span>
       </div>
 
+      <!-- TODO hacer filter search -->
+
       <!-- RESUMEN PROJECTS -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full max-w-full">
         {featured.map((p, index) => (
 
-          <div data-reveal data-multi-anim
+          <div data-reveal
             class:list={[
               'rounded-xl flex flex-col border border-transparent',
               'hover:border-console hover:border hover-up-lg',
@@ -72,8 +74,9 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
                 <span class="text-white font_console ">{formatDateRange(p.date)}</span>
               </div>
 
-              <button class="absolute right-0 top-0 rounded-tr-xl rounded-bl-xl cursor-pointer
-                flex justify-center items-center px-3 py-1.5 bg-console-400">
+              {/* FUTURE BTN MODAL RESUME   flex */}
+              <button class="hidden absolute right-0 top-0 rounded-tr-xl rounded-bl-xl cursor-pointer
+                justify-center items-center px-3 py-1.5 bg-console-400">
                 <Icon name="ri:fullscreen-fill" class="h-5 w-5"></Icon>
               </button>
  
@@ -142,7 +145,7 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
 
       <div data-reveal
         class:list={[
-          'flex flex-col justify-center items-center bg-surface-800', 
+          'flex flex-col flex-wrap text-center justify-center items-center bg-surface-800', 
           'font_console py-6 rounded-2xl cont_animate__from_left', 
           WIDTH_CLASSES.sm
       ]}>

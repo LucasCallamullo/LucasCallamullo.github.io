@@ -38,6 +38,13 @@
   @media (hover: hover) { &:hover { transform: translateY(-1rem); } }
 }
 
+@utility hover-up-5xl {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  &:active, &:focus-visible { transform: translateY(-25%); }
+  @media (hover: hover) { &:hover { transform: translateY(-25%); } }
+}
+
 /* FONT CONSOLE STYLES */
 .font_console {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
