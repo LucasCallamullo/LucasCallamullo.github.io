@@ -43,8 +43,12 @@ let translations: Translations = {};
 // -----------------------------------------------------------------------------
 
 export function getCurrentLang(): string {
-  return localStorage.getItem(STORAGE_KEY) || 'en';
+  if (typeof window === 'undefined') return 'en'; // fallback server
+  // return localStorage.getItem(STORAGE_KEY) || 'en';
+  const key = STORAGE_KEY ?? 'en';
+  return localStorage.getItem(key) ?? 'en';
 }
+
 
 function isLangCode(value: string | null): value is LangCode {
   return value !== null && (VALID_LANGS as readonly string[]).includes(value);

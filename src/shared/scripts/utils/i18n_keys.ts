@@ -144,6 +144,7 @@ export const I18N = {
     tools: 'skills.tools',
     testing: 'skills.testing',
     api: 'skills.api',
+    ai: 'skills.ai',
     games: 'skills.games',
 
     main: {
@@ -225,6 +226,7 @@ export const I18N = {
 
     fleet_optimizer: {
       title: 'projects.fleet_optimizer.title',
+      titleFull: 'projects.fleet_optimizer.titleFull',
       milestone: 'projects.fleet_optimizer.milestone',
       timeline: {
         summary: 'projects.fleet_optimizer.timeline.summary',
@@ -237,6 +239,7 @@ export const I18N = {
 
     university: {
       title: 'projects.university.title',
+      titleFull: 'projects.university.titleFull',
       milestone: 'projects.university.milestone',
       timeline: {
         summary: 'projects.university.timeline.summary',
@@ -245,6 +248,7 @@ export const I18N = {
 
     ecommerce_dj: {
       title: 'projects.ecommerce_dj.title',
+      titleFull: 'projects.ecommerce_dj.titleFull',
       milestone: 'projects.ecommerce_dj.milestone',
       timeline: {
         summary: 'projects.ecommerce_dj.timeline.summary',
@@ -257,6 +261,7 @@ export const I18N = {
 
     portfolio: {
       title: 'projects.portfolio.title',
+      titleFull: 'projects.portfolio.titleFull',
       milestone: 'projects.portfolio.milestone',
       timeline: {
         summary: 'projects.portfolio.timeline.summary',
@@ -269,6 +274,7 @@ export const I18N = {
 
     dds_tutor: {
       title: 'projects.dds_tutor.title',
+      titleFull: 'projects.dds_tutor.titleFull',
       milestone: 'projects.dds_tutor.milestone',
       timeline: {
         summary: 'projects.dds_tutor.timeline.summary',
@@ -281,6 +287,7 @@ export const I18N = {
 
     backend_tp: {
       title: 'projects.backend_tp.title',
+      titleFull: 'projects.backend_tp.titleFull',
       milestone: 'projects.backend_tp.milestone',
       timeline: {
         summary: 'projects.backend_tp.timeline.summary',
@@ -293,6 +300,7 @@ export const I18N = {
 
     py_tutor: {
       title: 'projects.py_tutor.title',
+      titleFull: 'projects.py_tutor.titleFull',
       milestone: 'projects.py_tutor.milestone',
       timeline: {
         summary: 'projects.py_tutor.timeline.summary',
@@ -305,6 +313,7 @@ export const I18N = {
 
     no_country: {
       title: 'projects.no_country.title',
+      titleFull: 'projects.no_country.titleFull',
       milestone: 'projects.no_country.milestone',
       timeline: {
         summary: 'projects.no_country.timeline.summary',
@@ -317,6 +326,7 @@ export const I18N = {
 
     pawn_cs: {
       title: 'projects.pawn_cs.title',
+      titleFull: 'projects.pawn_cs.titleFull',
       milestone: 'projects.pawn_cs.milestone',
       timeline: {
         summary: 'projects.pawn_cs.timeline.summary',

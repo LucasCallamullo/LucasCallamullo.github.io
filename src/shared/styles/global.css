@@ -681,7 +681,7 @@ a { text-decoration: none; }                  /* Sin subrayado */
 .cont_btns_3d:hover .cont_btns_3d__btn_effect {
   transform: rotateX(-10deg) translateX(10px) translateY(-10px);
   /* transform: rotateX(-10deg) translateY(-10px); */
-  box-shadow: 0 2px 6px -2px var(--text-muted); /* rgba(0, 0, 0, 0.4)*/
+  /* box-shadow: 0 1px 1px -1px var(--text-muted); /* rgba(0, 0, 0, 0.4)*/
 }
 
 /* Staggered delays (short cascade, 150ms apart).
