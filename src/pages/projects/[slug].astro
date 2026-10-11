@@ -1,0 +1,111 @@
+---
+// src/pages/projects/[slug].astro
+import type { GetStaticPaths } from 'astro';
+
+// src/pages/fleet_optimizer.astro
+import Section from '@/shared/components/Section.astro';
+import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro'; 
+
+import { Icon } from 'astro-icon/components';
+import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { getNavHref } from '@/shared/data/links';
+import { formatDateRange, PROJECTS } from '@/shared/data/projects';
+
+export const getStaticPaths = (() => {
+  return Object.values(PROJECTS)
+    // .filter(p => p.hrefAstro) // solo los que tienen página propia
+    .map(p => ({
+      params: { slug: p.slug },
+      props: { project: p },
+    }));
+}) satisfies GetStaticPaths;
+
+const { project: PROJECT } = Astro.props;
+
+// Define page metadata
+const title = "Software Engineer · Fleet Optimizer · Callamullo Lucas";
+---
+
+<BaseLayout title={title} mainWidth="full">
+
+  <!-- + MAIN DIV CONTAINER -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+
+    <div class:list={["w-full gap-3 flex flex-col border-b border-console", WIDTH_CLASSES.md]}>
+
+      <div class="flex items-center gap-5">
+        <!-- Back link -->
+        <a class="flex hover-up items-center justify-center rounded-full" href={getNavHref('projects')}>
+          <Icon name="ri:arrow-left-circle-line" class="text-accent h-8 w-8" />
+        </a>
+
+
+        <h1 class="text-4xl font-bold" data-i18n={PROJECT.titleFull}>
+          <!-- PROJECT TITLE -->
+        </h1>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 text-sm text-surface-300 font_console">
+        <span class="flex items-center gap-1">
+          <Icon name="ri:calendar-line" class="w-4 h-4" />
+          {formatDateRange(PROJECT.date)}
+        </span>
+        <span class="flex items-center gap-1">
+          <Icon name="ri:flag-line" class="w-4 h-4" />
+          <span data-i18n=''>Final project · UTN FRC</span>
+        </span>
+      </div>
+
+      <!-- Tags -->
+      <p>
+        
+      </p>
+
+      <!-- Summary -->
+      <p>
+        
+      </p>
+
+      <!-- INDICE OF CONTENT -->
+      <ul>
+        <li>1. Links App</li>  <!-- Github, youtube, deploys etc -->
+        <li>2. Core Stack</li>
+        <li>3. Images App</li>
+        <li>4. More description history</li>
+        <li>5. C4 Model</li>  <!-- Varia segun proyecto, los mas nuevos casi seguro tendran -->
+        <li>6. DER</li>       <!-- Varia segun proyecto, los mas nuevos casi seguro tendran -->
+        
+        <li>7, 8, 9 . More Flows</li> <!-- A portir de aca puede variar mucho entre proyectos -->
+        <li>10. Contact</li>   <!-- Final seccion, ver otros proyectos o algo asi -->
+      </ul>
+    </div>
+  </Section>
+
+
+  <!-- + MAIN DIV CONTAINER -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+
+    <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
+
+      <h1 class="text-4xl font-bold" data-i18n>
+        MORE CONTECT
+      </h1>
+
+      <p>
+
+      </p>
+
+    </div>
+  </Section>
+
+
+
+        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
+        btn_notched btn_notched_surface_900" href={getNavHref('home')}>
+        <Icon name="ri:arrow-left-circle-line" class="text-accent h-6 w-6"></Icon>
+        <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.page404.btn}>
+          Go back home
+        </span>
+      </a>
+
+</BaseLayout>
