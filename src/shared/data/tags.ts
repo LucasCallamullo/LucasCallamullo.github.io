@@ -70,3 +70,53 @@ export function filterTags(
 ): TagKey[] {
   return keys.filter((key) => TAGS[key].category === category);
 }
+
+
+
+
+
+export type SectionId =
+  | 'links'
+  | 'stack'
+  | 'gallery'
+  | 'history'
+  | 'c4'
+  | 'der'
+  | 'flow'
+  | 'next';
+
+export interface SectionMeta {
+  label: string;
+  i18n: string;
+}
+
+export const SECTIONS_TO_RENDER: Record<SectionId, SectionMeta> = {
+  links:   { label: 'Links',          i18n: 'projects.sections.links' },
+  stack:   { label: 'Core Stack',     i18n: 'projects.sections.stack' },
+  gallery: { label: 'Gallery',        i18n: 'projects.sections.gallery' },
+  history: { label: 'History',        i18n: 'projects.sections.history' },
+  c4:      { label: 'C4 Model',       i18n: 'projects.sections.c4' },
+  der:     { label: 'DER',            i18n: 'projects.sections.der' },
+  flow:    { label: 'Flow',           i18n: 'projects.sections.flow' },
+  next:    { label: 'More projects',  i18n: 'projects.sections.next' },
+};
+
+
+/*
+<nav>
+  <ul>
+    {sections.map(s => (
+      <li>
+        <a href={`#${s.id}`} data-i18n={s.i18n}>{s.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+*/
+export interface ResolvedSection extends SectionMeta {
+  id: SectionId;
+}
+
+export function getSections(ids: SectionId[]): ResolvedSection[] {
+  return ids.map(id => ({ id, ...SECTIONS_TO_RENDER[id] }));
+}

@@ -32,13 +32,14 @@ export const githubStatsUrl = `https://github-readme-stats.vercel.app/api?${new 
 export const githubStreakUrl = `https://github-readme-streak-stats.herokuapp.com?${new URLSearchParams({
   ...COMMON,
   user: USERNAME,
-  card_height: "208",
+  // card_height: "208",
 })}`;
 
 export const topLangsUrl = `https://github-readme-stats.vercel.app/api/top-langs/?${new URLSearchParams({
   ...COMMON,
-  langs_count: "6",
+  langs_count: "4",
   show_icons: "true",
   layout: "donut",
+  hide: "css,javascript",
   exclude_repo: EXCLUDED_REPOS,
 })}`;

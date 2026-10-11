@@ -1,7 +1,8 @@
 // src/shared/data/projects.ts
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import type { TagKey } from '@shared/data/tags';
+import type { TagKey, SectionId } from '@shared/data/tags';
 import type { TechKey } from '@shared/data/tech_stack';
+import { getCurrentLang } from '../scripts/navbar/translations';
 
 // ========================================================================
 //  +  DEFAULT VALUES
@@ -30,6 +31,8 @@ const youtubeExt: ExternalLink = {
 // ========================================================================
 //  +  INTERFACES
 // ========================================================================
+
+
 
 /** External link (repo, live demo, etc.). */
 export interface ExternalLink {
@@ -87,6 +90,7 @@ interface ProjectDate {
 export interface Project {
   /** i18n key for the title. */
   title: string;              //! I18N
+  titleFull: string;              //! I18N
   milestone?: string | null;     //! I18N
 
   isMain: boolean;
@@ -112,13 +116,15 @@ export interface Project {
   project?: ProjectEntry | null;
 
   /** Astro page path for the project detail, if any. */
-  hrefAstro?: string | null;
+  slug?: string | null;
 
   /** External image URLs. */
   images: ImagesProject[];
 
   /** Tags for filtering. */
   tags: TagKey[] | null;
+
+  sections: SectionId[];
 }
 
 /*
@@ -140,6 +146,7 @@ export const PROJECTS = {
   //! =================== PROJECT
   fleet_optimizer: {
     title: I18N.projects.fleet_optimizer.title,
+    titleFull: I18N.projects.fleet_optimizer.titleFull,
     date: { start: '2026-03', end: '2026-07' },
     isMain: true,
     tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Microservices', 'Layered', 'Full-Stack'],
@@ -168,13 +175,15 @@ export const PROJECTS = {
       description: I18N.projects.fleet_optimizer.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/fleet_optimizer',
+    slug: 'fleet_optimizer',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.fleet_optimizer.milestone
   },
 
   //! =================== PROJECT
   dds_tutor: {
     title: I18N.projects.dds_tutor.title,
+    titleFull: I18N.projects.dds_tutor.titleFull,
     date: { start: '2026-03', end: '2026-06' },
     isMain: true,
     tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
@@ -203,13 +212,15 @@ export const PROJECTS = {
       description: I18N.projects.dds_tutor.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/dds_tutor',
+    slug: 'dds_tutor',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.dds_tutor.milestone
   },
 
   //! =================== PROJECT
   portfolio: {
     title: I18N.projects.portfolio.title,
+    titleFull: I18N.projects.portfolio.titleFull,
     date: { start: '2026-01', end: '2026-02' },
     isMain: false,
     tags: ['Front-end', 'DevOps'],
@@ -236,13 +247,15 @@ export const PROJECTS = {
       description: I18N.projects.portfolio.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/portfolio',
+    slug: 'portfolio',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.portfolio.milestone
   },
 
   //! =================== PROJECT
   ecommerce_dj: {
     title: I18N.projects.ecommerce_dj.title,
+    titleFull: I18N.projects.ecommerce_dj.titleFull,
     date: { start: '2024-03', end: '2025-12' },
     isMain: true,
     tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
@@ -271,13 +284,15 @@ export const PROJECTS = {
       description: I18N.projects.ecommerce_dj.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/ecommerce_dj',
+    slug: 'ecommerce_dj',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.ecommerce_dj.milestone
   },
 
   //! =================== PROJECT
   backend_tp: {
     title: I18N.projects.backend_tp.title,
+    titleFull: I18N.projects.backend_tp.titleFull,
     date: { start: '2025-08', end: '2025-10' },
     isMain: false,
     tags: ['Back-end', 'Database', 'DevOps', 'Microservices', 'Layered'],
@@ -304,13 +319,15 @@ export const PROJECTS = {
       description: I18N.projects.backend_tp.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/backend_tp',
+    slug: 'backend_tp',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.backend_tp.milestone
   },
 
   //! =================== PROJECT
   no_country: {
     title: I18N.projects.no_country.title,
+    titleFull: I18N.projects.no_country.titleFull,
     date: { start: '2024-07', end: '2024-11' },
     isMain: false,
     tags: ['Back-end', 'Front-end', 'DevOps', 'Database', 'Full-Stack', 'Monolith Modular'],
@@ -337,13 +354,15 @@ export const PROJECTS = {
       description: I18N.projects.no_country.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/no_country',
+    slug: 'no_country',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.no_country.milestone
   },
 
   //! =================== PROJECT
   py_tutor: {
     title: I18N.projects.py_tutor.title,
+    titleFull: I18N.projects.py_tutor.titleFull,
     date: { start: '2023-11', end: '2026-03' },
     isMain: false,
     tags: ['Tutorial'],
@@ -365,13 +384,15 @@ export const PROJECTS = {
       description: I18N.projects.py_tutor.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/py_tutor',
+    slug: 'py_tutor',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.py_tutor.milestone
   },
 
   //! =================== PROJECT
   university: {
     title: I18N.projects.university.title,
+    titleFull: I18N.projects.university.titleFull,
     date: { start: '2023-03', end: null },
     isMain: false,
     tags: ['Microservices', 'Monolith Modular', 'Full-Stack'],
@@ -389,13 +410,15 @@ export const PROJECTS = {
     },
     project: null,
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/university',
+    slug: 'university',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.university.milestone
   },
 
   //! =================== PROJECT
   pawn_cs: {
     title: I18N.projects.pawn_cs.title,
+    titleFull: I18N.projects.pawn_cs.titleFull,
     date: { start: '2021-03', end: '2022-12' },
     isMain: false,
     tags: [],
@@ -416,7 +439,8 @@ export const PROJECTS = {
       description: I18N.projects.pawn_cs.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/pawn_cs',
+    slug: 'pawn_cs',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.pawn_cs.milestone
   },
 } as const satisfies Record<string, Project>;
@@ -443,9 +467,10 @@ export function dateToNumber(date: { start: string }): number {
  * Falls back to "Ongoing" / "En progreso" when `end` is null.
  */
 export function formatDateRange(
-  date: ProjectDate,
-  lang: 'en' | 'es' = 'en'
+  date: ProjectDate
 ): string {
+  const lang = getCurrentLang();
+
   const fmt = new Intl.DateTimeFormat(lang, {
     year: 'numeric',
     month: 'short',
@@ -467,7 +492,7 @@ export function formatDateRange(
   return `${start} – ${end}`;
 }
 
-
+export const getProjectHref = (slug: string) => `/projects/${slug}`;
 
 
 type OrderBy = 'asc' | 'desc';

@@ -55,7 +55,7 @@ export const TECH_STACK = {
   typescript:  { name: 'TypeScript',        isShow: true,  isMain: true,  category: 'frontend',  icon: 'devicon:typescript' },
   javascript:  { name: 'JavaScript',        isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:javascript' },
 
-  astro:       { name: 'Astro',             isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:astro',                  isOnlyLightTheme: true },
+  astro:       { name: 'Astro',             isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:astro',    isOnlyLightTheme: true },
   html5:       { name: 'HTML5',             isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:html5' },
   css3:        { name: 'CSS3',              isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:css3' },
   bootstrap:   { name: 'BootStrap 5',       isShow: false, isMain: false, category: 'frontend',  icon: 'thesvg-color:bootstrap' },
@@ -64,8 +64,8 @@ export const TECH_STACK = {
 
   // --- Mobile ---
   reactNative: { name: 'React Native',      isShow: true,  isMain: false,  category: 'mobile',   icon: 'devicon:reactnative' },
-  nativeWind:  { name: 'Native Wind',       isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:nativewind' },
-  expo:        { name: 'Expo',              isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:expo',              isOnlyLightTheme: true },
+  nativeWind:  { name: 'Native Wind',       isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:nativewind', isOnlyLightTheme: true },
+  expo:        { name: 'Expo',              isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:expo',  isOnlyLightTheme: true },
 
   // --- Databases ---
   postgresql:  { name: 'PostgreSQL',        isShow: true,  isMain: true,  category: 'databases', icon: 'devicon:postgresql' },
@@ -78,7 +78,7 @@ export const TECH_STACK = {
   docker:       { name: 'Docker',           isShow: true,  isMain: true,  category: 'devops',     icon: 'devicon:docker' },
   dockerCompose:{ name: 'Docker Compose',   isShow: true,  isMain: true, category: 'devops',     icon: 'devicon:docker-wordmark' },
   nginx:        { name: 'Nginx',            isShow: true,  isMain: true, category: 'devops',     icon: 'devicon:nginx' },
-  linux:        { name: 'Linux',            isShow: false,  isMain: false, category: 'devops',     icon: 'devicon:linux',                  isOnlyLightTheme: true },
+  linux:        { name: 'Linux',            isShow: false,  isMain: false, category: 'devops',     icon: 'devicon:linux',     isOnlyLightTheme: true },
   gunicorn:     { name: 'Gunicorn',         isShow: true,  isMain: false, category: 'devops',     icon: 'thesvg-color:gunicorn' },
   railway:      { name: 'Railway',          isShow: false,  isMain: false, category: 'devops',     icon: 'thesvg-color:railway-dark' },
 
@@ -88,29 +88,36 @@ export const TECH_STACK = {
 
   // --- Tools / Version Control ---
   git:          { name: 'Git',              isShow: true,  isMain: false,  category: 'tools',     icon: 'devicon:git' },
-  github:       { name: 'GitHub',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:github',                 isOnlyLightTheme: true },
+  github:       { name: 'GitHub',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:github',      isOnlyLightTheme: true },
   ghActions:    { name: 'GitHub Actions',   isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:githubactions' },
-  ghPages:      { name: 'GitHub Pages',     isShow: false,  isMain: false, category: 'tools',     icon: 'thesvg-color:github-pages',      isOnlyLightTheme: true },
+  ghPages:      { name: 'GitHub Pages',     isShow: false,  isMain: false, category: 'tools',     icon: 'thesvg-color:github-pages', isOnlyLightTheme: true },
   vite:         { name: 'Vite',             isShow: true,  isMain: false, category: 'tools',     icon: 'thesvg-color:vite' },
-  bash:         { name: 'Bash Scripts',     isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:bash' },
+  bash:         { name: 'Bash Scripts',     isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:bash', isOnlyLightTheme: true },
 
   vscode:       { name: 'VSCode',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:vscode' },
   dbeaver:      { name: 'DBeaver',          isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:dbeaver' },
-  ngrok:        { name: 'Ngrok',            isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:ngrok',    isOnlyLightTheme: true },
+  ngrok:        { name: 'Ngrok',            isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:ngrok', isOnlyLightTheme: true },
 
   // --- Testing / Docs ---
   pytest:       { name: 'PyTest',           isShow: true,  isMain: false, category: 'testing',   icon: 'devicon:pytest' },
   junit:        { name: 'JUnit 5',          isShow: true,  isMain: true, category: 'testing',   icon: 'devicon:junit' },
   jest:         { name: 'Jest',             isShow: false,  isMain: false, category: 'testing',   icon: 'thesvg-color:jest' },
+  bruno:         { name: 'Bruno',             isShow: true,  isMain: false, category: 'testing',   icon: 'thesvg-color:bruno' },
   postman:      { name: 'Postman',          isShow: true,  isMain: false, category: 'testing',   icon: 'devicon:postman' },
   swagger:      { name: 'Swagger',          isShow: true,  isMain: true, category: 'testing',   icon: 'devicon:swagger' },
 
   // --- API Integration ---
-  mercadoPago:  { name: 'Mercado Pago API',  isShow: true,  isMain: false, category: 'api',       icon: 'thesvg-color:mercado-pago' },
+  mercadoPago:  { name: 'Mercado Pago API', isShow: true,  isMain: false, category: 'api',       icon: 'thesvg-color:mercado-pago' },
+  googleMaps:   { name: 'Google Maps API',  isShow: true,  isMain: false, category: 'api',   icon: 'thesvg-color:google-maps' },
+
+  // ----
+  cursor:   { name: 'Cursor AI',    isShow: true,  isMain: false, category: 'ai',   icon: 'thesvg-color:cursor-light', isOnlyLightTheme: true },
+  openCode: { name: 'OpenCode AI',  isShow: true,  isMain: false, category: 'ai',   icon: 'thesvg-color:opencode', isOnlyLightTheme: true },
+  deepseek: { name: 'DeepSeek AI',  isShow: true,  isMain: false, category: 'ai',   icon: 'thesvg-color:deepseek' },
 
   // --- Games ---
-  counterStrike:{ name: 'Counter Strike 1.6', isShow: false,  isMain: false, category: 'games',     icon: 'thesvg-color:counter-strike',    isOnlyLightTheme: true },
-  pawn:         { name: 'Pawn (c-like)',      isShow: false,  isMain: false, category: 'games',     icon: 'thesvg-color:cplusplus' },
+  counterStrike:{ name: 'Counter Strike 1.6', isShow: false,  isMain: false, category: 'games',     icon: 'thesvg-color:counter-strike', isOnlyLightTheme: true },
+  pawn:         { name: 'Pawn (c-like)',      isShow: false,  isMain: false, category: 'games',     icon: 'thesvg-color:cplusplus', isOnlyLightTheme: true },
 
 } as const satisfies Record<string, Tech>;
 
