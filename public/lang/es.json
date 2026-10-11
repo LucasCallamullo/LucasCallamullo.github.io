@@ -41,6 +41,11 @@
     "build": "hecho con:"
   },
 
+  "page404": {
+    "title": "Lo sentimos, la página que buscas no existe.",
+    "btn": "Volver al inicio"
+  },
+
   "home": {
     "title": "Lucas Callamullo",
     "subtitle": "Ingeniero de Software",

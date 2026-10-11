@@ -104,7 +104,7 @@ function formatTranslationValue(
  *
  * Tries flat first, then nested. Returns undefined if not found.
  */
-function resolveKey(key: string): string | string[] | undefined {
+export function resolveKey(key: string): string | string[] | undefined {
   // Try 1: flat lookup.
   const flat = translations[key];
   if (typeof flat === 'string' || Array.isArray(flat)) return flat;

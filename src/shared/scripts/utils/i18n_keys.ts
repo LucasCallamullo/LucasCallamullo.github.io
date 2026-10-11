@@ -61,6 +61,11 @@ export const I18N = {
     build: 'footer.build',
   },
 
+  page404: {
+    title: 'page404.title',
+    btn: 'page404.btn',
+  },
+
   home: {
     title: 'home.title',    // My Name
     subtitle: 'home.subtitle',

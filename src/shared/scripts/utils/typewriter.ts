@@ -1,4 +1,6 @@
 // src/shared/scripts/utils/typewriter.ts
+import { resolveKey } from "../navbar/translations";
+
 
 /**
  * Typewriter effect.
@@ -18,11 +20,19 @@ interface SequentialItem {
   duration?: number;
 }
 
+
 class Typewriter {
   private static instance: Typewriter | null = null;
+  public static isTyping: boolean = false;
 
   private readonly speed: number;
   private readonly initAfter: number;
+
+  /** Mapa elemento -> token del run activo */
+  private runTokens = new WeakMap<HTMLElement, symbol>();
+
+  /** Timers activos por elemento (para limpiarlos al cancelar) */
+  private timers = new WeakMap<HTMLElement, number[]>();
 
   private constructor(speed: number, initAfter: number) {
     this.speed = speed;
@@ -37,6 +47,55 @@ class Typewriter {
   }
 
   /**
+   * Cancel any in-flight typing on `element`.
+   *
+   * Two things happen here:
+   *
+   * 1. The run token for `element` is deleted. Any `step` already scheduled
+   *    will see that its token no longer matches and bail out silently,
+   *    so it won't touch the DOM even if its timeout still fires.
+   * 2. All pending `setTimeout` handles registered for `element` are cleared
+   *    and removed from the timer map, so we don't leave orphaned callbacks
+   *    sitting in the event loop.
+   *
+   * Safe to call on an element that isn't currently typing: both operations
+   * are no-ops if there's nothing to cancel.
+   *
+   * @param element - The element whose active typing run should be aborted.
+   */
+  public cancel(element: HTMLElement): void {
+    // Invalidate the token: any pending `step` will self-discard on its next tick.
+    this.runTokens.delete(element);
+
+    // Clear any timers still queued for this element.
+    const timers = this.timers.get(element);
+    if (timers) {
+      for (const t of timers) clearTimeout(t);
+      this.timers.delete(element);
+    }
+  }
+
+  /**
+   * Schedule `fn` to run after `delay` ms, tracking the timeout handle so it
+   * can be cleared later by `cancel`.
+   *
+   * `setTimeout` alone isn't enough for the typewriter: when the language
+   * changes mid-animation, we need a way to stop every queued callback for a
+   * given element. By keying timers by element, `cancel(element)` can wipe
+   * the whole batch in one go.
+   *
+   * @param element - The element the callback belongs to (used as the timer key).
+   * @param fn      - The callback to invoke after the delay.
+   * @param delay   - Milliseconds to wait before invoking `fn`.
+   */
+  private schedule(element: HTMLElement, fn: () => void, delay: number): void {
+    const id = window.setTimeout(fn, delay);
+    const list = this.timers.get(element) ?? [];
+    list.push(id);
+    this.timers.set(element, list);
+  }
+
+  /**
    * Type `text` into `element`, character by character.
    * Calls `onComplete` after the last character is written.
    */
@@ -45,10 +104,20 @@ class Typewriter {
     text: string,
     onComplete?: () => void
   ): void {
+    // Cancels any previous run on this same element.
+    this.cancel(element);
+
+    // New token for this run
+    const token = Symbol('typewriter-run');
+    this.runTokens.set(element, token);
+
     let i = 0;
     element.textContent = '';
 
     const step = () => {
+      // If another run took control, we abort silently.
+      if (this.runTokens.get(element) !== token) return;
+
       if (i >= text.length) return;
 
       element.textContent += text.charAt(i);
@@ -57,11 +126,13 @@ class Typewriter {
       if (i >= text.length) {
         onComplete?.();
       } else {
-        setTimeout(step, this.speed);
+        // setTimeout(step, this.speed);
+        this.schedule(element, step, this.speed);
       }
     };
 
-    setTimeout(step, this.initAfter);
+    // setTimeout(step, this.initAfter);
+    this.schedule(element, step, this.initAfter);
   }
 
   /**
@@ -150,7 +221,13 @@ export function initTypewriter(params: SelectorParams): void {
 
   // Capture the text before wiping the element. This is the string
   // the typewriter will "type" back in.
-  const titleText = title.textContent ?? '';
+  const keyI18n = title.getAttribute('data-i18n');
+  const titleText = resolveKey(keyI18n ?? '') as string;
+
+  /* if (titleText == null) {
+    const titleText = title.textContent ?? '';
+    title.setAttribute('data-original', titleText);
+  } */
 
   // Reset any leftover state from a previous run (e.g. after a language change
   // or an Astro SPA navigation that reuses the same DOM node).
@@ -195,6 +272,7 @@ export function initTypewriter(params: SelectorParams): void {
     title.classList.remove('typewriter-cursor-fast');
     title.classList.add('typewriter-cursor');
   });
+  
 }
 
 

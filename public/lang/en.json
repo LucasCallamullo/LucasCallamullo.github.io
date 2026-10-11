@@ -41,7 +41,11 @@
     "build": "build with:"
   },
 
-
+  "page404": {
+    "title": "Sorry, the page you're looking for doesn't exist.",
+    "btn": "Go back home"
+  },
+  
   "home": {
     "title": "Lucas Callamullo",
     "subtitle": "Software Engineer",
