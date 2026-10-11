@@ -212,7 +212,8 @@
 
 
     "fleet_optimizer": {
-      "title": "Fleet Optimizer · Microservices Spring Boot",
+      "title": "Fleet Optimizer · Microservicios · Spring Boot & React",
+      "titleFull": "Fleet Optimizer · Microservicios · Java & Spring Boot · TypeScript & React",
       "milestone": "Madurez técnica en microservicios, SOLID, Java & Spring Boot y React",
       "timeline": {
         "summary": [
@@ -253,6 +254,7 @@
 
     "ecommerce_dj": {
       "title": "Modular E-commerce · Python & Django",
+      "titleFull": "Modular E-commerce · Python & Django · JavaScript Vanilla",
       "milestone": "Profundidad técnica con Python, Django, CSS & JS vanilla, optimizaciones con PostgreSQL y Redis",
       "timeline": {
         "summary": [
@@ -291,6 +293,7 @@
 
     "portfolio": {
       "title": "My Portfolio · Astro, TS & Tailwind",
+      "titleFull": "My Portfolio · Astro, TS & Tailwind",
       "milestone": "Frontend con profundidad en TypeScript & Tailwind",
       "timeline": {
         "summary": [
@@ -319,6 +322,7 @@
 
     "dds_tutor": {
       "title": "Tutoriales · JS/React",
+      "titleFull": "Tutoriales · React · JavaScript, HTML & CSS",
       "milestone": "Tutoriales técnicos sobre JavaScript y React",
       "timeline": {
         "summary": [
@@ -348,6 +352,7 @@
 
     "backend_tp": {
       "title": "Microservices · Java & Spring Boot",
+      "titleFull": "Microservices · Java & Spring Boot · Docker",
       "milestone": "Microservicios & Docker Compose, primer contacto",
       "timeline": {
         "summary": [
@@ -380,6 +385,7 @@
 
     "py_tutor": {
       "title": "Tutor Programación · Algoritmos & Backend",
+      "titleFull": "Tutor Programación · Algoritmos & Backend",
       "milestone": "Docencia y comunicación",
       
       "timeline": {
@@ -413,6 +419,7 @@
 
     "no_country": {
       "title": "No Country · Food Recycling App",
+      "titleFull": "No Country · Food Recycling App · Python & Django · Tailwind CSS",
       "milestone": "Primer trabajo en equipo real",
       "timeline": {
         "summary": [
@@ -442,6 +449,7 @@
 
     "university": {
       "title": "Ingeniería en Sistemas · UTN",
+      "titleFull": "Ingeniería en Sistemas · UTN",
       "milestone": "Formalización de conocimientos",
       "timeline": {
         "summary": [
@@ -462,6 +470,7 @@
 
     "pawn_cs": {
       "title": "Game Modder · CS 1.6",
+      "titleFull": "Game Modder · CS 1.6",
       "milestone": "Origen autodidacta",
       "timeline": {
         "summary": [

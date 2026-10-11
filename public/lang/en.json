@@ -215,7 +215,8 @@
 
 
     "fleet_optimizer": {
-      "title": "Fleet Optimizer · Microservices Spring Boot",
+      "title": "Fleet Optimizer · Microservices · Spring Boot & React",
+      "titleFull": "Fleet Optimizer · Microservices",
       "milestone": "Technical maturity in microservices, SOLID, Java & Spring Boot and React",
       "timeline": {
         "summary": [
@@ -256,6 +257,7 @@
 
     "university": {
       "title": "Systems Engineering · UTN",
+      "titleFull": "Systems Engineering · UTN",
       "milestone": "Formalizing knowledge",
       "timeline": {
         "summary": [
@@ -276,6 +278,7 @@
 
    "ecommerce_dj": {
       "title": "Modular E-commerce · Python & Django",
+      "titleFull": "Modular E-commerce · Python & Django",
       "milestone": "Deep technical work with Python, Django, vanilla CSS & JS, PostgreSQL and Redis optimizations",
       "timeline": {
         "summary": [
@@ -314,6 +317,7 @@
 
     "portfolio": {
       "title": "My Portfolio · Astro, TS & Tailwind",
+      "titleFull": "My Portfolio · Astro, TS & Tailwind",
       "milestone": "Frontend depth in TypeScript & Tailwind",
       "timeline": {
         "summary": [
@@ -341,6 +345,7 @@
 
     "dds_tutor": {
       "title": "Tutorials · JS/React",
+      "titleFull": "Tutorials · JavaScript / React",
       "milestone": "Technical teaching on JavaScript and React",
       "timeline": {
         "summary": [
@@ -370,6 +375,7 @@
 
     "backend_tp": {
       "title": "Microservices · Java & Spring Boot",
+      "titleFull": "Microservices · Java & Spring Boot",
       "milestone": "Microservices & Docker Compose, first contact", 
       "timeline": {
         "summary": [
@@ -402,6 +408,7 @@
 
     "py_tutor": {
       "title": "Programming Tutor · Algorithms & Backend",
+      "titleFull": "Programming Tutor · Algorithms & Backend",
       "milestone": "Teaching and communication", 
       "timeline": {
         "summary": [
@@ -433,6 +440,7 @@
 
     "no_country": {
       "title": "No Country · Food Recycling App",
+      "titleFull": "No Country · Food Recycling App",
       "milestone": "First real team project with Django",
       "timeline": {
         "summary": [
@@ -462,6 +470,7 @@
 
     "pawn_cs": {
       "title": "Game Modder · CS 1.6",
+      "titleFull": "Game Modder · CS 1.6",
       "milestone": "Self-taught origin",
       "timeline": {
         "summary": [
