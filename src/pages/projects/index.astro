@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 import { getTechs } from '@shared/data/tech_stack';
 import { getNavHref } from '@shared/data/links';
-import { getProjectsForPage, formatDateRange } from '@shared/data/projects';
+import { getProjectsForPage, formatDateRange, getProjectHref } from '@shared/data/projects';
 
 // Featured: solo los main
 const featured = getProjectsForPage({ isMain: true, sortBy: 'order' });
@@ -120,7 +120,7 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
                 <a class="flex gap-2 px-3.5 py-1.5 items-center justify-center rounded-2xl
                   text-black bg-blue-200 hover:bg-blue-400 
                   border border-console-400 hover-up-lg"
-                  href={p.hrefAstro}
+                  href={getProjectHref(p.slug)}
                 >
                   <Icon name="devicon:astro" class="h-5 w-5"> </Icon> 
                   <span class="text-base" data-i18n={I18N.projectsPage.projects.details}>

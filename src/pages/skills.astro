@@ -1,18 +1,21 @@
 ---
 import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+
 import Section from '@shared/components/Section.astro'
+import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 import { getGroupedTechs } from '@shared/data/tech_stack';
+import { topLangsUrl } from '@shared/data/github_stats';
+import { getNavHref } from '@shared/data/links';
 
-import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
 import { fade } from 'astro:transitions';
 
 const groups = getGroupedTechs({ 
   categories:[
-    'backend', 'languages', 'frontend', 'databases',
-    'devops', 'tools', 'testing', 'api'
+    'backend', 'languages', 'frontend', 'databases', 
+    'devops', 'tools', 'testing', 'api', 'mobile', 'ai'
   ] 
 });
 
@@ -109,6 +112,29 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
         ))}
       </div>
 
+      <!-- STATS AND BTN GH -->
+      <div class="mt-6 flex w-full gap-5 items-center justify-center h-min relative">
+
+        <a class="absolute! left-0 bottom-0 font_console rounded-3xl btn_w_tag 
+          border cursor-pointer group hover-up-lg border-console-400" 
+          href={getNavHref('github')} target="_blank"
+        >
+          <span class="btn_w_tag__top py-1.5 rounded-3xl flex items-center text-white
+            justify-center bg-console-400 text-base truncate w-full! ml-0!" data-i18n=''>
+            See GitHub!
+          </span>
+          
+          <div class="flex gap-2 items-center justify-center text-content-main py-2 px-3 
+            btn_move__cont_svg group-hover:btn_move__cont_svg:hover group-hover:bg-green-800 rounded-3xl"
+          >
+            <Icon name="ri:github-fill" class="h-6.5 w-6.5 btn_move__svg_svg group-hover:text-white"></Icon>
+            <span class="truncate text-base group-hover:text-white" data-i18n=''>Go GitHub</span>
+          </div>
+        </a>
+
+        <img src={topLangsUrl} alt="GitHub Top languages" loading="lazy" 
+          class="w-full md:w-[40%] h-full self-center place-self-center">
+      </div>
 
     </div>
   </Section>
@@ -194,10 +220,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
                   >
                     <Icon
                       name={tech.icon}
-                      class:list={[
-                        "h-5 w-5 object-contain",
-                        tech.isOnlyLightTheme ? 'bg-white rounded-2xl p-0.5' : ''
-                      ]}
+                      class={`h-5 w-5 ${tech.isOnlyLightTheme ? 'bg-white rounded-2xl p-0.5' : ''}`}
                     />
                     <span class="font_console text-base truncate">{tech.name}</span>
                   </button>
