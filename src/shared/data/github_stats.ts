@@ -43,3 +43,49 @@ export const topLangsUrl = `https://github-readme-stats.vercel.app/api/top-langs
   hide: "css,javascript",
   exclude_repo: EXCLUDED_REPOS,
 })}`;
+
+
+
+
+
+
+
+
+export interface RepoLanguages {
+  [language: string]: number; // bytes por lenguaje
+}
+
+/**
+ * Fetch the language breakdown for a repo from the GitHub API.
+ * Returns null if the URL is invalid or the request fails.
+ *
+ * Works at build time (Astro static) or runtime (client).
+ */
+export async function getRepoLanguages(githubSlug: string): Promise<RepoLanguages | null> {
+
+  let owner = USERNAME;
+  let repo = githubSlug;
+  
+  // This slugs is special cases from data/projects.ts
+  if (githubSlug == 'university') return null;
+
+  if (githubSlug == 'Antojitos_Ecommerce') {
+    owner = 'No-Country-simulation';
+  }
+
+  // Leer del .env (solo disponible en build/server)
+  const token = import.meta.env.GITHUB_TOKEN;
+
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`, {
+    headers: {
+      Accept: 'application/vnd.github+json',
+      // Si querés evitar rate limits, agregá un token en build time:
+      // Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}`,
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+  });
+
+  if (!res.ok) return null;
+  return res.json();
+  // return some like: { "Java": 45234, "TypeScript": 23000, "CSS": 1200 }
+}

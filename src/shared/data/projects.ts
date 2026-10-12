@@ -149,7 +149,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.fleet_optimizer.titleFull,
     date: { start: '2026-03', end: '2026-07' },
     isMain: true,
-    tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Microservices', 'Layered', 'Full-Stack'],
+    tags: ['Microservices', 'Layered', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
     coreTechs: [
       'java', 'springboot', 'junit', 'typescript', 'react', 
       'nginx', 'postgresql', 'docker', 'jwt', 'oauth',
@@ -175,7 +175,7 @@ export const PROJECTS = {
       description: I18N.projects.fleet_optimizer.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'fleet_optimizer',
+    slug: 'fleet-optimizer',
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.fleet_optimizer.milestone
   },
@@ -186,7 +186,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.dds_tutor.titleFull,
     date: { start: '2026-03', end: '2026-06' },
     isMain: true,
-    tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Web App', 'Completed', 'Solo', 'University'],
     coreTechs: [
       'typescript', 'javascript', 'react', 'tailwind', 'postgresql',  
     ],
@@ -212,7 +212,7 @@ export const PROJECTS = {
       description: I18N.projects.dds_tutor.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'dds_tutor',
+    slug: 'desarrollo-software-3k1',
     sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.dds_tutor.milestone
   },
@@ -223,7 +223,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.portfolio.titleFull,
     date: { start: '2026-01', end: '2026-02' },
     isMain: false,
-    tags: ['Front-end', 'DevOps'],
+    tags: ['Front-end', 'Completed', 'Solo', 'Web App', 'Personal'],
     coreTechs: [
       'astro', 'typescript', 'tailwind', 'ghActions', 'ghPages'
     ],
@@ -247,7 +247,7 @@ export const PROJECTS = {
       description: I18N.projects.portfolio.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'portfolio',
+    slug: 'LucasCallamullo.github.io',
     sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.portfolio.milestone
   },
@@ -258,7 +258,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.ecommerce_dj.titleFull,
     date: { start: '2024-03', end: '2025-12' },
     isMain: true,
-    tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Completed', 'Web App', 'Solo', 'Personal'],
     coreTechs: [
       'python', 'django', 'pytest', 'javascript', 'tailwind',
       'postgresql', 'redis', 'docker', 'mercadoPago', 'nginx',
@@ -284,7 +284,7 @@ export const PROJECTS = {
       description: I18N.projects.ecommerce_dj.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'ecommerce_dj',
+    slug: 'E-commerce-Public-Demo',
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.ecommerce_dj.milestone
   },
@@ -295,7 +295,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.backend_tp.titleFull,
     date: { start: '2025-08', end: '2025-10' },
     isMain: false,
-    tags: ['Back-end', 'Database', 'DevOps', 'Microservices', 'Layered'],
+    tags: ['Back-end', 'Microservices', 'Layered', 'API', 'University', 'Team', 'Completed'],
     coreTechs: [
       'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 
     ],
@@ -319,7 +319,7 @@ export const PROJECTS = {
       description: I18N.projects.backend_tp.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'backend_tp',
+    slug: 'java-microservices-backend',
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.backend_tp.milestone
   },
@@ -330,7 +330,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.no_country.titleFull,
     date: { start: '2024-07', end: '2024-11' },
     isMain: false,
-    tags: ['Back-end', 'Front-end', 'DevOps', 'Database', 'Full-Stack', 'Monolith Modular'],
+    tags: ['Full-Stack', 'Monolith Modular', 'Layered', 'Archived', 'Team', 'Web App', 'NoCountry'],
     coreTechs: [
       'python', 'django', 'javascript', 'tailwind', 'railway',
     ],
@@ -354,7 +354,7 @@ export const PROJECTS = {
       description: I18N.projects.no_country.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'no_country',
+    slug: 'Antojitos_Ecommerce',
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.no_country.milestone
   },
@@ -365,7 +365,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.py_tutor.titleFull,
     date: { start: '2023-11', end: '2026-03' },
     isMain: false,
-    tags: ['Tutorial'],
+    tags: ['Completed', 'Team', 'Tutorial', 'University'],
     coreTechs: ['python', 'java', 'bash', 'git'],
     extraTechs: ['vscode', 'github'],
     otherTechs: null,
@@ -384,7 +384,7 @@ export const PROJECTS = {
       description: I18N.projects.py_tutor.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'py_tutor',
+    slug: 'Tutoring-Algorithms-Data-Structures',
     sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.py_tutor.milestone
   },
@@ -395,7 +395,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.university.titleFull,
     date: { start: '2023-03', end: null },
     isMain: false,
-    tags: ['Microservices', 'Monolith Modular', 'Full-Stack'],
+    tags: ['Microservices', 'Monolith Modular', 'Full-Stack', 'University'],
     coreTechs: ['python', 'java', 'springboot', 'react', 'docker', 'bash', 'linux'],
     extraTechs: [
       'nodejs', 'express', 'sequelize', 'javascript', 'html5', 'css3', 
@@ -421,7 +421,7 @@ export const PROJECTS = {
     titleFull: I18N.projects.pawn_cs.titleFull,
     date: { start: '2021-03', end: '2022-12' },
     isMain: false,
-    tags: [],
+    tags: ['Game Mod', 'Completed'],
     coreTechs: ['pawn', 'counterStrike', 'git'],
     extraTechs: ['github'],
     otherTechs: null,
@@ -439,7 +439,7 @@ export const PROJECTS = {
       description: I18N.projects.pawn_cs.project.description,
     },
     images: [{ ...imageDefault }],
-    slug: 'pawn_cs',
+    slug: 'pawn-project-mod-cs-game',
     sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.pawn_cs.milestone
   },
