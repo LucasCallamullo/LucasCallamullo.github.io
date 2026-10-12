@@ -1,15 +1,21 @@
 ---
 // src/pages/projects/[slug].astro
 import type { GetStaticPaths } from 'astro';
+import { Icon } from 'astro-icon/components';
 
-// src/pages/fleet_optimizer.astro
 import Section from '@/shared/components/Section.astro';
 import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro'; 
 
-import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
+import { resolveKey } from '@shared/scripts/navbar/translations';
+
 import { getNavHref } from '@/shared/data/links';
+import { getTechs } from '@/shared/data/tech_stack';
+import { getRepoLanguages } from '@/shared/data/github_stats';
 import { formatDateRange, PROJECTS } from '@/shared/data/projects';
+import { existSection, filterTags, getSections, getSection, TAG_CATEGORIES, titleCase } from '@/shared/data/tags';
+
+import ProjectLanguages from '@/projects/components/ProjectLanguages.astro';
 
 export const getStaticPaths = (() => {
   return Object.values(PROJECTS)
@@ -22,90 +28,396 @@ export const getStaticPaths = (() => {
 
 const { project: PROJECT } = Astro.props;
 
+// All Tags Filter stuff
+const allTags = filterTags(PROJECT.tags ?? [], null);
+
+// All sections dinamycs
+const sectionsToRender = getSections(PROJECT.sections ?? []);
+const STACK_SECTION = getSection(sectionsToRender, 'stack');
+const GALLERY_SECTION = getSection(sectionsToRender, 'gallery');
+const HISTORY_SECTION = getSection(sectionsToRender, 'history');
+const C4_SECTION = getSection(sectionsToRender, 'c4');
+const DER_SECTION = getSection(sectionsToRender, 'der');
+const FLOW_SECTION = getSection(sectionsToRender, 'flow');
+const NEXT_SECTION = getSection(sectionsToRender, 'next');
+
+
+// Core Stacks segregated 
+const coreStackList = getTechs([...PROJECT.coreTechs, ...PROJECT.extraTechs]);
+const otherStackList = getTechs([...PROJECT.otherTechs ?? []]);
+
+
+
+
+// Languages stats
+const languages = await getRepoLanguages(PROJECT.slug);
+
+const langStats = languages
+  ? (() => {
+      const total = Object.values(languages).reduce((a, b) => a + b, 0);
+      return Object.entries(languages)
+        .map(([name, bytes]) => ({
+          name,
+          bytes,
+          pct: (bytes / total) * 100,
+        }))
+        .sort((a, b) => b.bytes - a.bytes);
+    })()
+  : [];
+
 // Define page metadata
-const title = "Software Engineer · Fleet Optimizer · Callamullo Lucas";
+const title = `${PROJECT.title} · Callamullo Lucas`;
 ---
 
 <BaseLayout title={title} mainWidth="full">
 
   <!-- + MAIN DIV CONTAINER -->
-  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={["w-full flex flex-col border-b border-console pb-2", WIDTH_CLASSES.md]}>
 
-    <div class:list={["w-full gap-3 flex flex-col border-b border-console", WIDTH_CLASSES.md]}>
-
-      <div class="flex items-center gap-5">
-        <!-- Back link -->
-        <a class="flex hover-up items-center justify-center rounded-full" href={getNavHref('projects')}>
-          <Icon name="ri:arrow-left-circle-line" class="text-accent h-8 w-8" />
-        </a>
-
-
-        <h1 class="text-4xl font-bold" data-i18n={PROJECT.titleFull}>
-          <!-- PROJECT TITLE -->
-        </h1>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-3 text-sm text-surface-300 font_console">
-        <span class="flex items-center gap-1">
+      <!-- TAGS ARCHITECTURE & DATE TIME -->
+      <div class="flex flex-wrap items-center gap-3 font_console justify-end mt-2">
+        <span class="flex items-center gap-2 text-sm">
           <Icon name="ri:calendar-line" class="w-4 h-4" />
           {formatDateRange(PROJECT.date)}
         </span>
-        <span class="flex items-center gap-1">
-          <Icon name="ri:flag-line" class="w-4 h-4" />
-          <span data-i18n=''>Final project · UTN FRC</span>
-        </span>
       </div>
 
-      <!-- Tags -->
-      <p>
-        
-      </p>
 
-      <!-- Summary -->
-      <p>
-        
-      </p>
+      <div class="flex items-center gap-5">
+        <!-- Back link -->
+        <a class="flex hover-up items-center justify-center rounded-full" 
+          href={getNavHref('projects')} aria-label="Back to projects" title="Back to projects"
+        >
+          <Icon name="ri:arrow-left-circle-line" class="text-accent h-8 w-8" />
+        </a>
 
-      <!-- INDICE OF CONTENT -->
-      <ul>
-        <li>1. Links App</li>  <!-- Github, youtube, deploys etc -->
-        <li>2. Core Stack</li>
-        <li>3. Images App</li>
-        <li>4. More description history</li>
-        <li>5. C4 Model</li>  <!-- Varia segun proyecto, los mas nuevos casi seguro tendran -->
-        <li>6. DER</li>       <!-- Varia segun proyecto, los mas nuevos casi seguro tendran -->
-        
-        <li>7, 8, 9 . More Flows</li> <!-- A portir de aca puede variar mucho entre proyectos -->
-        <li>10. Contact</li>   <!-- Final seccion, ver otros proyectos o algo asi -->
-      </ul>
-    </div>
-  </Section>
-
-
-  <!-- + MAIN DIV CONTAINER -->
-  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
-
-    <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
-
-      <h1 class="text-4xl font-bold" data-i18n>
-        MORE CONTECT
-      </h1>
-
-      <p>
-
-      </p>
+        <h1 class="text-4xl font-bold" data-i18n={PROJECT.titleFull}>
+          <!-- PROJECT TITLE -->
+          {resolveKey(PROJECT.titleFull)}
+        </h1>
+      </div>
 
     </div>
   </Section>
 
+
+  <!-- + CONTENTO LINKS & TAGS CONTAINER -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={["w-full flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+      <div class="grid md:grid-cols-2 gap-3 md:gap-4">
+
+        <div class="flex flex-col">
+
+          <!-- INDICE PROJECT -->
+          <h2 class="flex gap-2 items-center text-2xl font-semibold">
+            <Icon name="ri:crosshair-2-line" class="h-4.5 w-4.5"></Icon>
+            <span data-i18n={I18N.projectsSlug.indice}>On this page</span>
+          </h2>
+
+          <ul class="flex flex-wrap flex-row gap-4 mt-3">
+            {sectionsToRender.map((sec) => (
+              <li class="hover-up-lg group"> 
+                <a class="px-2.5 py-1 rounded bg-surface-800 flex gap-2 items-center
+                  group-hover:text-console" href={`#${sec.id}`} title={titleCase(sec.label)}
+                >
+                  <Icon name={sec.icon} class="w-4 h-4 text-accent" />
+                  <span class="font_console tracking-wider text-base" data-i18n={sec.i18n}>{sec.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <!--Tags -->
+          <h3 class="flex gap-2 items-center text-lg mt-4.5 font-semibold"> 
+            <Icon name="ri:price-tag-3-line" class="h-4 w-4"></Icon>
+            <span data-i18n={I18N.projectsSlug.tagsTitle}>Key concepts</span>
+          </h3>
+
+          <div class="flex flex-wrap gap-2.5 h-min w-full font_console mt-1.5"> 
+            <!-- Tags -->
+            {allTags.map(tag => {
+              const cat = TAG_CATEGORIES[tag.category];
+              return (
+                <div class:list={[
+                  "px-2.5 py-1 rounded text-sm font_console tracking-wide text-pink-50",
+                  "font_console flex",
+                  cat.bg 
+                ]}>
+                  <span data-i18n={cat.i18n}>{tag.category}</span>:&nbsp;
+                  <span data-i18n={tag.i18n}>{tag.label}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          <!-- LINKS SECTION -->
+          {existSection(sectionsToRender, 'links') && ( 
+            <div class="scroll-mt-20 pt-4.5" id="links">
+              <h3 class="flex gap-2 items-center text-lg font-semibold" >
+                <Icon name="ri:link" class="h-4.5 w-4.5"></Icon>
+                <span>Links:</span>
+              </h3>
+
+              <div class="flex gap-3 mt-1.5 flex-wrap items-center justify-center">
+                {PROJECT.links.map((link) => {
+                  return <a class="flex hover-up items-center justify-center h-10 px-2 py-1.5 gap-2
+                    btn_notched btn_notched_surface_900" title=""
+                    href={link.href} target={(link.newTab) ? "_blank" : ''}
+                  >
+                    <Icon name={link.icon} class="text-accent h-5 w-5"></Icon>
+                    <span class="font_console tracking-wider truncate text-base" data-i18n={link.i18n}>
+                      {link.altText}
+                    </span>
+                  </a>
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+        
+        <!-- Summary -->
+        <div data-i18n={PROJECT.project?.summary} data-i18n-join="newlineIcon"
+          class="flex flex-col gap-2.5 text-base text-content-muted font_console text-justify"
+        >
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- + SECTION WITH ID | CORE STACK ; use scroll-mt-20 -->
+  {STACK_SECTION && (  
+    <Section class:list={['bg-surface-800 scroll-mt-20' , WIDTH_CLASSES.full]} id={STACK_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        {/* <!-- TITLE CORE STACK --> */}
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={STACK_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={STACK_SECTION.i18n}>Core Stack</span>
+        </h2>
+
+        <div class="grid md:grid-cols-[1fr_min-content] gap-3 md:gap-4">
+
+          <div class="flex flex-col gap-3">
+            {/* <!-- coreStackList otherStackList  --> */}
+            <div class="flex flex-wrap gap-2.5 bg-surface-900 p-4 rounded-2xl">
+              {coreStackList.map(tech => {
+                return <button class="flex items-center gap-2 w-min h-min px-2.5 py-1.5 cursor-pointer rounded-2xl z-30
+                  cont_btns_3d__btn_effect border border-console-400 btn__glass_effect">
+                  <Icon
+                    name={tech.icon}
+                    class={`w-6 h-6 ${tech.isOnlyLightTheme ? 'bg-white rounded-md p-0.5' : ''}`}
+                  />
+                  <span class="font_console text-sm text-content-main truncate">
+                    {tech.name}
+                  </span>
+                </button>
+              })}
+            </div>
+
+            {otherStackList.length > 0 && ( 
+              <h3 class="text-xl font-semibold font_console flex gap-2 items-center">
+                <Icon name="ri:stack-fill" class="h-4 w-4"></Icon>
+                <span data-i18n={I18N.projectsSlug.stackSub}>Other Techs</span>
+              </h3>
+
+              <div class="flex flex-wrap gap-2.5 bg-surface-900 p-4 rounded-2xl">
+                {otherStackList.map(tech => {
+                  return <button class="flex items-center gap-2 w-min h-min px-2.5 py-1.5 cursor-pointer rounded-2xl z-30
+                    cont_btns_3d__btn_effect border border-console-400 btn__glass_effect">
+                    <Icon
+                      name={tech.icon}
+                      class={`w-6 h-6 ${tech.isOnlyLightTheme ? 'bg-white rounded-md p-0.5' : ''}`}
+                    />
+                    <span class="font_console text-sm text-content-main truncate">
+                      {tech.name}
+                    </span> 
+                  </button>
+                })}
+              </div>
+            )}
+          </div>
+
+          <div>
+            {/* <!-- Donut (por defecto) kind="donut" --> */}
+            {langStats.length > 0 && (
+              <ProjectLanguages langs={langStats} title="Stack breakdown" data_i18n={I18N.projectsSlug.graph} />
+            )}
+          </div>
+        </div>
+      </div>
+    </Section>
+  )}
+
+
+
+  <!-- + SECTION WITH ID SECTIONS ; use scroll-mt-20 -->
+  {GALLERY_SECTION && (
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={GALLERY_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        {/* <!-- TITLE GALLERY --> */}
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={GALLERY_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={GALLERY_SECTION.i18n}>Gallery</span>
+        </h2>
+
+
+        <div class="h-50 grid grid-cols-2 md:grid-cols-4 w-full" id="contBtnsModal">
+          {PROJECT.images.map((img) => (
+            <button class="imageBtn" data-src={img.href}>
+              <img
+                src={img.href}
+                alt={img.altText || 'Image'}
+                loading="lazy"
+                class="object-contain h-full w-full cursor-zoom-in hover:opacity-90 transition-opacity"
+              />
+            </button>
+          ))}
+        </div>
+
+
+        {/* <!-- ============================= 
+        +   MODAL IMAGE VIEWS
+        ============================= --> */}
+        <div
+          id="imagesView"
+          class:list={[
+            "modal border-b border-surface-800 bg-surface-900 place-self-center",
+            "w-3/4 h-4/5", 
+            WIDTH_CLASSES.md
+        ]}>
+          {/* <!-- El padding siempre a modal_content que no aplica cierre --> */}
+          <div class="modal__content max-h-full max-w-full h-full flex flex-col min-h-0 relative p-3">
+
+            <button class="modal__btn_close p-2 hover:bg-red-500 group absolute right-1 top-1
+              rounded-lg bg-surface-200 text-content-main border border-surface-800 cursor-pointer"
+              type="button"
+            >
+              <Icon name="ri:close-large-line" class="w-4.5 h-4.5 group-hover:text-white" />
+            </button>
+
+            <img src="" alt="" class="flex-1 min-h-0 w-full object-contain">
+          </div>
+        </div>
+
+        <div id="imagesOverlay" class="overlay"></div>
+
+      </div>
+    </Section>
+  )}
+
+
+
+  <!-- + SECTION HISTORY ; use scroll-mt-20 -->
+  { HISTORY_SECTION && (
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={HISTORY_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={HISTORY_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={HISTORY_SECTION.i18n}>History</span>
+        </h2>
+
+        {/* <!-- Description so so so long --> */}
+        <div data-i18n={PROJECT.project?.description} data-i18n-join="newline"
+          class="flex flex-col gap-4 text-base text-content-muted font_console text-justify"
+        >
+        </div>
+      </div>
+    </Section>
+  )}
+
+  
+
+  <!-- + SECTION C4 MODEL ; use scroll-mt-20 -->
+  { C4_SECTION && (
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={C4_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        {/* <!-- TITLE C4 MODEL --> */}
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={C4_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={C4_SECTION.i18n}>C4 Model</span>
+        </h2>
+
+        <span> Coming soon </span>
+      </div>
+    </Section>
+  )}
+
+
+
+  <!-- + SECTION DER ; use scroll-mt-20 -->
+  { DER_SECTION && (
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={DER_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        {/* <!-- TITLE DER --> */}
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={DER_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={DER_SECTION.i18n}>DER</span>
+        </h2>
+
+        <span> Coming soon </span>
+      </div>
+    </Section>
+  )}
+
+
+
+  <!-- + SECTION FLOW ; use scroll-mt-20 -->
+  { FLOW_SECTION && (
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={FLOW_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        {/* <!-- TITLE FLOWSS --> */}
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={FLOW_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={FLOW_SECTION.i18n}>Some Flow Diagram</span>
+        </h2>
+
+        <span> Coming soon </span>
+
+      </div>
+    </Section>
+  )}
+
+
+
+  <!-- + SECTION OTHER ; use scroll-mt-20 -->
+  { NEXT_SECTION && (
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={NEXT_SECTION.id} paddingY={false}>
+      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+
+        {/* <!-- TITLE NEXT PROJECTS --> */}
+        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
+          <Icon name={NEXT_SECTION.icon} class="h-5 w-5"></Icon>
+          <span data-i18n={NEXT_SECTION.i18n}>Other Projects:</span>
+        </h2>
+
+        <span> Coming soon </span>
 
 
         <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
-        btn_notched btn_notched_surface_900" href={getNavHref('home')}>
-        <Icon name="ri:arrow-left-circle-line" class="text-accent h-6 w-6"></Icon>
-        <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.page404.btn}>
-          Go back home
-        </span>
-      </a>
+          btn_notched btn_notched_surface_900" 
+          href={getNavHref('home')}
+        >
+          <Icon name="ri:arrow-left-circle-line" class="text-accent h-6 w-6"></Icon>
+          <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.page404.btn}>
+            Go back home
+          </span>
+        </a>
+
+      </div>
+    </Section>
+  )}
+
+
+  <script>
+    import { initModals } from "@/projects/scripts/init";
+    initModals()
+  </script>
 
 </BaseLayout>
