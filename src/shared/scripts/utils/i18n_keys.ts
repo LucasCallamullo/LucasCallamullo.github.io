@@ -177,6 +177,75 @@ export const I18N = {
     }
   },
 
+  // Projects Slug stuff, Sections, tags, etc
+  projectsSlug: {
+    indice: 'projectsSlug.indice',
+    tagsTitle: 'projectsSlug.tagsTitle',
+    stackSub: 'projectsSlug.stackSub',
+    graph: 'projectsSlug.graph',
+
+    sections: {
+      links:   'projectsSlug.sections.links',
+      stack:   'projectsSlug.sections.stack',
+      gallery: 'projectsSlug.sections.gallery',
+      history: 'projectsSlug.sections.history',
+      c4:      'projectsSlug.sections.c4',
+      der:     'projectsSlug.sections.der',
+      flow:    'projectsSlug.sections.flow',
+      next:    'projectsSlug.sections.next',
+    },
+  },
+
+  tags: {
+    // ── Categories ──────────────────────────────────────
+    category: {
+      architecture: 'tags.category.architecture',
+      structure:    'tags.category.structure',
+      scope:        'tags.category.scope',
+      context:      'tags.category.context',
+      type:         'tags.category.type',
+      status:       'tags.category.status',
+      team:         'tags.category.team',
+    },
+
+    // ── Tag labels ──────────────────────────────────────
+    microservices:   'tags.microservices',
+    monolithModular: 'tags.monolithModular',
+
+    layered: 'tags.layered',
+    onion:   'tags.onion',
+
+    fullStack: 'tags.fullStack',
+    backend:   'tags.backend',
+    frontend:  'tags.frontend',
+
+    university: 'tags.university',
+    personal:   'tags.personal',
+    freelance:  'tags.freelance',
+    noCountry:  'tags.noCountry',
+    course:     'tags.course',
+    tutorial:   'tags.tutorial',
+
+    webApp:    'tags.webApp',
+    mobileApp: 'tags.mobileApp',
+    api:       'tags.api',
+    cli:       'tags.cli',
+    gameMod:   'tags.gameMod',
+
+    completed:  'tags.completed',
+    inProgress: 'tags.inProgress',
+    archived:   'tags.archived',
+
+    solo:        'tags.solo',
+    team:        'tags.team',
+    lead:        'tags.lead',
+    pair:        'tags.pair',
+    contributor: 'tags.contributor',
+  },
+
+
+
+
   contact: {
     title: 'contact.title',
     subtitle: 'contact.subtitle',

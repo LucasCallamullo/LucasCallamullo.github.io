@@ -83,6 +83,12 @@ function formatTranslationValue(
       .map((line) => `<span>${escapeHtml(line)}</span>`)
       .join('');
   }
+  
+  if (joinMode === 'newlineIcon') {
+    return value
+      .map((line) => `<span>${escapeHtml(line)}</span>`)
+      .join('');
+  }
 
   // Manejo de arreglos según el atributo data-i18n-join
   switch (joinMode) {
@@ -165,7 +171,7 @@ export function applyTranslations(
       const textOrSpans = formatTranslationValue(value, dataJoin);
 
       // directamente agrego los span al element, util para descriptions y styles
-      if (dataJoin === 'newline') {
+      if (dataJoin === 'newline' || dataJoin === 'newlineIcon') {
         el.innerHTML = textOrSpans;
         return;
       }
