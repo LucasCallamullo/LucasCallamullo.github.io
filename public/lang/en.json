@@ -191,8 +191,69 @@
 
 
 
+  "projectsSlug": {
+    "indice": "On this page",
+    "tagsTitle": "Key concepts",
+    "stackSub": "Other Techs",
+    "graph": "Stack breakdown",
+
+    "sections": {
+      "links":   "Links",
+      "stack":   "Core Stack",
+      "gallery": "Gallery",
+      "history": "History",
+      "c4":      "C4 Model",
+      "der":     "Database Schema (DER)",
+      "flow":    "Flow",
+      "next":    "More projects"
+    }
+  },
 
 
+ "tags": {
+    "category": {
+      "architecture": "Architecture",
+      "structure":    "Structure",
+      "scope":        "Scope",
+      "context":      "Context",
+      "type":         "Type",
+      "status":       "Status",
+      "team":         "Team"
+    },
+
+    "microservices":   "Microservices",
+    "monolithModular": "Monolith Modular",
+
+    "layered": "Layered",
+    "onion":   "ONION",
+
+    "fullStack": "Full-Stack",
+    "backend":   "Back-end",
+    "frontend":  "Front-end",
+
+    "university": "University",
+    "personal":   "Personal",
+    "freelance":  "Freelance",
+    "noCountry":  "No Country",
+    "course":     "Course",
+    "tutorial":   "Tutorial",
+
+    "webApp":    "Web App",
+    "mobileApp": "Mobile App",
+    "api":       "API",
+    "cli":       "CLI",
+    "gameMod":   "Game Mod",
+
+    "completed":  "Completed",
+    "inProgress": "In Progress",
+    "archived":   "Archived",
+
+    "solo":        "Solo",
+    "team":        "Team",
+    "lead":        "Lead",
+    "pair":        "Pair",
+    "contributor": "Contributor"
+  },
 
 
 

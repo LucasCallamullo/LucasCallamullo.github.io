@@ -186,10 +186,69 @@
 
 
 
+  "projectsSlug": {
+    "indice": "En esta página",
+    "tagsTitle": "Conceptos clave",
+    "stackSub": "Otras Techs",
+    "graph": "Composición del Stack",
+
+    "sections": {
+      "links":   "Links",
+      "stack":   "Core Stack",
+      "gallery": "Galería",
+      "history": "Historia",
+      "c4":      "C4 Model",
+      "der":     "Esquema DB (DER)",
+      "flow":    "Flows",
+      "next":    "Más proyectos"
+    }
+  },
 
 
+  "tags": {
+    "category": {
+      "architecture": "Arquitectura",
+      "structure":    "Estructura",
+      "scope":        "Alcance",
+      "context":      "Contexto",
+      "type":         "Tipo",
+      "status":       "Estado",
+      "team":         "Equipo"
+    },
 
+    "microservices":   "Microservicios",
+    "monolithModular": "Monolito Modular",
 
+    "layered": "Layered",
+    "onion":   "ONION",
+
+    "fullStack": "Full-Stack",
+    "backend":   "Back-end",
+    "frontend":  "Front-end",
+
+    "university": "Universidad",
+    "personal":   "Personal",
+    "freelance":  "Freelance",
+    "noCountry":  "No Country",
+    "course":     "Curso",
+    "tutorial":   "Tutorial",
+
+    "webApp":    "App Web",
+    "mobileApp": "App Mobile",
+    "api":       "API",
+    "cli":       "CLI",
+    "gameMod":   "Game Mods",
+
+    "completed":  "Completado",
+    "inProgress": "En progreso",
+    "archived":   "Archivado",
+
+    "solo":        "Solo",
+    "team":        "Equipo",
+    "lead":        "Líder",
+    "pair":        "En pareja",
+    "contributor": "Colaborador"
+  },
 
 
 
