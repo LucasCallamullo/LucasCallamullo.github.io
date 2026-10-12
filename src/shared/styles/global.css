@@ -39,6 +39,15 @@
   --color-console-100: var(--console-color-100);
   --color-console-400: var(--console-color-400);
   --color-accent: var(--accent-color);
+
+    /* ── Tag category colors ───────────────────────────────── */
+  --color-tag-architecture: var(--tag-architecture);
+  --color-tag-structure:    var(--tag-structure);
+  --color-tag-scope:        var(--tag-scope);
+  --color-tag-context:      var(--tag-context);
+  --color-tag-type:         var(--tag-type);
+  --color-tag-status:       var(--tag-status);
+  --color-tag-team:         var(--tag-team);
 }
 
 /** ==========================================================================
@@ -51,7 +60,16 @@
   --color-green-100: #10b981;
   --color-wsp: #2db742;
 
-  --height-header: 80px
+  --height-header: 80px;
+
+  /* Tag colors — tonos más brillantes para que se lean sobre fondo oscuro */
+  --tag-architecture: #fbbf24;  /* amber-400 */
+  --tag-structure:    #a78bfa;  /* violet-400 */
+  --tag-scope:        #34d399;  /* emerald-400 */
+  --tag-context:      #38bdf8;  /* sky-400 */
+  --tag-type:         #e879f9;  /* fuchsia-400 */
+  --tag-status:       #4ade80;  /* green-400 */
+  --tag-team:         #fb7185;  /* rose-400 */
 }
 
 /** ==========================================================================
@@ -81,6 +99,15 @@
   --console-color-400: #2e7d32; 
 
   --accent-color: #c47d00;
+
+    /* Tag colors — tonos más oscuros para que se lean sobre fondo claro */
+  --tag-architecture: #b45309;  /* amber-700 */
+  --tag-structure:    #6d28d9;  /* violet-700 */
+  --tag-scope:        #047857;  /* emerald-700 */
+  --tag-context:      #0369a1;  /* sky-700 */
+  --tag-type:         #a21caf;  /* fuchsia-700 */
+  --tag-status:       #15803d;  /* green-700 */
+  --tag-team:         #be123c;  /* rose-700 */
 }
 
 /* Dark Theme */

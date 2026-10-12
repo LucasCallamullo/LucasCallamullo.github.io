@@ -14,11 +14,19 @@ export interface ModalElements {
   
 }
 
+export interface ModalOpenContext {
+  modal: HTMLElement;
+  overlay?: HTMLElement;
+  controller: ModalController;
+  /** Element that triggered the open, if it came from a click. */
+  trigger?: HTMLElement | null;
+}
+
 export interface ModalCallbacks {
   /** Fired immediately after the modal opens. */
-  onOpen?: () => void;
+  onOpen?: (ctx: ModalOpenContext) => void;
   /** Fired immediately after the modal closes. */
-  onClose?: () => void;
+  onClose?: (ctx: ModalOpenContext) => void;
 }
 
 // -----------------------------------------------------------------------------
@@ -134,8 +142,8 @@ export class ModalController {
 
   private _isOpen = false;
   private _setEventClick = false;
-  private onOpen?: () => void;
-  private onClose?: () => void;
+  private onOpen?: (ctx: ModalOpenContext) => void;
+  private onClose?: (ctx: ModalOpenContext) => void;
 
   constructor(
     {
@@ -165,11 +173,23 @@ export class ModalController {
     return this._isOpen;
   }
 
+  // pass the context
+  private notify(kind: 'open' | 'close', trigger?: HTMLElement | null): void {
+    const ctx: ModalOpenContext = {
+      modal: this.modal,
+      overlay: this.overlay,
+      controller: this,
+      trigger: trigger ?? null,
+    };
+    if (kind === 'open') this.onOpen?.(ctx);
+    else this.onClose?.(ctx);
+  }
+
   /**
    * Opens the modal, updates z-index hierarchy, disables body scroll,
    * and pushes a new dummy entry to browser history.
    */
-  public open(): void {
+  public open(trigger?: HTMLElement | null): void {
     if (__logging) console.log('[open] called. isOpen:', this._isOpen, 'stack:', openModals.length);
     if (this._isOpen) return;
 
@@ -195,7 +215,8 @@ export class ModalController {
 
     if (__logging) console.log('[open] called. Phase 2:', this._isOpen, 'stack Modals:', depth);
 
-    this.onOpen?.();
+    // this.onOpen?.();
+    this.notify('open', trigger);
   }
 
   /**
@@ -238,7 +259,8 @@ export class ModalController {
       document.body.style.overflow = '';
     }
 
-    this.onClose?.();
+    // this.onClose?.();
+    this.notify('close');
   }
 
   /**
@@ -339,36 +361,71 @@ export interface ModalBinding {
   overlaySelector?: string;
   /** ID of the button that opens the modal (optional). */
   openBtnSelector?: string;
+
+  /** ID of the container to delegate event ; use openBtnSelector like class to delegate event */
+  contBtnToDelegate?: string | null;
+
   /** Optional callbacks. */
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen?: (ctx: ModalOpenContext) => void;
+  onClose?: (ctx: ModalOpenContext) => void;
 }
 
 /**
  * Create a ModalController from DOM ids and optionally wire an open button.
  * Returns null if the modal element is not found.
  */
+/**
+ * Create a ModalController from DOM ids and optionally wire an open button.
+ * Returns null if the modal element is not found.
+ */
 export function bindModal(binding: ModalBinding): ModalController | null {
+  // Resolve the modal root element; bail out if it doesn't exist.
   const modal = document.querySelector<HTMLElement>(binding.modalSelector);
   if (!modal) return null;
 
+  // Resolve the optional overlay element.
   const overlay = binding.overlaySelector
     ? document.querySelector<HTMLElement>(binding.overlaySelector) ?? undefined
     : undefined;
 
+  // Instantiate the controller with the resolved elements and forwarded callbacks.
   const controller = new ModalController(
     { modal, overlay },
     { onOpen: binding.onOpen, onClose: binding.onClose }
   );
 
-  if (binding.openBtnSelector) {
+  // Wire a direct click listener when there's no delegation container.
+  if (binding.contBtnToDelegate == null && binding.openBtnSelector) {
     const btn = document.querySelector<HTMLElement>(binding.openBtnSelector);
     btn?.addEventListener('click', (e) => {
       e.stopPropagation();
-      controller.open();
+      controller.open(btn);
     });
   }
 
+  // Wire a delegated click listener scoped to the container.
+  if (binding.contBtnToDelegate && binding.openBtnSelector) {
+    const container = document.querySelector<HTMLElement>(binding.contBtnToDelegate);
+
+    container?.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+
+      // Find the closest ancestor (or self) matching the trigger selector.
+      const trigger = target.closest<HTMLElement>(binding.openBtnSelector!);
+      if (!trigger) return;
+
+      // Ensure the matched trigger is actually inside this container.
+      if (!container.contains(trigger)) return;
+
+      // Stop the event from bubbling past this container.
+      e.stopPropagation();
+
+      // Open the modal via the controller.
+      controller.open(trigger);
+    });
+  }
+
+  // Return the controller so callers can open/close programmatically.
   return controller;
 }
 
