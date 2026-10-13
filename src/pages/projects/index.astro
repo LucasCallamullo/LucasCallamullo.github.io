@@ -74,42 +74,49 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
               </div>
 
               {/* FUTURE BTN MODAL RESUME   flex */}
-              <button class="hidden absolute right-0 top-0 rounded-tr-xl rounded-bl-xl cursor-pointer
-                justify-center items-center px-3 py-1.5 bg-console-400">
-                <Icon name="ri:fullscreen-fill" class="h-5 w-5"></Icon>
-              </button>
+              <a class="absolute right-0 top-0 rounded-tr-xl rounded-bl-xl cursor-pointer group
+                justify-center items-center px-3 py-1.5 bg-console-400"
+                title="View more details" href=`/projects/${p.slug}`
+              >
+                <Icon name="ri:eye-fill" class="h-5 w-5 text-content-main/40 group-hover:text-content-main hover-up"></Icon>
+              </a>
  
               <img src={p.images[0].href} alt={p.title} class="h-full w-full object-cover rounded-t-xl">
             </div>
 
             {/* TECH LABELS RESUME */}
-            <div class="flex flex-col px-3 pt-3 pb-5 bg-surface-900 rounded-b-xl font_console flex-1">
+            <div class="flex flex-col px-3 pt-2 pb-3.5 bg-surface-900 rounded-b-xl font_console flex-1">
               <h3 class="text-console text-lg tracking-wider" data-i18n={p.title}></h3>
 
               {/* DESCRIPTION */}
               <div data-i18n={p.project?.summary} data-i18n-join="newline"
-                class="flex flex-col gap-3 text-base text-content-muted mt-4"
+                class="flex flex-col gap-3 text-sm text-content-muted/90 mt-1.5 indent-5 text-justify"
               >
               </div>
 
-              <div class="flex flex-wrap gap-2 mt-3">
-                {getTechs([...p.coreTechs, ...p.extraTechs]).map((tech) => (
+              <div class="flex flex-wrap gap-2 mt-2">
+                {getTechs([...p.coreTechs]).map((tech) => (
                   <div class="flex gap-2 px-2.5 py-1 items-center justify-center rounded-xl bg-surface-200
                     border border-console-400 hover-up group"
                   >
-                    <Icon name={tech.icon} class="h-4 w-4"> </Icon> 
-                    <span class="text-base group-hover:text-console-100">{tech.name}</span>
+                    <Icon
+                      name={tech.icon}
+                      class={
+                        `h-4 w-4
+                        ${tech.isOnlyLightTheme ? 'bg-white rounded-2xl p-0.5' : ''}`}
+                    />
+                    <span class="text-sm group-hover:text-console-100">{tech.name}</span>
                   </div>
                   
                 ))} 
               </div>
 
-              <div class="flex flex-wrap gap-3 mt-5">
+              <div class="flex flex-wrap gap-3 mt-4">
                 {p.links.map((link) => (
-                  <a class="flex gap-2 px-3.5 py-1.5 items-center justify-center rounded-2xl
+                  <a class="flex gap-1.5 px-2 py-1 items-center justify-center rounded-2xl
                     text-black bg-blue-200 hover:bg-blue-400 
                     border border-console-400 hover-up-lg"
-                    href={link.href} target="_blank"
+                    href={link.href} target="_blank" title=""
                   >
                     <Icon name={link.icon} class="h-5 w-5"> </Icon> 
                     <span class="text-base" data-i18n={link.i18n}>
@@ -117,13 +124,13 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
                   </a>
                 ))}
 
-                <a class="flex gap-2 px-3.5 py-1.5 items-center justify-center rounded-2xl
+                <a class="flex gap-1.5 px-2 py-1 items-center justify-center rounded-2xl text-base
                   text-black bg-blue-200 hover:bg-blue-400 
                   border border-console-400 hover-up-lg"
-                  href={getProjectHref(p.slug)}
+                  href={getProjectHref(p.slug)} title="View more details"
                 >
                   <Icon name="devicon:astro" class="h-5 w-5"> </Icon> 
-                  <span class="text-base" data-i18n={I18N.projectsPage.projects.details}>
+                  <span data-i18n={I18N.projectsPage.projects.details}>
                     More details
                   </span>
                 </a>
@@ -165,7 +172,7 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
           <a class="flex justify-center items-center gap-2 py-2 w-40
             btn__glass_effect bg-console-400 rounded-3xl hover-up-lg flex-1
             border-2 border-console-100" 
-            href={getNavHref('github')} target="_blank"
+            href={getNavHref('github')} target="_blank" title="Go GitHub"
           > 
             <Icon name="ri:github-line" class="h-5 w-5"></Icon>
             <span class="truncate">GitHub</span> 

@@ -4,14 +4,17 @@ import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
 import Section from '@shared/components/Section.astro'
 import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
 import ProjectsModal from '@/features/projects/components/ModalProjects.astro';
+import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
+
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 import { getGroupedTechs, getTitleBtnModals } from '@shared/data/tech_stack';
-import { topLangsUrl } from '@shared/data/github_stats';
+import { makeLangStats } from '@shared/data/github_stats';
 import { getNavHref } from '@shared/data/links';
 
 import { fade } from 'astro:transitions';
+
 
 const groups = getGroupedTechs({ 
   categories:[
@@ -35,6 +38,9 @@ const cardsCarousel: Card[] = mainStack.flatMap((group) =>
     id: t.id ?? '',     
   }))
 );
+
+// Languages stats 
+const langStats = await makeLangStats(null);
 
 // Define page metadata
 const title = "Skills · Callamullo Lucas · Software Engineer";
@@ -63,8 +69,8 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
 
   <!-- + section of MAIN SKILLS -->
-  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class:list={['px-2 md:px-1 py-6 w-full', WIDTH_CLASSES.md]}>
+  <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={['px-2 md:px-1 py-8 w-full h-min', WIDTH_CLASSES.md]}>
 
       <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
         data-reveal data-multi-anim
@@ -118,36 +124,57 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
       </div>
 
       <!-- STATS AND BTN GH -->
-      <div class="mt-6 flex w-full gap-5 items-center justify-center h-min relative">
+      <div class="mt-5 flex w-full gap-5 items-center justify-center h-min">
 
-        <a class="absolute! left-0 bottom-0 font_console rounded-3xl btn_w_tag 
-          border cursor-pointer group hover-up-lg border-console-400" 
-          href={getNavHref('github')} target="_blank"
-        >
-          <span class="btn_w_tag__top py-1.5 rounded-3xl flex items-center text-white
-            justify-center bg-console-400 text-base truncate w-full! ml-0!" data-i18n=''>
-            See GitHub!
-          </span>
-          
-          <div class="flex gap-2 items-center justify-center text-content-main py-2 px-3 
-            btn_move__cont_svg group-hover:btn_move__cont_svg:hover group-hover:bg-green-800 rounded-3xl"
-          >
-            <Icon name="ri:github-fill" class="h-6.5 w-6.5 btn_move__svg_svg group-hover:text-white"></Icon>
-            <span class="truncate text-base group-hover:text-white" data-i18n=''>Go GitHub</span>
-          </div>
-        </a>
-
+        <!-- 
         <img src={topLangsUrl} alt="GitHub Top languages" loading="lazy" 
-          class="w-full md:w-[40%] h-full self-center place-self-center">
+          class="w-full md:w-[40%] h-full self-center place-self-center">  -->
+
+        <div id="donutSkills">
+          {/* <!-- Donut (por defecto) kind="donut" --> */}
+          {langStats && langStats.length > 0 && (
+            <ProjectLanguages langs={langStats} 
+              title="Stack breakdown · Featured projects" 
+              data_i18n="" 
+            >
+
+              <div class="flex justify-between items-start">
+                <a class="font_console rounded-3xl btn_w_tag cursor-pointer
+                  border group hover-up border-console-400" 
+                  href={getNavHref('github')} target="_blank"
+                >
+                  <span class="btn_w_tag__top py-1 rounded-3xl flex items-center text-white
+                    justify-center bg-console-400 text-sm truncate w-full! ml-0!" data-i18n=''>
+                    See GitHub!
+                  </span>
+                  
+                  <div class="flex gap-2 items-center justify-center text-content-main py-1 px-1.5 
+                    btn_move__cont_svg group-hover:btn_move__cont_svg:hover group-hover:bg-green-800 rounded-3xl"
+                  >
+                    <Icon name="ri:github-fill" class="h-5 w-5 btn_move__svg_svg group-hover:text-white"></Icon>
+                    <span class="truncate text-sm group-hover:text-white" 
+                      data-i18n={I18N.links.other_github}>Go GitHub</span>
+                  </div>
+                </a>
+
+                <button title="View selected projects"
+                  class="cursor-pointer text-sm text-content-muted hover:text-accent self-end 
+                    flex gap-1.5 items-center"
+                  data-tech="REPOS_TO_DONUT"
+                >
+                  <Icon name="ri:stack-line" class="h-5 w-5"></Icon>
+                  <span data-i18n={I18N.projectsPage.donutSkillsSubtitle}>Ver proyectos seleccionados</span>
+                </button>
+              </div>
+            </ProjectLanguages>
+          )}
+
+
+        </div>
       </div>
 
     </div>
   </Section>
-
-
-  <!-- + MODAL PROJECTS COMPONENTS -->
-  <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>
-
 
   <!-- + SECTION ---- STACK CAROUSEL MAIN CARDS -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false} paddingX={false}>
@@ -244,6 +271,9 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
     </div>  
   </Section>
 
+
+  <!-- + MODAL PROJECTS COMPONENTS -->
+  <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>
 
   <script>
     import { initSetupSkills } from "@/features/skills/scripts/init";

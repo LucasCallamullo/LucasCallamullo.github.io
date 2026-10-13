@@ -66,7 +66,7 @@ const title = "About · Callamullo Lucas · Software Engineer";
       WIDTH_CLASSES.md
     ]}>
 
-      <CardSection class="bg-surface-900 max-w-3xl md:col-span-2 gap-3 cont_animate__from_left_lg w-full" 
+      <CardSection class="bg-surface-900 max-w-3xl md:col-span-2 gap-3 cont_animate__from_left_lg w-full font_console" 
         hover={false} bordered={true} data-reveal>
 
         <h2 class="font_console text-2xl flex gap-2 border-b-2 pb-3 w-full border-content-muted">
@@ -75,25 +75,25 @@ const title = "About · Callamullo Lucas · Software Engineer";
           <span>bio.txt</span>
         </h2>
 
-        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p1} data-reveal>
+        <p class="text-base text-justify indent-5 cont_animate__from_left" data-i18n={I18N.about.bio.p1} data-reveal>
           Hi! I'm Lucas Callamullo, a Backend / Full stack developer based in Córdoba, Argentina.
         </p>
 
-        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p2} data-reveal>
+        <p class="text-base text-justify indent-5 cont_animate__from_left" data-i18n={I18N.about.bio.p2} data-reveal>
           I've been fascinated by programming logic ever since I started modifying game mods. 
           I probably spend more time than I should coding some idea.
         </p>
-        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p3} data-reveal>
+        <p class="text-base text-justify indent-5 cont_animate__from_left" data-i18n={I18N.about.bio.p3} data-reveal>
           Over the last 3 years, I built my own RoadMap — a self-taught Full-Stack journey focused on building real-world 
           applications from scratch. Alongside that, I'm currently in my fourth year of Systems Engineering at UTN.
         </p>
-        <p class="font_console text-base text-justify cont_animate__from_left" data-i18n={I18N.about.bio.p4} data-reveal>
+        <p class="text-base text-justify indent-5 cont_animate__from_left" data-i18n={I18N.about.bio.p4} data-reveal>
           Teaching was one of the experiences I enjoyed the most. What I loved about this RoadMap was teaching programming 
           (Algorithms and Paradigms) for university courses over 2 years. It taught me how to break down complex ideas into 
           plain language and introduced me to amazing people who are now friends.
         </p>
 
-        <p class="font_console text-base text-justify cont_animate__from_left" data-reveal> 
+        <p class="text-base text-justify cont_animate__from_left" data-reveal> 
           <span data-i18n={I18N.about.bio.p5}>My technical experience covers</span>
           <b class="text-console bolder tracking-wider">&nbsp;e2e</b>
           &nbsp;(<b class="text-main-500 tracking-wider">EndToEnd</b>) Apps: 
@@ -102,7 +102,7 @@ const title = "About · Callamullo Lucas · Software Engineer";
         <!-- + RENDER GENERICS TECHS -->
         <div id="contStackAbout" class="w-full text-start justify-start items-start flex flex-col gap-1">
           {techRows.map(({ label, items }) => (
-            <p class="font_console text-base flex items-center justify-center ms-1 md:ms-6 flex-wrap cont_animate__from_left" 
+            <p class="font_console text-base flex items-center justify-center ms-2 md:ms-5 flex-wrap cont_animate__from_left" 
               data-reveal data-multi-anim>
               <strong class="text-accent">{label}</strong>
               
@@ -121,7 +121,7 @@ const title = "About · Callamullo Lucas · Software Engineer";
           ))}
         </div>
 
-        <p class="font_console text-base text-justify mt-2 cont_animate__from_left" data-i18n={I18N.about.bio.p6} data-reveal>
+        <p class="text-base text-justify indent-5 mt-1 cont_animate__from_left" data-i18n={I18N.about.bio.p6} data-reveal>
           To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. 
           I love that code is our medium to turn any idea into reality.
         </p>
@@ -137,7 +137,7 @@ const title = "About · Callamullo Lucas · Software Engineer";
           <span data-i18n={I18N.about.stats.title}>stats.txt</span>
         </h3>
 
-        <div class="grid grid-cols-[auto_1fr] w-full font_console text-base md:text-lg gap-x-2 gap-y-1.5">
+        <div class="grid grid-cols-[auto_1fr] w-full font_console text-base gap-x-2 gap-y-1.5">
 
           <span class="text-content-muted cont_animate__from_left" data-i18n={I18N.about.stats.projectLabel} data-reveal>
             Projects:</span>
@@ -189,14 +189,9 @@ const title = "About · Callamullo Lucas · Software Engineer";
     </div>
   </Section>
 
-
-  <!-- + MODAL PROJECTS COMPONENTS -->
-  <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>
-
-
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false}>
     <div class:list={[
-      'md:px-4 py-5 w-full', 
+      'md:px-4 py-3 w-full', 
       WIDTH_CLASSES.md
     ]}>
 
@@ -248,9 +243,9 @@ const title = "About · Callamullo Lucas · Software Engineer";
                 </a>
               </h3>
 
-              <p data-i18n={p.timeline?.summary} data-i18n-join="space"
+              <p data-i18n={p.timeline?.summary} data-i18n-join="newline"
                 class:list={[
-                  'gap-2 font_console text-base text-content-muted text-justify',
+                  'flex flex-col gap-1.5 font_console text-sm text-content-muted text-justify indent-5',
                   index % 2 === 0 ? 'self-start pl-2' : 'self-end pr-2',
                 ]}
               >
@@ -352,9 +347,11 @@ const title = "About · Callamullo Lucas · Software Engineer";
       </div>
 
     </div>
-
   </Section>
 
+
+  <!-- + MODAL PROJECTS COMPONENTS -->
+  <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>
 
   <script>
     import { initAbout } from "@/features/about/scripts/init";

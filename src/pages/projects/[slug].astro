@@ -11,7 +11,7 @@ import { resolveKey } from '@shared/scripts/navbar/translations';
 
 import { getNavHref } from '@/shared/data/links';
 import { getTechs } from '@/shared/data/tech_stack';
-import { getRepoLanguages } from '@/shared/data/github_stats';
+import { makeLangStats } from '@/shared/data/github_stats';
 import { formatDateRange, PROJECTS } from '@/shared/data/projects';
 import { existSection, filterTags, getSections, getSection, TAG_CATEGORIES, titleCase } from '@/shared/data/tags';
 
@@ -46,21 +46,8 @@ const NEXT_SECTION = getSection(sectionsToRender, 'next');
 const coreStackList = getTechs([...PROJECT.coreTechs, ...PROJECT.extraTechs]);
 const otherStackList = getTechs([...PROJECT.otherTechs ?? []]);
 
-// Languages stats
-const languages = await getRepoLanguages(PROJECT.slug);
-
-const langStats = languages
-  ? (() => {
-      const total = Object.values(languages).reduce((a, b) => a + b, 0);
-      return Object.entries(languages)
-        .map(([name, bytes]) => ({
-          name,
-          bytes,
-          pct: (bytes / total) * 100,
-        }))
-        .sort((a, b) => b.bytes - a.bytes);
-    })()
-  : [];
+// Languages stats 
+const langStats = await makeLangStats(PROJECT.slug);
 
 // Define page metadata
 const title = `${PROJECT.slug} · Callamullo Lucas`;
@@ -182,6 +169,7 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
       </div>
     </div>
   </Section>
+
 
   <!-- + SECTION WITH ID | CORE STACK ; use scroll-mt-20 -->
   {STACK_SECTION && (  
