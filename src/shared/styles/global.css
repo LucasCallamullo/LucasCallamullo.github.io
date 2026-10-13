@@ -196,6 +196,31 @@ main {
 }
 
 
+/* Firefox + Chrome 121+ (estándar) */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-surface-800) transparent;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-surface-800);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
+
 
 ul {
   list-style: none;                           /* Sin viñetas */

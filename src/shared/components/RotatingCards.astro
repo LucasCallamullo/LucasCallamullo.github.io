@@ -1,6 +1,7 @@
 ---
 // src/shared/components/RotatingCards.astro
 import { Icon } from 'astro-icon/components';
+import { getTitleBtnModals } from '../data/tech_stack';
 
 // ========================================================================
 //  COLORS
@@ -41,6 +42,8 @@ export interface Card {
   color?: ColorKey | null;
   /** Iconify icon name (optional). */
   icon?: string;
+  /** Some ID key (optional). */
+  id?: string;
   /** Label text (optional). */
   label?: string;
   /** Background image URL (optional). */
@@ -55,6 +58,7 @@ interface Props {
   gap?: number;
   duration?: string;
   rotateX?: number;
+  id?: string;
 }
 
 // ========================================================================
@@ -69,6 +73,7 @@ const {
   gap = 50,
   duration = '20s',
   rotateX = -4,  // define los grados de inclinicacion del  carousel en general
+  id = 'carouselCustom'
 } = Astro.props;
 
 const quantity = cards.length;
@@ -79,7 +84,7 @@ const minRadius = Math.ceil((width / 2) / Math.sin(Math.PI / quantity));
 const computedRadius = radius ?? minRadius + gap;
 ---
 
-<div class="carousel_rotate__wrapper">
+<div class="carousel_rotate__wrapper" id={id}>
   <div
     class="carousel_rotate__inner"
     style={`
@@ -103,7 +108,11 @@ const computedRadius = radius ?? minRadius + gap;
           class="carousel_rotate__img group"
           style={card.image ? `background-image: url(${card.image});` : ''}
         >
-          {card.icon && <Icon name={card.icon} class="w-13 h-13 hover-up-lg cursor-pointer" />}
+          {card.icon && 
+            <button data-tech={card.id} type="button" title={getTitleBtnModals(card.label || '')}> 
+              <Icon name={card.icon} class="w-13 h-13 hover-up-lg cursor-pointer" />
+            </button>
+          }
           {card.label && (
             <span class="mt-2 font_console text-sm group-hover:text-console
              text-content-main text-center leading-tight">

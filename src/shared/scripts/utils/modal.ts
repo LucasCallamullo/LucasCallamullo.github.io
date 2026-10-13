@@ -80,6 +80,54 @@ function attachGlobalListeners(): void {
     }
   });
 
+  // ! TEST HASH STATE - PUSH
+  /*   
+  // Escucha el evento de preparación de Astro (se dispara antes del fetch)
+  document.addEventListener('astro:before-preparation', (event) => {
+    if (__logging) console.log('[ASTRO BEFORE]: ABCD');
+
+    // Solo nos interesan las navegaciones del historial (atrás/adelante)
+    if (event.navigationType !== 'traverse') return;
+
+    if (__logging) console.log('[ASTRO TRAVERSE]: ABCD');
+
+    // Si no hay modales abiertos, dejamos que Astro haga lo suyo
+    if (openModals.length === 0) return;
+
+    // 1. Cancelamos la navegación de Astro
+    event.preventDefault();
+
+    // 2. Neutralizamos el loader y el swap para que no haga fetch ni cambie el DOM
+    event.loader = async () => {};
+    // event.swap = () => {}; 
+
+    // 3. Cerramos nuestro modal manualmente
+    const topModal = openModals.at(-1);
+    if (topModal) {
+      topModal.close(openModals.length, true);
+    }
+  });  */
+  
+
+
+  // ! TEST HASH STATE - PUSH
+  /*
+  window.addEventListener('hashchange', () => {
+    if (__logging) console.log('[hashchange] hash:', location.hash, 'stack:', openModals.length);
+
+    if (!isCloseByCode && openModals.length > 0) {
+      const topModal = openModals.at(-1);
+      // Si el hash ya no matchea el modal abierto, cerralo
+      if (topModal && location.hash !== `#modal-${topModal.id}`) {
+        const size = openModals.length;
+        topModal.close(size, true);  // use directly the method to close
+      }
+    }
+    
+    // Always reset the programmatic navigation flag for future popstate triggers
+    // isCloseByCode = false;
+  }); */
+
   /**
    * Handles mobile back gesture or browser back button navigation.
    * 
@@ -93,10 +141,9 @@ function attachGlobalListeners(): void {
   window.addEventListener('popstate', () => {
     if (__logging) console.log('[popstate] isCloseByCode:', isCloseByCode, 'stack:', openModals.length);
 
-    
     if (!isCloseByCode && openModals.length > 0) {
-
       const topModal = openModals.at(-1);
+      
       if (topModal) {
         const size = openModals.length;
         topModal.close(size, true);  // use directly the method to close
@@ -105,26 +152,7 @@ function attachGlobalListeners(): void {
     
     // Always reset the programmatic navigation flag for future popstate triggers
     isCloseByCode = false;
-  }); 
-
-  /*   
-  document.addEventListener('astro:before-preparation', (event) => {
-    // Only intercept when the user navigated via back/forward
-    if (event.navigationType !== 'traverse') return;
-
-
-    // If there's an open modal, close it and cancel the navigation
-    if (__logging) console.log('[before-preparation] isCloseByCode:', isCloseByCode, 'stack:', openModals.length);
-    if (openModals.length > 0) {
-      
-      event.preventDefault(); // Cancels the browser back navigation
-
-    }
-
-    // Always reset the programmatic navigation flag for future popstate triggers
-    // isCloseByCode = false;
-  }); */
-  
+  }); /*   */
 }
 
 // -----------------------------------------------------------------------------
@@ -139,6 +167,8 @@ export class ModalController {
   private overlay?: HTMLElement;
   private closeButtonSelector: string;
   private contentSelector: string;
+
+  public readonly id: string;  // ! TEST HASH PUSH
 
   private _isOpen = false;
   private _setEventClick = false;
@@ -158,6 +188,8 @@ export class ModalController {
     this.overlay = overlay;
     this.closeButtonSelector = closeButtonSelector;
     this.contentSelector = contentSelector;
+
+    this.id = modal.id || `modal-${Math.random().toString(36).slice(2, 9)}`; // ! TEST HASH PUSH
 
     this._setEventClick = false;
 
@@ -211,7 +243,8 @@ export class ModalController {
     }
 
     // ALWAYS push a history entry for EVERY modal opened
-    history.pushState({ modalOpen: true, depth }, '', window.location.pathname);
+    // history.pushState({ modalOpen: true, depth }, '', window.location.pathname);
+    history.pushState({ modalOpen: true, id: this.id }, '', `#modal-${this.id}`);  // ! TEST HASH
 
     if (__logging) console.log('[open] called. Phase 2:', this._isOpen, 'stack Modals:', depth);
 
@@ -251,7 +284,10 @@ export class ModalController {
     if (openModals.length == size - 1 && !isFromPopState) {
       isCloseByCode = true;
       if (__logging) console.log('[close] called historyBack', 'size modal list:', size);
-      history.back();
+
+      // history.back();
+      // ! TESTING HASH STATE
+      // history.replaceState({}, '', window.location.pathname + window.location.search);
     }
 
     // Restore body scroll when all modals are fully closed
