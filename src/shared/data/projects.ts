@@ -143,6 +143,83 @@ export interface Project {
 // ========================================================================
 export const PROJECTS = {
 
+  //! =================== PROJECT 
+  mara_sem: {
+    title: I18N.projects.mara_sem.title,
+    titleFull: I18N.projects.mara_sem.titleFull,
+    date: { start: '2026-08', end: null },
+    isMain: true,
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Mobile App', 'In Progress', 'Team'],
+    coreTechs: [
+      'java', 'springboot', 'junit', 'postgresql', 
+      'typescript', 'reactNative', 'expo', 'androidIDE',
+      'nginx', 'docker', 'googleMaps', 'jwt', 
+    ],
+    extraTechs: [
+      'springCloud', 'dockerCompose', 'nativeWind', 'tailwind', 'vite',
+    ],
+    otherTechs: [
+      'springSecurity', 'hibernate', 'h2', 'js', 'ts', 'react', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'swagger', 'dbeaver', 'ngrok'
+    ],
+    links: [
+      { ...githubExt, href: 'https://github.com/LucasCallamullo/react-native-compiler-apk' },
+    ],
+    timeline: {
+      order: 18,
+      icon: 'ri:android-fill',
+      summary: I18N.projects.mara_sem.timeline.summary,
+    },
+    project: {
+      order: 18,
+      summary: I18N.projects.mara_sem.project.summary,
+      description: I18N.projects.mara_sem.project.description,
+    },
+    images: [{ ...imageDefault }],
+    slug: 'react-native-compiler-apk',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
+    milestone: I18N.projects.mara_sem.milestone
+  },
+
+  //! =================== PROJECT 
+  ecommerce_net: {
+    title: I18N.projects.ecommerce_net.title,
+    titleFull: I18N.projects.ecommerce_net.titleFull,
+    date: { start: '2026-08', end: null },
+    isMain: true,
+    tags: ['Monolith Modular', 'ONION', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
+    coreTechs: [
+      'csharp', 'dotnet', 'efCore', 'typescript', 'react', 'tailwind',
+      'nginx', 'postgresql', 'docker', 'jwt', 
+    ],
+    extraTechs: [
+      'dockerCompose', 'vite',
+    ],
+    otherTechs: [
+      'sqlite', 'js', 'ts', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'dbeaver', 'ngrok'
+    ],
+    links: [
+      { ...githubExt, href: 'https://github.com/LucasCallamullo/ecommerce-engine' },
+    ],
+    timeline: {
+      order: 19,
+      icon: 'ri:shopping-bag-line',
+      summary: I18N.projects.ecommerce_net.timeline.summary,
+    },
+    project: {
+      order: 19,
+      summary: I18N.projects.ecommerce_net.project.summary,
+      description: I18N.projects.ecommerce_net.project.description,
+    },
+    images: [{ ...imageDefault }],
+    slug: 'ecommerce-engine',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
+    milestone: I18N.projects.ecommerce_net.milestone
+  },
+
+
+
   //! =================== PROJECT
   fleet_optimizer: {
     title: I18N.projects.fleet_optimizer.title,
@@ -151,15 +228,15 @@ export const PROJECTS = {
     isMain: true,
     tags: ['Microservices', 'Layered', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
     coreTechs: [
-      'java', 'springboot', 'junit', 'typescript', 'react', 
+      'java', 'springboot', 'junit', 'typescript', 'react', 'tailwind',
       'nginx', 'postgresql', 'docker', 'jwt', 'oauth', 'googleMaps'
     ],
     extraTechs: [
-      'springCloud', 'dockerCompose', 'tailwind', 'swagger', 'ghActions'
+      'springCloud', 'dockerCompose', 'swagger', 'ghActions'
     ],
     otherTechs: [
       'springSecurity', 'hibernate', 'h2', 'vite', 'ts', 'javascript', 'html5', 'css3',  
-      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'keycloack'
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'keycloack', 'dbeaver', 'ngrok'
     ],
     links: [
       { ...githubExt, href: 'https://github.com/lucascallamullo/fleet-optimizer' },
@@ -243,7 +320,7 @@ export const PROJECTS = {
       summary: I18N.projects.portfolio.timeline.summary,
     },
     project: {
-      order: 42,
+      order: 29,
       summary: I18N.projects.portfolio.project.summary,
       description: I18N.projects.portfolio.project.description,
     },
@@ -298,7 +375,7 @@ export const PROJECTS = {
     isMain: false,
     tags: ['Back-end', 'Microservices', 'Layered', 'API', 'University', 'Team', 'Completed'],
     coreTechs: [
-      'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 
+      'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 'googleMaps'
     ],
     extraTechs: [
       'springCloud', 'springSecurity', 'h2', 'dockerCompose', 'swagger',
@@ -329,7 +406,7 @@ export const PROJECTS = {
   no_country: {
     title: I18N.projects.no_country.title,
     titleFull: I18N.projects.no_country.titleFull,
-    date: { start: '2024-07', end: '2024-11' },
+    date: { start: '2024-07', end: '2024-08' },
     isMain: false,
     tags: ['Full-Stack', 'Monolith Modular', 'Layered', 'Archived', 'Team', 'Web App', 'NoCountry'],
     coreTechs: [
@@ -364,7 +441,7 @@ export const PROJECTS = {
   py_tutor: {
     title: I18N.projects.py_tutor.title,
     titleFull: I18N.projects.py_tutor.titleFull,
-    date: { start: '2023-11', end: '2026-03' },
+    date: { start: '2023-10', end: '2026-02' },
     isMain: false,
     tags: ['Completed', 'Team', 'Tutorial', 'University'],
     coreTechs: ['python', 'java', 'springboot', 'docker', ],
@@ -574,12 +651,11 @@ export function getProjectsByTech(tech: TechKey): Project[] {
 
 
 
-
-
-
-
-
-
+export function getProjectsBySlugs(slugs: string[]): Project[] {
+  return Object.values(PROJECTS)
+    .filter(p => slugs.includes(p.slug))
+    .sort((a, b) => (a.project?.order ?? 0) - (b.project?.order ?? 0));
+}
 
 
 

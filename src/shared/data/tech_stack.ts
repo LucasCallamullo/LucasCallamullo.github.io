@@ -70,6 +70,7 @@ export const TECH_STACK = {
   reactNative: { name: 'React Native',      isShow: true,  isMain: false,  category: 'mobile',   icon: 'devicon:reactnative' },
   nativeWind:  { name: 'Native Wind',       isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:nativewind', isOnlyLightTheme: true },
   expo:        { name: 'Expo',              isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:expo',  isOnlyLightTheme: true },
+  androidIDE:  { name: 'Android Studio',    isShow: true,  isMain: false, category: 'mobile',    icon: 'thesvg-color:android-studio' },
 
   // --- Databases ---
   postgresql:  { name: 'PostgreSQL',        isShow: true,  isMain: true,  category: 'databases', icon: 'devicon:postgresql' },
@@ -97,7 +98,7 @@ export const TECH_STACK = {
   // --- Tools / Version Control ---
   git:          { name: 'Git',              isShow: true,  isMain: false,  category: 'tools',     icon: 'devicon:git' },
   github:       { name: 'GitHub',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:github',      isOnlyLightTheme: true },
-  ghPages:      { name: 'GitHub Pages',     isShow: false,  isMain: false, category: 'tools',     icon: 'thesvg-color:github-pages', isOnlyLightTheme: true },
+  ghPages:      { name: 'GitHub Pages',     isShow: true,  isMain: false, category: 'tools',     icon: 'thesvg-color:github-pages', isOnlyLightTheme: true },
   bash:         { name: 'Bash Scripts',     isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:bash', isOnlyLightTheme: true },
 
   vscode:       { name: 'VSCode',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:vscode' },

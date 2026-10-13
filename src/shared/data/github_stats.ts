@@ -1,5 +1,4 @@
 // @shared/data/github_stats.ts
-
 const USERNAME = "LucasCallamullo";
 
 const EXCLUDED_REPOS = [
@@ -51,9 +50,6 @@ export const topLangsUrl = `https://github-readme-stats.vercel.app/api/top-langs
 
 
 
-
-
-
 export interface RepoLanguages {
   [language: string]: number; // bytes por lenguaje
 }
@@ -87,7 +83,7 @@ export async function getRepoLanguages(githubSlug: string): Promise<RepoLanguage
     return await fetchToGitHub(owner, githubSlug, token);
   }
   
-// Merge both repos into a single language map
+  // Merge both repos into a single language map
   const [primary, secondary] = await Promise.all([
     fetchToGitHub(owner, githubSlug, token),
     fetchToGitHub(owner, otherRepo, token),
@@ -129,4 +125,132 @@ function mergeLanguages(
     merged[lang] = (merged[lang] ?? 0) + bytes;
   }
   return merged;
+}
+
+
+
+
+
+
+
+export const REPOS_TO_DONUT = [
+  'LucasCallamullo.github.io',  // portfolio
+  'react-native-compiler-apk',  // app mobile proyecto de seminario de analista de sistemas
+  'fleet-optimizer',            // microservicios con java, multi stage con docker y ui con react/ts
+  'ecommerce-engine',           // evolucion natural con .net y un buen layered, mejoras en los esquemas de db y responsabilidad de modulos 
+  'E-commerce-Public-Demo',     // proyecto mas completo de desarrollo personal y autodidactico aunque podria ser mas organizo o enterprise
+                                // que por eso su evolucion es la de .net
+  // 'databases-queries',
+  // 'Engine-E-commerce-Complete',
+  // 'java-microservices-backend',
+  // 'Antojitos_Ecommerce',
+] as string[];
+
+/**
+ * Fetch the language breakdown of every repo in REPOS_TO_DONUT
+ * and merge them into a single language map.
+ *
+ * Fetches in parallel, skips repos that fail, and returns null
+ * if every request fails.
+ */
+export async function allTechsDonut(): Promise<RepoLanguages | null> {
+  const token = import.meta.env.GITHUB_TOKEN;
+
+  const results = await Promise.all(
+    REPOS_TO_DONUT.map((repo) =>
+      fetchToGitHub(
+        // (repo === 'Antojitos_Ecommerce') ? 'No-Country-simulation' : COMMON.username,
+        COMMON.username,
+        repo, 
+        token
+      )
+    )
+  );
+
+  // Merge everything into one map
+  const merged = results.reduce<RepoLanguages | null>(
+    (acc, current) => mergeLanguages(acc, current),
+    null
+  );
+
+  return excludeLanguages(merged, EXCLUDED_LANGS);
+}
+
+const EXCLUDED_LANGS = [
+  'CSS',
+  'HTML',
+  'SCSS',
+  'Less',
+  'Makefile',
+  // 'Dockerfile',
+  'Shell',
+  'TSQL',
+  'Batchfile',
+  'JavaScript',
+  'Procfile',
+  'Astro',
+  // 'Python',
+] as const;
+
+function excludeLanguages(
+  languages: RepoLanguages | null,
+  excluded: readonly string[]
+): RepoLanguages | null {
+  if (!languages) return null;
+
+  languages['TypeScript'] += languages['JavaScript'] / 3; 
+
+  const filtered: RepoLanguages = {};
+  for (const [lang, bytes] of Object.entries(languages)) {
+    if (!excluded.includes(lang)) {
+      filtered[lang] = bytes;
+    }
+  }
+  return Object.keys(filtered).length > 0 ? filtered : null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export interface LangStat {
+  name: string;
+  bytes: number;
+  pct: number;
+}
+
+/**
+ * Convert a RepoLanguages map into a sorted array of language stats
+ * with byte counts and percentages.
+ *
+ * Returns an empty array if the input is null or empty.
+ */
+export async function makeLangStats(slug: string | null): Promise<LangStat[]> {
+  
+  const l = (slug != null)
+   ? await getRepoLanguages(slug)
+   : await allTechsDonut();
+  
+  const languages = (l != null) ? l : [];
+
+  const total = Object.values(languages).reduce((a, b) => a + b, 0);
+  if (total === 0) return [];
+
+  return Object.entries(languages)
+    .map(([name, bytes]) => ({
+      name,
+      bytes,
+      pct: (bytes / total) * 100,
+    }))
+    .sort((a, b) => b.bytes - a.bytes);
 }
