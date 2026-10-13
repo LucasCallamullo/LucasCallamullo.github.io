@@ -152,14 +152,14 @@ export const PROJECTS = {
     tags: ['Microservices', 'Layered', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
     coreTechs: [
       'java', 'springboot', 'junit', 'typescript', 'react', 
-      'nginx', 'postgresql', 'docker', 'jwt', 'oauth',
+      'nginx', 'postgresql', 'docker', 'jwt', 'oauth', 'googleMaps'
     ],
     extraTechs: [
-      'springCloud', 'dockerCompose', 'tailwind', 'swagger', 
+      'springCloud', 'dockerCompose', 'tailwind', 'swagger', 'ghActions'
     ],
     otherTechs: [
-      'javascript', 'html5', 'css3', 'hibernate', 'h2', 'vite',
-      'git', 'ghActions', 'github', 'postman', 'bash',
+      'springSecurity', 'hibernate', 'h2', 'vite', 'ts', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'keycloack'
     ],
     links: [
       { ...githubExt, href: 'https://github.com/lucascallamullo/fleet-optimizer' },
@@ -188,14 +188,15 @@ export const PROJECTS = {
     isMain: true,
     tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Web App', 'Completed', 'Solo', 'University'],
     coreTechs: [
-      'typescript', 'javascript', 'react', 'tailwind', 'postgresql',  
+      'typescript', 'javascript', 'vite', 'react', 'tailwind', 'postgresql', 'jwt'
     ],
     extraTechs: [
-      'nodejs', 'express', 'sequelize', 'docker',
+      'nodejs', 'express', 'sequelize', 'docker', 'html5', 'css3', 'jest', 'keycloack', 'nodejs'
     ],
     otherTechs: [
-      'html5', 'css3', 'github', 'postman', 'nginx', 'sqlite', 'ngrok',
-      'dbeaver', 'bash', 'vite', 'git', 'jest', 'dockerCompose',
+      'git', 'github', 'postman', 'vscode',
+      'sqlite', 'ngrok', 'cursor', 'deepseek', 'openCode',
+      'dbeaver', 'bash',  'ts', 'js', 'dockerCompose', 'nginx',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/desarrollo-software-3k1' },
@@ -228,10 +229,10 @@ export const PROJECTS = {
       'astro', 'typescript', 'tailwind', 'ghActions', 'ghPages'
     ],
     extraTechs: [
-      'git', 'vite', 'javascript',
+      'git', 'vite', 'javascript', 'html5', 'css3', 'nodejs'
     ],
     otherTechs: [
-      'html5', 'css3', 'github', 'vscode'
+      'github', 'vscode', 'deepseek'
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/LucasCallamullo.github.io' },
@@ -267,8 +268,8 @@ export const PROJECTS = {
       'drf', 'djTemplates', 'dockerCompose', 'swagger', 'gunicorn',
     ],
     otherTechs: [
-      'html5', 'css3', 'git', 'ghActions', 'github', 'postman',
-      'sqlite', 'ngrok', 'dbeaver', 'bash',
+      'html5', 'css3', 'git', 'github', 'postman', 'bruno', 'deepseek',
+      'sqlite', 'ngrok', 'dbeaver', 'bash', 'js', 'railway',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/E-commerce-Public-Demo' },
@@ -300,10 +301,10 @@ export const PROJECTS = {
       'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 
     ],
     extraTechs: [
-      'springCloud', 'springSecurity', 'h2',  'dockerCompose', 'swagger',
+      'springCloud', 'springSecurity', 'h2', 'dockerCompose', 'swagger',
     ],
     otherTechs: [
-      'hibernate', 'git', 'ghActions', 'github', 'postman', 'bash', 'dbeaver',
+      'hibernate', 'git', 'github', 'deepseek', 'postman', 'bruno', 'bash', 'dbeaver',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/java-microservices-backend' },
@@ -332,13 +333,13 @@ export const PROJECTS = {
     isMain: false,
     tags: ['Full-Stack', 'Monolith Modular', 'Layered', 'Archived', 'Team', 'Web App', 'NoCountry'],
     coreTechs: [
-      'python', 'django', 'javascript', 'tailwind', 'railway',
+      'python', 'django', 'javascript', 'tailwind', 'railway', 'postgresql'
     ],
     extraTechs: [
       'git', 'gunicorn', 'drf', 'djTemplates',
     ],
     otherTechs: [
-      'vscode', 'github', 'html5', 'css3', 'dbeaver', 'postman'
+      'vscode', 'github', 'html5', 'css3', 'deepseek', 'dbeaver', 'postman', 'sqlite',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/No-Country-simulation/Antojitos_Ecommerce' },
@@ -366,9 +367,9 @@ export const PROJECTS = {
     date: { start: '2023-11', end: '2026-03' },
     isMain: false,
     tags: ['Completed', 'Team', 'Tutorial', 'University'],
-    coreTechs: ['python', 'java', 'bash', 'git'],
-    extraTechs: ['vscode', 'github'],
-    otherTechs: null,
+    coreTechs: ['python', 'java', 'springboot', 'docker', ],
+    extraTechs: ['bash', 'git', 'springSecurity', 'springCloud', ],
+    otherTechs: ['vscode', 'github', 'dockerCompose', 'dbeaver', 'junit'],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/Tutoring-Algorithms-Data-Structures' },
       { ...youtubeExt },
@@ -399,7 +400,7 @@ export const PROJECTS = {
     coreTechs: ['python', 'java', 'springboot', 'react', 'docker', 'bash', 'linux'],
     extraTechs: [
       'nodejs', 'express', 'sequelize', 'javascript', 'html5', 'css3', 
-      'sqlServer', 'jwt', 'git', 
+      'sqlServer', 'jwt', 'git', 'js'
     ],
     otherTechs: null,
     links: [{ ...univExt }],
@@ -545,6 +546,39 @@ export function getProjects(options: TimelineQueryOptions & { sortBy?: 'timeline
     return dir * (aOrder - bOrder);
   });
 }
+
+
+
+
+
+
+/**
+ * Returns true if the given project uses the tech in any of its
+ * three tech lists (coreTechs, extraTechs, otherTechs).
+ */
+function projectUsesTech(project: Project, tech: TechKey): boolean {
+  return (
+    project.coreTechs.includes(tech) ||
+    (project.extraTechs?.includes(tech) ?? false) ||
+    (project.otherTechs?.includes(tech) ?? false)
+  );
+}
+
+/**
+ * Filter PROJECTS to those that use the given tech.
+ * Returns an array of [slug, project] pairs.
+ */
+export function getProjectsByTech(tech: TechKey): Project[] {
+  return Object.values(PROJECTS).filter(p => projectUsesTech(p, tech));
+}
+
+
+
+
+
+
+
+
 
 
 

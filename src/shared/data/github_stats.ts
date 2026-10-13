@@ -4,13 +4,16 @@ const USERNAME = "LucasCallamullo";
 
 const EXCLUDED_REPOS = [
   "pawn-project-mod-cs-game",
-  "Tutoring-Algorithms-Data-Structures",
-  "java-backend-3k2",
-  "desarrollo-software-3k1",
   "python-mobile-kivy",
   "django-practice",
   "python-project-analysis",
+  "desarrollo-software-3k1",
+  "Tutoring-Algorithms-Data-Structures",
+  "java-backend-3k2",
+
   "java-microservices-backend",
+  "LucasCallamullo",
+  "Antojitos_Ecommerce",
 ].join(",");
 
 const COMMON = {
@@ -62,9 +65,7 @@ export interface RepoLanguages {
  * Works at build time (Astro static) or runtime (client).
  */
 export async function getRepoLanguages(githubSlug: string): Promise<RepoLanguages | null> {
-
   let owner = USERNAME;
-  let repo = githubSlug;
   
   // This slugs is special cases from data/projects.ts
   if (githubSlug == 'university') return null;
@@ -72,9 +73,30 @@ export async function getRepoLanguages(githubSlug: string): Promise<RepoLanguage
   if (githubSlug == 'Antojitos_Ecommerce') {
     owner = 'No-Country-simulation';
   }
+  
+  // Some projects span multiple repos and need to be merged (py_tutor)
+  let otherRepo: string | null = null;
+  if (githubSlug === 'Tutoring-Algorithms-Data-Structures') {
+    otherRepo = 'java-backend-3k2';
+  }
 
   // Leer del .env (solo disponible en build/server)
   const token = import.meta.env.GITHUB_TOKEN;
+
+  if (!otherRepo) {
+    return await fetchToGitHub(owner, githubSlug, token);
+  }
+  
+// Merge both repos into a single language map
+  const [primary, secondary] = await Promise.all([
+    fetchToGitHub(owner, githubSlug, token),
+    fetchToGitHub(owner, otherRepo, token),
+  ]);
+
+  return mergeLanguages(primary, secondary);
+}
+
+async function fetchToGitHub(owner: string, repo: string, token: string): Promise<RepoLanguages | null> {
 
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`, {
     headers: {
@@ -88,4 +110,23 @@ export async function getRepoLanguages(githubSlug: string): Promise<RepoLanguage
   if (!res.ok) return null;
   return res.json();
   // return some like: { "Java": 45234, "TypeScript": 23000, "CSS": 1200 }
+}
+
+/**
+ * Merge two language maps by summing byte counts per language.
+ * Languages present in only one map are kept as-is.
+ */
+function mergeLanguages(
+  a: RepoLanguages | null,
+  b: RepoLanguages | null
+): RepoLanguages | null {
+  if (!a && !b) return null;
+  if (!a) return b;
+  if (!b) return a;
+
+  const merged: RepoLanguages = { ...a };
+  for (const [lang, bytes] of Object.entries(b)) {
+    merged[lang] = (merged[lang] ?? 0) + bytes;
+  }
+  return merged;
 }
