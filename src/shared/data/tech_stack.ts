@@ -1,10 +1,13 @@
 // src/shared/data/tech-stack.ts
+import { getCurrentLang } from '../scripts/navbar/translations';
 import { TECH_CATEGORIES, type TechCategoryKey } from './tech_categories';
 
 export interface Tech {
   name: string;
   icon: string;
   category: TechCategoryKey;
+
+  id?: string | null;
 
   isShow: boolean;
   isMain: boolean;
@@ -28,13 +31,12 @@ export const TECH_STACK = {
   // --- Languages ---
   java:      { name: 'Java',        isShow: true,  isMain: true,  category: 'languages', icon: 'devicon:java' },
   csharp:    { name: 'C#',          isShow: true,  isMain: true, category: 'languages', icon: 'thesvg-color:csharp' },
-  ts:        { name: 'TypeScript',  isShow: true,  isMain: true,  category: 'languages',  icon: 'devicon:typescript' },
-  js:        { name: 'JavaScript',  isShow: true,  isMain: false, category: 'languages',  icon: 'devicon:javascript' },
+  ts:        { name: 'TypeScript',  isShow: true,  isMain: false,  category: 'languages',  icon: 'devicon:typescript' },
+  js:        { name: 'JavaScript',  isShow: false,  isMain: false, category: 'languages',  icon: 'devicon:javascript' },
   python:    { name: 'Python',      isShow: true,  isMain: false,  category: 'languages', icon: 'devicon:python' },
 
   // --- Backend ---
   springboot:    { name: 'Spring Boot',     isShow: true,  isMain: true,  category: 'backend',   icon: 'devicon:spring' },
-  springSecurity:{ name: 'Spring Security', isShow: false,  isMain: false, category: 'backend',   icon: 'thesvg-color:spring-security' },
   springCloud:   { name: 'Spring Cloud',    isShow: true,  isMain: false, category: 'backend',   icon: 'devicon:spring' },
   hibernate:     { name: 'Hibernate',       isShow: false, isMain: false, category: 'backend',   icon: 'devicon:hibernate' },
 
@@ -42,22 +44,24 @@ export const TECH_STACK = {
   efCore:        { name: 'EF Core', isShow: true,  isMain: false, category: 'backend',   icon: 'thesvg-color:entityframeworkcore' },
   
   django:        { name: 'Django',          isShow: true,  isMain: false,  category: 'backend',   icon: 'thesvg-color:django' },
-  drf:           { name: 'Django Rest Framework',  isShow: true,  isMain: false, category: 'backend',   icon: 'devicon:djangorest' },
+  drf:           { name: 'DRF',             isShow: true,  isMain: false, category: 'backend',   icon: 'devicon:djangorest' },
   fastapi:       { name: 'FastAPI',         isShow: false, isMain: false, category: 'backend',   icon: 'devicon:fastapi' },
 
-  nodejs:        { name: 'Node.js',         isShow: false,  isMain: false, category: 'backend',   icon: 'devicon:nodejs' },
+  nodejs:        { name: 'Node.js',         isShow: true,   isMain: false, category: 'backend',   icon: 'devicon:nodejs' },
   express:       { name: 'Express',         isShow: false,  isMain: false, category: 'backend',   icon: 'thesvg-color:expressdotjs-light', isOnlyLightTheme: true },
   sequelize:     { name: 'Sequelize',       isShow: false,  isMain: false, category: 'backend',   icon: 'devicon:sequelize' },
 
   // --- Frontend ---
+  typescript:  { name: 'TypeScript',        isShow: true,  isMain: true,  category: 'frontend',  icon: 'devicon:typescript' },
   react:       { name: 'React',             isShow: true,  isMain: true,  category: 'frontend',  icon: 'devicon:react' },
   tailwind:    { name: 'Tailwind',          isShow: true,  isMain: true,  category: 'frontend',  icon: 'devicon:tailwindcss' },
-  typescript:  { name: 'TypeScript',        isShow: true,  isMain: true,  category: 'frontend',  icon: 'devicon:typescript' },
-  javascript:  { name: 'JavaScript',        isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:javascript' },
 
+  vite:        { name: 'Vite',             isShow: true,  isMain: true, category: 'frontend',     icon: 'thesvg-color:vite' },
   astro:       { name: 'Astro',             isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:astro',    isOnlyLightTheme: true },
+  javascript:  { name: 'JavaScript',        isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:javascript' },
   html5:       { name: 'HTML5',             isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:html5' },
   css3:        { name: 'CSS3',              isShow: true,  isMain: false, category: 'frontend',  icon: 'devicon:css3' },
+
   bootstrap:   { name: 'BootStrap 5',       isShow: false, isMain: false, category: 'frontend',  icon: 'thesvg-color:bootstrap' },
   nextjs:      { name: 'Next.js',           isShow: false, isMain: false, category: 'frontend',  icon: 'devicon:nextjs' },
   djTemplates: { name: 'Django Templates',  isShow: false, isMain: false, category: 'frontend',  icon: 'thesvg-color:jinja' },
@@ -78,20 +82,22 @@ export const TECH_STACK = {
   docker:       { name: 'Docker',           isShow: true,  isMain: true,  category: 'devops',     icon: 'devicon:docker' },
   dockerCompose:{ name: 'Docker Compose',   isShow: true,  isMain: true, category: 'devops',     icon: 'devicon:docker-wordmark' },
   nginx:        { name: 'Nginx',            isShow: true,  isMain: true, category: 'devops',     icon: 'devicon:nginx' },
-  linux:        { name: 'Linux',            isShow: false,  isMain: false, category: 'devops',     icon: 'devicon:linux',     isOnlyLightTheme: true },
+  ghActions:    { name: 'GitHub Actions',   isShow: true,  isMain: true, category: 'devops',     icon: 'devicon:githubactions' },
   gunicorn:     { name: 'Gunicorn',         isShow: true,  isMain: false, category: 'devops',     icon: 'thesvg-color:gunicorn' },
+
+  linux:        { name: 'Linux',            isShow: false,  isMain: false, category: 'devops',     icon: 'devicon:linux',     isOnlyLightTheme: true },
   railway:      { name: 'Railway',          isShow: false,  isMain: false, category: 'devops',     icon: 'thesvg-color:railway-dark' },
 
-  jwt:          { name: 'JWT',              isShow: true,  isMain: false, category: 'devops',     icon: 'devicon:jwt' },
-  oauth:        { name: 'OAuth',            isShow: true,  isMain: false, category: 'devops',     icon: 'devicon:oauth' },
-  keycloack:    { name: 'Keycloak',         isShow: true,  isMain: false, category: 'devops',     icon: 'thesvg-color:keycloak' },
+  // --- Auth ---
+  jwt:          { name: 'JWT',              isShow: true,  isMain: false, category: 'auth',     icon: 'devicon:jwt' },
+  springSecurity: { name: 'Spring Security', isShow: true,  isMain: false, category: 'auth',     icon: 'thesvg-color:spring-security' },
+  oauth:        { name: 'OAuth',            isShow: true,  isMain: false, category: 'auth',     icon: 'devicon:oauth' },
+  keycloack:    { name: 'Keycloak',         isShow: true,  isMain: false, category: 'auth',     icon: 'thesvg-color:keycloak' },
 
   // --- Tools / Version Control ---
   git:          { name: 'Git',              isShow: true,  isMain: false,  category: 'tools',     icon: 'devicon:git' },
   github:       { name: 'GitHub',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:github',      isOnlyLightTheme: true },
-  ghActions:    { name: 'GitHub Actions',   isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:githubactions' },
   ghPages:      { name: 'GitHub Pages',     isShow: false,  isMain: false, category: 'tools',     icon: 'thesvg-color:github-pages', isOnlyLightTheme: true },
-  vite:         { name: 'Vite',             isShow: true,  isMain: false, category: 'tools',     icon: 'thesvg-color:vite' },
   bash:         { name: 'Bash Scripts',     isShow: true,  isMain: false, category: 'tools',     icon: 'devicon:bash', isOnlyLightTheme: true },
 
   vscode:       { name: 'VSCode',           isShow: false,  isMain: false, category: 'tools',     icon: 'devicon:vscode' },
@@ -102,7 +108,7 @@ export const TECH_STACK = {
   pytest:       { name: 'PyTest',           isShow: true,  isMain: false, category: 'testing',   icon: 'devicon:pytest' },
   junit:        { name: 'JUnit 5',          isShow: true,  isMain: true, category: 'testing',   icon: 'devicon:junit' },
   jest:         { name: 'Jest',             isShow: false,  isMain: false, category: 'testing',   icon: 'thesvg-color:jest' },
-  bruno:         { name: 'Bruno',             isShow: true,  isMain: false, category: 'testing',   icon: 'thesvg-color:bruno' },
+  bruno:         { name: 'Bruno',             isShow: true,  isMain: true, category: 'testing',   icon: 'thesvg-color:bruno' },
   postman:      { name: 'Postman',          isShow: true,  isMain: false, category: 'testing',   icon: 'devicon:postman' },
   swagger:      { name: 'Swagger',          isShow: true,  isMain: true, category: 'testing',   icon: 'devicon:swagger' },
 
@@ -147,8 +153,14 @@ export const TECH_STACK_ORDER: TechKey[] = [
  * @returns Array of Tech in the same order as `ids`
  */
 export function getTechs(ids: TechKey[]): Tech[] {
-  return ids.map((id) => TECH_STACK[id]);
-  // .filter((tech): tech is Tech => Boolean(tech));
+  return ids.map((id) => {
+    const t = TECH_STACK[id];
+    return { ...t, id };
+  });
+}
+
+export function getTech(id: TechKey): Tech | null {
+  return TECH_STACK[id] || null;
 }
 
 /**
@@ -158,8 +170,12 @@ export function getOrderedTechs(): Tech[] {
   return getTechs(TECH_STACK_ORDER);
 }
 
-
-
+export function getTitleBtnModals(techName: string): string {
+  const lang = getCurrentLang();
+  return lang === 'en'
+    ? `View ${techName} projects in modal`
+    : `Ver proyectos de ${techName} en modal`;
+}
 
 
 
@@ -203,12 +219,22 @@ export function getGroupedTechs(options: FilterOptions = {}): GroupedTechs[] {
   } = options;
 
   // 1. Filter the TECH_STACK entries.
-  const filtered = Object.values(TECH_STACK).filter((tech) => {
+  /* const filtered = Object.values(TECH_STACK).filter((tech) => {
     if (categories && !categories.includes(tech.category)) return false;
     if (onlyVisible && !tech.isShow) return false;
     if (onlyMain && !tech.isMain) return false;
     return true;
-  });
+  }) */
+  
+  const filtered = Object.entries(TECH_STACK)
+  .filter(([_, tech]) => {
+    if (categories && !categories.includes(tech.category)) return false;
+    if (onlyVisible && !tech.isShow) return false;
+    if (onlyMain && !tech.isMain) return false;
+    return true;
+  })
+  .map(([id, tech]) => ({ id, ...tech }));
+
 
   // 2. Group by category.
   const grouped = filtered.reduce<Record<string, Tech[]>>((acc, tech) => {
