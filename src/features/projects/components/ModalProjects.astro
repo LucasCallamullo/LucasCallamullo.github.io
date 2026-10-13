@@ -1,0 +1,60 @@
+---
+import { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import Section from '@shared/components/Section.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  /** ID of the modal element (used for anchors and JS lookup). */
+  modalId?: string;
+  /** ID of the overlay element. */
+  overlayId?: string;
+  /** ID of the inner scrollable container where content gets injected. */
+  dataId?: string;
+  /** Extra classes to apply on the modal container. */
+  class?: string;
+}
+
+const {
+  modalId = 'modalProjects',
+  overlayId = 'overlayProjects',
+  dataId = `${modalId}Data`,
+  class: extraClass = '',
+} = Astro.props;
+
+const modalClasses = [
+  'modal bg-surface-900 place-self-center w-5/6 md:w-3/4 h-4/5',
+  WIDTH_CLASSES.md,
+  extraClass,
+];
+---
+
+<Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
+  <div class:list={['px-2 md:px-1 py-6 w-full', WIDTH_CLASSES.md]}>
+
+    <div id={modalId} class:list={modalClasses}>
+      <div class="modal__content max-h-full max-w-full h-full w-full
+                  flex flex-col relative p-3 min-h-0">
+
+        <button type="button" title="Close Modal"
+          class="modal__btn_close p-2 hover:bg-red-500 group absolute right-1 top-1
+            rounded-lg bg-surface-200 text-content-main border border-surface-800
+            cursor-pointer"
+        >
+          <Icon name="ri:close-large-line" class="w-4.5 h-4.5 group-hover:text-white" />
+        </button>
+
+        <div
+          id={dataId}
+          class="modal__data w-full px-10 py-2 flex flex-col gap-2
+                 flex-1 min-h-0 overflow-y-auto"
+        >
+        </div>
+
+
+      </div>
+    </div>
+
+    <div id={overlayId} class="overlay"></div>
+
+  </div>
+</Section>
