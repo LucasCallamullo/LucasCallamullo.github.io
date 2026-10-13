@@ -163,6 +163,8 @@ export const I18N = {
   projectsPage: {
     title: 'projectsPage.title',
     subtitle: 'projectsPage.subtitle',
+    modalTitle: 'projectsPage.modalTitle',
+    donutSkillsSubtitle: 'projectsPage.donutSkillsSubtitle',
 
     projects: {
       title: 'projectsPage.projects.title',
@@ -290,6 +292,32 @@ export const I18N = {
       university: {
         label: 'projects.links.university.label',
         altText: 'projects.links.university.altText',
+      },
+    },
+
+    ecommerce_net: {
+      title: 'projects.ecommerce_net.title',
+      titleFull: 'projects.ecommerce_net.titleFull',
+      milestone: 'projects.ecommerce_net.milestone',
+      timeline: {
+        summary: 'projects.ecommerce_net.timeline.summary',
+      },
+      project: {
+        summary: 'projects.ecommerce_net.project.summary',
+        description: 'projects.ecommerce_net.project.description',
+      },
+    },
+
+    mara_sem: {
+      title: 'projects.mara_sem.title',
+      titleFull: 'projects.mara_sem.titleFull',
+      milestone: 'projects.mara_sem.milestone',
+      timeline: {
+        summary: 'projects.mara_sem.timeline.summary',
+      },
+      project: {
+        summary: 'projects.mara_sem.project.summary',
+        description: 'projects.mara_sem.project.description',
       },
     },
 

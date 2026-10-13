@@ -72,7 +72,7 @@ function escapeHtml(str: string): string {
 /**
  * Une los elementos si es un arreglo, o retorna la cadena intacta.
  */
-function formatTranslationValue(
+export function formatTranslationValue(
   value: string | string[],
   joinMode: string | null
 ): string {

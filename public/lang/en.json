@@ -146,6 +146,7 @@
   "projectsPage": {
     "title": "ls -la projects/",
     "subtitle": "A selection of projects built end-to-end.",
+    "donutSkillsSubtitle": "View selected projects.",
 
     "projects": {
       "title": "'Featured Projects'",
@@ -165,6 +166,7 @@
   "contact": {
     "title": "ping contact.server",
     "subtitle": "Establishing connection to communication endpoint",
+
     "form": {
       "title": "'Contact Me'",
       "name": "Your Name:",
@@ -273,6 +275,82 @@
         "altText": "National Technological University - FRC"
       }
     },
+
+
+
+    "ecommerce_net": {
+      "title": "E-commerce Engine · .NET & React / TypeScript",
+      "titleFull": "E-commerce Engine · .NET Core & React / TypeScript",
+      "milestone": "Architectural and technical evolution of my first Django e-commerce, rewritten with .NET and a React SPA.",
+      "timeline": {
+        "summary": [
+          "Rewrote my first e-commerce engine in Django using .NET Core, focused on improving the database schema, resource consumption and the project's long-term structure.",
+          "Moved from a monolith with Django's standard structure to a modular monolith with an Onion architecture, separating responsibilities by layer and leaving modules ready to be extracted as a microservice if needed.",
+          "Built a React SPA with TypeScript, JWT-based authentication, and server state and cache management with TanStack Query."
+        ]
+      },
+      "project": {
+        "summary": [
+          "E-commerce engine capable of spinning up stores from configuration and product data, in the style of Shopify or Tienda Nube.",
+          "Rewrite of my Django e-commerce: same functional goals, better architecture, modeling and stack decisions.",
+          "Modular monolith in .NET Core, with improvements in RAM usage compared to the Python runtime when running multiple store instances.",
+          "React + TypeScript SPA connected to the API, with JWT authentication and state and cache management via TanStack Query.",
+          "Clear improvements in response times, resource usage and code quality compared to the Django version."
+        ],
+        "description": [
+          "This project comes from a personal decision: taking my first Django e-commerce and rewriting it with the tools and criteria I picked up along the way. It's not a new project — it's the same problem solved with more judgment, after going through other projects and other stacks.",
+
+          "The Django version taught me a lot, but it also showed me the limits a dynamic framework has once the project grows: the magic of the ORM, the difficulty of measuring which queries actually fire, and Django's standard structure that falls short once you go from 3 CRUDs to more than 10 modules.",
+
+          "With .NET Core I wanted to address exactly those points. Static typing and EF Core gave me much more explicit and measurable queries than Django's ORM. The project structure stopped being 'what Django expects' and became a modular monolith with explicit layers: domain, application, infrastructure and presentation, each with a clear responsibility.",
+
+          "EF Core showed me things Django ORM wouldn't let me do in a single database round trip. With Django, I often ended up with two or three queries where one would have sufficed, and without seeing the generated query it was hard to notice. EF Core has a much more explicit and composable query model: I can project to a DTO in the same query, include related entities with a controlled JOIN, and see exactly what SQL is being generated. That let me optimize queries I would have had to solve in Django with `select_related`, `prefetch_related`, or even raw SQL — here they come naturally out of the ORM.",
+
+          "In the data modeling I redesigned entities and relationships that had been left as technical debt in the first version. I separated responsibilities that used to live mixed together and defined clear contracts between modules. The improvement isn't just cosmetic: it translates into more efficient queries and code that's easier to reason about and extend.",
+
+          "The Onion architecture wasn't just a stylistic decision. By separating the domain from the infrastructure, the use cases became testable without spinning up the database, and modules ended up with clear contracts between each other. In the future, that makes it possible to extract a module as a microservice without rewriting its logic: the domain is already isolated. I haven't done it yet, but the structure is ready for it.",
+
+          "On the client side, I built a React SPA with TypeScript. Unlike the Django Templates I used in the first version, here the frontend and backend are clearly decoupled: the client consumes a REST API and manages its own state. I used TanStack Query for server state, cache and synchronization, and JWT for authentication.",
+
+          "One thing that surprised me was the RAM usage. With Python and Django, spinning up multiple instances to handle multiple stores got expensive: every Gunicorn worker loads a copy of the interpreter and its dependencies. With .NET the same service takes a fraction of that memory, which on a multi-store deployment makes a concrete difference in hosting costs.",
+
+          "If I have to sum up what I learned from this project, it's that framework limitations aren't excuses: they're opportunities to understand what the framework does for you, and what you'd rather control yourself. Moving from Django to .NET forced me to explicitly write things Django resolved magically, and that made me a better programmer in both ecosystems."
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    "mara_sem": {
+      "title": "MARA · Mobile App · React Native & Spring Boot",
+      "titleFull": "MARA · Mobile App · React Native & Spring Boot",
+      "milestone": "First mobile project. Technical leadership on the backend and full development of the mobile client.",
+      "timeline": {
+        "summary": [
+          "Technically led the backend development, supporting my teammates through architecture, security and data modeling decisions.",
+          "Took part in negotiating functional requirements with the client and in oral presentations at the end of each biweekly Sprint on the app's progress.",
+          "Built the mobile app with React Native and Expo: screens, image/audio/video upload, API consumption and client-side JWT handling.",
+          "Contributed to the database schema definition, the project architecture and the UI/UX decisions for the mobile client."
+        ]
+      },
+      "project": {
+        "summary": [
+          "Project focused on backing up digital evidence for gender-based violence reports and on sending emergency alerts to trusted contacts.",
+          "Designed the mobile application with React Native and Expo, defining the UI/UX based on conversations with the client and the PO, and building releases with Android Studio.",
+          "Reviewed the backend code implemented in Spring Boot by my teammates, ensuring consistency and best practices.",
+          "Co-designed the project architecture, features, and the modules and database schemas required for the technical solution.",
+          "Developed the Spring Security JWT integration on the server side, the middlewares to propagate context across modules, and the JWT management stored in the mobile app."
+        ],
+        "description": [
+          "Coming soon"
+        ]
+      }
+    },
+
 
 
     "fleet_optimizer": {
