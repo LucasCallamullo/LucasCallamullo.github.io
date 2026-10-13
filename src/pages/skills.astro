@@ -3,10 +3,11 @@ import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
 
 import Section from '@shared/components/Section.astro'
 import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
+import ProjectsModal from '@/features/projects/components/ModalProjects.astro';
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import { getGroupedTechs } from '@shared/data/tech_stack';
+import { getGroupedTechs, getTitleBtnModals } from '@shared/data/tech_stack';
 import { topLangsUrl } from '@shared/data/github_stats';
 import { getNavHref } from '@shared/data/links';
 
@@ -14,15 +15,15 @@ import { fade } from 'astro:transitions';
 
 const groups = getGroupedTechs({ 
   categories:[
-    'backend', 'languages', 'frontend', 'databases', 
-    'devops', 'tools', 'testing', 'api', 'mobile', 'ai'
+    'backend', 'languages', 'frontend', 'databases', 'auth',
+    'devops', 'tools', 'testing', 'api', 'mobile', 'ai', 'games'
   ] 
 });
 
 const mainStack = getGroupedTechs({ 
   categories:[
     'backend', 'languages', 'frontend', 'databases',
-    'devops', 'tools', 'testing'
+    'devops', 'tools', 'testing', 'auth'
   ],
   onlyMain: true 
 });
@@ -31,6 +32,7 @@ const cardsCarousel: Card[] = mainStack.flatMap((group) =>
   group.techs.map((t) => ({
     icon: t.icon,
     label: t.name,     
+    id: t.id ?? '',     
   }))
 );
 
@@ -62,7 +64,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
   <!-- + section of MAIN SKILLS -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-    <div class:list={['px-2 md:px-4 py-6 w-full', WIDTH_CLASSES.md]}>
+    <div class:list={['px-2 md:px-1 py-6 w-full', WIDTH_CLASSES.md]}>
 
       <div class="flex flex-col items-center justify-center gap-5 cont_animate__from_left_lg"
         data-reveal data-multi-anim
@@ -80,27 +82,30 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
       </div>
       
       <!-- STACK MAIN CARDS -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4.5 mt-7">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4.5 mt-7" id="contStackMain">
         {mainStack.map((group) => (
           <div class="flex flex-col rounded-xl bg-surface-200
             cont_border_effect cont_btns_3d cont_animate__from_left_lg"
             data-reveal
           >
             <h3 class="font_console text-lg text-accent uppercase tracking-wider
-              bg-surface-200 px-4 py-2.5">
+              bg-surface-200 px-3.5 py-2.5">
               <span data-i18n={group.category.i18n}>{group.category.label}</span>
             </h3>
 
-            <div class="flex flex-wrap flex-1 bg-surface-900 px-3 py-4 gap-2">
+            <div class="flex flex-wrap flex-1 bg-surface-900 px-2 py-3.5 gap-2">
               {group.techs.map((tech) => (
-                <button class="flex items-center gap-2 w-min h-min px-2.5 py-1.5 cursor-pointer rounded-2xl z-30
-                  cont_btns_3d__btn_effect border border-console-400 btn__glass_effect">
+                <button class="flex items-center gap-2 w-min h-min px-2 py-1.5 cursor-pointer rounded-2xl z-30
+                  cont_btns_3d__btn_effect border border-console-400 btn__glass_effect"
+                  data-tech={tech.id} type="button" title={getTitleBtnModals(tech.name)}
+                  aria-label={getTitleBtnModals(tech.name)}
+                >
                   <Icon
                     name={tech.icon}
                     class={`w-6 h-6 ${tech.isOnlyLightTheme ? 'bg-white rounded-md p-0.5' : ''}`}
                   />
                   <span class="font_console text-sm text-content-main truncate">
-                    {tech.name}
+                    {tech.name} 
                   </span>
                 </button>
               ))}
@@ -140,6 +145,10 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
   </Section>
 
 
+  <!-- + MODAL PROJECTS COMPONENTS -->
+  <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>
+
+
   <!-- + SECTION ---- STACK CAROUSEL MAIN CARDS -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false} paddingX={false}>
     <div class:list={[
@@ -165,7 +174,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
       </div>
 
       <div class:list={["h-55 w-full px-2 md:px-4", WIDTH_CLASSES.md]}>
-        <RotatingCards cards={cardsCarousel} />
+        <RotatingCards cards={cardsCarousel} id='carouselStack' />
       </div>
     
     </div>  
@@ -192,7 +201,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
         </span>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 relative">
+      <div class="grid md:grid-cols-2 gap-6 relative" id="contAllStack">
         {groups.map((group, index) => (
           <section data-reveal
             class:list={[
@@ -216,7 +225,8 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
               gap-2.5 px-4 py-4 overflow-auto relative ">
                 {group.techs.map((tech) => (
                   <button class="flex items-center gap-2 px-3.5 py-2 cont__border_animate w-min 
-                    cont_btns_3d__btn_effect cursor-pointer"
+                    cont_btns_3d__btn_effect cursor-pointer" aria-label={getTitleBtnModals(tech.name)}
+                    data-tech={tech.id} type="button" title={getTitleBtnModals(tech.name)}
                   >
                     <Icon
                       name={tech.icon}
@@ -236,17 +246,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
 
   <script>
-    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
-
-    async function boot() {
-      // this events call init typewriter methods, only need the right selectors
-      setEventTypewriter({
-        container: '#skillsMain',
-        title: '[data-typewriter]',
-        elementsToFade: ['[data-fade-1]'],
-      });
-    }
-
-    document.addEventListener('astro:page-load', boot);
+    import { initSetupSkills } from "@/features/skills/scripts/init";
+    document.addEventListener('astro:page-load', initSetupSkills);
   </script>
 </BaseLayout>

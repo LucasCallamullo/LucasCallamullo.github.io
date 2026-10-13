@@ -15,7 +15,7 @@ import { getRepoLanguages } from '@/shared/data/github_stats';
 import { formatDateRange, PROJECTS } from '@/shared/data/projects';
 import { existSection, filterTags, getSections, getSection, TAG_CATEGORIES, titleCase } from '@/shared/data/tags';
 
-import ProjectLanguages from '@/projects/components/ProjectLanguages.astro';
+import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
 
 export const getStaticPaths = (() => {
   return Object.values(PROJECTS)
@@ -46,9 +46,6 @@ const NEXT_SECTION = getSection(sectionsToRender, 'next');
 const coreStackList = getTechs([...PROJECT.coreTechs, ...PROJECT.extraTechs]);
 const otherStackList = getTechs([...PROJECT.otherTechs ?? []]);
 
-
-
-
 // Languages stats
 const languages = await getRepoLanguages(PROJECT.slug);
 
@@ -66,7 +63,7 @@ const langStats = languages
   : [];
 
 // Define page metadata
-const title = `${PROJECT.title} · Callamullo Lucas`;
+const title = `${PROJECT.slug} · Callamullo Lucas`;
 ---
 
 <BaseLayout title={title} mainWidth="full">
@@ -224,6 +221,8 @@ const title = `${PROJECT.title} · Callamullo Lucas`;
 
               <div class="flex flex-wrap gap-2.5 bg-surface-900 p-4 rounded-2xl">
                 {otherStackList.map(tech => {
+                  if (tech.id == 'ts' || tech.id == 'js') return '';
+
                   return <button class="flex items-center gap-2 w-min h-min px-2.5 py-1.5 cursor-pointer rounded-2xl z-30
                     cont_btns_3d__btn_effect border border-console-400 btn__glass_effect">
                     <Icon
@@ -277,10 +276,7 @@ const title = `${PROJECT.title} · Callamullo Lucas`;
           ))}
         </div>
 
-
-        {/* <!-- ============================= 
-        +   MODAL IMAGE VIEWS
-        ============================= --> */}
+        {/* MODAL IMAGE VIEWS */}
         <div
           id="imagesView"
           class:list={[
@@ -416,7 +412,7 @@ const title = `${PROJECT.title} · Callamullo Lucas`;
 
 
   <script>
-    import { initModals } from "@/projects/scripts/init";
+    import { initModals } from "@/features/projects/scripts/init";
     initModals()
   </script>
 

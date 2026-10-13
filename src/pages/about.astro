@@ -2,12 +2,13 @@
 import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
 import Section from '@shared/components/Section.astro'
 import CardSection from '@shared/components/CardSection.astro'
+import ProjectsModal from '@/features/projects/components/ModalProjects.astro';
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 
 import { getProjects, formatDateRange } from '@shared/data/projects';
-import { getTechs } from '@shared/data/tech_stack';
+import { getTechs, getTitleBtnModals } from '@shared/data/tech_stack';
 import { getNavHref } from '@shared/data/links';
 
 // retrieve stack list to complete
@@ -25,7 +26,7 @@ interface TechRow {
 const techRows: TechRow[] = [
   { label: 'Frontend:', items: frontend },
   { label: 'Backend:',  items: backend },
-  { label: 'DB:',       items: databases },
+  { label: 'DataBase:', items: databases },
   { label: 'DevOps:',   items: devops },
 ];
 
@@ -99,19 +100,26 @@ const title = "About · Callamullo Lucas · Software Engineer";
         </p>
 
         <!-- + RENDER GENERICS TECHS -->
-        {techRows.map(({ label, items }) => (
-          <p class="font_console text-base flex items-center justify-center ms-1 md:ms-6 flex-wrap cont_animate__from_left" 
-            data-reveal data-multi-anim>
-            <strong class="text-accent">{label}</strong>
-            {items.map((t, index) => (
-              <>
-                <Icon name={t.icon} class="ms-3" />
-                <span class="ms-2 truncate">{t.name}</span>
-                {index < items.length - 1 && <span class="ms-2 text-console">|</span>}
-              </>
-            ))}
-          </p>
-        ))}
+        <div id="contStackAbout" class="w-full text-start justify-start items-start flex flex-col gap-1">
+          {techRows.map(({ label, items }) => (
+            <p class="font_console text-base flex items-center justify-center ms-1 md:ms-6 flex-wrap cont_animate__from_left" 
+              data-reveal data-multi-anim>
+              <strong class="text-accent">{label}</strong>
+              
+              {items.map((t, index) => (
+                <>
+                  <button class="group flex items-center cursor-pointer"
+                    title={getTitleBtnModals(t.name)} data-tech={t.id}
+                  >
+                    <Icon name={t.icon} class="ms-3" />
+                    <span class="ms-2 truncate group-hover:text-console">{t.name}</span>
+                    {index < items.length - 1 && <span class="ms-2 text-console">|</span>}
+                  </button>
+                </>
+              ))}
+            </p>
+          ))}
+        </div>
 
         <p class="font_console text-base text-justify mt-2 cont_animate__from_left" data-i18n={I18N.about.bio.p6} data-reveal>
           To me, programming is about simplifying life through code — even if replicating life's randomness seems impossible. 
@@ -156,18 +164,22 @@ const title = "About · Callamullo Lucas · Software Engineer";
             Main Stack:
           </strong>
 
-          <ul class="w-full col-span-2 gap-2 grid grid-cols-2">
+          <ul class="w-full col-span-2 gap-2 grid grid-cols-2" id="contMainStack">
             {mainTechs.map((t, index) => (
               <li
                 class:list={[
-                  'flex flex-wrap items-center gap-2 cont_animate__from_left',
+                  'flex flex-wrap cont_animate__from_left',
                   // Si es impar (segundo, cuarto, etc.), alinearlo a la derecha.
                   index % 2 === 1 && 'place-self-end',
                 ]}
                 data-reveal data-multi-anim
               >
-                <Icon name={t.icon} />
-                <span class="truncate text-accent">{t.name}</span>
+                <button class="h-full w-full group flex items-center gap-2 cursor-pointer"
+                  title={getTitleBtnModals(t.name)} data-tech={t.id}
+                >
+                  <Icon name={t.icon} />
+                  <span class="truncate text-accent group-hover:text-console">{t.name}</span>
+                </button>
               </li>
             ))}
           </ul>
@@ -176,6 +188,10 @@ const title = "About · Callamullo Lucas · Software Engineer";
 
     </div>
   </Section>
+
+
+  <!-- + MODAL PROJECTS COMPONENTS -->
+  <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>
 
 
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false}>
@@ -223,13 +239,13 @@ const title = "About · Callamullo Lucas · Software Engineer";
                 <span class="text-sm font_console text-accent font-bold">{formatDateRange(p.date)}</span>
               </div>
 
-              <h3 data-i18n={p.title}
-                class:list={[
-                  'gap-2 font_console text-xl tracking-wider text-console mt-4 mb-4',
-                  index % 2 === 0 ? 'self-start pl-2' : 'self-end pr-2',
-                ]}
-              >
-                Ecommerce Engine
+              <h3 class:list={[
+                'gap-2 font_console text-xl tracking-wider text-console mt-4 mb-4',
+                index % 2 === 0 ? 'self-start pl-2' : 'self-end pr-2',
+              ]}>
+                <a href=`projects/${p.slug}` data-i18n={p.title} title="View in Portfolio">
+                  Ecommerce Engine
+                </a>
               </h3>
 
               <p data-i18n={p.timeline?.summary} data-i18n-join="space"
@@ -314,8 +330,9 @@ const title = "About · Callamullo Lucas · Software Engineer";
               <span class="w-3 h-3 rounded-full bg-brand-green-100 shadow-brand-green-100 animate-pulse"></span>
             </div>
 
-            <span class="font_console text-base text-console font-bold mt-2 wrap-break-word" 
-              data-i18n={p.title}>title</span>
+            <span class="font_console text-base text-console font-bold mt-2 wrap-break-word">
+              <a href=`projects/${p.slug}` data-i18n={p.title} title="View in Portfolio">title</a>
+            </span>
 
             <span class="font_console text-sm text-accent mt-1 wrap-break-word" 
               data-i18n={p.milestone}>milestone description</span>
@@ -340,18 +357,8 @@ const title = "About · Callamullo Lucas · Software Engineer";
 
 
   <script>
-    import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
-
-    async function boot() {
-      // this events call init typewriter methods, only need the right selectors
-      setEventTypewriter({
-        container: '#aboutMain',
-        title: '[data-typewriter]',
-        elementsToFade: ['[data-fade-1]'],
-      });
-    }
-
-    document.addEventListener('astro:page-load', boot);
+    import { initAbout } from "@/features/about/scripts/init";
+    initAbout()
   </script>
 
 </BaseLayout>

@@ -6,8 +6,8 @@ export function initModals() {
   // Every SPA navigation
   document.addEventListener('astro:page-load', () => {
 
-    // --- Mobile drawer ---
-    const modalMobile = bindModal({ 
+    // --- PROJECTS IMAGES MODAL ---
+    const modalImages = bindModal({ 
       modalSelector: '#imagesView',  
       overlaySelector: '#imagesOverlay',  
       openBtnSelector: '.imageBtn',  
