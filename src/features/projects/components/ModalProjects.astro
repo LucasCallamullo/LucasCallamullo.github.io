@@ -28,15 +28,15 @@ const modalClasses = [
 ];
 ---
 
-<Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
-  <div class:list={['px-2 md:px-1 py-6 w-full', WIDTH_CLASSES.md]}>
+<Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false} paddingX={false}>
+  <div class:list={['w-full', WIDTH_CLASSES.md]}>
 
     <div id={modalId} class:list={modalClasses}>
-      <div class="modal__content max-h-full max-w-full h-full w-full
-                  flex flex-col relative p-3 min-h-0">
+      <div class="modal__content max-h-full max-w-full h-full w-full 
+                  flex flex-col relative min-h-0">
 
         <button type="button" title="Close Modal"
-          class="modal__btn_close p-2 hover:bg-red-500 group absolute right-1 top-1
+          class="modal__btn_close p-2 hover:bg-red-500 group absolute right-0 top-0
             rounded-lg bg-surface-200 text-content-main border border-surface-800
             cursor-pointer"
         >
@@ -45,7 +45,7 @@ const modalClasses = [
 
         <div
           id={dataId}
-          class="modal__data w-full px-10 py-2 flex flex-col gap-2
+          class="modal__data w-full flex flex-col gap-2 px-6 md:px-8 py-8
                  flex-1 min-h-0 overflow-y-auto"
         >
         </div>
