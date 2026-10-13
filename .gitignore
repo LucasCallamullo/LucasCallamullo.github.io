@@ -39,3 +39,8 @@ build/
 
 # My folders
 proofs/
+
+# .gitignore
+.env
+.env.*
+!.env.example

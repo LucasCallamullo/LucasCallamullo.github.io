@@ -14,11 +14,19 @@ export interface ModalElements {
   
 }
 
+export interface ModalOpenContext {
+  modal: HTMLElement;
+  overlay?: HTMLElement;
+  controller: ModalController;
+  /** Element that triggered the open, if it came from a click. */
+  trigger?: HTMLElement | null;
+}
+
 export interface ModalCallbacks {
   /** Fired immediately after the modal opens. */
-  onOpen?: () => void;
+  onOpen?: (ctx: ModalOpenContext) => void;
   /** Fired immediately after the modal closes. */
-  onClose?: () => void;
+  onClose?: (ctx: ModalOpenContext) => void;
 }
 
 // -----------------------------------------------------------------------------
@@ -72,6 +80,54 @@ function attachGlobalListeners(): void {
     }
   });
 
+  // ! TEST HASH STATE - PUSH
+  /*   
+  // Escucha el evento de preparación de Astro (se dispara antes del fetch)
+  document.addEventListener('astro:before-preparation', (event) => {
+    if (__logging) console.log('[ASTRO BEFORE]: ABCD');
+
+    // Solo nos interesan las navegaciones del historial (atrás/adelante)
+    if (event.navigationType !== 'traverse') return;
+
+    if (__logging) console.log('[ASTRO TRAVERSE]: ABCD');
+
+    // Si no hay modales abiertos, dejamos que Astro haga lo suyo
+    if (openModals.length === 0) return;
+
+    // 1. Cancelamos la navegación de Astro
+    event.preventDefault();
+
+    // 2. Neutralizamos el loader y el swap para que no haga fetch ni cambie el DOM
+    event.loader = async () => {};
+    // event.swap = () => {}; 
+
+    // 3. Cerramos nuestro modal manualmente
+    const topModal = openModals.at(-1);
+    if (topModal) {
+      topModal.close(openModals.length, true);
+    }
+  });  */
+  
+
+
+  // ! TEST HASH STATE - PUSH
+  /*
+  window.addEventListener('hashchange', () => {
+    if (__logging) console.log('[hashchange] hash:', location.hash, 'stack:', openModals.length);
+
+    if (!isCloseByCode && openModals.length > 0) {
+      const topModal = openModals.at(-1);
+      // Si el hash ya no matchea el modal abierto, cerralo
+      if (topModal && location.hash !== `#modal-${topModal.id}`) {
+        const size = openModals.length;
+        topModal.close(size, true);  // use directly the method to close
+      }
+    }
+    
+    // Always reset the programmatic navigation flag for future popstate triggers
+    // isCloseByCode = false;
+  }); */
+
   /**
    * Handles mobile back gesture or browser back button navigation.
    * 
@@ -85,10 +141,9 @@ function attachGlobalListeners(): void {
   window.addEventListener('popstate', () => {
     if (__logging) console.log('[popstate] isCloseByCode:', isCloseByCode, 'stack:', openModals.length);
 
-    
     if (!isCloseByCode && openModals.length > 0) {
-
       const topModal = openModals.at(-1);
+      
       if (topModal) {
         const size = openModals.length;
         topModal.close(size, true);  // use directly the method to close
@@ -97,26 +152,7 @@ function attachGlobalListeners(): void {
     
     // Always reset the programmatic navigation flag for future popstate triggers
     isCloseByCode = false;
-  }); 
-
-  /*   
-  document.addEventListener('astro:before-preparation', (event) => {
-    // Only intercept when the user navigated via back/forward
-    if (event.navigationType !== 'traverse') return;
-
-
-    // If there's an open modal, close it and cancel the navigation
-    if (__logging) console.log('[before-preparation] isCloseByCode:', isCloseByCode, 'stack:', openModals.length);
-    if (openModals.length > 0) {
-      
-      event.preventDefault(); // Cancels the browser back navigation
-
-    }
-
-    // Always reset the programmatic navigation flag for future popstate triggers
-    // isCloseByCode = false;
-  }); */
-  
+  }); /*   */
 }
 
 // -----------------------------------------------------------------------------
@@ -132,10 +168,12 @@ export class ModalController {
   private closeButtonSelector: string;
   private contentSelector: string;
 
+  public readonly id: string;  // ! TEST HASH PUSH
+
   private _isOpen = false;
   private _setEventClick = false;
-  private onOpen?: () => void;
-  private onClose?: () => void;
+  private onOpen?: (ctx: ModalOpenContext) => void;
+  private onClose?: (ctx: ModalOpenContext) => void;
 
   constructor(
     {
@@ -151,6 +189,8 @@ export class ModalController {
     this.closeButtonSelector = closeButtonSelector;
     this.contentSelector = contentSelector;
 
+    this.id = modal.id || `modal-${Math.random().toString(36).slice(2, 9)}`; // ! TEST HASH PUSH
+
     this._setEventClick = false;
 
     this.onOpen = callbacks.onOpen;
@@ -165,11 +205,23 @@ export class ModalController {
     return this._isOpen;
   }
 
+  // pass the context
+  private notify(kind: 'open' | 'close', trigger?: HTMLElement | null): void {
+    const ctx: ModalOpenContext = {
+      modal: this.modal,
+      overlay: this.overlay,
+      controller: this,
+      trigger: trigger ?? null,
+    };
+    if (kind === 'open') this.onOpen?.(ctx);
+    else this.onClose?.(ctx);
+  }
+
   /**
    * Opens the modal, updates z-index hierarchy, disables body scroll,
    * and pushes a new dummy entry to browser history.
    */
-  public open(): void {
+  public open(trigger?: HTMLElement | null): void {
     if (__logging) console.log('[open] called. isOpen:', this._isOpen, 'stack:', openModals.length);
     if (this._isOpen) return;
 
@@ -191,11 +243,13 @@ export class ModalController {
     }
 
     // ALWAYS push a history entry for EVERY modal opened
-    history.pushState({ modalOpen: true, depth }, '', window.location.pathname);
+    // history.pushState({ modalOpen: true, depth }, '', window.location.pathname);
+    history.pushState({ modalOpen: true, id: this.id }, '', `#modal-${this.id}`);  // ! TEST HASH
 
     if (__logging) console.log('[open] called. Phase 2:', this._isOpen, 'stack Modals:', depth);
 
-    this.onOpen?.();
+    // this.onOpen?.();
+    this.notify('open', trigger);
   }
 
   /**
@@ -230,7 +284,10 @@ export class ModalController {
     if (openModals.length == size - 1 && !isFromPopState) {
       isCloseByCode = true;
       if (__logging) console.log('[close] called historyBack', 'size modal list:', size);
-      history.back();
+
+      // history.back();
+      // ! TESTING HASH STATE
+      // history.replaceState({}, '', window.location.pathname + window.location.search);
     }
 
     // Restore body scroll when all modals are fully closed
@@ -238,7 +295,8 @@ export class ModalController {
       document.body.style.overflow = '';
     }
 
-    this.onClose?.();
+    // this.onClose?.();
+    this.notify('close');
   }
 
   /**
@@ -339,36 +397,71 @@ export interface ModalBinding {
   overlaySelector?: string;
   /** ID of the button that opens the modal (optional). */
   openBtnSelector?: string;
+
+  /** ID of the container to delegate event ; use openBtnSelector like class to delegate event */
+  contBtnToDelegate?: string | null;
+
   /** Optional callbacks. */
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen?: (ctx: ModalOpenContext) => void;
+  onClose?: (ctx: ModalOpenContext) => void;
 }
 
 /**
  * Create a ModalController from DOM ids and optionally wire an open button.
  * Returns null if the modal element is not found.
  */
+/**
+ * Create a ModalController from DOM ids and optionally wire an open button.
+ * Returns null if the modal element is not found.
+ */
 export function bindModal(binding: ModalBinding): ModalController | null {
+  // Resolve the modal root element; bail out if it doesn't exist.
   const modal = document.querySelector<HTMLElement>(binding.modalSelector);
   if (!modal) return null;
 
+  // Resolve the optional overlay element.
   const overlay = binding.overlaySelector
     ? document.querySelector<HTMLElement>(binding.overlaySelector) ?? undefined
     : undefined;
 
+  // Instantiate the controller with the resolved elements and forwarded callbacks.
   const controller = new ModalController(
     { modal, overlay },
     { onOpen: binding.onOpen, onClose: binding.onClose }
   );
 
-  if (binding.openBtnSelector) {
+  // Wire a direct click listener when there's no delegation container.
+  if (binding.contBtnToDelegate == null && binding.openBtnSelector) {
     const btn = document.querySelector<HTMLElement>(binding.openBtnSelector);
     btn?.addEventListener('click', (e) => {
       e.stopPropagation();
-      controller.open();
+      controller.open(btn);
     });
   }
 
+  // Wire a delegated click listener scoped to the container.
+  if (binding.contBtnToDelegate && binding.openBtnSelector) {
+    const container = document.querySelector<HTMLElement>(binding.contBtnToDelegate);
+
+    container?.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+
+      // Find the closest ancestor (or self) matching the trigger selector.
+      const trigger = target.closest<HTMLElement>(binding.openBtnSelector!);
+      if (!trigger) return;
+
+      // Ensure the matched trigger is actually inside this container.
+      if (!container.contains(trigger)) return;
+
+      // Stop the event from bubbling past this container.
+      e.stopPropagation();
+
+      // Open the modal via the controller.
+      controller.open(trigger);
+    });
+  }
+
+  // Return the controller so callers can open/close programmatically.
   return controller;
 }
 

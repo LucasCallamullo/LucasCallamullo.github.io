@@ -144,6 +144,7 @@ export const I18N = {
     tools: 'skills.tools',
     testing: 'skills.testing',
     api: 'skills.api',
+    ai: 'skills.ai',
     games: 'skills.games',
 
     main: {
@@ -162,6 +163,8 @@ export const I18N = {
   projectsPage: {
     title: 'projectsPage.title',
     subtitle: 'projectsPage.subtitle',
+    modalTitle: 'projectsPage.modalTitle',
+    donutSkillsSubtitle: 'projectsPage.donutSkillsSubtitle',
 
     projects: {
       title: 'projectsPage.projects.title',
@@ -175,6 +178,75 @@ export const I18N = {
       btn: 'projectsPage.touch.btn',
     }
   },
+
+  // Projects Slug stuff, Sections, tags, etc
+  projectsSlug: {
+    indice: 'projectsSlug.indice',
+    tagsTitle: 'projectsSlug.tagsTitle',
+    stackSub: 'projectsSlug.stackSub',
+    graph: 'projectsSlug.graph',
+
+    sections: {
+      links:   'projectsSlug.sections.links',
+      stack:   'projectsSlug.sections.stack',
+      gallery: 'projectsSlug.sections.gallery',
+      history: 'projectsSlug.sections.history',
+      c4:      'projectsSlug.sections.c4',
+      der:     'projectsSlug.sections.der',
+      flow:    'projectsSlug.sections.flow',
+      next:    'projectsSlug.sections.next',
+    },
+  },
+
+  tags: {
+    // ── Categories ──────────────────────────────────────
+    category: {
+      architecture: 'tags.category.architecture',
+      structure:    'tags.category.structure',
+      scope:        'tags.category.scope',
+      context:      'tags.category.context',
+      type:         'tags.category.type',
+      status:       'tags.category.status',
+      team:         'tags.category.team',
+    },
+
+    // ── Tag labels ──────────────────────────────────────
+    microservices:   'tags.microservices',
+    monolithModular: 'tags.monolithModular',
+
+    layered: 'tags.layered',
+    onion:   'tags.onion',
+
+    fullStack: 'tags.fullStack',
+    backend:   'tags.backend',
+    frontend:  'tags.frontend',
+
+    university: 'tags.university',
+    personal:   'tags.personal',
+    freelance:  'tags.freelance',
+    noCountry:  'tags.noCountry',
+    course:     'tags.course',
+    tutorial:   'tags.tutorial',
+
+    webApp:    'tags.webApp',
+    mobileApp: 'tags.mobileApp',
+    api:       'tags.api',
+    cli:       'tags.cli',
+    gameMod:   'tags.gameMod',
+
+    completed:  'tags.completed',
+    inProgress: 'tags.inProgress',
+    archived:   'tags.archived',
+
+    solo:        'tags.solo',
+    team:        'tags.team',
+    lead:        'tags.lead',
+    pair:        'tags.pair',
+    contributor: 'tags.contributor',
+  },
+
+
+
 
   contact: {
     title: 'contact.title',
@@ -223,8 +295,35 @@ export const I18N = {
       },
     },
 
+    ecommerce_net: {
+      title: 'projects.ecommerce_net.title',
+      titleFull: 'projects.ecommerce_net.titleFull',
+      milestone: 'projects.ecommerce_net.milestone',
+      timeline: {
+        summary: 'projects.ecommerce_net.timeline.summary',
+      },
+      project: {
+        summary: 'projects.ecommerce_net.project.summary',
+        description: 'projects.ecommerce_net.project.description',
+      },
+    },
+
+    mara_sem: {
+      title: 'projects.mara_sem.title',
+      titleFull: 'projects.mara_sem.titleFull',
+      milestone: 'projects.mara_sem.milestone',
+      timeline: {
+        summary: 'projects.mara_sem.timeline.summary',
+      },
+      project: {
+        summary: 'projects.mara_sem.project.summary',
+        description: 'projects.mara_sem.project.description',
+      },
+    },
+
     fleet_optimizer: {
       title: 'projects.fleet_optimizer.title',
+      titleFull: 'projects.fleet_optimizer.titleFull',
       milestone: 'projects.fleet_optimizer.milestone',
       timeline: {
         summary: 'projects.fleet_optimizer.timeline.summary',
@@ -237,6 +336,7 @@ export const I18N = {
 
     university: {
       title: 'projects.university.title',
+      titleFull: 'projects.university.titleFull',
       milestone: 'projects.university.milestone',
       timeline: {
         summary: 'projects.university.timeline.summary',
@@ -245,6 +345,7 @@ export const I18N = {
 
     ecommerce_dj: {
       title: 'projects.ecommerce_dj.title',
+      titleFull: 'projects.ecommerce_dj.titleFull',
       milestone: 'projects.ecommerce_dj.milestone',
       timeline: {
         summary: 'projects.ecommerce_dj.timeline.summary',
@@ -257,6 +358,7 @@ export const I18N = {
 
     portfolio: {
       title: 'projects.portfolio.title',
+      titleFull: 'projects.portfolio.titleFull',
       milestone: 'projects.portfolio.milestone',
       timeline: {
         summary: 'projects.portfolio.timeline.summary',
@@ -269,6 +371,7 @@ export const I18N = {
 
     dds_tutor: {
       title: 'projects.dds_tutor.title',
+      titleFull: 'projects.dds_tutor.titleFull',
       milestone: 'projects.dds_tutor.milestone',
       timeline: {
         summary: 'projects.dds_tutor.timeline.summary',
@@ -281,6 +384,7 @@ export const I18N = {
 
     backend_tp: {
       title: 'projects.backend_tp.title',
+      titleFull: 'projects.backend_tp.titleFull',
       milestone: 'projects.backend_tp.milestone',
       timeline: {
         summary: 'projects.backend_tp.timeline.summary',
@@ -293,6 +397,7 @@ export const I18N = {
 
     py_tutor: {
       title: 'projects.py_tutor.title',
+      titleFull: 'projects.py_tutor.titleFull',
       milestone: 'projects.py_tutor.milestone',
       timeline: {
         summary: 'projects.py_tutor.timeline.summary',
@@ -305,6 +410,7 @@ export const I18N = {
 
     no_country: {
       title: 'projects.no_country.title',
+      titleFull: 'projects.no_country.titleFull',
       milestone: 'projects.no_country.milestone',
       timeline: {
         summary: 'projects.no_country.timeline.summary',
@@ -317,6 +423,7 @@ export const I18N = {
 
     pawn_cs: {
       title: 'projects.pawn_cs.title',
+      titleFull: 'projects.pawn_cs.titleFull',
       milestone: 'projects.pawn_cs.milestone',
       timeline: {
         summary: 'projects.pawn_cs.timeline.summary',

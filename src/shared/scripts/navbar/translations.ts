@@ -43,8 +43,12 @@ let translations: Translations = {};
 // -----------------------------------------------------------------------------
 
 export function getCurrentLang(): string {
-  return localStorage.getItem(STORAGE_KEY) || 'en';
+  if (typeof window === 'undefined') return 'en'; // fallback server
+  // return localStorage.getItem(STORAGE_KEY) || 'en';
+  const key = STORAGE_KEY ?? 'en';
+  return localStorage.getItem(key) ?? 'en';
 }
+
 
 function isLangCode(value: string | null): value is LangCode {
   return value !== null && (VALID_LANGS as readonly string[]).includes(value);
@@ -68,13 +72,19 @@ function escapeHtml(str: string): string {
 /**
  * Une los elementos si es un arreglo, o retorna la cadena intacta.
  */
-function formatTranslationValue(
+export function formatTranslationValue(
   value: string | string[],
   joinMode: string | null
 ): string {
   if (typeof value === 'string') return value;
 
   if (joinMode === 'newline') {
+    return value
+      .map((line) => `<span>${escapeHtml(line)}</span>`)
+      .join('');
+  }
+  
+  if (joinMode === 'newlineIcon') {
     return value
       .map((line) => `<span>${escapeHtml(line)}</span>`)
       .join('');
@@ -161,7 +171,7 @@ export function applyTranslations(
       const textOrSpans = formatTranslationValue(value, dataJoin);
 
       // directamente agrego los span al element, util para descriptions y styles
-      if (dataJoin === 'newline') {
+      if (dataJoin === 'newline' || dataJoin === 'newlineIcon') {
         el.innerHTML = textOrSpans;
         return;
       }

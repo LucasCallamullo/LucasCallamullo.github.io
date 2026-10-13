@@ -1,7 +1,8 @@
 // src/shared/data/projects.ts
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import type { TagKey } from '@shared/data/tags';
+import type { TagKey, SectionId } from '@shared/data/tags';
 import type { TechKey } from '@shared/data/tech_stack';
+import { getCurrentLang } from '../scripts/navbar/translations';
 
 // ========================================================================
 //  +  DEFAULT VALUES
@@ -30,6 +31,8 @@ const youtubeExt: ExternalLink = {
 // ========================================================================
 //  +  INTERFACES
 // ========================================================================
+
+
 
 /** External link (repo, live demo, etc.). */
 export interface ExternalLink {
@@ -87,6 +90,7 @@ interface ProjectDate {
 export interface Project {
   /** i18n key for the title. */
   title: string;              //! I18N
+  titleFull: string;              //! I18N
   milestone?: string | null;     //! I18N
 
   isMain: boolean;
@@ -112,13 +116,15 @@ export interface Project {
   project?: ProjectEntry | null;
 
   /** Astro page path for the project detail, if any. */
-  hrefAstro?: string | null;
+  slug?: string | null;
 
   /** External image URLs. */
   images: ImagesProject[];
 
   /** Tags for filtering. */
   tags: TagKey[] | null;
+
+  sections: SectionId[];
 }
 
 /*
@@ -137,22 +143,100 @@ export interface Project {
 // ========================================================================
 export const PROJECTS = {
 
+  //! =================== PROJECT 
+  mara_sem: {
+    title: I18N.projects.mara_sem.title,
+    titleFull: I18N.projects.mara_sem.titleFull,
+    date: { start: '2026-08', end: null },
+    isMain: true,
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Mobile App', 'In Progress', 'Team'],
+    coreTechs: [
+      'java', 'springboot', 'junit', 'postgresql', 
+      'typescript', 'reactNative', 'expo', 'androidIDE',
+      'nginx', 'docker', 'googleMaps', 'jwt', 
+    ],
+    extraTechs: [
+      'springCloud', 'dockerCompose', 'nativeWind', 'tailwind', 'vite',
+    ],
+    otherTechs: [
+      'springSecurity', 'hibernate', 'h2', 'js', 'ts', 'react', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'swagger', 'dbeaver', 'ngrok'
+    ],
+    links: [
+      { ...githubExt, href: 'https://github.com/LucasCallamullo/react-native-compiler-apk' },
+    ],
+    timeline: {
+      order: 18,
+      icon: 'ri:android-fill',
+      summary: I18N.projects.mara_sem.timeline.summary,
+    },
+    project: {
+      order: 18,
+      summary: I18N.projects.mara_sem.project.summary,
+      description: I18N.projects.mara_sem.project.description,
+    },
+    images: [{ ...imageDefault }],
+    slug: 'react-native-compiler-apk',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
+    milestone: I18N.projects.mara_sem.milestone
+  },
+
+  //! =================== PROJECT 
+  ecommerce_net: {
+    title: I18N.projects.ecommerce_net.title,
+    titleFull: I18N.projects.ecommerce_net.titleFull,
+    date: { start: '2026-08', end: null },
+    isMain: true,
+    tags: ['Monolith Modular', 'ONION', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
+    coreTechs: [
+      'csharp', 'dotnet', 'efCore', 'typescript', 'react', 'tailwind',
+      'nginx', 'postgresql', 'docker', 'jwt', 
+    ],
+    extraTechs: [
+      'dockerCompose', 'vite',
+    ],
+    otherTechs: [
+      'sqlite', 'js', 'ts', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'dbeaver', 'ngrok'
+    ],
+    links: [
+      { ...githubExt, href: 'https://github.com/LucasCallamullo/ecommerce-engine' },
+    ],
+    timeline: {
+      order: 19,
+      icon: 'ri:shopping-bag-line',
+      summary: I18N.projects.ecommerce_net.timeline.summary,
+    },
+    project: {
+      order: 19,
+      summary: I18N.projects.ecommerce_net.project.summary,
+      description: I18N.projects.ecommerce_net.project.description,
+    },
+    images: [{ ...imageDefault }],
+    slug: 'ecommerce-engine',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
+    milestone: I18N.projects.ecommerce_net.milestone
+  },
+
+
+
   //! =================== PROJECT
   fleet_optimizer: {
     title: I18N.projects.fleet_optimizer.title,
+    titleFull: I18N.projects.fleet_optimizer.titleFull,
     date: { start: '2026-03', end: '2026-07' },
     isMain: true,
-    tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Microservices', 'Layered', 'Full-Stack'],
+    tags: ['Microservices', 'Layered', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
     coreTechs: [
-      'java', 'springboot', 'junit', 'typescript', 'react', 
-      'nginx', 'postgresql', 'docker', 'jwt', 'oauth',
+      'java', 'springboot', 'junit', 'typescript', 'react', 'tailwind',
+      'nginx', 'postgresql', 'docker', 'jwt', 'oauth', 'googleMaps'
     ],
     extraTechs: [
-      'springCloud', 'dockerCompose', 'tailwind', 'swagger', 
+      'springCloud', 'dockerCompose', 'swagger', 'ghActions'
     ],
     otherTechs: [
-      'javascript', 'html5', 'css3', 'hibernate', 'h2', 'vite',
-      'git', 'ghActions', 'github', 'postman', 'bash',
+      'springSecurity', 'hibernate', 'h2', 'vite', 'ts', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'keycloack', 'dbeaver', 'ngrok'
     ],
     links: [
       { ...githubExt, href: 'https://github.com/lucascallamullo/fleet-optimizer' },
@@ -168,25 +252,28 @@ export const PROJECTS = {
       description: I18N.projects.fleet_optimizer.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/fleet_optimizer',
+    slug: 'fleet-optimizer',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.fleet_optimizer.milestone
   },
 
   //! =================== PROJECT
   dds_tutor: {
     title: I18N.projects.dds_tutor.title,
+    titleFull: I18N.projects.dds_tutor.titleFull,
     date: { start: '2026-03', end: '2026-06' },
     isMain: true,
-    tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Web App', 'Completed', 'Solo', 'University'],
     coreTechs: [
-      'typescript', 'javascript', 'react', 'tailwind', 'postgresql',  
+      'typescript', 'javascript', 'vite', 'react', 'tailwind', 'postgresql', 'jwt'
     ],
     extraTechs: [
-      'nodejs', 'express', 'sequelize', 'docker',
+      'nodejs', 'express', 'sequelize', 'docker', 'html5', 'css3', 'jest', 'keycloack', 'nodejs'
     ],
     otherTechs: [
-      'html5', 'css3', 'github', 'postman', 'nginx', 'sqlite', 'ngrok',
-      'dbeaver', 'bash', 'vite', 'git', 'jest', 'dockerCompose',
+      'git', 'github', 'postman', 'vscode',
+      'sqlite', 'ngrok', 'cursor', 'deepseek', 'openCode',
+      'dbeaver', 'bash',  'ts', 'js', 'dockerCompose', 'nginx',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/desarrollo-software-3k1' },
@@ -203,24 +290,26 @@ export const PROJECTS = {
       description: I18N.projects.dds_tutor.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/dds_tutor',
+    slug: 'desarrollo-software-3k1',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.dds_tutor.milestone
   },
 
   //! =================== PROJECT
   portfolio: {
     title: I18N.projects.portfolio.title,
+    titleFull: I18N.projects.portfolio.titleFull,
     date: { start: '2026-01', end: '2026-02' },
     isMain: false,
-    tags: ['Front-end', 'DevOps'],
+    tags: ['Front-end', 'Completed', 'Solo', 'Web App', 'Personal'],
     coreTechs: [
       'astro', 'typescript', 'tailwind', 'ghActions', 'ghPages'
     ],
     extraTechs: [
-      'git', 'vite', 'javascript',
+      'git', 'vite', 'javascript', 'html5', 'css3', 'nodejs'
     ],
     otherTechs: [
-      'html5', 'css3', 'github', 'vscode'
+      'github', 'vscode', 'deepseek'
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/LucasCallamullo.github.io' },
@@ -231,21 +320,23 @@ export const PROJECTS = {
       summary: I18N.projects.portfolio.timeline.summary,
     },
     project: {
-      order: 42,
+      order: 29,
       summary: I18N.projects.portfolio.project.summary,
       description: I18N.projects.portfolio.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/portfolio',
+    slug: 'LucasCallamullo.github.io',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.portfolio.milestone
   },
 
   //! =================== PROJECT
   ecommerce_dj: {
     title: I18N.projects.ecommerce_dj.title,
+    titleFull: I18N.projects.ecommerce_dj.titleFull,
     date: { start: '2024-03', end: '2025-12' },
     isMain: true,
-    tags: ['Back-end', 'Front-end', 'Database', 'DevOps', 'Monolith Modular', 'Layered', 'Full-Stack'],
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Completed', 'Web App', 'Solo', 'Personal'],
     coreTechs: [
       'python', 'django', 'pytest', 'javascript', 'tailwind',
       'postgresql', 'redis', 'docker', 'mercadoPago', 'nginx',
@@ -254,8 +345,8 @@ export const PROJECTS = {
       'drf', 'djTemplates', 'dockerCompose', 'swagger', 'gunicorn',
     ],
     otherTechs: [
-      'html5', 'css3', 'git', 'ghActions', 'github', 'postman',
-      'sqlite', 'ngrok', 'dbeaver', 'bash',
+      'html5', 'css3', 'git', 'github', 'postman', 'bruno', 'deepseek',
+      'sqlite', 'ngrok', 'dbeaver', 'bash', 'js', 'railway',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/E-commerce-Public-Demo' },
@@ -271,24 +362,26 @@ export const PROJECTS = {
       description: I18N.projects.ecommerce_dj.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/ecommerce_dj',
+    slug: 'E-commerce-Public-Demo',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.ecommerce_dj.milestone
   },
 
   //! =================== PROJECT
   backend_tp: {
     title: I18N.projects.backend_tp.title,
+    titleFull: I18N.projects.backend_tp.titleFull,
     date: { start: '2025-08', end: '2025-10' },
     isMain: false,
-    tags: ['Back-end', 'Database', 'DevOps', 'Microservices', 'Layered'],
+    tags: ['Back-end', 'Microservices', 'Layered', 'API', 'University', 'Team', 'Completed'],
     coreTechs: [
-      'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 
+      'java', 'springboot', 'postgresql', 'docker', 'junit',  'jwt', 'keycloack', 'googleMaps'
     ],
     extraTechs: [
-      'springCloud', 'springSecurity', 'h2',  'dockerCompose', 'swagger',
+      'springCloud', 'springSecurity', 'h2', 'dockerCompose', 'swagger',
     ],
     otherTechs: [
-      'hibernate', 'git', 'ghActions', 'github', 'postman', 'bash', 'dbeaver',
+      'hibernate', 'git', 'github', 'deepseek', 'postman', 'bruno', 'bash', 'dbeaver',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/java-microservices-backend' },
@@ -304,24 +397,26 @@ export const PROJECTS = {
       description: I18N.projects.backend_tp.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/backend_tp',
+    slug: 'java-microservices-backend',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.backend_tp.milestone
   },
 
   //! =================== PROJECT
   no_country: {
     title: I18N.projects.no_country.title,
-    date: { start: '2024-07', end: '2024-11' },
+    titleFull: I18N.projects.no_country.titleFull,
+    date: { start: '2024-07', end: '2024-08' },
     isMain: false,
-    tags: ['Back-end', 'Front-end', 'DevOps', 'Database', 'Full-Stack', 'Monolith Modular'],
+    tags: ['Full-Stack', 'Monolith Modular', 'Layered', 'Archived', 'Team', 'Web App', 'NoCountry'],
     coreTechs: [
-      'python', 'django', 'javascript', 'tailwind', 'railway',
+      'python', 'django', 'javascript', 'tailwind', 'railway', 'postgresql'
     ],
     extraTechs: [
       'git', 'gunicorn', 'drf', 'djTemplates',
     ],
     otherTechs: [
-      'vscode', 'github', 'html5', 'css3', 'dbeaver', 'postman'
+      'vscode', 'github', 'html5', 'css3', 'deepseek', 'dbeaver', 'postman', 'sqlite',
     ],
     links: [
       { ...githubExt, href: 'https://github.com/No-Country-simulation/Antojitos_Ecommerce' },
@@ -337,19 +432,21 @@ export const PROJECTS = {
       description: I18N.projects.no_country.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/no_country',
+    slug: 'Antojitos_Ecommerce',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.no_country.milestone
   },
 
   //! =================== PROJECT
   py_tutor: {
     title: I18N.projects.py_tutor.title,
-    date: { start: '2023-11', end: '2026-03' },
+    titleFull: I18N.projects.py_tutor.titleFull,
+    date: { start: '2023-10', end: '2026-02' },
     isMain: false,
-    tags: ['Tutorial'],
-    coreTechs: ['python', 'java', 'bash', 'git'],
-    extraTechs: ['vscode', 'github'],
-    otherTechs: null,
+    tags: ['Completed', 'Team', 'Tutorial', 'University'],
+    coreTechs: ['python', 'java', 'springboot', 'docker', ],
+    extraTechs: ['bash', 'git', 'springSecurity', 'springCloud', ],
+    otherTechs: ['vscode', 'github', 'dockerCompose', 'dbeaver', 'junit'],
     links: [
       { ...githubExt, href: 'https://github.com/LucasCallamullo/Tutoring-Algorithms-Data-Structures' },
       { ...youtubeExt },
@@ -365,20 +462,22 @@ export const PROJECTS = {
       description: I18N.projects.py_tutor.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/py_tutor',
+    slug: 'Tutoring-Algorithms-Data-Structures',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.py_tutor.milestone
   },
 
   //! =================== PROJECT
   university: {
     title: I18N.projects.university.title,
+    titleFull: I18N.projects.university.titleFull,
     date: { start: '2023-03', end: null },
     isMain: false,
-    tags: ['Microservices', 'Monolith Modular', 'Full-Stack'],
+    tags: ['Microservices', 'Monolith Modular', 'Full-Stack', 'University'],
     coreTechs: ['python', 'java', 'springboot', 'react', 'docker', 'bash', 'linux'],
     extraTechs: [
       'nodejs', 'express', 'sequelize', 'javascript', 'html5', 'css3', 
-      'sqlServer', 'jwt', 'git', 
+      'sqlServer', 'jwt', 'git', 'js'
     ],
     otherTechs: null,
     links: [{ ...univExt }],
@@ -389,16 +488,18 @@ export const PROJECTS = {
     },
     project: null,
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/university',
+    slug: 'university',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.university.milestone
   },
 
   //! =================== PROJECT
   pawn_cs: {
     title: I18N.projects.pawn_cs.title,
+    titleFull: I18N.projects.pawn_cs.titleFull,
     date: { start: '2021-03', end: '2022-12' },
     isMain: false,
-    tags: [],
+    tags: ['Game Mod', 'Completed'],
     coreTechs: ['pawn', 'counterStrike', 'git'],
     extraTechs: ['github'],
     otherTechs: null,
@@ -416,7 +517,8 @@ export const PROJECTS = {
       description: I18N.projects.pawn_cs.project.description,
     },
     images: [{ ...imageDefault }],
-    hrefAstro: '/projects/pawn_cs',
+    slug: 'pawn-project-mod-cs-game',
+    sections: ['links', 'stack', 'gallery', 'history', 'next'],
     milestone: I18N.projects.pawn_cs.milestone
   },
 } as const satisfies Record<string, Project>;
@@ -443,9 +545,10 @@ export function dateToNumber(date: { start: string }): number {
  * Falls back to "Ongoing" / "En progreso" when `end` is null.
  */
 export function formatDateRange(
-  date: ProjectDate,
-  lang: 'en' | 'es' = 'en'
+  date: ProjectDate
 ): string {
+  const lang = getCurrentLang();
+
   const fmt = new Intl.DateTimeFormat(lang, {
     year: 'numeric',
     month: 'short',
@@ -467,7 +570,7 @@ export function formatDateRange(
   return `${start} – ${end}`;
 }
 
-
+export const getProjectHref = (slug: string) => `/projects/${slug}`;
 
 
 type OrderBy = 'asc' | 'desc';
@@ -521,6 +624,38 @@ export function getProjects(options: TimelineQueryOptions & { sortBy?: 'timeline
   });
 }
 
+
+
+
+
+
+/**
+ * Returns true if the given project uses the tech in any of its
+ * three tech lists (coreTechs, extraTechs, otherTechs).
+ */
+function projectUsesTech(project: Project, tech: TechKey): boolean {
+  return (
+    project.coreTechs.includes(tech) ||
+    (project.extraTechs?.includes(tech) ?? false) ||
+    (project.otherTechs?.includes(tech) ?? false)
+  );
+}
+
+/**
+ * Filter PROJECTS to those that use the given tech.
+ * Returns an array of [slug, project] pairs.
+ */
+export function getProjectsByTech(tech: TechKey): Project[] {
+  return Object.values(PROJECTS).filter(p => projectUsesTech(p, tech));
+}
+
+
+
+export function getProjectsBySlugs(slugs: string[]): Project[] {
+  return Object.values(PROJECTS)
+    .filter(p => slugs.includes(p.slug))
+    .sort((a, b) => (a.project?.order ?? 0) - (b.project?.order ?? 0));
+}
 
 
 
