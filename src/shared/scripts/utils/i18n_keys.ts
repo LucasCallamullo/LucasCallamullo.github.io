@@ -57,6 +57,7 @@ export const I18N = {
 
   footer: {
     downloadLabel: 'footer.downloadLabel',
+    title: 'footer.title',
     resume: 'footer.resume',
     build: 'footer.build',
   },

@@ -1,32 +1,26 @@
 // src/shared/data/tech-stack.ts
-import { getCurrentLang } from '../scripts/navbar/translations';
 import { TECH_CATEGORIES, type TechCategoryKey } from './tech_categories';
 
 export interface Tech {
+  id?: string | null;
   name: string;
   icon: string;
   category: TechCategoryKey;
-
-  id?: string | null;
 
   isShow: boolean;
   isMain: boolean;
   isOnlyLightTheme?: boolean | null;
 }
 
-
 /**
  * Tech stack as a dictionary keyed by a stable id.
  * Use the id (e.g. `TECH_STACK.java`) when referencing a specific tech.
  * Iterate with `Object.values(TECH_STACK)` when rendering the full list.
  * 
- * 
+  // ? Icons is from these libraries
+  https://icon-sets.iconify.design/devicon/
+  https://icon-sets.iconify.design/thesvg-color/
  */
-
-// ? Icons is from these libraries
-// ? https://icon-sets.iconify.design/devicon/
-// ? https://icon-sets.iconify.design/thesvg-color/
-
 export const TECH_STACK = {
   // --- Languages ---
   java:      { name: 'Java',        isShow: true,  isMain: true,  category: 'languages', icon: 'devicon:java' },
@@ -128,22 +122,19 @@ export const TECH_STACK = {
 
 } as const satisfies Record<string, Tech>;
 
-export type TechKey = keyof typeof TECH_STACK;
-// → 'java' | 'csharp' | 'python' | 'springboot' | ... | 'swagger'
+export type TechKey = keyof typeof TECH_STACK;   // → 'java' | 'csharp' | 'python' | 'springboot' | ... | 'swagger'
 
 /**
  * Preferred display order for the tech stack.
  * Ids must match keys in `TECH_STACK`.
  */
 export const TECH_STACK_ORDER: TechKey[] = [
-  'junit', 'java', 'springboot', 'react', 'typescript', 'tailwind',
-  'postgresql', 'docker', 'dockerCompose', 'redis',
-  'csharp', 'dotnet', 
-  'python', 'django', 'pytest', 'sqlite',
-  'javascript', 'git', 'bash', 'nginx', 'swagger', 'jwt'
+  'postgresql', 'junit', 'java', 'springboot', 
+  'react', 'typescript', 'tailwind',
+  'docker', 'dockerCompose', 'redis',
+  'csharp', 'dotnet', 'python', 'django',
+  'git', 'bash', 'nginx', 'swagger', 'jwt'
 ];
-
-
 
 /**
  * Resolve a list of tech ids to their Tech entries.
@@ -154,34 +145,18 @@ export const TECH_STACK_ORDER: TechKey[] = [
  * @returns Array of Tech in the same order as `ids`
  */
 export function getTechs(ids: TechKey[]): Tech[] {
-  return ids.map((id) => {
-    const t = TECH_STACK[id];
-    return { ...t, id };
-  });
+  return ids.map((id) => getTech(id));
 }
 
-export function getTech(id: TechKey): Tech | null {
-  return TECH_STACK[id] || null;
-}
-
-/**
- * All techs, in the preferred display order.
- */
-export function getOrderedTechs(): Tech[] {
-  return getTechs(TECH_STACK_ORDER);
-}
-
-export function getTitleBtnModals(techName: string): string {
-  const lang = getCurrentLang();
-  return lang === 'en'
-    ? `View ${techName} projects in modal`
-    : `Ver proyectos de ${techName} en modal`;
+export function getTech(id: TechKey): Tech {
+  return { ...TECH_STACK[id], id };
 }
 
 
 
-
-
+// + =============================================
+// + FILTERS INTERFACE SEE LATER
+// + =============================================
 
 export interface GroupedTechs {
   category: {
@@ -259,8 +234,3 @@ export function getGroupedTechs(options: FilterOptions = {}): GroupedTechs[] {
     })
     .sort((a, b) => a.category.order - b.category.order);
 }
-
-
-
-
-

@@ -1,7 +1,7 @@
 ---
 // src/shared/components/RotatingCards.astro
+import './rotatingCards.css';
 import { Icon } from 'astro-icon/components';
-import { getTitleBtnModals } from '../data/tech_stack';
 
 // ========================================================================
 //  COLORS
@@ -109,7 +109,10 @@ const computedRadius = radius ?? minRadius + gap;
           style={card.image ? `background-image: url(${card.image});` : ''}
         >
           {card.icon && 
-            <button data-tech={card.id} type="button" title={getTitleBtnModals(card.label || '')}> 
+            <button type="button" 
+              title='View Projects' data-tech={card.id}
+              data-title="Projects" data-i18n={card.label}
+            > 
               <Icon name={card.icon} class="w-13 h-13 hover-up-lg cursor-pointer" />
             </button>
           }

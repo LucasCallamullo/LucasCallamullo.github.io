@@ -1,15 +1,21 @@
 ---
 import 'swiper/css';
-import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
-import Section from '@shared/components/Section.astro'
-import CardSection from '@shared/components/CardSection.astro'
-
 import { Icon } from 'astro-icon/components';
+
+import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro';
+
+import Section from '@shared/components/layout/Section.astro'
+import CardSection from '@shared/components/layout/CardSection.astro'
+
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import { getOrderedTechs } from '@/shared/data/tech_stack';
+import NotchedBtn from '@shared/components/ui/buttons/NotchedBtn.astro';
+import ModalProjects from '@/features/projects/components/ModalProjects.astro';
+
+import { getTechs, TECH_STACK_ORDER } from '@/shared/data/tech_stack';
 import { getNavHref, SOCIAL_LINKS } from '@/shared/data/links';
 
-
+// techs to render on swiperr
+const TECHS_SWIPER = getTechs(TECH_STACK_ORDER);
 
 // Define page metadata
 const title = "Software Engineer · Callamullo Lucas";
@@ -46,35 +52,36 @@ const title = "Software Engineer · Callamullo Lucas";
       <!-- + MAIN BUTTONS HOMEEE -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-7 mt-8" data-fade-3>
 
-        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
-          btn_notched btn_notched_surface_900" href={getNavHref('projects')}>
-          <Icon name="ri:code-s-slash-line" class="text-xl text-accent"></Icon>
+        <NotchedBtn href={getNavHref('projects')} 
+          target="_self" surface="900"
+          title="View Projects" data-title="I18N" data-i18n={I18N.home.btn.projects}
+        >
+          <Icon name="ri:code-s-slash-line" class="w-5 h-5 text-accent"></Icon>
           <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.projects}>
             View Projects
           </span>
-        </a>
+        </NotchedBtn>
 
-        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
-          btn_notched btn_notched_surface_900" data-i18n={I18N.links.cv.href}
+        <NotchedBtn href={SOCIAL_LINKS.cv.href} target="_blank" surface="900"
           data-altText={I18N.links.cv.altText}
-          data-cv="true"
-          target="_blank"
-          download={SOCIAL_LINKS.cv.altText}
-          href={SOCIAL_LINKS.cv.href}>
-            <Icon name="ri:file-pdf-2-line" class="text-xl text-accent"></Icon>
-            <span class="font_console tracking-wider truncate text-lg" 
-              data-i18n={I18N.home.btn.downloadCv}>
-              Download CV
-            </span>
-        </a>
+          data-i18n={I18N.links.cv.href}
+          download={SOCIAL_LINKS.cv.altText} data-cv="true"
+          title="Download Resume" data-title="I18N" data-i18n={I18N.home.btn.downloadCv}
+        >
+          <Icon name="ri:file-pdf-2-line" class="w-5 h-5 text-accent"></Icon>
+          <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.downloadCv}>
+            Download Resume
+          </span>
+        </NotchedBtn>
 
-        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
-          btn_notched btn_notched_surface_900" href={getNavHref('contact')}>
-          <Icon name="ri:send-plane-fill" class="text-xl text-accent"></Icon>
+        <NotchedBtn href={getNavHref('contact')} target="_self" surface="900"
+          title="Go Contact" data-title="Go" data-i18n={I18N.home.btn.contact}
+        >
+          <Icon name="ri:send-plane-fill" class="w-5 h-5 text-accent"></Icon>
           <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.home.btn.contact}>
             Contact
           </span>
-        </a>
+        </NotchedBtn>
       </div>
     </div>
   </Section>
@@ -118,16 +125,16 @@ const title = "Software Engineer · Callamullo Lucas";
           </span>
         </p>
 
-        <a class="flex hover-up items-center justify-center h-10 px-4 py-5 mt-4 self-center
-          btn_notched btn_notched_surface_900 font_console text-lg group font-bold" 
-          href={getNavHref('about')}
+        <NotchedBtn class="self-center group font-semibold mt-2 font_console text-lg" 
+          href={getNavHref('about')} defGap={false}
+          title="Go about" data-title="Go" data-i18n={I18N.home.about.about_txt}
         >
-          <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
-          <span class="text-console truncate tracking-wider font-bold" data-i18n={I18N.home.about.about_txt}>
+          <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+          <span class="text-console tracking-wider" data-i18n={I18N.home.about.about_txt}>
             about
           </span>
-          <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
-        </a>
+          <span class="text-content-muted group-hover:text-content-main">.txt</span>
+        </NotchedBtn>
       </CardSection>
 
     </div>
@@ -154,39 +161,38 @@ const title = "Software Engineer · Callamullo Lucas";
       </div>
 
       <!-- + SWIPER CONTAINER -->
-      <div class="swiper skillsSwiper">
+      <div class="swiper skillsSwiper" id="skillsSwiper">
         <div class="swiper-wrapper py-4 overflow-visible">
-          {getOrderedTechs().map((tech) => {
+          {TECHS_SWIPER.map((tech) => {
             return (
               <div class="swiper-slide tech_group bg-surface-800 rounded-xl cont_border_effect">
+
                 <Icon name={tech.icon} class="w-16 h-16 md:w-18 md:h-18 self-center place-self-center mb-4" />
-                <span class="font_console">{tech.name}</span>
+                <button class="font_console cursor-pointer hover:text-console z-20" 
+                  data-tech={tech.id}
+                  data-title="Projects" data-i18n={tech.name}
+                >
+                  {tech.name} 
+                </button>
 
                 {/* <!-- Effects absolute --> */}
-                <span class="cont_border__anim_effect border-console rounded-xl border-2"></span>
+                <span class="cont_border__anim_effect border-console rounded-xl border-2 z-5"></span>
               </div>
             );
           })}
         </div>
       </div>  
 
-      <a class="flex hover-up items-center justify-center h-10 px-4 py-5 mt-2 self-center
-        btn_notched btn_notched_surface_900 font_console text-lg group" 
-        href={getNavHref('skills')}
+      <NotchedBtn class="mt-2 self-center group font_console font-semibold text-lg" 
+        href={getNavHref('skills')} defGap={false}
+        title="Go skills" data-title="Go" data-i18n={I18N.home.skills.btn}
       >
-        <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
-        <span class="text-console truncate tracking-wider font-bold" data-i18n={I18N.home.skills.btn}>
+        <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+        <span class="text-console tracking-wider" data-i18n={I18N.home.skills.btn}>
           skills
         </span>
-        <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
-        <!--  
-        <span class="group-hover:text-console text-xl truncate font_console tracking-wider" 
-          data-i18n={I18N.home.skills.btn}>
-          View all skills
-        </span> 
-        <Icon name="ri:external-link-line" class="text-xl" ></Icon>
-        -->
-      </a>
+        <span class="text-content-muted group-hover:text-content-main">.txt</span>
+      </NotchedBtn>
 
     </div>
   </Section> 
@@ -223,24 +229,24 @@ const title = "Software Engineer · Callamullo Lucas";
         <!-- Buttons ref -->
         <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full mt-4">
 
-          <a class="flex hover-up items-center justify-center h-10 px-4 py-5 self-center
-            btn_notched btn_notched_surface_900 font_console text-lg group" 
-            href={getNavHref('contact')}
+          <NotchedBtn class="self-center font_console text-lg group font-semibold" 
+            href={getNavHref('contact')} defGap={false}
+            title="Go contact" data-title="Go" data-i18n={I18N.home.contact.btn}
           >
-            <span class="text-content-muted truncate group-hover:text-accent font-bold">$ cd&nbsp;</span>
-            <span class="text-console truncate tracking-wider font-bold" 
-              data-i18n={I18N.home.contact.btn}>contact</span>
-            <span class="text-content-muted truncate group-hover:text-content-main">.txt</span>
-          </a>
+            <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+            <span class="text-console tracking-wider" data-i18n={I18N.home.contact.btn}>
+              contact</span>
+            <span class="text-content-muted group-hover:text-content-main">.txt</span>
+          </NotchedBtn>
 
-          <a class="flex hover-up items-center justify-center h-10 px-4 py-5 self-center gap-2
-            btn_notched btn_notched_surface_900 font_console text-lg group" 
-            href={getNavHref('github')} target="_blank"
+          <NotchedBtn class="self-center font_console text-lg group font-semibold" 
+            href={getNavHref('github')} defGap={false} target="_blank"
+            title="Go GitHub"
           >
-            <span class="text-content-muted truncate group-hover:text-accent font-bold">$ open</span>
-            <span class="text-console truncate tracking-wider font-bold">GitHub</span>
-            <Icon name="ri:github-line" class="h-6 w-6 group-hover:text-console-400" />
-          </a>
+            <span class="text-content-muted group-hover:text-accent">$&nbsp;open&nbsp;</span>
+            <span class="text-console tracking-wider">GitHub</span>
+            <Icon name="ri:github-line" class="h-6 w-6 ms-2 group-hover:text-console-400" />
+          </NotchedBtn>
 
         </div>
 
@@ -249,9 +255,14 @@ const title = "Software Engineer · Callamullo Lucas";
   </Section>
 
 
+  <!-- + MODAL PROJECTS COMPONENTS -->
+  <ModalProjects modalId="modalIndex" overlayId="overlayIndex"/>
+
   <script>
     import { setEventTypewriter } from '@shared/scripts/utils/typewriter';
     import { initSkillsSwiper } from '@/features/home/scripts/swiper';
+    import { bindModal } from "@/shared/scripts/utils/modal";
+    import { renderModalWithProjects } from '@/features/projects/components/modalProjects';
 
     function boot() {
       // this events call init typewriter methods, only need the right selectors
@@ -262,6 +273,24 @@ const title = "Software Engineer · Callamullo Lucas";
       });
 
       initSkillsSwiper();
+
+      // --- PROJECTS MODAL - MAIN STACK SWIPER ---
+      bindModal({ 
+        modalSelector: '#modalIndex',  
+        overlaySelector: '#overlayIndex',  
+        openBtnSelector: '[data-tech]',  
+        contBtnToDelegate: '#skillsSwiper',
+        onOpen: ({ modal, trigger }) => {
+          const cont = modal.querySelector<HTMLElement>('.modal__data');
+          if (!cont || !trigger) return;
+
+          renderModalWithProjects(cont, trigger);
+        },
+        onClose: ({ modal }) => {
+          const cont = modal.querySelector<HTMLElement>('.modal__data');
+          if (!cont) return;
+        },
+      });
     }
 
     document.addEventListener('astro:page-load', boot);

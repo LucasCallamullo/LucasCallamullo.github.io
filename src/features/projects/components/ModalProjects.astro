@@ -1,7 +1,8 @@
 ---
-import { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
-import Section from '@shared/components/Section.astro';
 import { Icon } from 'astro-icon/components';
+
+import { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro';
+import Section from '@shared/components/layout/Section.astro';
 
 interface Props {
   /** ID of the modal element (used for anchors and JS lookup). */
@@ -29,32 +30,32 @@ const modalClasses = [
 ---
 
 <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]} paddingY={false} paddingX={false}>
-  <div class:list={['w-full', WIDTH_CLASSES.md]}>
 
-    <div id={modalId} class:list={modalClasses}>
-      <div class="modal__content max-h-full max-w-full h-full w-full 
-                  flex flex-col relative min-h-0">
+  <!-- MODAL BACKGROUND LIMITED POP UP -->
+  <div id={modalId} class:list={[modalClasses, WIDTH_CLASSES.md]}>
 
-        <button type="button" title="Close Modal"
-          class="modal__btn_close p-2 hover:bg-red-500 group absolute right-0 top-0
-            rounded-lg bg-surface-200 text-content-main border border-surface-800
-            cursor-pointer"
-        >
-          <Icon name="ri:close-large-line" class="w-4.5 h-4.5 group-hover:text-white" />
-        </button>
+    <div class="modal__content max-h-full max-w-full h-full w-full  
+      flex flex-col relative min-h-0">
 
-        <div
-          id={dataId}
-          class="modal__data w-full flex flex-col gap-2 px-6 md:px-8 py-8
-                 flex-1 min-h-0 overflow-y-auto"
-        >
-        </div>
+      <button type="button" title="Close Modal"
+        class="modal__btn_close p-2 hover:bg-red-500 group absolute right-0 top-0
+          rounded-lg bg-surface-200 text-content-main border border-surface-800
+          cursor-pointer"
+      >
+        <Icon name="ri:close-large-line" class="w-4.5 h-4.5 group-hover:text-white" />
+      </button>
 
-
+      <div
+        id={dataId}
+        class="modal__data w-full flex flex-col gap-2 px-6 md:px-8 py-8 
+          flex-1 min-h-0 overflow-y-auto"
+      >
       </div>
+
     </div>
 
-    <div id={overlayId} class="overlay"></div>
-
   </div>
+
+  <!-- OVERLAY BACK OF BACKGROUND -->
+  <div id={overlayId} class="overlay"></div>
 </Section>

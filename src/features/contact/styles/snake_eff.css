@@ -1,0 +1,41 @@
+
+/* CONTACT FORM EFFECT POST SEND */
+.loader_snake {
+  display: flex;
+}
+
+.loader_snake .dot_snake {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid #212121;
+  background: #16b0c1;
+  animation: jump 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes jump {
+  100% {
+    background: #661e92;
+    transform: translateY(-3rem) scale(1.9);
+  }
+}
+
+.loader_snake .dot_snake:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.loader_snake .dot_snake:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader_snake .dot_snake:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.loader_snake .dot_snake:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.loader_snake .dot_snake:nth-child(5) {
+  animation-delay: 0.5s;
+}

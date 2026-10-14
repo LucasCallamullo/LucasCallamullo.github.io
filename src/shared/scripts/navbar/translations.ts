@@ -44,7 +44,6 @@ let translations: Translations = {};
 
 export function getCurrentLang(): string {
   if (typeof window === 'undefined') return 'en'; // fallback server
-  // return localStorage.getItem(STORAGE_KEY) || 'en';
   const key = STORAGE_KEY ?? 'en';
   return localStorage.getItem(key) ?? 'en';
 }
@@ -134,12 +133,34 @@ export function resolveKey(key: string): string | string[] | undefined {
     return nested;
   }
 
-  return undefined;
+  // Not found: warn in dev and return the raw key.
+  if (import.meta.env.DEV) {
+    console.warn(`[i18n] Missing key: "${key}"`);
+  }
+
+  return key;
 }
 
 // -----------------------------------------------------------------------------
 // Core: load + apply
 // -----------------------------------------------------------------------------
+
+type TitleFormatter = (value: string, lang: string) => string;
+
+const TITLE_FORMATTERS: Record<string, TitleFormatter> = {
+  Go: (value, lang) =>
+    lang === 'en' ? `Go ${value}` : `Ir a ${value}`,
+
+  Projects: (value, lang) =>
+    lang === 'en'
+      ? `View ${value} projects in modal`
+      : `Ver proyectos de ${value} en modal`,
+
+  moreProjects: (value, lang) =>
+    lang === 'en'
+      ? `View more details about "${value}".`
+      : `Ver más detalles sobre "${value}".`,
+};
 
 /**
  * Apply the current translations to every `[data-i18n]` element in the DOM.
@@ -190,6 +211,18 @@ export function applyTranslations(
     // <img> — src translation
     if (el instanceof HTMLImageElement) {
       el.src = value;
+      return;
+    }
+
+    // ! this only changes title if is neccesary
+    if (el.hasAttribute('data-title')) {
+      const dataTitle = el.getAttribute('data-title')!;
+      const formatter = TITLE_FORMATTERS[dataTitle];
+
+      el.title = formatter
+        ? formatter(value, currentLang)
+        : value;
+
       return;
     }
 

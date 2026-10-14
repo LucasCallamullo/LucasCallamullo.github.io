@@ -1,0 +1,37 @@
+---
+// src/shared/components/utils/BackToTop.astro
+import { Icon } from 'astro-icon/components';
+import './backToTop.css';
+
+interface Props {
+  extraClass?: string;
+}
+
+const { 
+  extraClass: extraClass = ''
+} = Astro.props;
+---
+
+<div class:list={[extraClass, '']}>
+
+  <button
+    id="btn__back_to_top"
+    class="
+      btn__back_to_top fixed bottom-5
+      bg-surface-200 text-main-300 w-10 h-10 rounded-full cursor-pointer"
+    type="button"
+    aria-label="Back to Top"
+    title="Back to Top"
+  >
+    <Icon name="ri:arrow-up-line" class="self-center place-self-center h-5.5 w-5.5"></Icon>
+    <svg class="progress" width="40" height="40" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="18" />
+    </svg>
+  </button>
+  
+</div>
+
+<script>
+  import { eventBackToTopBtn } from './backToTop';
+  document.addEventListener('astro:page-load', () => eventBackToTopBtn());
+</script>

@@ -1,0 +1,101 @@
+
+
+
+/* ==============================================================
+   Effect: rotating cards (3D carousel)
+   --------------------------------------------------------------
+   Renders a set of cards arranged in a 3D wheel and rotates
+   the whole wheel continuously around the Y axis.
+
+   Each card is positioned around an imaginary circle:
+     - `rotateY` spreads the cards evenly around the wheel.
+     - `translateZ` pushes them outward to the wheel radius.
+
+   The number of cards and each card's index are passed in from
+   the Astro component (`RotatingCards.astro`) as CSS custom
+   properties, so the CSS stays generic and reusable:
+
+     --quantity-carousel-rotate   → total number of cards
+     --index-carousel-rotate      → index of the current card (0-based)
+     --color-card-carousel-rotate → RGB triplet for the card's color
+
+   The component computes the radius so cards don't overlap:
+     radius = (width / 2) / sin(π / quantity) + gap
+
+   Related component: `src/shared/components/RotatingCards.astro`
+   ============================================================== */
+
+.carousel_rotate__wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  place-items: center;
+  overflow: hidden; /*  */
+}
+
+.carousel_rotate__inner {
+  /* Size of each card and geometry of the wheel.
+     Values are set from the Astro component via inline styles. */
+  --w-carousel-rotate: 100px;
+  --h-carousel-rotate: 150px;
+  --radius-carousel-rotate: 150px;
+  --rotateX-carousel-rotate: -15deg;
+  --perspective-carousel-rotate: 1000px;
+  --spin-duration-carousel-rotate: 20s;
+
+  position: relative;
+  width: var(--w-carousel-rotate);
+  height: var(--h-carousel-rotate);
+  transform-style: preserve-3d;
+  animation: rotate-wheel var(--spin-duration-carousel-rotate) linear infinite;
+}
+
+/* The whole wheel rotates around Y, with a slight X tilt for depth. */
+@keyframes rotate-wheel {
+  from {
+    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(0deg);
+  }
+  to {
+    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(360deg);
+  }
+}
+
+/* Each card is placed around the wheel using its index and the
+   total quantity, then pushed outward by the radius. */
+.carousel_rotate__card {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgb(var(--color-card-carousel-rotate));
+  border-radius: 12px;
+  overflow: hidden;
+  transform:
+    rotateY(calc((360deg / var(--quantity-carousel-rotate)) * var(--index-carousel-rotate)))
+    translateZ(var(--radius-carousel-rotate));
+
+  /* Comment out to make cards on the back side visible too. */
+  backface-visibility: hidden;
+}
+
+/* Card inner layout: vertical stack, centered content, and a
+   radial gradient tinted by the card's color. */
+.carousel_rotate__img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(var(--color-card-carousel-rotate), 0.2) 0%,
+      rgba(var(--color-card-carousel-rotate), 0.6) 80%,
+      rgba(var(--color-card-carousel-rotate), 0.9) 100%
+    );
+  /* If a background-image is set inline, it sits above the gradient */
+  background-size: cover;
+  background-position: center;
+}
+

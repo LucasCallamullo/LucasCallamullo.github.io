@@ -1,11 +1,10 @@
 ---
 import '@shared/styles/global.css'
-import '@shared/styles/custom.css'
 
-
-import Navbar from '@components/Navbar.astro';
-import Footer from '@components/Footer.astro';
-
+import Navbar from '@shared/components/layout/Navbar.astro';
+import Footer from '@shared/components/layout/Footer.astro';
+import BackToTop from '@shared/components/ui/BackToTop.astro'; 
+  
 // This is to enable SPA
 import { ClientRouter } from 'astro:transitions';
 
@@ -33,27 +32,14 @@ export const WIDTH_CLASSES = {
 const widthClass = WIDTH_CLASSES[mainWidth];
 
 
-/* 
-<!-- Default / Light -->
-<html lang="en" data-theme="light">
-
-<!-- Dark Theme -->
-<html lang="en" data-theme="dark">
-
-<!-- Violet Theme -->
-<html lang="en" data-theme="violet">
-
-<!-- Blue Theme -->
-<html lang="en" data-theme="blue"></html>
-
-<!-- <meta name="theme-color" content="#000000"> --> 
-*/
-
 ---
 
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_AR">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{title}</title>
@@ -61,28 +47,41 @@ const widthClass = WIDTH_CLASSES[mainWidth];
     <!--  -->
     <link rel="icon" type="image/svg+xml" href="./icons/terminal.svg">
     
-    <!-- Meta tags útiles para SEO y redes sociales -->
-    <meta name="description" content="Lucas Callamullo, Software Engineer from Córdoba, Argentina. 
-        I build production-ready e-commerce platforms, microservices with JWT authentication, and clean REST APIs. 
-        Skilled in Python/Django, Java/Spring Boot, Node.js/Express, Docker, and PostgreSQL.">
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Lucas Callamullo · Software Engineer from Córdoba, Argentina.
+        Backend-oriented full-stack developer building production-ready e-commerce engines,
+        microservices with JWT authentication and clean REST APIs.
+        Skilled in Java/Spring Boot, Python/Django, TypeScript/React and C#/.NET."
+    >
     <meta name="author" content="Lucas Callamullo">
 
     <!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Lucas Callamullo · Software Engineer & Systems Engineering Student">
-    <meta property="og:description" content="Portfolio showcasing e-commerce engines, microservices architectures, 
-        and API development. Currently 4th year Systems Engineering at UTN.">
-
+    <meta
+      property="og:description"
+      content="Backend-oriented full-stack engineer. I design and build e-commerce engines,
+        microservices architectures and clean REST APIs across Java, Python, TypeScript and C#.
+        Currently 4th year Systems Engineering at UTN."
+    >
     <meta property="og:url" content="https://lucascallamullo.github.io">
     <meta property="og:site_name" content="Lucas Callamullo · Portfolio">
-    <meta property="og:image" content="https://lucascallamullo.github.io/staticfiles/og-image.jpg">
+    <meta property="og:image" content="https://lucascallamullo.github.io/profile/og-image.jpg">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:locale:alternate" content="en_US">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lucas Callamullo · Software Engineer">
-    <meta name="twitter:description" content="Building scalable backend systems. E-commerce, microservices, 
-        REST APIs. Python, Java, Node.js, Docker.">
-    
+    <meta
+      name="twitter:description"
+      content="Backend-oriented full-stack engineer. E-commerce engines, microservices and REST APIs.
+        Java, Python, TypeScript, C#. Docker, PostgreSQL, Spring Boot."
+    >
+    <meta name="twitter:image" content="https://lucascallamullo.github.io/profile/og-image.jpg">
+
     <!-- Slot para CSS o meta tags específicos de cada página -->
     <slot name="head" />
 
@@ -93,7 +92,11 @@ const widthClass = WIDTH_CLASSES[mainWidth];
 
   <body class="min-h-screen">
     <!-- Navbar global persistente -->
-    <Navbar transition:persist class:list={['', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}></Navbar>
+    <Navbar 
+      transition:persist 
+      wFull={WIDTH_CLASSES.full} 
+      wSon={WIDTH_CLASSES.md}
+    > </Navbar>
 
     <!-- Banner superior opcional -->
     <slot name="banner-header" />
@@ -108,16 +111,11 @@ const widthClass = WIDTH_CLASSES[mainWidth];
     <slot name="banner-footer" />
 
     <!-- Footer global -->
-    <Footer class:list={['', WIDTH_CLASSES.full]} classSon={WIDTH_CLASSES.md}> </Footer>
+    <Footer wFull={WIDTH_CLASSES.full} wSon={WIDTH_CLASSES.md}> </Footer>
 
-    <!--
-    <script>
-      import { resetModals } from '@shared/scripts/utils/modal';
 
-      // Limpia el estado global antes de que Astro cambie de página.
-      document.addEventListener('astro:before-swap', resetModals);
-    </script>
-  -->
+    <BackToTop extraClass={WIDTH_CLASSES.lg}> </BackToTop>
+
     <script>
       import { initTranslations, applyTranslations, } from '@shared/scripts/navbar/translations';
 

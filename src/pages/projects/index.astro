@@ -1,6 +1,6 @@
 ---
-import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
-import Section from '@shared/components/Section.astro'
+import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro';
+import Section from '@shared/components/layout/Section.astro'
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
@@ -76,7 +76,9 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
               {/* FUTURE BTN MODAL RESUME   flex */}
               <a class="absolute right-0 top-0 rounded-tr-xl rounded-bl-xl cursor-pointer group
                 justify-center items-center px-3 py-1.5 bg-console-400"
-                title="View more details" href=`/projects/${p.slug}`
+                href={getProjectHref(p.slug)}
+                title="View More Details" data-title="moreProjects"
+                data-i18n={p.title}
               >
                 <Icon name="ri:eye-fill" class="h-5 w-5 text-content-main/40 group-hover:text-content-main hover-up"></Icon>
               </a>
@@ -86,7 +88,12 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
 
             {/* TECH LABELS RESUME */}
             <div class="flex flex-col px-3 pt-2 pb-3.5 bg-surface-900 rounded-b-xl font_console flex-1">
-              <h3 class="text-console text-lg tracking-wider" data-i18n={p.title}></h3>
+              <a href={getProjectHref(p.slug)} class="hover-up"
+                title="View More Details" data-title="moreProjects"
+                data-i18n={p.title}
+              >
+                <h3 class="text-console text-lg tracking-wider" data-i18n={p.title}></h3>
+              </a>
 
               {/* DESCRIPTION */}
               <div data-i18n={p.project?.summary} data-i18n-join="newline"
@@ -114,20 +121,21 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
               <div class="flex flex-wrap gap-3 mt-4">
                 {p.links.map((link) => (
                   <a class="flex gap-1.5 px-2 py-1 items-center justify-center rounded-2xl
-                    text-black bg-blue-200 hover:bg-blue-400 
+                    text-black bg-blue-200 hover:bg-blue-400 text-base
                     border border-console-400 hover-up-lg"
-                    href={link.href} target="_blank" title=""
+                    href={link.href} target="_blank"
                   >
                     <Icon name={link.icon} class="h-5 w-5"> </Icon> 
-                    <span class="text-base" data-i18n={link.i18n}>
-                      {link.altText}</span>
+                    <span data-i18n={link.i18n}>{link.altText}</span>
                   </a>
                 ))}
 
                 <a class="flex gap-1.5 px-2 py-1 items-center justify-center rounded-2xl text-base
                   text-black bg-blue-200 hover:bg-blue-400 
                   border border-console-400 hover-up-lg"
-                  href={getProjectHref(p.slug)} title="View more details"
+                  href={getProjectHref(p.slug)} 
+                  title="View More Details" data-title="moreProjects"
+                  data-i18n={p.title}
                 >
                   <Icon name="devicon:astro" class="h-5 w-5"> </Icon> 
                   <span data-i18n={I18N.projectsPage.projects.details}>
@@ -139,6 +147,7 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
             
           </div>
         ))}
+
       </div>
 
     </div>
