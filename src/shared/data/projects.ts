@@ -532,6 +532,8 @@ export type KeyProject = keyof typeof PROJECTS;
 //  +  HELPERS
 // ========================================================================
 
+export const getProjectHref = (slug: string) => `/projects/${slug}`;
+
 /**
  * Convert a project date to a comparable number.
  * Uses `start` as the sort key.
@@ -569,8 +571,6 @@ export function formatDateRange(
 
   return `${start} – ${end}`;
 }
-
-export const getProjectHref = (slug: string) => `/projects/${slug}`;
 
 
 type OrderBy = 'asc' | 'desc';

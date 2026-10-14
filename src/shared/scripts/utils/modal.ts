@@ -285,7 +285,7 @@ export class ModalController {
       isCloseByCode = true;
       if (__logging) console.log('[close] called historyBack', 'size modal list:', size);
 
-      // history.back();
+      history.back();
       // ! TESTING HASH STATE
       // history.replaceState({}, '', window.location.pathname + window.location.search);
     }

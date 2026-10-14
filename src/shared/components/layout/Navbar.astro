@@ -1,12 +1,13 @@
 ---
 // src/shared/components/Navbar.astro
+import './navbar.css'
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 import { navItems } from '@shared/data/links';
-import DropdownNav from '@shared/components/DropdownNav.astro';
+import DropdownNav from '@shared/components/layout/DropdownNav.astro';
 
 
-// Defined themes for dynamic rendering
+// Defined themes for dynamic rendering 
 const themes = [
   { id: 'light', label: 'Light', icon: 'ri:sun-line' },
   { id: 'dark', label: 'Dark', icon: 'ri:moon-line' },
@@ -22,28 +23,25 @@ const languages = [
 ];
 
 interface Props {
-  class?: string;
-  classSon?: string;
+  wFull: string;
+  wSon: string;
 }
 
 const { 
-  class: className = '',
-  classSon: classSon = ''
+  wFull: wFull,
+  wSon: wSon
 } = Astro.props;
 ---
 
-<header class:list={["fixed top-0 left-0 w-full bg-surface-900 transition-colors duration-300", className]}>
+<header class:list={["fixed top-0 left-0 w-full bg-surface-900 transition-colors duration-300", wFull]}>
 
   <!-- mx-auto px-4 sm:px-6 lg:px-18 -->
-  <div class:list={[
-    "h-full flex items-center justify-between w-full",
-    classSon
-  ]}>
+  <div class:list={["h-full flex items-center justify-between w-full", wSon]}>
 
     <!-- Mobile Hamburger Button -->
     <button 
       id="mobileMenuBtn" 
-      aria-label="Toggle Mobile Menu"
+      aria-label="Toggle Mobile Menu" title="Toggle Mobile Menu"
       class="md:hidden p-2 rounded-lg bg-surface-200 text-content-main border border-surface-800 cursor-pointer"
     >
       <Icon name="ri:menu-line" id="iconMenu" class="w-5 h-5 block" />
@@ -51,19 +49,23 @@ const {
     </button>
     
     <!-- Logo / Brand -->
-    <a href="/" class="flex items-center gap-2 shrink-0 font_console group">
-      <span class="text-console font-bold text-xl">&gt;</span>
-      <span class="text-2xl">Lucas.dev</span>
-      <span class="text-console blinking_underscore font-medium text-xl">_</span>
+    <a href="/" class="flex items-center gap-2 shrink-0 font_console group hover-up" title="Go Home">
+      <span class="text-xl text-console font-bold group-hover:text-accent">&gt;</span>
+      <span class="text-2xl group-hover:text-console">Lucas.dev</span>
+      <span class="text-xl text-console blinking_underscore group-hover:text-accent">_</span>
     </a>
 
     <!-- Desktop Navigation Links -->
-    <nav class="hidden md:flex items-center gap-6">
-      <ul class="flex items-center gap-8 font-mono text-sm relative" id="navContainer">
+    <nav class="hidden md:flex items-center gap-7">
+      <ul class="flex items-center gap-7.5 font_console text-lg relative" id="navContainer">
         {navItems.map((item) => (
           <li>
-            <a class="nav__btn_nav text-content-muted hover:text-console transition-colors py-1 text-lg font_console"
-              href={item.href} data-i18n={item.i18n} data-nav={item.nav}>
+            <a class="nav__btn_nav text-content-muted hover:text-console transition-colors py-1"
+              href={item.href} 
+              data-i18n={item.i18n} 
+              data-nav={item.nav}
+              title={`Go ${item.label}`} data-title="Go"
+            >
               {item.label}
             </a>
           </li>
@@ -82,22 +84,25 @@ const {
 
         <div class="relative group" id="themeDropdownContainer" data-open="false">
           <button 
-            id="themeDropdownBtn" aria-label="Select Theme"
-            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-200 hover:bg-main-500 group-hover:bg-main-500
-            text-content-main transition-colors text-xs font_console border border-surface-800 cursor-pointer"
+            id="themeDropdownBtn" aria-label="Select Theme" title="Select Theme"
+            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-200 
+            text-content-muted font_console border border-surface-800 cursor-pointer
+            hover:bg-main-500 group-hover:bg-main-500 transition-colors "
           >
-            <Icon name="ri:palette-line" class="w-5 h-5 text-content-muted group-hover:text-white" />
-            <span id="currentThemeLabel" class="capitalize text-base font_console group-hover:text-white">Theme</span>
-            <Icon name="ri:arrow-down-s-line" class="w-4 h-4 text-content-muted group-hover:text-white" />
+            <Icon name="ri:palette-line" class="w-5 h-5 group-hover:text-white" />
+            <span id="currentThemeLabel" class="capitalize text-base text-content-main group-hover:text-white">Theme</span>
+            <Icon name="ri:arrow-down-s-line" class="w-4.5 h-4.5 group-hover:text-white" />
           </button>
 
           <!-- Theme Options Menu -->
           <DropdownNav id="themeMenu" align='right' animation="scale" class="w-36">
             {themes.map((theme) => (
-              <button data-theme-select={theme.id} class="w-full flex items-center gap-2 px-3 py-2 text-content-main 
-                  hover:bg-main-500 transition-colors text-left cursor-pointer group/item">
-                <Icon name={theme.icon} class="w-4 h-4 text-content-muted group-hover/item:text-white" />
-                <span class="text-base font_console group-hover/item:text-white">{theme.label}</span>
+              <button data-theme-select={theme.id} title={theme.label}
+                class="w-full flex items-center gap-2 px-2.5 py-2 text-content-main/80 
+                  text-left cursor-pointer font_console
+                  hover:bg-main-500 transition-colors group/item">
+                <Icon name={theme.icon} class="w-4 h-4 group-hover/item:text-white" />
+                <span class="text-base group-hover/item:text-white">{theme.label}</span>
               </button>
             ))}
           </DropdownNav>
@@ -109,17 +114,18 @@ const {
         <div class="relative group" id="langDropdownContainer" data-open="false">
           <button 
             id="langDropdownBtn"
-            aria-label="Select Language"
-            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-200 hover:bg-main-500 group-hover:bg-main-500 
-            text-content-main transition-colors text-xs font_console border border-surface-800 cursor-pointer"
+            aria-label="Select Language" title="Select Language"
+            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg 
+              bg-surface-200 border border-surface-800 text-content-main font_console  
+              hover:bg-main-500 group-hover:bg-main-500 transition-colors cursor-pointer"
           >
             <img id="currentFlagLabel" class="w-5 h-4 rounded-sm object-cover" />
-            <span id="currentLangLabel" class="text-base font_console group-hover:text-white">EN</span>
-            <Icon name="ri:arrow-down-s-line" class="w-4 h-4 text-content-muted group-hover:text-white text-base" />
+            <span id="currentLangLabel" class="text-base group-hover:text-white">EN</span>
+            <Icon name="ri:arrow-down-s-line" class="w-4.5 h-4.5 group-hover:text-white text-content-muted" />
           </button>
 
           <!-- Language Menu -->
-          <DropdownNav id="langMenu" align="left" animation="scale" class='w-36'>
+          <DropdownNav id="langMenu" align="right" animation="scale" class='w-36'>
             {languages.map(lang => (
               <button data-lang={lang.id} data-flag={lang.icon}
                 class="w-full flex items-center gap-2 px-3 py-2 text-content-main hover:bg-main-500
@@ -143,37 +149,39 @@ const {
     id="mobileMenu"
     class:list={[
       "drawer drawer--left md:hidden border-b border-surface-800 bg-surface-900",
-      "px-3 pt-2 pb-6 space-y-4 w-full",
-      classSon
+      "px-3 pb-5 pt-3 w-full",
+      wSon
   ]}>
 
-    <div class="modal__content h-full w-full flex flex-col gap-4">
+    <div class="modal__content h-full w-full flex flex-col">
+
       <button
         type="button"
-        class="modal__btn_close self-end p-2 rounded-lg bg-surface-200 text-content-main border border-surface-800 cursor-pointer"
+        class="modal__btn_close self-end p-2 rounded-lg text-content-main group group-hover:bg-red-400
+        bg-surface-200 border border-surface-800 cursor-pointer"
       >
-        <Icon name="ri:close-large-line" class="w-4 h-4" />
+        <Icon name="ri:close-large-line" class="w-4 h-4 group-hover:text-white" />
       </button>
 
-      <ul class="flex flex-col gap-3 font-mono text-sm">
+      <ul class="flex flex-col gap-2.5 font_console text-sm mt-2">
         {navItems.map((item) => (
           <li>
             <a href={item.href} data-i18n={item.i18n}
-              class="mobile-nav-link block py-2 text-content-muted hover:text-console transition-colors">
+              class="mobile-nav-link block py-1 text-content-muted hover:text-console transition-colors">
               {item.label}
             </a>
           </li>
         ))}
       </ul>
 
-      <div class="pt-4 border-t border-surface-800 flex flex-col gap-3">
+      <div class="pt-4 border-t border-surface-800 flex flex-col gap-2.5 mt-3">
         <!-- Mobile Theme Selector -->
-        <div id="mobileMenu__theme_btns">
-          <span class="text-xs text-content-muted block mb-2 font_console" data-i18n={I18N.nav.mobile.themeLabel}>Select Theme:</span>
-          <div class="grid grid-cols-2 gap-2">
+        <div id="mobileMenu__theme_btns" class="flex flex-col gap-2.5 font_console text-sm">
+          <span class="text-content-muted" data-i18n={I18N.nav.mobile.themeLabel}>Select Theme:</span>
+          <div class="grid grid-cols-2 gap-2.5">
             {themes.map((theme) => (
-              <button data-theme-select={theme.id} class="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-200 
-                text-content-main text-xs border border-surface-800 cursor-pointer font_console">
+              <button data-theme-select={theme.id} class="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-surface-200 
+                text-content-main border border-surface-800 cursor-pointer font_console">
                 <Icon name={theme.icon} class="w-4 h-4 text-content-muted"/>
                 <span>{theme.label}</span>
               </button>
@@ -182,20 +190,21 @@ const {
         </div>
 
         <!-- Mobile Language Selector -->
-        <div id="mobileMenu__lang_btns" class="pt-2 border-t border-surface-800 flex items-center justify-between">
-          <span class="text-xs font_console text-content-muted" data-i18n={I18N.nav.mobile.langLabel}>Language:</span>
-          <div class="flex gap-2">
+        <div id="mobileMenu__lang_btns" class="mt-3 pt-2 border-t border-surface-800 flex flex-col gap-2.5 font_console text-sm">
+          <span class="text-content-muted" data-i18n={I18N.nav.mobile.langLabel}>Language:</span>
+          <div class="flex flex-wrap gap-2">
             {languages.map(lang => (
               <button data-lang={lang.id} data-flag={lang.icon}
-                class="px-2.5 py-1.5 rounded bg-surface-200 text-content-main text-xs 
-                  font_console border border-surface-800 cursor-pointer flex items-center gap-2">
+                class="px-2.5 py-1.5 rounded bg-surface-200 text-content-main
+                  border border-surface-800 cursor-pointer flex items-center gap-2">
                 <img src={lang.icon} alt={lang.alt} class="w-4 h-3 rounded-sm object-cover" />
-                <span class="text-base font_console" data-i18n={lang.i18nMobile}>{lang.labelMobile}</span>
+                <span data-i18n={lang.i18nMobile}>{lang.labelMobile}</span>
               </button>
             ))}
           </div>
         </div>
       </div>
+
     </div>
   </div>
 

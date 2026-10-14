@@ -195,6 +195,11 @@ main {
   margin-top: var(--height-header);
 }
 
+/* main container home */
+#whoami {
+  min-height: calc(100vh - var(--height-header));
+}
+
 
 /* Firefox + Chrome 121+ (estándar) */
 html {
@@ -229,68 +234,10 @@ ul {
 
 a { text-decoration: none; }                  /* Sin subrayado */
 
-#whoami {
-  min-height: calc(100vh - var(--height-header));
+/* FONT CONSOLE STYLES */
+.font_console {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
-
-
-
-/* ==============================================================
-  +  BUTTON EFFECT [ ----  ]
-/* ============================================================== */
-.btn_notched {
-  width: min-content;
-  position: relative;
-  /* ridge */
-  border: 3px solid var(--console-color);
-  outline: none;
-  transition: 1s;
-  border-radius: 5px;
-}
-
-.btn_notched::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 3%;
-  width: 95%;
-  height: 40%;
-  transition: 0.5s;
-  transform-origin: center;
-}
-
-.btn_notched::before {
-  content: "";
-  transform-origin: center;
-  position: absolute;
-  top: 80%;
-  left: 3%;
-  width: 95%;
-  height: 40%;
-  transition: 0.5s;
-}
-
-.btn_notched:hover::before, .btn_notched:hover::after {
-  transform: scale(0)
-}
-
-.btn_notched_surface_900::after,
-.btn_notched_surface_900::before {
-  background-color: var(--surface-900);
-}
-
-.btn_notched_surface_800::after,
-.btn_notched_surface_800::before {
-  background-color: var(--surface-800);
-}
-
-.btn_notched_surface_200::after,
-.btn_notched_surface_200::before {
-  background-color: var(--surface-200);
-}
-
-
 
 
 /* ==============================================================
@@ -523,7 +470,6 @@ a { text-decoration: none; }                  /* Sin subrayado */
 
 
 
-
 /* ==============================================================
    Effect: grayscale → color on group hover
    --------------------------------------------------------------
@@ -558,7 +504,6 @@ a { text-decoration: none; }                  /* Sin subrayado */
   filter: grayscale(30%);
   opacity: 0.85;
 }
-
 
 
 
@@ -658,7 +603,6 @@ a { text-decoration: none; }                  /* Sin subrayado */
    border or background defined (e.g. `border: 2px solid ...`)
    — this stylesheet only handles the animation.
    ============================================================== */
-
 .cont_border_effect {
   place-content: center;
   position: relative;
@@ -691,7 +635,6 @@ a { text-decoration: none; }                  /* Sin subrayado */
   transform: rotate(0) scale(1);
   opacity: 1;
 }
-
 
 
 
@@ -786,7 +729,6 @@ a { text-decoration: none; }                  /* Sin subrayado */
   transform: translateX(300%) skewX(-21deg);
 }
 
-/* Hover: cambiar color del texto */
 .btn__glass_effect:hover {
   color: #82ffc9;
 }
@@ -799,112 +741,7 @@ a { text-decoration: none; }                  /* Sin subrayado */
 
 
 
-/* ==============================================================
-   Effect: rotating cards (3D carousel)
-   --------------------------------------------------------------
-   Renders a set of cards arranged in a 3D wheel and rotates
-   the whole wheel continuously around the Y axis.
-
-   Each card is positioned around an imaginary circle:
-     - `rotateY` spreads the cards evenly around the wheel.
-     - `translateZ` pushes them outward to the wheel radius.
-
-   The number of cards and each card's index are passed in from
-   the Astro component (`RotatingCards.astro`) as CSS custom
-   properties, so the CSS stays generic and reusable:
-
-     --quantity-carousel-rotate   → total number of cards
-     --index-carousel-rotate      → index of the current card (0-based)
-     --color-card-carousel-rotate → RGB triplet for the card's color
-
-   The component computes the radius so cards don't overlap:
-     radius = (width / 2) / sin(π / quantity) + gap
-
-   Related component: `src/shared/components/RotatingCards.astro`
-   ============================================================== */
-
-.carousel_rotate__wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  place-items: center;
-  overflow: hidden; /*  */
-}
-
-.carousel_rotate__inner {
-  /* Size of each card and geometry of the wheel.
-     Values are set from the Astro component via inline styles. */
-  --w-carousel-rotate: 100px;
-  --h-carousel-rotate: 150px;
-  --radius-carousel-rotate: 150px;
-  --rotateX-carousel-rotate: -15deg;
-  --perspective-carousel-rotate: 1000px;
-  --spin-duration-carousel-rotate: 20s;
-
-  position: relative;
-  width: var(--w-carousel-rotate);
-  height: var(--h-carousel-rotate);
-  transform-style: preserve-3d;
-  animation: rotate-wheel var(--spin-duration-carousel-rotate) linear infinite;
-}
-
-/* The whole wheel rotates around Y, with a slight X tilt for depth. */
-@keyframes rotate-wheel {
-  from {
-    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(0deg);
-  }
-  to {
-    transform: perspective(var(--perspective-carousel-rotate)) rotateX(var(--rotateX-carousel-rotate)) rotateY(360deg);
-  }
-}
-
-/* Each card is placed around the wheel using its index and the
-   total quantity, then pushed outward by the radius. */
-.carousel_rotate__card {
-  position: absolute;
-  inset: 0;
-  border: 2px solid rgb(var(--color-card-carousel-rotate));
-  border-radius: 12px;
-  overflow: hidden;
-  transform:
-    rotateY(calc((360deg / var(--quantity-carousel-rotate)) * var(--index-carousel-rotate)))
-    translateZ(var(--radius-carousel-rotate));
-
-  /* Comment out to make cards on the back side visible too. */
-  backface-visibility: hidden;
-}
-
-/* Card inner layout: vertical stack, centered content, and a
-   radial gradient tinted by the card's color. */
-.carousel_rotate__img {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 8px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(var(--color-card-carousel-rotate), 0.2) 0%,
-      rgba(var(--color-card-carousel-rotate), 0.6) 80%,
-      rgba(var(--color-card-carousel-rotate), 0.9) 100%
-    );
-  /* If a background-image is set inline, it sits above the gradient */
-  background-size: cover;
-  background-position: center;
-}
-
-
-
-
-
-
-
-
-
+/* btn to move svg/icon containit */
 .btn_move__cont_svg {
   position: relative;
   overflow: hidden;
@@ -925,12 +762,7 @@ a { text-decoration: none; }                  /* Sin subrayado */
 
 
 
-
-
-
-
-
-/* CONTACT FORM */
+/* btn effect with tag upside */
 .btn_w_tag {
   position: relative;
   transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -954,8 +786,6 @@ a { text-decoration: none; }                  /* Sin subrayado */
   pointer-events: auto;
 }
 
-/* .btn_w_tag:hover,
-.btn_w_tag:hover .btn_w_tag__top, */
 .btn_w_tag:hover .btn_w_tag__top::before {
   /*background: linear-gradient(320deg, var(--grad-end), var(--grad-start)); */
   margin-bottom: -4px;
@@ -971,53 +801,4 @@ a { text-decoration: none; }                  /* Sin subrayado */
   left: 50%;
   transform: translate(-50%) rotate(45deg);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-
-
-
-
-
-
-
-
-
-.loader_snake {
-  display: flex;
-}
-
-.loader_snake .dot_snake {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: 2px solid #212121;
-  background: #16b0c1;
-  animation: jump 0.8s ease-in-out infinite alternate;
-}
-
-@keyframes jump {
-  100% {
-    background: #661e92;
-    transform: translateY(-3rem) scale(1.9);
-  }
-}
-
-.loader_snake .dot_snake:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.loader_snake .dot_snake:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.loader_snake .dot_snake:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.loader_snake .dot_snake:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-.loader_snake .dot_snake:nth-child(5) {
-  animation-delay: 0.5s;
 }

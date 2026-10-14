@@ -92,7 +92,7 @@ const animationClasses = ANIMATION_CLASSES[animation];
   class:list={[
     // --- Base panel styles -------------------------------------------------
     'absolute bg-surface-200 border border-surface-800 rounded-lg shadow-xl',
-    'py-1 z-50 text-xs font_console origin-top',
+    'z-50 text-xs font_console origin-top',
     
     // --- Animation (depends on `animation` prop) ---------------------------
     ...animationClasses,
@@ -105,5 +105,7 @@ const animationClasses = ANIMATION_CLASSES[animation];
   ]}
   {...rest}
 >
+
   <slot />
+  
 </div>
