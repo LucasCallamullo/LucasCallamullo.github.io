@@ -37,7 +37,11 @@
 
   "footer": {
     "downloadLabel": "./descargar_cv.sh",
-    "resume": "Desarrollador backend que crea API escalables con Python y Java. PostgreSQL, Docker e implementaciones en la nube.",
+    "title": "Ingeniero full-stack orientado a backend.",
+    "resume": [
+      "Construyo APIs y backends modulares con criterio arquitectónico: monolito modular y microservicios con Java/Spring Boot y C#/.NET.",
+      "Frontend con React y TypeScript. Infraestructura con Docker, Nginx y PostgreSQL."
+    ],
     "build": "hecho con:"
   },
 

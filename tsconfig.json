@@ -6,10 +6,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@shared/*": ["src/shared/*"],
-      "@components/*": ["src/shared/components/*"],
-      "@layouts/*": ["src/shared/layouts/*"],
-      "@styles/*": ["src/shared/styles/*"],
-      "@types/*": ["src/shared/types/*"]
+      "@features/*": ["src/features/*"],
+      "@pages/*": ["src/pages/*"],
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
