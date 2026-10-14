@@ -1,15 +1,15 @@
 ---
-import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
+import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro';
 
-import Section from '@shared/components/Section.astro'
-import RotatingCards, {type Card} from '@shared/components/RotatingCards.astro';
+import Section from '@shared/components/layout/Section.astro'
+import RotatingCards, {type Card} from '@shared/components/ui/cards/RotatingCards.astro';
 import ProjectsModal from '@/features/projects/components/ModalProjects.astro';
 import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
 
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import { getGroupedTechs, getTitleBtnModals } from '@shared/data/tech_stack';
+import { getGroupedTechs } from '@shared/data/tech_stack';
 import { makeLangStats } from '@shared/data/github_stats';
 import { getNavHref } from '@shared/data/links';
 
@@ -103,8 +103,8 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
               {group.techs.map((tech) => (
                 <button class="flex items-center gap-2 w-min h-min px-2 py-1.5 cursor-pointer rounded-2xl z-30
                   cont_btns_3d__btn_effect border border-console-400 btn__glass_effect"
-                  data-tech={tech.id} type="button" title={getTitleBtnModals(tech.name)}
-                  aria-label={getTitleBtnModals(tech.name)}
+                  data-tech={tech.id} type="button" title="View Projects"
+                  data-i18n={tech.name} data-title="Projects"
                 >
                   <Icon
                     name={tech.icon}
@@ -142,6 +142,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
                 <a class="font_console rounded-3xl btn_w_tag cursor-pointer
                   border group hover-up border-console-400" 
                   href={getNavHref('github')} target="_blank"
+                  title="Go GitHub!"
                 >
                   <span class="btn_w_tag__top py-1 rounded-3xl flex items-center text-white
                     justify-center bg-console-400 text-sm truncate w-full! ml-0!" data-i18n=''>
@@ -161,6 +162,7 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
                   class="cursor-pointer text-sm text-content-muted hover:text-accent self-end 
                     flex gap-1.5 items-center"
                   data-tech="REPOS_TO_DONUT"
+                  title="View Projects" data-title="I18N" data-i18n={I18N.projectsPage.donutSkillsSubtitle}
                 >
                   <Icon name="ri:stack-line" class="h-5 w-5"></Icon>
                   <span data-i18n={I18N.projectsPage.donutSkillsSubtitle}>Ver proyectos seleccionados</span>
@@ -252,8 +254,9 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
               gap-2.5 px-4 py-4 overflow-auto relative ">
                 {group.techs.map((tech) => (
                   <button class="flex items-center gap-2 px-3.5 py-2 cont__border_animate w-min 
-                    cont_btns_3d__btn_effect cursor-pointer" aria-label={getTitleBtnModals(tech.name)}
-                    data-tech={tech.id} type="button" title={getTitleBtnModals(tech.name)}
+                    cont_btns_3d__btn_effect cursor-pointer"
+                    data-tech={tech.id} type="button" title="View Projects"
+                    data-i18n={tech.name} data-title="Projects"
                   >
                     <Icon
                       name={tech.icon}

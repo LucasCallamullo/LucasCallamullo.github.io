@@ -1,12 +1,14 @@
 ---
-import BaseLayout, { WIDTH_CLASSES } from '@layouts/BaseLayout.astro';
-import Section from '@shared/components/Section.astro'
-import CardSection from '@shared/components/CardSection.astro'
+import '@features/contact/styles/snake_eff.css';
+
+import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro';
+import Section from '@shared/components/layout/Section.astro'
+import CardSection from '@shared/components/layout/CardSection.astro'
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
-import { getGroupedTechs } from '@shared/data/tech_stack';
-import { getSocialLinks, getNavItem } from '@shared/data/links';
+import { getSocialLinks } from '@shared/data/links';
+
 
 
 const links = getSocialLinks(['linkedin', 'github', 'email', 'cv_contact']);
@@ -142,6 +144,7 @@ const title = "Callamullo Lucas · Software Engineer";
               data-cv={link.altText == 'LucasCallamullo_Software_Resume.pdf' ? 'true' : undefined}
               data-i18n={link.altText == 'LucasCallamullo_Software_Resume.pdf' ? link.href : undefined}
               download={link.altText == 'LucasCallamullo_Software_Resume.pdf' ? link.altText : undefined}
+              title={`Go ${link.altText}`}
             >
               <span class="btn_w_tag__top py-1.5 px-2 rounded-full flex items-center justify-center 
                 bg-main-300 text-base">
