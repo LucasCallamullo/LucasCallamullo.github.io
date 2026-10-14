@@ -1,0 +1,62 @@
+---
+// src/shared/components/ui/buttons/NotchedBtn.astro
+import './notchedBtn.css';
+
+type Tag = 'a' | 'button';
+type Surface = '800' | '900';
+
+interface Props {
+  /** Which HTML tag to render. Default: 'a'. */
+  as?: Tag;
+
+  /** Required when `as === 'a'`. */
+  href?: string;
+
+  /** Only for `as === 'a'`. */
+  target?: '_blank' | '_self';
+
+  /** Apply the default padding / height / gap. Default: true. */
+  defSize?: boolean;
+  defGap?: boolean;
+
+  /** Background surface variant. Default: '900'. */
+  surface?: Surface;
+
+  /** Extra classes, applied last. */
+  class?: string;
+
+  // Allow any other attribute to be forwarded to the tag.
+  [key: string]: unknown;
+}
+
+const {
+  as = 'a',
+  href,
+  target = '_blank',
+  defSize = true,
+  defGap = true,
+  surface = '900',
+  class: extraClass = '',
+  ...rest
+} = Astro.props;
+
+const Tag = as;
+
+const baseClasses = [
+  'flex items-center justify-center hover-up btn_notched',
+  defSize && 'px-3.5 py-4.5 h-10',
+  defGap && 'gap-2',
+  surface === '800' && 'btn_notched_surface_800',
+  surface === '900' && 'btn_notched_surface_900',
+  extraClass,
+];
+---
+
+<Tag
+  href={href}
+  target={href ? target : undefined}
+  class:list={baseClasses}
+  {...rest}
+>
+  <slot />
+</Tag>
