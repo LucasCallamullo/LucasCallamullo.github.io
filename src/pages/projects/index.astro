@@ -181,15 +181,18 @@ const title = "Projects · Callamullo Lucas · Software Engineer";
           <a class="flex justify-center items-center gap-2 py-2 w-40
             btn__glass_effect bg-console-400 rounded-3xl hover-up-lg flex-1
             border-2 border-console-100" 
-            href={getNavHref('github')} target="_blank" title="Go GitHub"
+            href={getNavHref('github')} target="_blank" 
+            title="Go GitHub" data-title="Go" data-i18n={I18N.links.github}
           > 
             <Icon name="ri:github-line" class="h-5 w-5"></Icon>
             <span class="truncate">GitHub</span> 
           </a>
+
           <a class="flex justify-center items-center gap-2 py-2 w-40
             btn__glass_effect bg-console-400 rounded-3xl hover-up-lg flex-1
             border-2 border-console-100" 
             href={getNavHref('contact')}
+            title="Get In Touch" data-i18n={I18N.projectsPage.touch.btn} data-title="I18N"
           > 
             <Icon name="ri:mail-send-line" class="h-5 w-5"></Icon>
             <span class="truncate" data-i18n={I18N.projectsPage.touch.btn}>Get In Touch</span> 

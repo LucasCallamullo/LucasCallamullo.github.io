@@ -5,7 +5,7 @@ import Section from '@shared/components/layout/Section.astro'
 import RotatingCards, {type Card} from '@shared/components/ui/cards/RotatingCards.astro';
 import ProjectsModal from '@/features/projects/components/ModalProjects.astro';
 import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
-
+import NotchedBtn from '@/shared/components/ui/buttons/NotchedBtn.astro';
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
@@ -272,6 +272,23 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
 
     </div>  
+  </Section>
+
+
+  <!-- + MILESTONES SECTION  -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={['md:px-4 py-8 w-full flex justify-center items-center', WIDTH_CLASSES.md]}>
+      <NotchedBtn class="self-center group font_console font-semibold text-lg" target="_self"
+        href={getNavHref('projects')} defGap={false}
+        title="Go projects" data-title="Go" data-i18n={I18N.nav.projects}
+      >
+        <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+        <span class="text-console tracking-wider lowercase" data-i18n={I18N.nav.projects}>
+          projects
+        </span>
+        <span class="text-content-muted group-hover:text-content-main">/</span>
+      </NotchedBtn>
+    </div>
   </Section>
 
 
