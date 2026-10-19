@@ -5,7 +5,7 @@ import Section from '@shared/components/layout/Section.astro'
 import RotatingCards, {type Card} from '@shared/components/ui/cards/RotatingCards.astro';
 import ProjectsModal from '@/features/projects/components/ModalProjects.astro';
 import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
-
+import NotchedBtn from '@/shared/components/ui/buttons/NotchedBtn.astro';
 
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
@@ -15,13 +15,6 @@ import { getNavHref } from '@shared/data/links';
 
 import { fade } from 'astro:transitions';
 
-
-const groups = getGroupedTechs({ 
-  categories:[
-    'backend', 'languages', 'frontend', 'databases', 'auth',
-    'devops', 'tools', 'testing', 'api', 'mobile', 'ai', 'games'
-  ] 
-});
 
 const mainStack = getGroupedTechs({ 
   categories:[
@@ -38,6 +31,13 @@ const cardsCarousel: Card[] = mainStack.flatMap((group) =>
     id: t.id ?? '',     
   }))
 );
+
+const groups = getGroupedTechs({ 
+  categories:[
+    'backend', 'languages', 'frontend', 'databases', 'auth',
+    'devops', 'tools', 'testing', 'api', 'mobile', 'ai', 'games'
+  ] 
+});
 
 // Languages stats 
 const langStats = await makeLangStats(null);
@@ -95,7 +95,9 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
             data-reveal
           >
             <h3 class="font_console text-lg text-accent uppercase tracking-wider
-              bg-surface-200 px-3.5 py-2.5">
+              bg-surface-200 px-3.5 py-2.5 flex items-center gap-2"
+            >
+              <Icon name={group.category?.icon} class={`w-5 h-5 ${group.category?.colorIcon}`}/>
               <span data-i18n={group.category.i18n}>{group.category.label}</span>
             </h3>
 
@@ -239,8 +241,9 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
             ]}
           >
             <div class="bg-surface-200 rounded-t-2xl flex justify-between items-center px-4 py-3">
-              <h3 data-i18n={group.category.i18n} class="font_console text-console tracking-wider font-xl">
-                {group.category.label}
+              <h3 class="font_console text-console tracking-wider font-xl flex gap-2 items-center">
+                <Icon name={group.category.icon} class={`w-5 h-5 ${group.category.colorIcon}`}/>
+                <span data-i18n={group.category.i18n}>{group.category.label}</span>
               </h3>
               <div class="flex gap-2">
                 <span class="rounded-full bg-red-500 h-3 w-3 border border-surface-900"></span>
@@ -272,6 +275,23 @@ const title = "Skills · Callamullo Lucas · Software Engineer";
 
 
     </div>  
+  </Section>
+
+
+  <!-- + MILESTONES SECTION  -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={['md:px-4 py-8 w-full flex justify-center items-center', WIDTH_CLASSES.md]}>
+      <NotchedBtn class="self-center group font_console font-semibold text-lg" target="_self"
+        href={getNavHref('projects')} defGap={false}
+        title="Go projects" data-title="Go" data-i18n={I18N.nav.projects}
+      >
+        <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+        <span class="text-console tracking-wider lowercase" data-i18n={I18N.nav.projects}>
+          projects
+        </span>
+        <span class="text-content-muted group-hover:text-content-main">/</span>
+      </NotchedBtn>
+    </div>
   </Section>
 
 

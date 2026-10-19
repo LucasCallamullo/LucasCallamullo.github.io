@@ -6,6 +6,7 @@ import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro';
 import { Icon } from 'astro-icon/components';
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 import { getNavHref } from '@/shared/data/links';
+import NotchedBtn from '@/shared/components/ui/buttons/NotchedBtn.astro';
 
 // Define page metadata
 const title = "Software Engineer · 404 · Callamullo Lucas";
@@ -21,17 +22,16 @@ const title = "Software Engineer · 404 · Callamullo Lucas";
       WIDTH_CLASSES.md
     ]}>
 
-      <h1 class="text-6xl font-bold">404</h1>
+      <h1 class="text-6xl font-bold">404 Page</h1>
 
       <p class="mt-4 text-xl" data-i18n={I18N.page404.title}>Sorry, the page you're looking for doesn't exist.</p>
 
-      <a class="flex hover-up items-center justify-center h-10 px-4 py-5 gap-2
-        btn_notched btn_notched_surface_900" href={getNavHref('home')}>
+      <NotchedBtn href={getNavHref('home')}>
         <Icon name="ri:arrow-left-circle-line" class="text-accent h-6 w-6"></Icon>
         <span class="font_console tracking-wider truncate text-lg" data-i18n={I18N.page404.btn}>
           Go back home
         </span>
-      </a>
+      </NotchedBtn>
     </div>
   </Section>
 </BaseLayout>

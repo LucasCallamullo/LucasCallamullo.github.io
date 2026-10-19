@@ -13,10 +13,10 @@ import { getNavHref } from '@shared/data/links';
 import NotchedBtn from '@/shared/components/ui/buttons/NotchedBtn.astro';
 
 // retrieve stack list to complete
-const frontend = getTechs(['typescript', 'react', 'tailwind', 'javascript']);
+const frontend = getTechs(['typescript', 'react', 'tailwind', 'vite']);
 const backend = getTechs(['java', 'springboot', 'csharp', 'dotnet']);
 const databases = getTechs(['postgresql', 'redis']);
-const devops = getTechs(['dockerCompose', 'nginx', 'linux', 'bash']);
+const devops = getTechs(['docker', 'bash', 'git', 'nginx', ]);
 const mainTechs = getTechs(['java', 'springboot', 'junit', 'typescript', 'react', 'postgresql', 'docker', 'nginx']);
 
 interface TechRow {
@@ -352,6 +352,22 @@ const title = "About · Callamullo Lucas · Software Engineer";
     </div>
   </Section>
 
+
+  <!-- + MILESTONES SECTION  -->
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
+    <div class:list={['md:px-4 py-8 w-full flex justify-center items-center', WIDTH_CLASSES.md]}>
+      <NotchedBtn class="self-center group font_console font-semibold text-lg" target="_self"
+        href={getNavHref('skills')} defGap={false}
+        title="Go skills" data-title="Go" data-i18n={I18N.home.skills.btn}
+      >
+        <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+        <span class="text-console tracking-wider" data-i18n={I18N.home.skills.btn}>
+          skills
+        </span>
+        <span class="text-content-muted group-hover:text-content-main">/</span>
+      </NotchedBtn>
+    </div>
+  </Section>
 
   <!-- + MODAL PROJECTS COMPONENTS -->
   <ProjectsModal modalId="modalProjects" overlayId="overlayProjects"/>

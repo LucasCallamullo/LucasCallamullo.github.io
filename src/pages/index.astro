@@ -74,7 +74,7 @@ const title = "Software Engineer · Callamullo Lucas";
           </span>
         </NotchedBtn>
 
-        <NotchedBtn href={getNavHref('contact')} target="_self" surface="900"
+        <NotchedBtn href={getNavHref('contact')} target="_self" surface="900" target="_self"
           title="Go Contact" data-title="Go" data-i18n={I18N.home.btn.contact}
         >
           <Icon name="ri:send-plane-fill" class="w-5 h-5 text-accent"></Icon>
@@ -125,7 +125,7 @@ const title = "Software Engineer · Callamullo Lucas";
           </span>
         </p>
 
-        <NotchedBtn class="self-center group font-semibold mt-2 font_console text-lg" 
+        <NotchedBtn class="self-center group font-semibold mt-2 font_console text-lg" target="_self"
           href={getNavHref('about')} defGap={false}
           title="Go about" data-title="Go" data-i18n={I18N.home.about.about_txt}
         >
@@ -183,7 +183,7 @@ const title = "Software Engineer · Callamullo Lucas";
         </div>
       </div>  
 
-      <NotchedBtn class="mt-2 self-center group font_console font-semibold text-lg" 
+      <NotchedBtn class="mt-2 self-center group font_console font-semibold text-lg" target="_self"
         href={getNavHref('skills')} defGap={false}
         title="Go skills" data-title="Go" data-i18n={I18N.home.skills.btn}
       >
@@ -201,7 +201,7 @@ const title = "Software Engineer · Callamullo Lucas";
   <!--  CONTACT Y GITHUB SECTION   -->
   <Section class:list={['bg-surface-800', WIDTH_CLASSES.full]}>
     <div class:list={[
-      "flex flex-col justify-center items-center max-w-full py-7",
+      "flex flex-col justify-center items-center max-w-full pt-7 pb-3",
       WIDTH_CLASSES.md
     ]}>
 
@@ -227,9 +227,20 @@ const title = "Software Engineer · Callamullo Lucas";
         </p>
 
         <!-- Buttons ref -->
-        <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full mt-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 w-full mt-4 flex-wrap">
 
-          <NotchedBtn class="self-center font_console text-lg group font-semibold" 
+          <NotchedBtn class="self-center group font-semibold font_console text-lg" surface="900"
+            href={getNavHref('about')} defGap={false} target="_self"
+            title="Go about" data-title="Go" data-i18n={I18N.home.about.about_txt}
+          >
+            <span class="text-content-muted group-hover:text-accent">$&nbsp;cd&nbsp;</span>
+            <span class="text-console tracking-wider" data-i18n={I18N.home.about.about_txt}>
+              about
+            </span>
+            <span class="text-content-muted group-hover:text-content-main">.txt</span>
+          </NotchedBtn>
+
+          <NotchedBtn class="self-center font_console text-lg group font-semibold" target="_self"
             href={getNavHref('contact')} defGap={false}
             title="Go contact" data-title="Go" data-i18n={I18N.home.contact.btn}
           >
@@ -251,6 +262,7 @@ const title = "Software Engineer · Callamullo Lucas";
         </div>
 
       </CardSection>
+
     </div>
   </Section>
 

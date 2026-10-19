@@ -164,6 +164,8 @@ export interface GroupedTechs {
     i18n: string;
     label: string;
     order: number;
+    icon: string;
+    colorIcon: string;
   };
   techs: Tech[];
 }
@@ -225,9 +227,7 @@ export function getGroupedTechs(options: FilterOptions = {}): GroupedTechs[] {
       return {
         category: {
           key: key as TechCategoryKey,
-          i18n: cat.i18n,
-          label: cat.label,
-          order: cat.order,
+          ...cat
         },
         techs,
       };
