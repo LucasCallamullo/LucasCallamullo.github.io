@@ -140,6 +140,7 @@ export const I18N = {
     backend: 'skills.backend',
     frontend: 'skills.frontend',
     mobile: 'skills.mobile',
+    auth: 'skills.auth',
     databases: 'skills.databases',
     devops: 'skills.devops',
     tools: 'skills.tools',
@@ -165,6 +166,8 @@ export const I18N = {
     title: 'projectsPage.title',
     subtitle: 'projectsPage.subtitle',
     modalTitle: 'projectsPage.modalTitle',
+
+    // donut graph
     donutSkillsSubtitle: 'projectsPage.donutSkillsSubtitle',
 
     projects: {
@@ -186,6 +189,12 @@ export const I18N = {
     tagsTitle: 'projectsSlug.tagsTitle',
     stackSub: 'projectsSlug.stackSub',
     graph: 'projectsSlug.graph',
+
+    der: {
+      p1: 'projectsSlug.der.p1',
+      p2: 'projectsSlug.der.p2',
+      p3: 'projectsSlug.der.p3',
+    },
 
     sections: {
       links:   'projectsSlug.sections.links',

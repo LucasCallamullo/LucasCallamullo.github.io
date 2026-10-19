@@ -133,6 +133,11 @@
     "devops": "DevOps & Automation",
     "testing": "Testing & Docs",
 
+    "mobile": "Mobile",
+    "auth": "Auth & Security",
+    "ai": "Artificial Intelligence - AI",
+    "tools": "Extra Tools",
+
     "main": {
       "subtitle": "Where I have the most hands-on experience."
     },
@@ -212,6 +217,12 @@
       "der":     "Database Schema (DER)",
       "flow":    "Flow",
       "next":    "More projects"
+    },
+
+    "der": {
+      "p1": "Note: Diagrams present a simplified model to highlight main relationships and key business rules. Audit attributes (e.g., created_at, updated_at) and secondary fields have been omitted for readability.",
+      "p2": "Note: The USER entity abstractly represents the identity subsystem (which internally includes User, Role, and UserRole). It is simplified into a single table to keep the focus on the domain.",
+      "p3": "Notes on the diagram:"
     }
   },
 

@@ -128,6 +128,11 @@
     "devops": "DevOps & Automatización",
     "testing": "Testing & Documentación",
 
+    "mobile": "Mobile",
+    "auth": "Auth & Seguridad",
+    "ai": "Inteligencia Artificial - IA",
+    "tools": "Herramientas Extra",
+
     "main": {
       "subtitle": "Donde tengo más experiencia práctica."
     },
@@ -206,6 +211,12 @@
       "der":     "Esquema DB (DER)",
       "flow":    "Flows",
       "next":    "Más proyectos"
+    },
+
+    "der": {
+      "p1": "Nota: Los diagramas presentan un modelo simplificado con el objetivo de destacar las relaciones principales y las reglas de negocio clave. Se han omitido atributos de auditoría (como created_at o updated_at) y campos secundarios para facilitar la lectura.",
+      "p2": "Nota: La entidad USER representa de forma abstracta el subsistema de identidad (que internamente incluye User, Role y UserRole). Se simplifica en una sola tabla para mantener el foco en el dominio.",
+      "p3": "Notas sobre el diagrama:"
     }
   },
 
