@@ -128,14 +128,19 @@ export interface Project {
 }
 
 /*
-
-2026       .NET E-commerce         → Dominio de otro stack empresarial: .NET + React + TS
-2026       React Native + Java     → Seminario de Analista (grupo de 6).
-                                     Mobile con React Native, liderazgo técnico
-                                     sobre Backend (2), coordinación con los 3
-                                     de documentación funcional, requerimientos
-                                     y user stories
-
+export const PROJECT_KEYS = [
+  'mara_sem',
+  'ecommerce_net',
+  'fleet_optimizer',
+  'dds_tutor',
+  'portfolio',
+  'ecommerce_dj',
+  'backend_tp',
+  'no_country',
+  'py_tutor',
+  'university',
+  'pawn_cs',
+] as const;
 */
 
 // ========================================================================
@@ -143,43 +148,6 @@ export interface Project {
 // ========================================================================
 export const PROJECTS = {
 
-  //! =================== PROJECT 
-  mara_sem: {
-    title: I18N.projects.mara_sem.title,
-    titleFull: I18N.projects.mara_sem.titleFull,
-    date: { start: '2026-08', end: null },
-    isMain: true,
-    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Mobile App', 'In Progress', 'Team'],
-    coreTechs: [
-      'java', 'springboot', 'junit', 'postgresql', 
-      'typescript', 'reactNative', 'expo', 'androidIDE',
-      'nginx', 'docker', 'googleMaps', 'jwt', 
-    ],
-    extraTechs: [
-      'springCloud', 'dockerCompose', 'nativeWind', 'tailwind', 'vite',
-    ],
-    otherTechs: [
-      'springSecurity', 'hibernate', 'h2', 'js', 'ts', 'react', 'javascript', 'html5', 'css3',  
-      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'swagger', 'dbeaver', 'ngrok'
-    ],
-    links: [
-      { ...githubExt, href: 'https://github.com/LucasCallamullo/react-native-compiler-apk' },
-    ],
-    timeline: {
-      order: 18,
-      icon: 'ri:android-fill',
-      summary: I18N.projects.mara_sem.timeline.summary,
-    },
-    project: {
-      order: 18,
-      summary: I18N.projects.mara_sem.project.summary,
-      description: I18N.projects.mara_sem.project.description,
-    },
-    images: [{ ...imageDefault }],
-    slug: 'react-native-compiler-apk',
-    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
-    milestone: I18N.projects.mara_sem.milestone
-  },
 
   //! =================== PROJECT 
   ecommerce_net: {
@@ -203,12 +171,12 @@ export const PROJECTS = {
       { ...githubExt, href: 'https://github.com/LucasCallamullo/ecommerce-engine' },
     ],
     timeline: {
-      order: 19,
+      order: 18,
       icon: 'ri:shopping-bag-line',
       summary: I18N.projects.ecommerce_net.timeline.summary,
     },
     project: {
-      order: 19,
+      order: 18,
       summary: I18N.projects.ecommerce_net.project.summary,
       description: I18N.projects.ecommerce_net.project.description,
     },
@@ -217,8 +185,6 @@ export const PROJECTS = {
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.ecommerce_net.milestone
   },
-
-
 
   //! =================== PROJECT
   fleet_optimizer: {
@@ -247,7 +213,7 @@ export const PROJECTS = {
       summary: I18N.projects.fleet_optimizer.timeline.summary,
     },
     project: {
-      order: 20,
+      order: 19,
       summary: I18N.projects.fleet_optimizer.project.summary,
       description: I18N.projects.fleet_optimizer.project.description,
     },
@@ -255,6 +221,44 @@ export const PROJECTS = {
     slug: 'fleet-optimizer',
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.fleet_optimizer.milestone
+  },
+
+  //! =================== PROJECT 
+  mara_sem: {
+    title: I18N.projects.mara_sem.title,
+    titleFull: I18N.projects.mara_sem.titleFull,
+    date: { start: '2026-08', end: null },
+    isMain: true,
+    tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Mobile App', 'In Progress', 'Team'],
+    coreTechs: [
+      'java', 'springboot', 'junit', 'postgresql', 
+      'typescript', 'reactNative', 'expo', 'androidIDE',
+      'nginx', 'docker', 'googleMaps', 'jwt', 
+    ],
+    extraTechs: [
+      'springCloud', 'dockerCompose', 'nativeWind', 'tailwind', 'vite',
+    ],
+    otherTechs: [
+      'springSecurity', 'hibernate', 'h2', 'js', 'ts', 'react', 'javascript', 'html5', 'css3',  
+      'deepseek', 'git', 'github', 'postman', 'bruno', 'bash', 'swagger', 'dbeaver', 'ngrok'
+    ],
+    links: [
+      { ...githubExt, href: 'https://github.com/LucasCallamullo/react-native-compiler-apk' },
+    ],
+    timeline: {
+      order: 19,
+      icon: 'ri:android-fill',
+      summary: I18N.projects.mara_sem.timeline.summary,
+    },
+    project: {
+      order: 20,
+      summary: I18N.projects.mara_sem.project.summary,
+      description: I18N.projects.mara_sem.project.description,
+    },
+    images: [{ ...imageDefault }],
+    slug: 'react-native-compiler-apk',
+    sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
+    milestone: I18N.projects.mara_sem.milestone
   },
 
   //! =================== PROJECT

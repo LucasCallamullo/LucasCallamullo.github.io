@@ -5,6 +5,8 @@ import { Icon } from 'astro-icon/components';
 
 import Section from '@/shared/components/layout/Section.astro';
 import BaseLayout, { WIDTH_CLASSES } from '@shared/layouts/BaseLayout.astro'; 
+import NotchedBtn from '@/shared/components/ui/buttons/NotchedBtn.astro';
+import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
 
 import { I18N } from '@shared/scripts/utils/i18n_keys';
 import { resolveKey } from '@shared/scripts/navbar/translations';
@@ -15,19 +17,24 @@ import { makeLangStats } from '@/shared/data/github_stats';
 import { formatDateRange, PROJECTS } from '@/shared/data/projects';
 import { existSection, filterTags, getSections, getSection, TAG_CATEGORIES, titleCase } from '@/shared/data/tags';
 
-import ProjectLanguages from '@/features/projects/components/ProjectLanguages.astro';
-import NotchedBtn from '@/shared/components/ui/buttons/NotchedBtn.astro';
 
+import MermaidDiagram from '@features/projects/components/mermaid/MermaidDiagram.astro';
+import { DIAGRAMS } from '@shared/data/diagrams'; 
+
+
+// buildear all projects pages
 export const getStaticPaths = (() => {
-  return Object.values(PROJECTS)
-    // .filter(p => p.hrefAstro) // solo los que tienen página propia
-    .map(p => ({
-      params: { slug: p.slug },
-      props: { project: p },
+  return Object.entries(PROJECTS)
+    .map(([key, project]) => ({
+      params: { slug: project.slug },
+      props: { 
+        project: project, 
+        projectKey: key as keyof typeof PROJECTS // Pasamos la key original
+      },
     }));
 }) satisfies GetStaticPaths;
 
-const { project: PROJECT } = Astro.props;
+const { project: PROJECT, projectKey } = Astro.props;
 
 // All Tags Filter stuff
 const allTags = filterTags(PROJECT.tags ?? [], null);
@@ -52,13 +59,18 @@ const langStats = await makeLangStats(PROJECT.slug);
 
 // Define page metadata
 const title = `${PROJECT.slug} · Callamullo Lucas`;
+
+
+// We look up the diagrams using the key (with a fallback in case it doesn't exist)
+const diagrams = DIAGRAMS[projectKey] || { c4_model: null, der: null, others: [] };
+
 ---
 
 <BaseLayout title={title} mainWidth="full">
 
   <!-- + MAIN DIV CONTAINER -->
   <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
-    <div class:list={["w-full flex flex-col border-b border-console pb-2", WIDTH_CLASSES.md]}>
+    <div class:list={["w-full flex flex-col border-b border-console pb-2.5", WIDTH_CLASSES.md]}>
 
       <!-- TAGS ARCHITECTURE & DATE TIME -->
       <div class="flex flex-wrap items-center gap-3 font_console justify-end mt-2">
@@ -68,8 +80,7 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
         </span>
       </div>
 
-
-      <div class="flex items-center gap-5">
+      <div class="flex items-center gap-5 mt-0.5">
         <!-- Back link -->
         <a class="flex hover-up items-center justify-center rounded-full" 
           href={getNavHref('projects')} aria-label="Back to projects" title="Back to projects"
@@ -88,82 +99,80 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
 
   <!-- + CONTENTO LINKS & TAGS CONTAINER -->
-  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]} paddingY={false}>
-    <div class:list={["w-full flex flex-col py-4", WIDTH_CLASSES.md]}>
+  <Section class:list={['bg-surface-900', WIDTH_CLASSES.full]}>
+    <div class:list={["w-full grid md:grid-cols-2 gap-3 md:gap-4", WIDTH_CLASSES.md]}>
 
-      <div class="grid md:grid-cols-2 gap-3 md:gap-4">
+      <div class="flex flex-col">
+        <!-- INDICE PROJECT -->
+        <h2 class="flex gap-2 items-center text-2xl font-semibold">
+          <Icon name="ri:crosshair-2-line" class="h-5 w-5"></Icon>
+          <span data-i18n={I18N.projectsSlug.indice}>On this page</span>
+        </h2>
 
-        <div class="flex flex-col">
+        <ul class="flex flex-wrap flex-row gap-4 mt-3">
+          {sectionsToRender.map((sec) => (
+            <li class="hover-up-lg group"> 
+              <a class="px-2.5 py-1 rounded bg-surface-800 flex gap-2 items-center
+                group-hover:text-console" href={`#${sec.id}`} title={titleCase(sec.label)}
+              >
+                <Icon name={sec.icon} class="w-4 h-4 text-accent" />
+                <span class="font_console tracking-wider text-base" data-i18n={sec.i18n}>{sec.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
 
-          <!-- INDICE PROJECT -->
-          <h2 class="flex gap-2 items-center text-2xl font-semibold">
-            <Icon name="ri:crosshair-2-line" class="h-4.5 w-4.5"></Icon>
-            <span data-i18n={I18N.projectsSlug.indice}>On this page</span>
-          </h2>
+        <!--Tags -->
+        <h3 class="flex gap-2 items-center text-lg mt-4.5 font-semibold"> 
+          <Icon name="ri:price-tag-3-line" class="h-4 w-4"></Icon>
+          <span data-i18n={I18N.projectsSlug.tagsTitle}>Key concepts</span>
+        </h3>
 
-          <ul class="flex flex-wrap flex-row gap-4 mt-3">
-            {sectionsToRender.map((sec) => (
-              <li class="hover-up-lg group"> 
-                <a class="px-2.5 py-1 rounded bg-surface-800 flex gap-2 items-center
-                  group-hover:text-console" href={`#${sec.id}`} title={titleCase(sec.label)}
-                >
-                  <Icon name={sec.icon} class="w-4 h-4 text-accent" />
-                  <span class="font_console tracking-wider text-base" data-i18n={sec.i18n}>{sec.label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <!--Tags -->
-          <h3 class="flex gap-2 items-center text-lg mt-4.5 font-semibold"> 
-            <Icon name="ri:price-tag-3-line" class="h-4 w-4"></Icon>
-            <span data-i18n={I18N.projectsSlug.tagsTitle}>Key concepts</span>
-          </h3>
-
-          <div class="flex flex-wrap gap-2.5 h-min w-full font_console mt-1.5"> 
-            <!-- Tags -->
-            {allTags.map(tag => {
-              const cat = TAG_CATEGORIES[tag.category];
-              return (
-                <div class:list={[
-                  "px-2.5 py-1 rounded text-sm font_console tracking-wide text-pink-50",
-                  "font_console flex",
-                  cat.bg 
-                ]}>
-                  <span data-i18n={cat.i18n}>{tag.category}</span>:&nbsp;
-                  <span data-i18n={tag.i18n}>{tag.label}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          <!-- LINKS SECTION -->
-          {existSection(sectionsToRender, 'links') && ( 
-            <div class="scroll-mt-20 pt-4.5" id="links">
-              <h3 class="flex gap-2 items-center text-lg font-semibold" >
-                <Icon name="ri:link" class="h-4.5 w-4.5"></Icon>
-                <span>Links:</span>
-              </h3>
-
-              <div class="flex gap-3 mt-1.5 flex-wrap items-center justify-center">
-                {PROJECT.links.map((link) => {
-                  return <NotchedBtn href={link.href} target={(link.newTab) ? "_blank" : ''}>
-                    <Icon name={link.icon} class="text-accent h-5 w-5"></Icon>
-                    <span class="font_console tracking-wider truncate text-base" data-i18n={link.i18n}>
-                      {link.altText}
-                    </span>
-                  </NotchedBtn>
-                })}
+        <div class="flex flex-wrap gap-2.5 h-min w-full font_console mt-1.5"> 
+          <!-- Tags -->
+          {allTags.map(tag => {
+            const cat = TAG_CATEGORIES[tag.category];
+            return (
+              <div class:list={[
+                "px-2.5 py-1 rounded text-sm font_console tracking-wide text-pink-50",
+                "font_console flex",
+                cat.bg 
+              ]}>
+                <span data-i18n={cat.i18n}>{tag.category}</span>:&nbsp;
+                <span data-i18n={tag.i18n}>{tag.label}</span>
               </div>
+            );
+          })}
+        </div>
+
+        <!-- LINKS SECTION -->
+        {existSection(sectionsToRender, 'links') && ( 
+          <div class="scroll-mt-20 pt-4.5" id="links">
+            <h3 class="flex gap-2 items-center text-lg font-semibold" >
+              <Icon name="ri:link" class="h-4 w-4"></Icon>
+              <span>Links:</span>
+            </h3>
+
+            <div class="flex gap-3 mt-1.5 flex-wrap items-center justify-center">
+              {PROJECT.links.map((link) => {
+                return <NotchedBtn href={link.href} target={(link.newTab) ? "_blank" : ''}>
+                  <Icon name={link.icon} class="text-accent h-5 w-5"></Icon>
+                  <span class="font_console tracking-wider truncate text-base" data-i18n={link.i18n}>
+                    {link.altText}
+                  </span>
+                </NotchedBtn>
+              })}
             </div>
-          )}
-        </div>
+          </div>
+        )}
+      </div>
         
-        <!-- Summary -->
-        <div data-i18n={PROJECT.project?.summary} data-i18n-join="newlineIcon"
-          class="flex flex-col gap-2.5 text-base text-content-muted font_console text-justify"
-        >
-        </div>
+      <!-- Summary -->
+      <div 
+        data-i18n={PROJECT.project?.summary} 
+        data-i18n-join="newlineIcon"
+        class="flex flex-col gap-2.5 text-base text-content-muted font_console text-justify"
+      >
       </div>
     </div>
   </Section>
@@ -171,13 +180,13 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION WITH ID | CORE STACK ; use scroll-mt-20 -->
   {STACK_SECTION && (  
-    <Section class:list={['bg-surface-800 scroll-mt-20' , WIDTH_CLASSES.full]} id={STACK_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-800 scroll-mt-20' , WIDTH_CLASSES.full]} id={STACK_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE CORE STACK --> */}
-        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={STACK_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={STACK_SECTION.i18n}>Core Stack</span>
+        <h2 class="flex gap-2 items-center text-2xl font_console">
+          <Icon name={STACK_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="text-console font-semibold" data-i18n={STACK_SECTION.i18n}>Core Stack</span>
         </h2>
 
         <div class="grid md:grid-cols-[1fr_min-content] gap-3 md:gap-4">
@@ -201,7 +210,7 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
             {otherStackList.length > 0 && ( 
               <h3 class="text-xl font-semibold font_console flex gap-2 items-center">
-                <Icon name="ri:stack-fill" class="h-4 w-4"></Icon>
+                <Icon name="ri:stack-fill" class="h-4.5 w-4.5"></Icon>
                 <span data-i18n={I18N.projectsSlug.stackSub}>Other Techs</span>
               </h3>
 
@@ -239,17 +248,16 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION WITH ID SECTIONS ; use scroll-mt-20 -->
   {GALLERY_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={GALLERY_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-900 scroll-mt-20 mb-5' , WIDTH_CLASSES.full]} id={GALLERY_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE GALLERY --> */}
-        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={GALLERY_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={GALLERY_SECTION.i18n}>Gallery</span>
+        <h2 class="flex gap-2 items-center text-2xl font_console">
+          <Icon name={GALLERY_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="font-semibold text-console" data-i18n={GALLERY_SECTION.i18n}>Gallery</span>
         </h2>
 
-
-        <div class="h-50 grid grid-cols-2 md:grid-cols-4 w-full" id="contBtnsModal">
+        <div class="h-50 grid grid-cols-2 md:grid-cols-3 w-full gap-5" id="contBtnsModal">
           {PROJECT.images.map((img) => (
             <button class="imageBtn" data-src={img.href}>
               <img
@@ -267,12 +275,11 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
           id="imagesView"
           class:list={[
             "modal border-b border-surface-800 bg-surface-900 place-self-center",
-            "w-3/4 h-4/5", 
-            WIDTH_CLASSES.md
-        ]}>
+            "w-3/4 h-4/5", WIDTH_CLASSES.md
+          ]}
+        >
           {/* <!-- El padding siempre a modal_content que no aplica cierre --> */}
           <div class="modal__content max-h-full max-w-full h-full flex flex-col min-h-0 relative p-3">
-
             <button class="modal__btn_close p-2 hover:bg-red-500 group absolute right-1 top-1
               rounded-lg bg-surface-200 text-content-main border border-surface-800 cursor-pointer"
               type="button"
@@ -281,6 +288,7 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
             </button>
 
             <img src="" alt="" class="flex-1 min-h-0 w-full object-contain">
+
           </div>
         </div>
 
@@ -294,17 +302,17 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION HISTORY ; use scroll-mt-20 -->
   { HISTORY_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={HISTORY_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={HISTORY_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
-        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={HISTORY_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={HISTORY_SECTION.i18n}>History</span>
+        <h2 class="flex gap-2 items-center text-2xl font_console">
+          <Icon name={HISTORY_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="font-semibold text-console" data-i18n={HISTORY_SECTION.i18n}>History</span>
         </h2>
 
         {/* <!-- Description so so so long --> */}
         <div data-i18n={PROJECT.project?.description} data-i18n-join="newline"
-          class="flex flex-col gap-4 text-base text-content-muted font_console text-justify"
+          class="flex flex-col gap-4 text-base text-content-muted font_console text-justify indent-8"
         >
         </div>
       </div>
@@ -315,16 +323,57 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION C4 MODEL ; use scroll-mt-20 -->
   { C4_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={C4_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-800 scroll-mt-20' , WIDTH_CLASSES.full]} id={C4_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE C4 MODEL --> */}
-        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={C4_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={C4_SECTION.i18n}>C4 Model</span>
+        <h2 class="flex gap-2 items-center text-2xl font_console">
+          <Icon name={C4_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="text-console font-semibold" data-i18n={C4_SECTION.i18n}>C4 Model</span>
         </h2>
 
-        <span> Coming soon </span>
+        {diagrams.c4_model && (
+          <MermaidDiagram 
+            chart={diagrams.c4_model.diagram || ''} 
+            filename={`c4_model_${PROJECT.slug}`} 
+            id='c4_model' 
+            className='bg-surface-900'
+          >
+
+            <div class="flex flex-col gap-1">
+
+              <p class="font_console text-sm border-r-2 border-l-6 rounded-xl border-main-300 
+                mx-8 pr-8 pl-5 py-3 mt-1.5 bg-surface-900 text-content-main/70"
+                data-i18n={I18N.projectsSlug.der.p2}  
+              >
+                Note: The USER entity acts as an abstraction for the entire identity subsystem (Auth, Roles, Users). 
+                It is simplified to highlight the domain's core containers.
+              </p>
+
+              {/*  <!-- General n o t e s -->   sticky-note-line */}
+              {diagrams.c4_model.notes && (
+                <div class="font_console text-sm border-r-2 border-l-6 rounded-xl border-main-500 
+                  mx-8 pr-8 pl-5 py-3 mt-1.5 bg-surface-900 text-content-main/70 flex flex-col gap-1 flex-wrap"
+                >
+                  <span class="font-semibold text-accent" data-i18n={I18N.projectsSlug.der.p3}>Notes on the diagram:</span>
+                  {diagrams.c4_model.notes.map(text => {
+                    return <div class="flex gap-1.5 items-center">
+                      <Icon name="ri:git-commit-fill" class="h-4.5 w-4.5"></Icon>
+                      <span>{text}</span>
+                    </div>
+                  })}
+                </div>
+              )}
+
+            </div>
+            
+          </MermaidDiagram>
+        )}
+
+        {!diagrams.c4_model && (
+          <span class="font_console text-base"> Coming soon </span>
+        )}
+
       </div>
     </Section>
   )}
@@ -333,16 +382,63 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION DER ; use scroll-mt-20 -->
   { DER_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={DER_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={DER_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE DER --> */}
         <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={DER_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={DER_SECTION.i18n}>DER</span>
+          <Icon name={DER_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="text-console" data-i18n={DER_SECTION.i18n}>DER</span>
         </h2>
 
-        <span> Coming soon </span>
+        {diagrams.der && (
+          <MermaidDiagram 
+            chart={diagrams.der.diagram || ''} 
+            filename={`DER_${PROJECT.slug}`} 
+            id='DER_diagram' 
+            className='bg-surface-900'
+          >
+            <div class="flex flex-col gap-1">
+
+              <p class="font_console text-sm border-r-2 border-l-6 rounded-xl border-main-300 
+                mx-8 pr-8 pl-5 py-3 mt-3 bg-surface-800 text-content-main/70"
+                data-i18n={I18N.projectsSlug.der.p1}
+              >
+                Note: Diagrams present a simplified model to highlight main relationships and key business rules. 
+                Audit attributes (e.g., created_at, updated_at) and secondary fields have been omitted for readability.
+              </p>
+
+              <p class="font_console text-sm border-r-2 border-l-6 rounded-xl border-main-300 
+                mx-8 pr-8 pl-5 py-3 mt-1.5 bg-surface-800 text-content-main/70"
+                data-i18n={I18N.projectsSlug.der.p2}  
+              >
+                Note: The USER entity abstractly represents the identity subsystem (which internally includes User, Role, and 
+                UserRole). It is simplified into a single table to keep the focus on the domain.
+              </p>
+
+              {/*  <!-- General n o t e s -->   sticky-note-line */}
+              {diagrams.der.notes && (
+                <div class="font_console text-sm border-r-2 border-l-6 rounded-xl border-main-500 
+                  mx-8 pr-8 pl-5 py-3 mt-1.5 bg-surface-800 text-content-main/70 flex flex-col gap-1 flex-wrap"
+                >
+                  <span class="font-semibold text-accent" data-i18n={I18N.projectsSlug.der.p3}>Notes on the diagram:</span>
+                  {diagrams.der.notes.map(text => {
+                    return <div class="flex gap-1.5 items-center">
+                      <Icon name="ri:git-commit-fill" class="h-4.5 w-4.5"></Icon>
+                      <span>{text}</span>
+                    </div>
+                  })}
+                </div>
+              )}
+
+            </div>
+          </MermaidDiagram>
+        )}
+
+        {!diagrams.der && (
+          <span class="font_console text-base"> Coming soon </span>
+        )}
+
       </div>
     </Section>
   )}
@@ -351,13 +447,13 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION FLOW ; use scroll-mt-20 -->
   { FLOW_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={FLOW_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={FLOW_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE FLOWSS --> */}
-        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={FLOW_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={FLOW_SECTION.i18n}>Some Flow Diagram</span>
+        <h2 class="flex gap-2 items-center text-2xl font_console">
+          <Icon name={FLOW_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="font-semibold text-console" data-i18n={FLOW_SECTION.i18n}>Some Flow Diagram</span>
         </h2>
 
         <span> Coming soon </span>
@@ -370,13 +466,13 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
   <!-- + SECTION OTHER ; use scroll-mt-20 -->
   { NEXT_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={NEXT_SECTION.id} paddingY={false}>
-      <div class:list={["w-full gap-3 flex flex-col py-4", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={NEXT_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE NEXT PROJECTS --> */}
-        <h2 class="flex gap-2 items-center text-2xl font-semibold font_console">
-          <Icon name={NEXT_SECTION.icon} class="h-5 w-5"></Icon>
-          <span data-i18n={NEXT_SECTION.i18n}>Other Projects:</span>
+        <h2 class="flex gap-2 items-center text-2xl font_console">
+          <Icon name={NEXT_SECTION.icon} class="h-6 w-6"></Icon>
+          <span class="text-console font-semibold" data-i18n={NEXT_SECTION.i18n}>Other Projects:</span>
         </h2>
 
         <span> Coming soon </span>
@@ -395,8 +491,17 @@ const title = `${PROJECT.slug} · Callamullo Lucas`;
 
 
   <script>
-    import { initModals } from "@/features/projects/scripts/init";
-    initModals()
+    import { initModals } from "@features/projects/scripts/init";
+    import { initMermaidDownloads } from '@features/projects/components/mermaid/mermaid_download';
+    
+    initModals();
+    initMermaidDownloads();
+
+    // Usamos astro:page-load para que funcione con el SPA de Astro
+    document.addEventListener('astro:page-load', () => {
+      initModals();
+      initMermaidDownloads();
+    });
   </script>
 
 </BaseLayout>
