@@ -214,7 +214,7 @@
       "gallery": "Gallery",
       "history": "History",
       "c4":      "C4 Model",
-      "der":     "Database Schema (DER)",
+      "der":     "Entity-Relationship Diagram - ERD",
       "flow":    "Flow",
       "next":    "More projects"
     },

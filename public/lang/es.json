@@ -208,7 +208,7 @@
       "gallery": "Galería",
       "history": "Historia",
       "c4":      "C4 Model",
-      "der":     "Esquema DB (DER)",
+      "der":     "Diagrama de Entidad-Relación - DER",
       "flow":    "Flows",
       "next":    "Más proyectos"
     },

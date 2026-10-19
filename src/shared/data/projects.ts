@@ -158,10 +158,10 @@ export const PROJECTS = {
     tags: ['Monolith Modular', 'ONION', 'Full-Stack', 'Web App', 'In Progress', 'Solo'],
     coreTechs: [
       'csharp', 'dotnet', 'efCore', 'typescript', 'react', 'tailwind',
-      'nginx', 'postgresql', 'docker', 'jwt', 
+      'nginx', 'postgresql', 'redis', 'docker', 'jwt', 'mercadoPago'
     ],
     extraTechs: [
-      'dockerCompose', 'vite',
+      'dockerCompose', 'vite', 
     ],
     otherTechs: [
       'sqlite', 'js', 'ts', 'javascript', 'html5', 'css3',  
@@ -266,7 +266,7 @@ export const PROJECTS = {
     title: I18N.projects.dds_tutor.title,
     titleFull: I18N.projects.dds_tutor.titleFull,
     date: { start: '2026-03', end: '2026-06' },
-    isMain: true,
+    isMain: false,
     tags: ['Monolith Modular', 'Layered', 'Full-Stack', 'Web App', 'Completed', 'Solo', 'University'],
     coreTechs: [
       'typescript', 'javascript', 'vite', 'react', 'tailwind', 'postgresql', 'jwt'
