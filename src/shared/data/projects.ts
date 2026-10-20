@@ -3,13 +3,15 @@ import { I18N } from '@shared/scripts/utils/i18n_keys';
 import type { TagKey, SectionId } from '@shared/data/tags';
 import type { TechKey } from '@shared/data/tech_stack';
 import { getCurrentLang } from '../scripts/navbar/translations';
+import { url } from 'astro:schema';
 
 // ========================================================================
 //  +  DEFAULT VALUES
 // ========================================================================
 const imageDefault: ImagesProject = {
   href: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c',
-  altText: 'Default Project Image'
+  altText: 'Default Project Image',
+  isMobile: false
 };
 
 const univExt: ExternalLink = {
@@ -50,6 +52,8 @@ export interface ImagesProject {
   href: string;
   /** i18n key for the alt text. */
   altText?: string;           //! I18N
+
+  isMobile: boolean;
 }
 
 /** Single entry inside the timeline. */
@@ -255,7 +259,12 @@ export const PROJECTS = {
       summary: I18N.projects.mara_sem.project.summary,
       description: I18N.projects.mara_sem.project.description,
     },
-    images: [{ ...imageDefault }],
+    images: [ 
+      // { ...imageDefault },
+      { href: '/public/projects/mara/MARA_1.jpeg', altText: '', isMobile: true },
+      { href: '/public/projects/mara/MARA_2.jpeg', altText: '', isMobile: true },
+      { href: '/public/projects/mara/MARA_3.jpeg', altText: '', isMobile: true },
+    ],
     slug: 'react-native-compiler-apk',
     sections: ['links', 'stack', 'gallery', 'history', 'c4', 'der', 'flow', 'next'],
     milestone: I18N.projects.mara_sem.milestone

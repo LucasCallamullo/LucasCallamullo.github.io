@@ -248,8 +248,8 @@ const diagrams = DIAGRAMS[projectKey] || { c4_model: null, der: null, others: []
 
   <!-- + SECTION WITH ID SECTIONS ; use scroll-mt-20 -->
   {GALLERY_SECTION && (
-    <Section class:list={['bg-surface-900 scroll-mt-20 mb-5' , WIDTH_CLASSES.full]} id={GALLERY_SECTION.id}>
-      <div class:list={["w-full gap-3 flex flex-col", WIDTH_CLASSES.md]}>
+    <Section class:list={['bg-surface-900 scroll-mt-20' , WIDTH_CLASSES.full]} id={GALLERY_SECTION.id}>
+      <div class:list={["w-full gap-3 flex flex-col h-min min-h-min", WIDTH_CLASSES.md]}>
 
         {/* <!-- TITLE GALLERY --> */}
         <h2 class="flex gap-2 items-center text-2xl font_console">
@@ -257,14 +257,14 @@ const diagrams = DIAGRAMS[projectKey] || { c4_model: null, der: null, others: []
           <span class="font-semibold text-console" data-i18n={GALLERY_SECTION.i18n}>Gallery</span>
         </h2>
 
-        <div class="h-50 grid grid-cols-2 md:grid-cols-3 w-full gap-5" id="contBtnsModal">
+        <div class="grid grid-cols-2 md:grid-cols-3 w-full gap-5" id="contBtnsModal">
           {PROJECT.images.map((img) => (
-            <button class="imageBtn" data-src={img.href}>
+            <button class="imageBtn w-full overflow-hidden rounded-lg group" data-src={img.href}>
               <img
                 src={img.href}
                 alt={img.altText || 'Image'}
                 loading="lazy"
-                class="object-contain h-full w-full cursor-zoom-in hover:opacity-90 transition-opacity"
+                class="object-cover w-full h-full aspect-video cursor-zoom-in transition-transform group-hover:scale-105"
               />
             </button>
           ))}
@@ -279,7 +279,8 @@ const diagrams = DIAGRAMS[projectKey] || { c4_model: null, der: null, others: []
           ]}
         >
           {/* <!-- El padding siempre a modal_content que no aplica cierre --> */}
-          <div class="modal__content max-h-full max-w-full h-full flex flex-col min-h-0 relative p-3">
+          <div class="modal__content max-h-full max-w-full w-full h-full flex flex-col min-h-0 relative p-3">
+
             <button class="modal__btn_close p-2 hover:bg-red-500 group absolute right-1 top-1
               rounded-lg bg-surface-200 text-content-main border border-surface-800 cursor-pointer"
               type="button"
